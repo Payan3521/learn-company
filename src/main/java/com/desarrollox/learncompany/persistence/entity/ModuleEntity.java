@@ -1,5 +1,6 @@
 package com.desarrollox.learncompany.persistence.entity;
 
+import java.util.List;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,5 +14,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 public class ModuleEntity {
-    
+    private Long id;
+    private CourseEntity course;
+    private String title;
+    private List<AssessmentTemplateEntity> assessmentTemplate;
 }
