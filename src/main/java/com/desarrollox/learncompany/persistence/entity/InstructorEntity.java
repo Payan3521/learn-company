@@ -1,5 +1,6 @@
 package com.desarrollox.learncompany.persistence.entity;
 
+import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -18,6 +19,12 @@ import lombok.experimental.SuperBuilder;
 @PrimaryKeyJoinColumn(name = "id")
 public class InstructorEntity extends UserEntity {
 
-    @Column(name = "age", nullable = false)
-    private int age;
+    @Column(name = "specialty", nullable = false)
+    private String specialty;
+
+    @Column(name = "biography", nullable = false)
+    private String biography;
+
+    @Column(name = "courses")
+    private List<CourseEntity> courses;
 }

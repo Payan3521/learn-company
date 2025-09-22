@@ -1,6 +1,6 @@
 package com.desarrollox.learncompany.persistence.entity;
 
-
+import com.desarrollox.learncompany.domain.model.NotificationContent.NotificationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,26 +13,27 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "questions")
+@Table(name = "notifications_content")
 @Getter
 @Setter
-@NoArgsConstructor
 @SuperBuilder
-public class QuestionEntity {
-    
+@NoArgsConstructor
+public class NotificationContentEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "question")
-    private String question;
+    @Column(name = "type")
+    private NotificationType type;
 
-    @Column(name = "response_options")
-    private String responseOptions;
+    @Column(name = "reference_id")
+    private Long referenceId;
 
-    @Column(name = "correct_answer")
-    private String correctAnswer;
+    @Column(name = "message")
+    private String message;
 
-    @Column(name = "assestment_template")
-    private AssessmentTemplateEntity assessmentTemplate;
+    @Column(name = "notification_id")
+    private NotificationEntity notification;
+
 }
