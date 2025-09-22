@@ -1,2 +1,2 @@
-1. anotaciones y relaciones de entities
-2. mappers con mapstruct
+1. mappers con mapstruct
+2. acoplar los entities a dominio
