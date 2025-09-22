@@ -1,8 +1,11 @@
 package com.desarrollox.learncompany.persistence.entity;
 
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -25,5 +28,6 @@ public class InstructorEntity extends UserEntity {
     @Column(name = "biography", nullable = false)
     private String biography;
 
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CourseEntity> courses;
 }

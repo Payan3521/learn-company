@@ -1,9 +1,7 @@
 package com.desarrollox.learncompany.persistence.entity;
 
 import java.time.LocalDateTime;
-
 import com.desarrollox.learncompany.domain.model.Inscription.Status;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -32,14 +30,14 @@ public class InscriptionEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private EmployeeEntity employee;
 
-    @Column(name = "date_issued")
+    @Column(name = "date_issued", nullable = false)
     private LocalDateTime dateIssued;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
 
     @Enumerated(EnumType.STRING)

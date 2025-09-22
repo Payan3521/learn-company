@@ -48,8 +48,8 @@ public class Inscription {
     public void setStatus(Status status) { this.status = status; }
 
     public enum Status{
-        Accepted,
-        inProgress,
-        rejected
+        ACCEPTED,
+        IN_PROGRESS,
+        REJECTED
     }
 }

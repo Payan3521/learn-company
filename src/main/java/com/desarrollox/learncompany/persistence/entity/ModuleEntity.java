@@ -17,7 +17,14 @@ public class ModuleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
+
+    @Column(name = "title", nullable = false)
     private String title;
+
+    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AssessmentTemplateEntity> assessmentTemplate;
 }

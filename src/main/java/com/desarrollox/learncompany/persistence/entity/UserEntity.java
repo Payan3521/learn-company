@@ -1,6 +1,10 @@
 package com.desarrollox.learncompany.persistence.entity;
 
+import java.util.List;
+
 import com.desarrollox.learncompany.domain.model.User.Role;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,6 +23,7 @@ import lombok.experimental.SuperBuilder;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @Table(name = "users")
@@ -29,23 +34,24 @@ import jakarta.persistence.ManyToOne;
 @SuperBuilder
 @NoArgsConstructor
 public class UserEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     protected String email;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     protected String password;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     protected String name;
 
-    @Column(nullable = false)
+    @Column(name = "lastname", nullable = false)
     protected String lastname;
 
-    @Column(nullable = false)
+    @Column(name = "status", nullable = false)
     protected boolean status;
 
     @Enumerated(EnumType.STRING)
@@ -53,9 +59,10 @@ public class UserEntity {
     protected Role role;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id", nullable = false)
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
     protected DepartmentEntity department;
 
-    @Column(name = "url_photo")
+    @Column(name = "url_photo", nullable = false)
     protected String urlPhoto;
+
 }

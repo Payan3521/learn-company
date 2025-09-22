@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,15 +25,16 @@ public class NotificationContentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "type")
+    @Column(name = "type", nullable = false)
     private NotificationType type;
 
-    @Column(name = "reference_id")
+    @Column(name = "reference_id", nullable = false)
     private Long referenceId;
 
-    @Column(name = "message")
+    @Column(name = "message", nullable = false)
     private String message;
 
+    @OneToOne(mappedBy = "content")
     private NotificationEntity notification;
 
 }

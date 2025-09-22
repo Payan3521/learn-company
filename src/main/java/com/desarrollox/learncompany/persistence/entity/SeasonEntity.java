@@ -26,10 +26,10 @@ public class SeasonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "duration_in_hours")
+    @Column(name = "duration_in_hours", nullable = false)
     private int durationInHours;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "season", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -1,8 +1,6 @@
 package com.desarrollox.learncompany.persistence.entity;
 
 import java.time.LocalDateTime;
-
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,16 +19,20 @@ public class NotificationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "notification_content_id", referencedColumnName = "id")
     private NotificationContentEntity content;
 
-    @Column(name = "date_issued")
+    @Column(name = "date_issued", nullable = false)
     private LocalDateTime dateIssued;
 
-    @Column(name = "read")
+    @Column(name = "read", nullable = false)
     private boolean read;
 } 

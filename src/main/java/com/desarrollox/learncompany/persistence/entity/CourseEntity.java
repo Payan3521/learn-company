@@ -1,6 +1,7 @@
 package com.desarrollox.learncompany.persistence.entity;
 
 import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,21 +29,23 @@ public class CourseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "topic")
+    @Column(name = "topic", nullable = false)
     private String topic;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "level")
+    @Column(name = "level", nullable = false)
     private int level;
 
-    @Column(name = "duration_in_hours")
+    @Column(name = "duration_in_hours", nullable = false)
     private int durationInHours;
 
+    @ManyToOne
+    @JoinColumn(name = "season_id", referencedColumnName = "id")
     private SeasonEntity season;
 
     @ManyToOne

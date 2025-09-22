@@ -1,11 +1,13 @@
 package com.desarrollox.learncompany.persistence.entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,15 +26,16 @@ public class QuestionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "question")
+    @Column(name = "question", nullable = false)
     private String question;
 
-    @Column(name = "response_options")
+    @Column(name = "response_options", nullable = false)
     private String responseOptions;
 
-    @Column(name = "correct_answer")
+    @Column(name = "correct_answer", nullable = false)
     private String correctAnswer;
 
-    @Column(name = "assestment_template")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assessment_template_id", referencedColumnName = "id", nullable = false)
     private AssessmentTemplateEntity assessmentTemplate;
 }

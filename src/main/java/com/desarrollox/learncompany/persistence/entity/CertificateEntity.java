@@ -27,11 +27,11 @@ public class CertificateEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private EmployeeEntity employee;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
 
     @Column(name = "date_issued", nullable = false)
