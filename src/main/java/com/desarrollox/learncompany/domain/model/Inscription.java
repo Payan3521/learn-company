@@ -20,6 +20,13 @@ public class Inscription {
         this.status = status;
     }
 
+    public Inscription(Employee employee, LocalDateTime dateAndHour, Course course, Status status) {
+        this.employee = employee;
+        this.dateAndHour = dateAndHour;
+        this.course = course;
+        this.status = status;
+    }
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }

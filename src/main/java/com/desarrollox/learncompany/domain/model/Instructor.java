@@ -8,9 +8,20 @@ public class Instructor extends User{
     private List<Course> courses;
 
     public Instructor() {
+        super();
     }
 
-    public Instructor(String specialty, String biography, List<Course> courses) {
+    public Instructor(String specialty, String biography, List<Course> courses, Long id, String email, String password, String name, String lastname, boolean status,
+                      Role role, Department department, String urlPhoto) {
+        super(id, email, password, name, lastname, status, role, department, urlPhoto);
+        this.specialty = specialty;
+        this.biography = biography;
+        this.courses = courses;
+    }
+
+    public Instructor(String specialty, String biography, List<Course> courses, String email, String password, String name, String lastname, boolean status,
+                      Role role, Department department, String urlPhoto) {
+        super(email, password, name, lastname, status, role, department, urlPhoto);
         this.specialty = specialty;
         this.biography = biography;
         this.courses = courses;

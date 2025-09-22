@@ -32,6 +32,19 @@ public class Course {
         this.instructor = instructor;
     }
 
+    public Course(List<Module> modules, List<Inscription> inscriptions, String title, String topic, String description,
+            int level, int duration, Season season, Instructor instructor) {
+        this.modules = modules;
+        this.inscriptions = inscriptions;
+        this.title = title;
+        this.topic = topic;
+        this.description = description;
+        this.level = level;
+        this.duration = duration;
+        this.season = season;
+        this.instructor = instructor;
+    }
+
     public List<Module> getModules() { return modules; }
 
     public void setModules(List<Module> modules) { this.modules = modules; }

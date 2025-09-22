@@ -2,6 +2,8 @@ package com.desarrollox.learncompany.persistence.entity;
 
 import java.time.LocalDateTime;
 
+import com.desarrollox.learncompany.domain.model.Inscription.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
