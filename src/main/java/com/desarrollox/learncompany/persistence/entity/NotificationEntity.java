@@ -2,8 +2,6 @@ package com.desarrollox.learncompany.persistence.entity;
 
 import java.time.LocalDateTime;
 
-import com.desarrollox.learncompany.domain.model.Notification.NotificationContent;
-import com.desarrollox.learncompany.domain.model.Notification.NotificationContent.NotificationType;
 
 import jakarta.persistence.*;
 import lombok.Getter;
