@@ -23,12 +23,12 @@ public class DepartmentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "prize")
+    @Column(name = "prize", nullable = false)
     private String prize;
     
-    @Column(name = "hierarchy")
+    @Column(name = "hierarchy", nullable = false)
     private int hierarchy;
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "id")
 public class EmployeeEntity extends UserEntity {
 
-    @Column(nullable = false)
+    @Column(name = "puntos", nullable = false)
     private int puntos;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)

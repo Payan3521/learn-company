@@ -11,28 +11,30 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "badges")
 @Getter
 @Setter
 @NoArgsConstructor
+@SuperBuilder
 public class BadgeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "url_icon")
+    @Column(name = "url_icon", nullable = false)
     private String urlIcon;
 
-    @Column(name = "criteria")
+    @Column(name = "criteria", nullable = false)
     private String criteria;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employee_id", nullable = false)
     private EmployeeEntity employee;
 }

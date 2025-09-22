@@ -49,7 +49,7 @@ public class UserEntity {
     protected boolean status;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false)
     protected Role role;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,5 +1,5 @@
 package com.desarrollox.learncompany.persistence.entity;
 
-public class Module {
+public class ModuleEntity {
     
 }
