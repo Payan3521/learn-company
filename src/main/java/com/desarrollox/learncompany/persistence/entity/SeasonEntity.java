@@ -9,9 +9,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "seasos")
+@Getter
+@Setter
+@NoArgsConstructor
+@SuperBuilder
 public class SeasonEntity {
 
     @Id

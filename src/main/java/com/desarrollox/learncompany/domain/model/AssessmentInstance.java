@@ -3,7 +3,7 @@ package com.desarrollox.learncompany.domain.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Assessment {
+public class AssessmentInstance {
     private Long id;
     private AssessmentTemplate assessmentTemplate;
     private Employee employee;
@@ -12,10 +12,10 @@ public class Assessment {
     private List<Answer> answers;
     private LocalDateTime createdAt;
 
-    public Assessment() {
+    public AssessmentInstance() {
     }
 
-    public Assessment(Long id, AssessmentTemplate assessmentTemplate, Employee employee, double grade, Status status,
+    public AssessmentInstance(Long id, AssessmentTemplate assessmentTemplate, Employee employee, double grade, Status status,
             List<Answer> answers, LocalDateTime createdAt) {
         this.id = id;
         this.assessmentTemplate = assessmentTemplate;
@@ -26,7 +26,7 @@ public class Assessment {
         this.createdAt = createdAt;
     }
     
-    public Assessment(AssessmentTemplate assessmentTemplate, Employee employee, double grade, Status status,
+    public AssessmentInstance(AssessmentTemplate assessmentTemplate, Employee employee, double grade, Status status,
             List<Answer> answers, LocalDateTime createdAt) {
         this.assessmentTemplate = assessmentTemplate;
         this.employee = employee;
