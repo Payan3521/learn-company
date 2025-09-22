@@ -13,6 +13,4 @@ public class NotificationContentResponse {
     private NotificationType type;
     private Long referenceId;
     private String message;
-    //aqui se estaría redundando
-    private NotificationResponse notification;
 }

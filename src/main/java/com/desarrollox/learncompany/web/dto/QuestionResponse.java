@@ -12,5 +12,4 @@ public class QuestionResponse {
     private String question;
     private String responseOptions;
     private String correctAnswer;
-    private AssessmentTemplateResponse assessmentTemplate;
 }
