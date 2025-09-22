@@ -29,6 +29,7 @@ public class EmployeeRequest {
     private Role role;
 
     @NotNull(message = "El departamento es obligatorio")
+    //validacion para que sea mayor a 0 el id
     private Long departmentId;
 
     @NotNull(message = "La url de la foto es obligatoria")

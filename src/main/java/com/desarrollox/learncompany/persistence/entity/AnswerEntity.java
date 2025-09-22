@@ -9,7 +9,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "badges")
+@Table(name = "answers")
 @Getter
 @Setter
 @NoArgsConstructor

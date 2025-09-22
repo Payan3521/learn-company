@@ -1,7 +1,6 @@
 package com.desarrollox.learncompany.web.dto;
 
 import java.util.List;
-import com.desarrollox.learncompany.domain.model.Department;
 import com.desarrollox.learncompany.domain.model.User.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ public class UserResponse {
     private String lastname;
     private boolean status;
     private Role role;
-    private Department department;
+    private DepartmentResponse department;
     private String urlPhoto;
     private int puntos; // only for employee
     private List<BadgeResponse> badges; // only for employee
