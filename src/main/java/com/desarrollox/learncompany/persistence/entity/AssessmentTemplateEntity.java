@@ -1,6 +1,9 @@
 package com.desarrollox.learncompany.persistence.entity;
 
-import java.time.LocalDateTime;
+import java.util.List;
+
+import com.desarrollox.learncompany.domain.model.AssessmentTemplate.Type;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -9,14 +12,15 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "answers")
+@Table(name = "assessments_template")
 @Getter
 @Setter
 @NoArgsConstructor
 @SuperBuilder
-public class AnswerEntity {
+public class AssessmentTemplateEntity {
     private Long id;
-    private String content;
-    private QuestionEntity question;
-    private LocalDateTime dateIssued;
+    private Module module;
+    private List<QuestionEntity> questions;
+    private Type type;
+    private int retries;
 }
