@@ -31,6 +31,9 @@ public class CourseEntity {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "topic")
+    private String topic;
+
     @Column(name = "description")
     private String description;
 
@@ -40,7 +43,6 @@ public class CourseEntity {
     @Column(name = "duration_in_hours")
     private int durationInHours;
 
-    @Column(name = "season_id")
     private SeasonEntity season;
 
     @ManyToOne

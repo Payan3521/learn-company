@@ -25,6 +25,5 @@ public class InstructorEntity extends UserEntity {
     @Column(name = "biography", nullable = false)
     private String biography;
 
-    @Column(name = "courses")
     private List<CourseEntity> courses;
 }

@@ -33,7 +33,6 @@ public class NotificationContentEntity {
     @Column(name = "message")
     private String message;
 
-    @Column(name = "notification_id")
     private NotificationEntity notification;
 
 }
