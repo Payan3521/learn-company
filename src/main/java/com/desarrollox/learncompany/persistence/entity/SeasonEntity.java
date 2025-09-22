@@ -15,7 +15,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "seasos")
+@Table(name = "seasons")
 @Getter
 @Setter
 @NoArgsConstructor

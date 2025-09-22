@@ -1,6 +1,5 @@
 package com.desarrollox.learncompany.persistence.entity;
 
-import com.desarrollox.learncompany.domain.model.AssessmentTemplate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

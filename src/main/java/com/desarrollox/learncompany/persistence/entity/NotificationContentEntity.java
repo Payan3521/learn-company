@@ -1,7 +1,6 @@
 package com.desarrollox.learncompany.persistence.entity;
 
-import com.desarrollox.learncompany.domain.model.Notification.NotificationContent.NotificationType;
-
+import com.desarrollox.learncompany.domain.model.NotificationContent.NotificationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
