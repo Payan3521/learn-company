@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Inscription {
     private Long id;
-    private Employ employ;
+    private Employee employee;
     private LocalDateTime dateAndHour;
     private Course course;
     private Status status;
@@ -12,9 +12,9 @@ public class Inscription {
     public Inscription() {
     }
 
-    public Inscription(Long id, Employ employ, LocalDateTime dateAndHour, Course course, Status status) {
+    public Inscription(Long id, Employee employee, LocalDateTime dateAndHour, Course course, Status status) {
         this.id = id;
-        this.employ = employ;
+        this.employee = employee;
         this.dateAndHour = dateAndHour;
         this.course = course;
         this.status = status;
@@ -24,9 +24,9 @@ public class Inscription {
 
     public void setId(Long id) { this.id = id; }
 
-    public Employ getEmploy() { return employ; }
+    public Employee getEmploy() { return employee; }
 
-    public void setEmploy(Employ employ) { this.employ = employ; }
+    public void setEmploy(Employee employee) { this.employee = employee; }
 
     public LocalDateTime getDateAndHour() { return dateAndHour; }
 

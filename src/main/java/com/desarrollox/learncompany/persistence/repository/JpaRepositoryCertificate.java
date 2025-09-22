@@ -1,5 +1,10 @@
 package com.desarrollox.learncompany.persistence.repository;
 
-public interface JpaRepositoryCertificate {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import com.desarrollox.learncompany.persistence.entity.CertificateEntity;
+
+@Repository
+public interface JpaRepositoryCertificate extends JpaRepository<CertificateEntity, Long> {
     
 }
