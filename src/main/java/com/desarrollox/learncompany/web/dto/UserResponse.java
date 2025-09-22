@@ -27,5 +27,5 @@ public class UserResponse {
     private String especialidad; // only for instructor
     private String biografia; // only for instructor
     private List<CourseResponse> courses; //only for instructor
-    private Integer edad; //only for administrator
+    private Integer age; //only for administrator
 }

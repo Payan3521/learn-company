@@ -1,6 +1,8 @@
 package com.desarrollox.learncompany.persistence.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,9 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class AdministratorEntity {
-    
+@PrimaryKeyJoinColumn(name = "id")
+public class AdministratorEntity extends UserEntity{
+
+    @Column(name = "age", nullable = false)
+    private int age;
 }
