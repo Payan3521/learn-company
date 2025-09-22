@@ -21,13 +21,11 @@ public class NotificationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_user")
     private UserEntity user;
 
     @Column(name = "title")
     private String title;
 
-    @Column(name = "content")
     private NotificationContentEntity content;
 
     @Column(name = "date_issued")
