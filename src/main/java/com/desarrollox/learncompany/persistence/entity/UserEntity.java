@@ -1,10 +1,6 @@
 package com.desarrollox.learncompany.persistence.entity;
 
-import java.util.List;
-
 import com.desarrollox.learncompany.domain.model.User.Role;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -23,7 +19,6 @@ import lombok.experimental.SuperBuilder;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 @Entity
 @Table(name = "users")

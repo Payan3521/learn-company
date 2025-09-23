@@ -5,24 +5,24 @@ import java.time.LocalDateTime;
 public class Inscription {
     private Long id;
     private Employee employee;
-    private LocalDateTime dateAndHour;
+    private LocalDateTime dateIssued;
     private Course course;
     private Status status;
 
     public Inscription() {
     }
 
-    public Inscription(Long id, Employee employee, LocalDateTime dateAndHour, Course course, Status status) {
+    public Inscription(Long id, Employee employee, LocalDateTime dateIssued, Course course, Status status) {
         this.id = id;
         this.employee = employee;
-        this.dateAndHour = dateAndHour;
+        this.dateIssued = dateIssued;
         this.course = course;
         this.status = status;
     }
 
-    public Inscription(Employee employee, LocalDateTime dateAndHour, Course course, Status status) {
+    public Inscription(Employee employee, LocalDateTime dateIssued, Course course, Status status) {
         this.employee = employee;
-        this.dateAndHour = dateAndHour;
+        this.dateIssued = dateIssued;
         this.course = course;
         this.status = status;
     }
@@ -35,9 +35,9 @@ public class Inscription {
 
     public void setEmploy(Employee employee) { this.employee = employee; }
 
-    public LocalDateTime getDateAndHour() { return dateAndHour; }
+    public LocalDateTime getDateIssued() { return dateIssued; }
 
-    public void setDateAndHour(LocalDateTime dateAndHour) { this.dateAndHour = dateAndHour; }
+    public void setDateIssued(LocalDateTime dateIssued) { this.dateIssued = dateIssued; }
 
     public Course getCourse() { return course; }
 

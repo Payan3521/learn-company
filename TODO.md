@@ -1,2 +1,2 @@
 1. mappers con mapstruct
-2. acoplar los entities a dominio
+3. crear script sql, añadir index

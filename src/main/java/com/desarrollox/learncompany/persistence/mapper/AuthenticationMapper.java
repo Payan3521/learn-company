@@ -1,4 +1,4 @@
-package com.desarrollox.learncompany.persistence.repository.mapper;
+package com.desarrollox.learncompany.persistence.mapper;
 
 import org.springframework.stereotype.Component;
 

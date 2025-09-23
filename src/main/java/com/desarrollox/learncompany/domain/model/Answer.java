@@ -7,21 +7,24 @@ public class Answer {
     private String content;
     private Question question;
     private LocalDateTime dateIssued;
+    private AssessmentInstance assessmentInstance;
 
     public Answer() {
     }
     
-    public Answer(Long id, String content, Question question, LocalDateTime dateIssued) {
+    public Answer(Long id, String content, Question question, LocalDateTime dateIssued, AssessmentInstance assessmentInstance) {
         this.id = id;
         this.content = content;
         this.question = question;
         this.dateIssued = dateIssued;
+        this.assessmentInstance = assessmentInstance;
     }
 
-    public Answer(String content, Question question, LocalDateTime dateIssued) {
+    public Answer(String content, Question question, LocalDateTime dateIssued, AssessmentInstance assessmentInstance) {
         this.content = content;
         this.question = question;
         this.dateIssued = dateIssued;
+        this.assessmentInstance = assessmentInstance;
     }
 
     public Long getId() { return id; }
@@ -35,4 +38,9 @@ public class Answer {
 
     public LocalDateTime getDateIssued() { return dateIssued; }
     public void setDateIssued(LocalDateTime dateIssued) { this.dateIssued = dateIssued; }
+
+    public AssessmentInstance getAssessmentInstance() { return assessmentInstance; }
+
+    public void setAssessmentInstance(AssessmentInstance assessmentInstance) { this.assessmentInstance = assessmentInstance; }
+    
 }

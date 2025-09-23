@@ -1,12 +1,13 @@
-package com.desarrollox.learncompany.persistence.repository.mapper;
+package com.desarrollox.learncompany.persistence.mapper;
 
-import org.mapstruct.Mapper;
 import com.desarrollox.learncompany.domain.model.Badge;
 import com.desarrollox.learncompany.persistence.entity.BadgeEntity;
-
+import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface BadgeMapper {
-    BadgeEntity toBadgeEntity(Badge badge);
-    Badge toBadge(BadgeEntity entity);
+
+    BadgeEntity toEntity(Badge badge);
+
+    Badge toDomain(BadgeEntity badgeEntity);
 }
