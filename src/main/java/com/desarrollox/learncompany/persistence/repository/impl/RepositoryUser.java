@@ -16,7 +16,7 @@ public class RepositoryUser implements IRepositoryUser{
 
     @Override
     public User save(User user) {
-        return userMapper.toUser(jpaRepositoryUser.save(userMapper.toUserEntity(user)));
+        return userMapper.toDomain(jpaRepositoryUser.save(userMapper.toEntity(user)));
     }
     
 }

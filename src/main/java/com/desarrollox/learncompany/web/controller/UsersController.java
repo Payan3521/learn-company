@@ -11,6 +11,7 @@ import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.service.IUserService;
 import com.desarrollox.learncompany.web.dto.EmployeeRequest;
 import com.desarrollox.learncompany.web.dto.UserResponse;
+import com.desarrollox.learncompany.web.webMapper.EmployeeWebMapper;
 import com.desarrollox.learncompany.web.webMapper.UserWebMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,16 +22,17 @@ import lombok.RequiredArgsConstructor;
 public class UsersController {
 
     private final IUserService userService;
+    private final EmployeeWebMapper employeeWebMapper;
     private final UserWebMapper userWebMapper;
     
     @PostMapping("/employee")
     public ResponseEntity<ApiResponse<UserResponse>> createEmployee(@Valid @RequestBody EmployeeRequest request) {
         //mapear de request a dominio
-        Employee employee = userWebMapper.toEmployee(request);
+        Employee employee = employeeWebMapper.requestToDomain(request);
         //lamar al servicio y mandarle el dominio
         Employee employeeSaved = userService.createEmployee(employee);
         //mapear de dominio a response
-        UserResponse userResponse = userWebMapper.toUserResponse(employeeSaved);
+        UserResponse userResponse = userWebMapper.userToResponse(employeeSaved);
         //retornar con api response
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Empleado registrado correctamente", userResponse));
     }
