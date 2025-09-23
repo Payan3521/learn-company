@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ModuleRequest {
     private Long courseId;
-    private String title;
+    private String title; 
 
     //validar que no exceda los 3 objetos
     private List<AssessmentTemplateRequest> assessmentTemplate;

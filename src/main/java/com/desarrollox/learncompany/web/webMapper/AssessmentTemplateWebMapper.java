@@ -11,13 +11,10 @@ import com.desarrollox.learncompany.web.dto.AssessmentTemplateResponse;
         uses = {ModuleWebMapper.class, QuestionWebMapper.class})
 public interface AssessmentTemplateWebMapper {
     
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "module.id", source = "moduleId")
-    @Mapping(target = "module.course", ignore = true)
-    @Mapping(target = "module.title", ignore = true)
-    @Mapping(target = "module.assessmentTemplate", ignore = true)
-    @Mapping(source = "questions", target = "questions")
+     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "module", ignore = true)
     AssessmentTemplate requestToDomain(AssessmentTemplateRequest request);
     
+    @Mapping(target = "moduleId", source = "module.id")
     AssessmentTemplateResponse domainToResponse(AssessmentTemplate domain);
 }

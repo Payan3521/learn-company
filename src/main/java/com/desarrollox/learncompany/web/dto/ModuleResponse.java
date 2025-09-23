@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class ModuleResponse {
     private Long id;
-    private CourseResponse course;
+    private Long courseId;
     private String title;
     private List<AssessmentTemplateResponse> assessmentTemplate;
 }

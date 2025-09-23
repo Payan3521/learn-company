@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class AssessmentTemplateResponse {
     private Long id;
-    private ModuleResponse module;
+    private Long moduleId;
     private List<QuestionResponse> questions;
     private Type type;
     private Integer retries;

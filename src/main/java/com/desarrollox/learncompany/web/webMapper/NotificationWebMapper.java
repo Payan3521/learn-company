@@ -22,7 +22,7 @@ public interface NotificationWebMapper {
     @Mapping(target = "user.department", ignore = true)
     @Mapping(target = "user.urlPhoto", ignore = true)
     @Mapping(target = "dateIssued", ignore = true)
-    @Mapping(target = "read", constant = "false")
+    @Mapping(target = "readStatus", constant = "false")
     Notification requestToDomain(NotificationRequest request);
     
     NotificationResponse domainToResponse(Notification domain);

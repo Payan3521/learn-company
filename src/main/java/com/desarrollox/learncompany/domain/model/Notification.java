@@ -8,26 +8,26 @@ public class Notification {
     private String title;
     private NotificationContent content;
     private LocalDateTime dateIssued;
-    private boolean read;
+    private boolean readStatus;
 
     public Notification() {
     }
 
-    public Notification(User user, String title, NotificationContent content, LocalDateTime dateIssued, boolean read) {
+    public Notification(User user, String title, NotificationContent content, LocalDateTime dateIssued, boolean readStatus) {
         this.user = user;
         this.title = title;
         this.content = content;
         this.dateIssued = dateIssued;
-        this.read = read;
+        this.readStatus = readStatus;
     }
 
-    public Notification(Long id, User user, String title, NotificationContent content, LocalDateTime dateIssued, boolean read) {
+    public Notification(Long id, User user, String title, NotificationContent content, LocalDateTime dateIssued, boolean readStatus) {
         this.id = id;
         this.user = user;
         this.title = title;
         this.content = content;
         this.dateIssued = dateIssued;
-        this.read = read;
+        this.readStatus = readStatus;
     }
 
     public Long getId() { return id; }
@@ -45,7 +45,7 @@ public class Notification {
     public LocalDateTime getDateIssued() { return dateIssued; }
     public void setDateIssued(LocalDateTime dateIssued) { this.dateIssued = dateIssued; }
 
-    public boolean isRead() { return read; }
-    public void setRead(boolean read) { this.read = read; }
+    public boolean isReadStatus() { return readStatus; }
+    public void setReadStatus(boolean readStatus) { this.readStatus = readStatus; }
 
 }

@@ -33,6 +33,6 @@ public class NotificationEntity {
     @Column(name = "date_issued", nullable = false)
     private LocalDateTime dateIssued;
 
-    @Column(name = "read", nullable = false)
-    private boolean read;
+    @Column(name = "read_status", nullable = false)
+    private boolean readStatus;
 } 

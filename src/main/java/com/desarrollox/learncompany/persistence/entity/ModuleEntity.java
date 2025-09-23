@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class ModuleEntity {
+public class ModuleEntity { 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -14,5 +14,5 @@ public class NotificationResponse {
     private String title;
     private NotificationContentResponse content;
     private LocalDateTime dateIssued;
-    private boolean read;
+    private boolean readStatus;
 }
