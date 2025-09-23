@@ -32,7 +32,7 @@ public class UsersController {
         //lamar al servicio y mandarle el dominio
         Employee employeeSaved = userService.createEmployee(employee);
         //mapear de dominio a response
-        UserResponse userResponse = userWebMapper.userToResponse(employeeSaved);
+        UserResponse userResponse = userWebMapper.employeeToResponse(employeeSaved);
         //retornar con api response
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Empleado registrado correctamente", userResponse));
     }
