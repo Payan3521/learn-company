@@ -1,13 +1,14 @@
 package com.desarrollox.learncompany.persistence.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 import com.desarrollox.learncompany.domain.model.Module;
 import com.desarrollox.learncompany.persistence.entity.ModuleEntity;
-import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {CourseMapper.class, AssessmentTemplateMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {CourseMapper.class, AssessmentTemplateMapper.class})
 public interface ModuleMapper {
-
-    ModuleEntity toEntity(Module module);
-
-    Module toDomain(ModuleEntity moduleEntity);
+    
+    Module toDomain(ModuleEntity entity);
+    ModuleEntity toEntity(Module domain);
 }

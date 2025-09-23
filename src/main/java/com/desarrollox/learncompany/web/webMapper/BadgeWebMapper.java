@@ -1,14 +1,19 @@
 package com.desarrollox.learncompany.web.webMapper;
 
-import java.util.List;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 import com.desarrollox.learncompany.domain.model.Badge;
+import com.desarrollox.learncompany.web.dto.BadgeRequest;
 import com.desarrollox.learncompany.web.dto.BadgeResponse;
 
-@Component
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {UserWebMapper.class})
 public interface BadgeWebMapper {
-    BadgeResponse toResponse(Badge badge);
-    List<BadgeResponse> toResponseList(List<Badge> badges);
+    
+    @Mapping(target = "id", ignore = true)
+    Badge requestToDomain(BadgeRequest request);
+    
+    @Mapping(target = "employee", ignore = true) // Se maneja por separado
+    BadgeResponse domainToResponse(Badge domain);
 }

@@ -3,7 +3,6 @@ package com.desarrollox.learncompany.persistence.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 import com.desarrollox.learncompany.domain.model.AssessmentInstance.Status;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

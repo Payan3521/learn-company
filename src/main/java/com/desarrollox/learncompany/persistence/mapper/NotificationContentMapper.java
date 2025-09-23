@@ -1,13 +1,13 @@
 package com.desarrollox.learncompany.persistence.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 import com.desarrollox.learncompany.domain.model.NotificationContent;
 import com.desarrollox.learncompany.persistence.entity.NotificationContentEntity;
-import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {NotificationMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface NotificationContentMapper {
-
-    NotificationContentEntity toEntity(NotificationContent notificationContent);
-
-    NotificationContent toDomain(NotificationContentEntity notificationContentEntity);
+    
+    NotificationContent toDomain(NotificationContentEntity entity);
+    NotificationContentEntity toEntity(NotificationContent domain);
 }

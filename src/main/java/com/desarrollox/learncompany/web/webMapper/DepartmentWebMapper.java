@@ -1,8 +1,14 @@
 package com.desarrollox.learncompany.web.webMapper;
 
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+import com.desarrollox.learncompany.domain.model.Department;
+import com.desarrollox.learncompany.web.dto.DepartmentRequest;
+import com.desarrollox.learncompany.web.dto.DepartmentResponse;
 
-@Component
-public class DepartmentWebMapper {
-
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+public interface DepartmentWebMapper {
+    
+    Department requestToDomain(DepartmentRequest request);
+    DepartmentResponse domainToResponse(Department domain);
 }

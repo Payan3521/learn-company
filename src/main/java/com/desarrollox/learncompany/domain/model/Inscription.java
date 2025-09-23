@@ -31,9 +31,9 @@ public class Inscription {
 
     public void setId(Long id) { this.id = id; }
 
-    public Employee getEmploy() { return employee; }
+    public Employee getEmployee() { return employee; }
 
-    public void setEmploy(Employee employee) { this.employee = employee; }
+    public void setEmployee(Employee employee) { this.employee = employee; }
 
     public LocalDateTime getDateIssued() { return dateIssued; }
 

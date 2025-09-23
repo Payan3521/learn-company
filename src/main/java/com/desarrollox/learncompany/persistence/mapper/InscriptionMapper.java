@@ -1,13 +1,18 @@
 package com.desarrollox.learncompany.persistence.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 import com.desarrollox.learncompany.domain.model.Inscription;
 import com.desarrollox.learncompany.persistence.entity.InscriptionEntity;
-import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {EmployeeMapper.class, CourseMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {EmployeeMapper.class, CourseMapper.class})
 public interface InscriptionMapper {
-
-    InscriptionEntity toEntity(Inscription inscription);
-
-    Inscription toDomain(InscriptionEntity inscriptionEntity);
+    
+    @Mapping(source = "employee", target = "employee")
+    Inscription toDomain(InscriptionEntity entity);
+    
+    @Mapping(source = "employee", target = "employee")
+    InscriptionEntity toEntity(Inscription domain);
 }

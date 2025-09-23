@@ -1,13 +1,14 @@
 package com.desarrollox.learncompany.persistence.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 import com.desarrollox.learncompany.domain.model.Question;
 import com.desarrollox.learncompany.persistence.entity.QuestionEntity;
 
-@Mapper(componentModel = "spring", uses = {AssessmentTemplateMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {AssessmentTemplateMapper.class})
 public interface QuestionMapper {
-
-    QuestionEntity toEntity(Question question);
-
-    Question toDomain(QuestionEntity questionEntity);
+    
+    Question toDomain(QuestionEntity entity);
+    QuestionEntity toEntity(Question domain);
 }

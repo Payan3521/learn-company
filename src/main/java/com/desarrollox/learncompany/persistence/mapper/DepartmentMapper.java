@@ -1,13 +1,13 @@
 package com.desarrollox.learncompany.persistence.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 import com.desarrollox.learncompany.domain.model.Department;
 import com.desarrollox.learncompany.persistence.entity.DepartmentEntity;
-import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface DepartmentMapper {
-
-    DepartmentEntity toEntity(Department department);
-
-    Department toDomain(DepartmentEntity departmentEntity);
+    
+    Department toDomain(DepartmentEntity entity);
+    DepartmentEntity toEntity(Department domain);
 }

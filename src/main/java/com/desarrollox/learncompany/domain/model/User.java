@@ -57,8 +57,8 @@ public class User {
     public boolean isStatus() { return status; }
     public void setStatus(boolean status) { this.status = status; }
 
-    public Role getRol() { return role; }
-    public void setRol(Role role) { this.role = role; }
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
 
     public Department getDepartment() { return department; }
     public void setDepartment(Department department) { this.department = department; }

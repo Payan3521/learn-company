@@ -1,13 +1,18 @@
 package com.desarrollox.learncompany.persistence.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 import com.desarrollox.learncompany.domain.model.User;
 import com.desarrollox.learncompany.persistence.entity.UserEntity;
-import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {DepartmentMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+        uses = {DepartmentMapper.class})
 public interface UserMapper {
-
-    UserEntity toUserEntity(User user);
-
-    User toUser(UserEntity userEntity);
+    
+    @Mapping(source = "role", target = "role")
+    User toDomain(UserEntity entity);
+    
+    @Mapping(source = "role", target = "role")
+    UserEntity toEntity(User domain);
 }
