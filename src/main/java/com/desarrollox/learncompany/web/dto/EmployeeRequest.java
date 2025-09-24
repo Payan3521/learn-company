@@ -2,6 +2,7 @@ package com.desarrollox.learncompany.web.dto;
 
 import com.desarrollox.learncompany.domain.model.User.Role;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -28,8 +29,8 @@ public class EmployeeRequest {
     @NotNull(message = "El rol es obligatorio")
     private Role role;
 
-    @NotNull(message = "El departamento es obligatorio")
-    //validacion para que sea mayor a 0 el id
+    @NotNull(message = "El ID del departamento es obligatorio")
+    @Min(value = 1, message = "El ID del departamento debe ser mayor que 0")
     private Long departmentId;
 
     @NotNull(message = "La url de la foto es obligatoria")

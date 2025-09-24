@@ -10,7 +10,6 @@ import com.desarrollox.learncompany.persistence.entity.ModuleEntity;
         uses = {AssessmentTemplateMapper.class, CourseMapper.class})
 public interface ModuleMapper {
     
-   
     Module toDomain(ModuleEntity entity);
 
     @Mapping(target = "id", ignore = true)
