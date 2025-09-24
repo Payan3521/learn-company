@@ -7,11 +7,15 @@ import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.persistence.entity.EmployeeEntity;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {DepartmentMapper.class, CertificateMapper.class, InscriptionMapper.class})
+        uses = {DepartmentMapper.class})
 public interface EmployeeMapper {
     
+    @Mapping(target = "certificates", ignore = true)
+    @Mapping(target = "inscriptions", ignore = true)
     Employee toDomain(EmployeeEntity entity);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "certificates", ignore = true)
+    @Mapping(target = "inscriptions", ignore = true)
     EmployeeEntity toEntity(Employee domain);
 }

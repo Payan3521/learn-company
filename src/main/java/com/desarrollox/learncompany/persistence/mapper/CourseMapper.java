@@ -7,13 +7,17 @@ import com.desarrollox.learncompany.domain.model.Course;
 import com.desarrollox.learncompany.persistence.entity.CourseEntity;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {ModuleMapper.class, InscriptionMapper.class, SeasonMapper.class, InstructorMapper.class})
+        uses = {SeasonMapper.class, InstructorMapper.class})
 public interface CourseMapper {
     
     @Mapping(target = "duration", source = "durationInHours" )
+    @Mapping(target = "modules", ignore = true)
+    @Mapping(target = "inscriptions", ignore = true)
     Course toDomain(CourseEntity entity);
     
     @Mapping(target = "durationInHours", source = "duration")
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "modules", ignore = true)
+    @Mapping(target = "inscriptions", ignore = true)
     CourseEntity toEntity(Course domain);
 }
