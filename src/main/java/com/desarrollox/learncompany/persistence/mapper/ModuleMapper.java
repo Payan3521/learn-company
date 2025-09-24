@@ -7,13 +7,12 @@ import com.desarrollox.learncompany.domain.model.Module;
 import com.desarrollox.learncompany.persistence.entity.ModuleEntity;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {AssessmentTemplateMapper.class})
+        uses = {AssessmentTemplateMapper.class, CourseMapper.class})
 public interface ModuleMapper {
     
    
     Module toDomain(ModuleEntity entity);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "course", ignore = true)
     ModuleEntity toEntity(Module domain);
 }

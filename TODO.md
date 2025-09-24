@@ -1,4 +1,4 @@
-1. validaciones en requests
+1. validaciones en requests (averiguar si mapear listas ya esta bien... relacion de employee y badge en entities, usar prepersist afecta en algo el mapeo)
 3. crear script sql, añadir index
 
 2. integracion, unitarias, extremo a extremo

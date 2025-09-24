@@ -6,12 +6,14 @@ import org.mapstruct.MappingConstants;
 import com.desarrollox.learncompany.domain.model.Season;
 import com.desarrollox.learncompany.persistence.entity.SeasonEntity;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, 
+    uses = {CourseMapper.class})
 public interface SeasonMapper {
     
-    @Mapping(source = "durationInHours", target = "duration")
+    @Mapping(target = "duration", source = "durationInHours" )
     Season toDomain(SeasonEntity entity);
     
-    @Mapping(source = "duration", target = "durationInHours")
+    @Mapping(target = "durationInHours", source = "duration" )
+    @Mapping(target = "id", ignore = true)
     SeasonEntity toEntity(Season domain);
 }

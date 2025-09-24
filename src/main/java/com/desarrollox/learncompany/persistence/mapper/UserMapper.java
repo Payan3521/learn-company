@@ -9,10 +9,9 @@ import com.desarrollox.learncompany.persistence.entity.UserEntity;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         uses = {DepartmentMapper.class})
 public interface UserMapper {
-    
-    @Mapping(source = "role", target = "role")
+
     User toDomain(UserEntity entity);
     
-    @Mapping(source = "role", target = "role")
+    @Mapping(target = "id", ignore = true)
     UserEntity toEntity(User domain);
 }
