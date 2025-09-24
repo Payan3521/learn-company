@@ -36,4 +36,56 @@ public class UsersController {
         //retornar con api response
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Empleado registrado correctamente", userResponse));
     }
+
+    public ResponseEntity<?> createInstructor(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> assignBadge(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> getUsersById(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> getAllUsers(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> getByUsersFilters(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> getMe(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> getBadgesById(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> getCertificatesById(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> getInscriptionsById(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> getCoursesById(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> updateEmployee(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> updateInstructor(){
+        throw new IllegalArgumentException();
+    }
+
+    public ResponseEntity<?> deleteUserById(){
+        throw new IllegalArgumentException();
+    }
 }
