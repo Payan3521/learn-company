@@ -7,12 +7,14 @@ import com.desarrollox.learncompany.domain.model.AssessmentInstance;
 import com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {AssessmentTemplateMapper.class, EmployeeMapper.class, AnswerMapper.class})
+        uses = {AssessmentTemplateMapper.class, EmployeeMapper.class})
 public interface AssessmentInstanceMapper {
     
+    @Mapping(target = "answers", ignore = true)
     AssessmentInstance toDomain(AssessmentInstanceEntity entity);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "answers", ignore = true)
     AssessmentInstanceEntity toEntity(AssessmentInstance domain);
 }
