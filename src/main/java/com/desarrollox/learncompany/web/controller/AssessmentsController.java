@@ -19,4 +19,9 @@ public class AssessmentsController {
     public ResponseEntity<?> getFeedbackById(){
         throw new IllegalArgumentException();
     }
+
+    public ResponseEntity<?> asignarGrade(){
+        throw new IllegalArgumentException();
+    }
+
 }
