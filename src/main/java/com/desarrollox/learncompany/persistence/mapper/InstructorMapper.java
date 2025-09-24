@@ -1,6 +1,7 @@
 package com.desarrollox.learncompany.persistence.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import com.desarrollox.learncompany.domain.model.Instructor;
 import com.desarrollox.learncompany.persistence.entity.InstructorEntity;
@@ -10,5 +11,7 @@ import com.desarrollox.learncompany.persistence.entity.InstructorEntity;
 public interface InstructorMapper {
     
     Instructor toDomain(InstructorEntity entity);
+
+    @Mapping(target = "id", ignore = true)
     InstructorEntity toEntity(Instructor domain);
 }

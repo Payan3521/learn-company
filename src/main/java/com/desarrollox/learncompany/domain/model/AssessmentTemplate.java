@@ -27,7 +27,7 @@ public class AssessmentTemplate {
         this.retries = retries;
     }
 
-     public Long getId() { return id; }
+    public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
     public Module getModule() { return module; }

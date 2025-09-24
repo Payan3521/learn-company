@@ -17,6 +17,6 @@ public class CourseResponse {
     private String description;
     private Integer level;
     private Integer duration;
-    private SeasonResponse season;
-    private UserResponse instructor;
+    private Long seasonId;
+    private Long instructorId;
 }

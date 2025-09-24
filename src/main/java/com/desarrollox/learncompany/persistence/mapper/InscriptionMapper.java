@@ -10,9 +10,9 @@ import com.desarrollox.learncompany.persistence.entity.InscriptionEntity;
         uses = {EmployeeMapper.class, CourseMapper.class})
 public interface InscriptionMapper {
     
-    @Mapping(source = "employee", target = "employee")
     Inscription toDomain(InscriptionEntity entity);
     
-    @Mapping(source = "employee", target = "employee")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dateIssued", ignore = true)
     InscriptionEntity toEntity(Inscription domain);
 }

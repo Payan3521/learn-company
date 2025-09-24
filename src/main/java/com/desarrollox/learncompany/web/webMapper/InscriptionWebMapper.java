@@ -7,8 +7,7 @@ import com.desarrollox.learncompany.domain.model.Inscription;
 import com.desarrollox.learncompany.web.dto.InscriptionRequest;
 import com.desarrollox.learncompany.web.dto.InscriptionResponse;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {UserWebMapper.class, CourseWebMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface InscriptionWebMapper {
     
     @Mapping(target = "id", ignore = true)
@@ -35,9 +34,11 @@ public interface InscriptionWebMapper {
     @Mapping(target = "course.season", ignore = true)
     @Mapping(target = "course.instructor", ignore = true)
     @Mapping(target = "dateIssued", ignore = true)
-    @Mapping(target = "status", constant = "ACCEPTED")
+    @Mapping(target = "status", constant = "IN_PROGRESS")
     Inscription requestToDomain(InscriptionRequest request);
     
-    @Mapping(source = "dateIssued", target = "dateAndHour")
+    @Mapping(target = "dateAndHour", source = "dateIssued")
+    @Mapping(target = "employeeId", source = "employee.id")
+    @Mapping(target = "courseId", source = "course.id")
     InscriptionResponse domainToResponse(Inscription domain);
 }

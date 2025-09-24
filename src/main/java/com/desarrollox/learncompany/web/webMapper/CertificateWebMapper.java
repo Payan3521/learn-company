@@ -37,5 +37,7 @@ public interface CertificateWebMapper {
     @Mapping(target = "dateIssued", ignore = true)
     Certificate requestToDomain(CertificateRequest request);
     
+    @Mapping(target = "employeeId", source = "employee.id")
+    @Mapping(target = "courseId", source = "course.id")
     CertificateResponse domainToResponse(Certificate domain);
 }

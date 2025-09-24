@@ -8,8 +8,7 @@ import com.desarrollox.learncompany.web.dto.CourseRequest;
 import com.desarrollox.learncompany.web.dto.CourseResponse;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {ModuleWebMapper.class, InscriptionWebMapper.class, 
-                SeasonWebMapper.class, UserWebMapper.class})
+        uses = {ModuleWebMapper.class, InscriptionWebMapper.class, })
 public interface CourseWebMapper {
     
     @Mapping(target = "id", ignore = true)
@@ -33,5 +32,7 @@ public interface CourseWebMapper {
     @Mapping(target = "instructor.courses", ignore = true)
     Course requestToDomain(CourseRequest request);
     
+    @Mapping(target = "seasonId", source =  "season.id")
+    @Mapping(target = "instructorId", source = "instructor.id")
     CourseResponse domainToResponse(Course domain);
 }

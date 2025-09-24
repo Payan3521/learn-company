@@ -17,14 +17,13 @@ public class UserResponse {
     private String lastname;
     private boolean status;
     private Role role;
-    private DepartmentResponse department;
+    private Long departmentId;
     private String urlPhoto;
     private int puntos; // only for employee
-    private List<BadgeResponse> badges; // only for employee
     private List<CertificateResponse> certificates; // only for employee
     private List<InscriptionResponse> inscriptions; // only for employee
-    private String especialidad; // only for instructor
-    private String biografia; // only for instructor
+    private String specialty; // only for instructor
+    private String biography; // only for instructor
     private List<CourseResponse> courses; //only for instructor
     private Integer age; //only for administrator
 }

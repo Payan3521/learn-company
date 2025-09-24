@@ -8,10 +8,10 @@ import com.desarrollox.learncompany.web.dto.AssessmentTemplateRequest;
 import com.desarrollox.learncompany.web.dto.AssessmentTemplateResponse;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {ModuleWebMapper.class, QuestionWebMapper.class})
+        uses = {QuestionWebMapper.class})
 public interface AssessmentTemplateWebMapper {
     
-     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "module", ignore = true)
     AssessmentTemplate requestToDomain(AssessmentTemplateRequest request);
     

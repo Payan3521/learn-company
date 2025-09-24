@@ -8,7 +8,7 @@ import com.desarrollox.learncompany.web.dto.NotificationRequest;
 import com.desarrollox.learncompany.web.dto.NotificationResponse;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {UserWebMapper.class, NotificationContentWebMapper.class})
+        uses = {NotificationContentWebMapper.class})
 public interface NotificationWebMapper {
     
     @Mapping(target = "id", ignore = true)
@@ -25,5 +25,6 @@ public interface NotificationWebMapper {
     @Mapping(target = "readStatus", constant = "false")
     Notification requestToDomain(NotificationRequest request);
     
+    @Mapping(target = "userId", source = "user.id")
     NotificationResponse domainToResponse(Notification domain);
 }

@@ -12,8 +12,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class AssessmentInstanceResponse {
     private Long id;
-    private AssessmentTemplateResponse assessmentTemplate;
-    private UserResponse employee;
+    private Long assessmentTemplateId;
+    private Long employeeId;
     private Double grade;
     private Status status;
     private List<AnswerResponse> answers;

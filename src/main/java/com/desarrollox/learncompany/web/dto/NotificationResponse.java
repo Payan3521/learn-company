@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class NotificationResponse {
     private Long id;
-    private UserResponse user;
+    private Long userId;
     private String title;
     private NotificationContentResponse content;
     private LocalDateTime dateIssued;

@@ -1,6 +1,7 @@
 package com.desarrollox.learncompany.persistence.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import com.desarrollox.learncompany.domain.model.AssessmentTemplate;
 import com.desarrollox.learncompany.persistence.entity.AssessmentTemplateEntity;
@@ -10,5 +11,7 @@ import com.desarrollox.learncompany.persistence.entity.AssessmentTemplateEntity;
 public interface AssessmentTemplateMapper {
     
     AssessmentTemplate toDomain(AssessmentTemplateEntity entity);
+
+    @Mapping(target = "id", ignore = true)
     AssessmentTemplateEntity toEntity(AssessmentTemplate domain);
 }

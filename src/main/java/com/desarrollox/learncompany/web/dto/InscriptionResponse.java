@@ -11,8 +11,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class InscriptionResponse {
     private Long id;
-    private UserResponse employee;
+    private Long employeeId;
     private LocalDateTime dateAndHour;
-    private CourseResponse course;
+    private Long courseId;
     private Status status;
 }

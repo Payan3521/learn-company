@@ -10,9 +10,10 @@ import com.desarrollox.learncompany.persistence.entity.CourseEntity;
         uses = {ModuleMapper.class, InscriptionMapper.class, SeasonMapper.class, InstructorMapper.class})
 public interface CourseMapper {
     
-    @Mapping(source = "durationInHours", target = "duration")
+    @Mapping(target = "duration", source = "durationInHours" )
     Course toDomain(CourseEntity entity);
     
-    @Mapping(source = "duration", target = "durationInHours")
+    @Mapping(target = "durationInHours", source = "duration")
+    @Mapping(target = "id", ignore = true)
     CourseEntity toEntity(Course domain);
 }

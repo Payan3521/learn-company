@@ -7,13 +7,11 @@ import com.desarrollox.learncompany.domain.model.Badge;
 import com.desarrollox.learncompany.web.dto.BadgeRequest;
 import com.desarrollox.learncompany.web.dto.BadgeResponse;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {UserWebMapper.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface BadgeWebMapper {
     
     @Mapping(target = "id", ignore = true)
     Badge requestToDomain(BadgeRequest request);
     
-    @Mapping(target = "employee", ignore = true) // Se maneja por separado
     BadgeResponse domainToResponse(Badge domain);
 }
