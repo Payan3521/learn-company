@@ -3,13 +3,12 @@ package com.desarrollox.learncompany.web.webMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
-
 import com.desarrollox.learncompany.domain.model.AssessmentInstance;
 import com.desarrollox.learncompany.web.dto.AssessmentInstanceRequest;
 import com.desarrollox.learncompany.web.dto.AssessmentInstanceResponse;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {AssessmentTemplateWebMapper.class, UserWebMapper.class, AnswerWebMapper.class})
+        uses = {AssessmentTemplateWebMapper.class, AnswerWebMapper.class})
 public interface AssessmentInstanceWebMapper {
     
     @Mapping(target = "id", ignore = true)
@@ -36,5 +35,7 @@ public interface AssessmentInstanceWebMapper {
     @Mapping(target = "createdAt", ignore = true)
     AssessmentInstance requestToDomain(AssessmentInstanceRequest request);
     
+    @Mapping(target = "assessmentTemplateId", source = "assessmentTemplate.id")
+    @Mapping(target = "employeeId", source = "employee.id")
     AssessmentInstanceResponse domainToResponse(AssessmentInstance domain);
 }

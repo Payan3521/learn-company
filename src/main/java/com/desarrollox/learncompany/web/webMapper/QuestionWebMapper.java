@@ -14,5 +14,6 @@ public interface QuestionWebMapper {
     @Mapping(target = "assessmentTemplate", ignore = true)
     Question requestToDomain(QuestionRequest request);
     
+    @Mapping(target = "assessmentTemplateId", source = "assessmentTemplate.id")
     QuestionResponse domainToResponse(Question domain);
 }

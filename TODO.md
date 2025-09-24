@@ -1,4 +1,4 @@
-1. mappers con mapstruct
+1. validaciones en requests
 3. crear script sql, añadir index
 
 2. integracion, unitarias, extremo a extremo

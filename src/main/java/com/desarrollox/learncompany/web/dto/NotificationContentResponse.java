@@ -13,4 +13,5 @@ public class NotificationContentResponse {
     private NotificationType type;
     private Long referenceId;
     private String message;
+    private Long notificationId;
 }

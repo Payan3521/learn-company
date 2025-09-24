@@ -15,5 +15,6 @@ public interface SeasonWebMapper {
     @Mapping(target = "courses", ignore = true)
     Season requestToDomain(SeasonRequest request);
     
+    
     SeasonResponse domainToResponse(Season domain);
 }

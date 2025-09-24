@@ -36,5 +36,6 @@ public class InstructorRequest {
     private String urlPhoto;
 
     private String specialty;
+    
     private String biography;
 }

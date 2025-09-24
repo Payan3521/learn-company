@@ -14,5 +14,6 @@ public interface NotificationContentWebMapper {
     @Mapping(target = "notification", ignore = true)
     NotificationContent requestToDomain(NotificationContentRequest request);
     
+    @Mapping(target = "notificationId", source = "notification.id")
     NotificationContentResponse domainToResponse(NotificationContent domain);
 }

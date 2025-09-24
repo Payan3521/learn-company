@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class CertificateResponse {
     private Long id;
-    private UserResponse employee;
-    private CourseResponse course;
+    private Long employeeId;
+    private Long courseId;
     private LocalDateTime dateIssued;
 }

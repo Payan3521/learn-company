@@ -12,5 +12,5 @@ public class BadgeResponse {
     private String name;
     private String urlIcon;
     private String criteria;
-    private UserResponse employee;
+    private Long employeeId;
 }

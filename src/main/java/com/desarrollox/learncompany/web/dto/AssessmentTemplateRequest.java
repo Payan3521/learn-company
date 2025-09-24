@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class AssessmentTemplateRequest {
-    //el ya conoce su modulo
-    private Long moduleId;
     private List<QuestionRequest> questions;
     private Type type;
     private int retries;

@@ -3,7 +3,6 @@ package com.desarrollox.learncompany.web.webMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
-
 import com.desarrollox.learncompany.domain.model.Answer;
 import com.desarrollox.learncompany.web.dto.AnswerRequest;
 import com.desarrollox.learncompany.web.dto.AnswerResponse;
@@ -22,5 +21,7 @@ public interface AnswerWebMapper {
     @Mapping(target = "assessmentInstance", ignore = true)
     Answer requestToDomain(AnswerRequest request);
     
+    @Mapping(target = "questionId", source = "question.id")
+    @Mapping(target = "assessmentInstanceId", source = "assessmentInstance.id")
     AnswerResponse domainToResponse(Answer domain);
 }
