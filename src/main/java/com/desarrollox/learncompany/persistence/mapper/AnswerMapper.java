@@ -13,5 +13,6 @@ public interface AnswerMapper {
     Answer toDomain(AnswerEntity entity);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dateIssued", ignore = true)
     AnswerEntity toEntity(Answer domain);
 }

@@ -13,5 +13,6 @@ public interface CertificateMapper {
     Certificate toDomain(CertificateEntity entity);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dateIssued", ignore = true)
     CertificateEntity toEntity(Certificate domain);
 }

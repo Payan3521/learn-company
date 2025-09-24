@@ -13,5 +13,6 @@ public interface NotificationMapper {
     Notification toDomain(NotificationEntity entity);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dateIssued", ignore = true)
     NotificationEntity toEntity(Notification domain);
 }

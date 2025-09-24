@@ -31,7 +31,4 @@ public class BadgeEntity {
 
     @Column(name = "criteria", nullable = false)
     private String criteria;
-
-    
-    private EmployeeEntity employee;
 }

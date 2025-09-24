@@ -5,24 +5,21 @@ public class Badge {
     private String name;
     private String urlIcon;
     private String criteria;
-    private Employee employee;
 
     public Badge() {
     }
 
-    public Badge(String name, String urlIcon, String criteria, Employee employee) {
+    public Badge(String name, String urlIcon, String criteria) {
         this.name = name;
         this.urlIcon = urlIcon;
         this.criteria = criteria;
-        this.employee= employee;
     }
 
-    public Badge(Long id, String name, String urlIcon, String criteria, Employee employee) {
+    public Badge(Long id, String name, String urlIcon, String criteria) {
         this.id = id;
         this.name = name;
         this.urlIcon = urlIcon;
         this.criteria = criteria;
-        this.employee = employee;
     }
     
     public Long getId() {return id; }
@@ -36,8 +33,5 @@ public class Badge {
 
     public String getCriteria() { return criteria; }
     public void setCriteria(String criteria) { this.criteria = criteria; }
-
-    public Employee getEmployee() { return employee; }
-    public void setEmployee(Employee employee) { this.employee = employee; }
     
 }
