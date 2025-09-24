@@ -14,7 +14,7 @@ public class CertificatesController {
         throw new IllegalArgumentException();
     }
 
-    public ResponseEntity<?> getAllNotifications(){
+    public ResponseEntity<?> getAllCertificates(){
         throw new IllegalArgumentException();
     }
 

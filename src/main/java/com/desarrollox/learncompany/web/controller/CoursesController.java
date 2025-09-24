@@ -45,4 +45,8 @@ public class CoursesController {
     public ResponseEntity<?> getModulesById(){
         throw new IllegalArgumentException();
     }
+
+    public ResponseEntity<?> deleteCourse(){
+        throw new IllegalArgumentException();
+    }
 }

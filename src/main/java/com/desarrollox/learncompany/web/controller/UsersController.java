@@ -61,19 +61,11 @@ public class UsersController {
         throw new IllegalArgumentException();
     }
 
-    public ResponseEntity<?> getBadgesById(){
-        throw new IllegalArgumentException();
-    }
-
     public ResponseEntity<?> getCertificatesById(){
         throw new IllegalArgumentException();
     }
 
     public ResponseEntity<?> getInscriptionsById(){
-        throw new IllegalArgumentException();
-    }
-
-    public ResponseEntity<?> getCoursesById(){
         throw new IllegalArgumentException();
     }
 

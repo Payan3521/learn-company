@@ -25,4 +25,8 @@ public class BadgesController {
     public ResponseEntity<?> getBadgesById(){
         throw new IllegalArgumentException();
     }
+
+    public ResponseEntity<?> getBadgesByEmployeeId(){
+        throw new IllegalArgumentException();
+    }
 }

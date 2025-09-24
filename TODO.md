@@ -1,4 +1,4 @@
-1. validaciones en requests (crear los pre-persist, metodos de logica de negocio), tener en cuenta poblar las listas al mapear
+1. validaciones en requests (crear los pre-persist, metodos de logica de negocio), tener en cuenta poblar las listas al mapear, agregar tipo para el curso (obligatorio/opcional)
 2. crear script sql, añadir index
 3. Crear los endpoints
 
