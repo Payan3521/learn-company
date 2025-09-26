@@ -23,6 +23,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	//Dependencia para leer variables de entorno(dotenv)
+	implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+
 	//Dependencia para documentación de swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 
