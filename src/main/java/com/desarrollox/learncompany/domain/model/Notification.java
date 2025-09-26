@@ -13,21 +13,21 @@ public class Notification {
     public Notification() {
     }
 
-    public Notification(User user, String title, NotificationContent content, LocalDateTime dateIssued, boolean readStatus) {
+    public Notification(User user, String title, NotificationContent content, LocalDateTime dateIssued) {
         this.user = user;
         this.title = title;
         this.content = content;
         this.dateIssued = dateIssued;
-        this.readStatus = readStatus;
+        this.readStatus = false;
     }
 
-    public Notification(Long id, User user, String title, NotificationContent content, LocalDateTime dateIssued, boolean readStatus) {
+    public Notification(Long id, User user, String title, NotificationContent content, LocalDateTime dateIssued) {
         this.id = id;
         this.user = user;
         this.title = title;
         this.content = content;
         this.dateIssued = dateIssued;
-        this.readStatus = readStatus;
+        this.readStatus = false;
     }
 
     public Long getId() { return id; }

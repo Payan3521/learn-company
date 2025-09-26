@@ -13,13 +13,14 @@ public class Course {
     private int duration;
     private Season season;
     private Instructor instructor;
+    private TypeCourse typeCourse;
 
     public Course() {
     }
 
     public Course(List<Module> modules, List<Inscription> inscriptions, Long id, String title,
                   String topic, String description, int level, int duration,
-                  Season season, Instructor instructor) {
+                  Season season, Instructor instructor, TypeCourse typeCourse) {
         this.modules = modules;
         this.inscriptions = inscriptions;
         this.id = id;
@@ -30,10 +31,11 @@ public class Course {
         this.duration = duration;
         this.season = season;
         this.instructor = instructor;
+        this.typeCourse = typeCourse;
     }
 
     public Course(List<Module> modules, List<Inscription> inscriptions, String title, String topic, String description,
-            int level, int duration, Season season, Instructor instructor) {
+            int level, int duration, Season season, Instructor instructor, TypeCourse typeCourse) {
         this.modules = modules;
         this.inscriptions = inscriptions;
         this.title = title;
@@ -43,7 +45,16 @@ public class Course {
         this.duration = duration;
         this.season = season;
         this.instructor = instructor;
+        this.typeCourse = typeCourse;
     }
+
+    public enum TypeCourse {
+        OPTIONAL,
+        MANDATORY
+    }
+
+    public TypeCourse getTypeCourse() { return typeCourse; }
+    public void setTypeCourse(TypeCourse typeCourse) { this.typeCourse = typeCourse; }
 
     public List<Module> getModules() { return modules; }
 

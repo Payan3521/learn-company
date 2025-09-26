@@ -28,4 +28,9 @@ public class EmployeeBadgeEntity {
 
     @Column(name = "date_earned", nullable = false)
     private LocalDateTime dateEarned;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateEarned = LocalDateTime.now();
+    }
 }

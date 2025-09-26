@@ -56,4 +56,7 @@ public class CourseEntity {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InscriptionEntity> inscriptions;
+
+    @Column(name = "type_course", nullable = false)
+    private String typeCourse;
 }

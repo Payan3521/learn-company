@@ -19,4 +19,5 @@ public class CourseResponse {
     private Integer duration;
     private Long seasonId;
     private Long instructorId;
+    private String typeCourse;
 }

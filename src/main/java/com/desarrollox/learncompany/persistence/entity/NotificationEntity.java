@@ -35,4 +35,9 @@ public class NotificationEntity {
 
     @Column(name = "read_status", nullable = false)
     private boolean readStatus;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateIssued = LocalDateTime.now();
+    }
 } 

@@ -13,5 +13,6 @@ public interface EmployeeBadgeMapper {
     EmployeeBadge toDomain(EmployeeBadgeEntity entity);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "dateEarned", ignore = true)
     EmployeeBadgeEntity toEntity(EmployeeBadge domain);
 }

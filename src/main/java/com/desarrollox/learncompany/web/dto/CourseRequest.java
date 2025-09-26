@@ -1,5 +1,6 @@
 package com.desarrollox.learncompany.web.dto;
 
+import com.desarrollox.learncompany.domain.model.Course.TypeCourse;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -38,4 +39,7 @@ public class CourseRequest {
     @NotNull(message = "El ID del instructor es obligatorio")
     @Min(value = 1, message = "El ID del instructor debe ser mayor que 0")
     private Long instructorId;
+
+    @NotNull(message = "El tipo de curso es obligatorio")
+    private TypeCourse typeCourse;
 }
