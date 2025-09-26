@@ -60,7 +60,7 @@ public class UsersController {
         throw new IllegalArgumentException();
     }
 
-    @GetMapping
+    @GetMapping("/filters")
     public ResponseEntity<?> getByUsersFilters(){
         throw new IllegalArgumentException();
     }

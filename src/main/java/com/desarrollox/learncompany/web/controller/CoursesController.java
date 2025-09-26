@@ -28,7 +28,7 @@ public class CoursesController {
         throw new IllegalArgumentException();
     }
 
-    @GetMapping
+    @GetMapping("/filters")
     public ResponseEntity<?> getCoursesByFilters(){
         throw new IllegalArgumentException();
     }

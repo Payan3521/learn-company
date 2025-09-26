@@ -29,7 +29,7 @@ public class DepartmentsController {
         throw new IllegalArgumentException();
     }
 
-    @GetMapping
+    @GetMapping("/filters")
     public ResponseEntity<?> getDepartamentsByFilters(){
         throw new IllegalArgumentException();
     }
