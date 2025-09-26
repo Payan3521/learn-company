@@ -33,7 +33,7 @@ public class NotificationsController {
         throw new IllegalArgumentException();
     }
 
-    @PatchMapping("/mark-read")
+    @PatchMapping("/mark-read/{id}")
     public ResponseEntity<?> markNotificationRead(){
         throw new IllegalArgumentException();
     }

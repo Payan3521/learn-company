@@ -38,17 +38,17 @@ public class CoursesController {
         throw new IllegalArgumentException();
     }
 
-    @GetMapping("/finishs/{id}")
+    @GetMapping("/finished/{id}")
     public ResponseEntity<?> getFinishById(){
         throw new IllegalArgumentException();
     }
 
-    @GetMapping("/optionals/{department}")
+    @GetMapping("/optional")
     public ResponseEntity<?> getOptionalsByDepartament(){
         throw new IllegalArgumentException();
     }
 
-    @GetMapping("/mandatorys/{departament}")
+    @GetMapping("/mandatory")
     public ResponseEntity<?> getMandatorysByDepartamet(){
         throw new IllegalArgumentException();
     }
