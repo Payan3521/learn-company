@@ -17,7 +17,7 @@ public class BadgesController {
         throw new IllegalArgumentException();
     }
 
-    @GetMapping("/{name}")
+    @GetMapping
     public ResponseEntity<?> getBadgeByName(){
         throw new IllegalArgumentException();
     }

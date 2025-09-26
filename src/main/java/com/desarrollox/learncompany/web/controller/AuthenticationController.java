@@ -12,17 +12,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthenticationController {
     
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<?> login(){
         throw new IllegalArgumentException();
     }
 
-    @GetMapping
+    @GetMapping("/logout")
     public ResponseEntity<?> logout(){
         throw new IllegalArgumentException();
     }
 
-    @GetMapping
+    @GetMapping("/refresh")
     public ResponseEntity<?> refresh(){
         throw new IllegalArgumentException();
     }

@@ -18,7 +18,7 @@ public class InscriptionsController {
         throw new IllegalArgumentException();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getInscriptionById(){
         throw new IllegalArgumentException();
     }
