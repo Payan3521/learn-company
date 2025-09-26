@@ -1,5 +1,21 @@
 package com.desarrollox.learncompany.domain.exception;
 
-public class CertificateNotFoundException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class CertificateNotFoundException extends RuntimeException {
+
+    public CertificateNotFoundException(Long id) {
+        super("Certificado con id: " + id + " no encontrado");
+    }
+
+    public CertificateNotFoundException() {
+        super("Certificado no encontrado");
+    }
+    
+    public CertificateNotFoundException(String message) {
+        super(message);
+    }
     
 }
