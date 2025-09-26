@@ -42,4 +42,8 @@ public class CourseRequest {
 
     @NotNull(message = "El tipo de curso es obligatorio")
     private TypeCourse typeCourse;
+
+    @NotNull(message = "El ID del departamento es obligatorio")
+    @Min(value = 1, message = "El ID del departamento debe ser mayor que 0")
+    private Long departmentId;
 }

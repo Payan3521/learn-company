@@ -39,6 +39,26 @@ public class User {
         this.urlPhoto = urlPhoto;
     }
 
+    public boolean isActive() {
+        return status;
+    }
+
+    public boolean isAdmin() {
+        return role != null && Role.ADMINISTRATOR.equals(role);
+    }
+
+    public boolean isInstructor() {
+        return role != null && Role.INSTRUCTOR.equals(role);
+    }
+
+    public boolean isEmployee() {
+        return role != null && Role.EMPLOYEE.equals(role);
+    }
+
+    public boolean canLogin() {
+        return status && email != null && password != null;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

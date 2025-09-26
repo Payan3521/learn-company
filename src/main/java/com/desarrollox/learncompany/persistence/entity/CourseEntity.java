@@ -59,4 +59,8 @@ public class CourseEntity {
 
     @Column(name = "type_course", nullable = false)
     private String typeCourse;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    private DepartmentEntity department;
 }

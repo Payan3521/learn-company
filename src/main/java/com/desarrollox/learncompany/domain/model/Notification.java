@@ -30,6 +30,14 @@ public class Notification {
         this.readStatus = false;
     }
 
+    public void markAsRead() {
+        this.readStatus = true;
+    }
+
+    public boolean isUnread() {
+        return !readStatus;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

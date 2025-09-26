@@ -6,6 +6,10 @@ public class Employee extends User {
     private int puntos;
     private List<Certificate> certificates;
     private List<Inscription> inscriptions;
+
+    public void addPoints(int points) {
+        this.puntos += points;
+    }
     
     public Employee() {
         super();

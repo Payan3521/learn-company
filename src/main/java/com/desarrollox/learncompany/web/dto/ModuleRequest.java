@@ -24,5 +24,6 @@ public class ModuleRequest {
     @Valid
     @NotEmpty(message = "La lista de evaluaciones template no puede estar vacía")
     @Size(max = 3, message = "La lista de evaluaciones template no puede tener más de 3 elementos")
+    @Size(min = 3, message = "La lista de evaluaciones template debe tener al menos 3 elementos")
     private List<AssessmentTemplateRequest> assessmentTemplate;
 }

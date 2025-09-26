@@ -20,4 +20,5 @@ public class CourseResponse {
     private Long seasonId;
     private Long instructorId;
     private String typeCourse;
+    private Long departmentId;
 }

@@ -9,8 +9,10 @@ import com.desarrollox.learncompany.persistence.entity.DepartmentEntity;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface DepartmentMapper {
     
+    @Mapping(target = "courses", ignore = true)
     Department toDomain(DepartmentEntity entity);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "courses", ignore = true)
     DepartmentEntity toEntity(Department domain);
 }

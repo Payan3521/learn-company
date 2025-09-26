@@ -27,6 +27,22 @@ public class AssessmentTemplate {
         this.retries = retries;
     }
 
+    public boolean isFinalExam() {
+        return type == Type.FINAL_ASSESSMENT;
+    }
+
+    public boolean isQuiz() {
+        return type == Type.QUIZ;
+    }
+
+    public boolean isWorkshop() {
+        return type == Type.WORKSHOP;
+    }
+
+    public boolean canRetry() {
+        return retries > 0;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

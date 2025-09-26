@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/assessments")
 @RequiredArgsConstructor
-public class AssessmentsController {
+public class AssessmentsInstanceController {
     
     @PostMapping
     public ResponseEntity<?> createAssessmentInstance(){

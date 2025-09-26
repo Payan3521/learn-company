@@ -30,9 +30,15 @@ public interface CourseWebMapper {
     @Mapping(target = "instructor.specialty", ignore = true)
     @Mapping(target = "instructor.biography", ignore = true)
     @Mapping(target = "instructor.courses", ignore = true)
+    @Mapping(target = "department.id", source = "departmentId")
+    @Mapping(target = "department.name", ignore = true)
+    @Mapping(target = "department.prize", ignore = true)
+    @Mapping(target = "department.hierarchy", ignore = true)
+    @Mapping(target = "department.courses", ignore = true)
     Course requestToDomain(CourseRequest request);
     
     @Mapping(target = "seasonId", source =  "season.id")
     @Mapping(target = "instructorId", source = "instructor.id")
+    @Mapping(target = "departmentId", source = "department.id")
     CourseResponse domainToResponse(Course domain);
 }

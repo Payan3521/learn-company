@@ -25,6 +25,14 @@ public class NotificationContent {
         this.notification = notification;
     }
 
+    public boolean isEvaluationNotification() {
+        return type == NotificationType.NEW_EVALUATION;
+    }
+
+    public boolean isRankingWinnerNotification() {
+        return type == NotificationType.RANKING_WINNER;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     

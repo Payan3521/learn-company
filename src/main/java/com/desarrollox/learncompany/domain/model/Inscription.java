@@ -27,6 +27,18 @@ public class Inscription {
         this.status = status;
     }
 
+    public boolean isAccepted() {
+        return status == Status.ACCEPTED;
+    }
+
+    public boolean isInProgress() {
+        return status == Status.IN_PROGRESS;
+    }
+
+    public boolean isRejected() {
+        return status == Status.REJECTED;
+    }
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }

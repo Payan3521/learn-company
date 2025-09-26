@@ -12,6 +12,14 @@ public class AssessmentInstance {
     private List<Answer> answers;
     private LocalDateTime createdAt;
 
+    public boolean isGraded() {
+        return status == Status.GRADED;
+    }
+
+    public boolean isPending() {
+        return status == Status.PENDING;
+    }
+
     public AssessmentInstance() {
     }
 
