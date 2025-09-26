@@ -2,7 +2,10 @@ package com.desarrollox.learncompany.web.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,50 +40,57 @@ public class UsersController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Empleado registrado correctamente", userResponse));
     }
 
+    @PostMapping("/instructor")
     public ResponseEntity<?> createInstructor(){
         throw new IllegalArgumentException();
     }
 
+    @PostMapping("/assingn-badge")
     public ResponseEntity<?> assignBadge(){
         throw new IllegalArgumentException();
     }
 
+    @GetMapping("/{id}")
     public ResponseEntity<?> getUsersById(){
         throw new IllegalArgumentException();
     }
 
+    @GetMapping
     public ResponseEntity<?> getAllUsers(){
         throw new IllegalArgumentException();
     }
 
+    @GetMapping
     public ResponseEntity<?> getByUsersFilters(){
         throw new IllegalArgumentException();
     }
 
+    @GetMapping("/me")
     public ResponseEntity<?> getMe(){
         throw new IllegalArgumentException();
     }
 
+    @GetMapping("/certificates/{id}")
     public ResponseEntity<?> getCertificatesById(){
         throw new IllegalArgumentException();
     }
 
+    @GetMapping("/inscriptions/{id}")
     public ResponseEntity<?> getInscriptionsById(){
         throw new IllegalArgumentException();
     }
 
-    public ResponseEntity<?> getCoursesById(){
-        throw new IllegalArgumentException();
-    }
-
+    @PutMapping("/employee/{id}")
     public ResponseEntity<?> updateEmployee(){
         throw new IllegalArgumentException();
     }
 
+    @PutMapping("/instructor/{id}")
     public ResponseEntity<?> updateInstructor(){
         throw new IllegalArgumentException();
     }
 
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUserById(){
         throw new IllegalArgumentException();
     }
