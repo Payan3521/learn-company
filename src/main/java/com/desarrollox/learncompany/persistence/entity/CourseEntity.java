@@ -34,10 +34,10 @@ public class CourseEntity {
     @Column(name = "topic", nullable = false)
     private String topic;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description_course", nullable = false)
     private String description;
 
-    @Column(name = "level", nullable = false)
+    @Column(name = "level_course", nullable = false)
     private int level;
 
     @Column(name = "duration_in_hours", nullable = false)

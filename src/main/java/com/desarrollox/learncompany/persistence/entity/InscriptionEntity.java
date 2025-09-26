@@ -42,7 +42,7 @@ public class InscriptionEntity {
     private CourseEntity course;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status_inscription", nullable = false)
     private Status status;
 
     @PrePersist

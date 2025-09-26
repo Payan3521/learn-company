@@ -46,7 +46,7 @@ public class AssessmentInstanceEntity {
     private double grade;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status_instance", nullable = false)
     private Status status;
 
     @OneToMany(mappedBy = "assessmentInstance", cascade = CascadeType.ALL, orphanRemoval = true)
