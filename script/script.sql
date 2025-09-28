@@ -40,7 +40,7 @@ CREATE TABLE seasons (
 
 CREATE TABLE badges (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL UNIQUE,
     url_icon VARCHAR(500) NOT NULL,
     criteria TEXT NOT NULL,
     INDEX idx_name (name)              -- Buscar badges por nombre

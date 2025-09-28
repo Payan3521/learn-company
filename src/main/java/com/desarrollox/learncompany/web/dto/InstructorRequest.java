@@ -1,7 +1,6 @@
 package com.desarrollox.learncompany.web.dto;
 
 import org.hibernate.validator.constraints.URL;
-
 import com.desarrollox.learncompany.domain.model.User.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;

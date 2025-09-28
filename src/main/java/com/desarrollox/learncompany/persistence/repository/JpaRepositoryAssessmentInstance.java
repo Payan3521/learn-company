@@ -1,5 +1,5 @@
 package com.desarrollox.learncompany.persistence.repository;
 
-public class JpaRepositoryAssessment {
+public class JpaRepositoryAssessmentInstance {
     
 }
