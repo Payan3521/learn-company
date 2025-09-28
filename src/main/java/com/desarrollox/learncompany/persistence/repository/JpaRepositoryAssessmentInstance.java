@@ -1,5 +1,10 @@
 package com.desarrollox.learncompany.persistence.repository;
 
-public class JpaRepositoryAssessmentInstance {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity;
+
+@Repository
+public interface JpaRepositoryAssessmentInstance extends JpaRepository<AssessmentInstanceEntity, Long>{
     
 }

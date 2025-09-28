@@ -2,6 +2,8 @@
 
 3. Crear los endpoints
 
+4. logs, encriptar contraseñas
+
 1. postman ,integracion, unitarias, extremo a extremo
 
 2. capturas (metodo, endpoint, boton, datos, respuesta, codigo, hora)

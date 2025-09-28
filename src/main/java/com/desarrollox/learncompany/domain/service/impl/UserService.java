@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
+import com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException;
+import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
 import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.model.Instructor;
 import com.desarrollox.learncompany.domain.model.User;
@@ -18,31 +20,46 @@ public class UserService implements IUserService{
 
     @Override
     public Employee createEmployee(Employee employee) {
+
+        if(repositoryUser.existsByEmail(employee.getEmail())){
+            throw new UserAlreadyRegisteredException(employee.getEmail());
+        } 
+
         return (Employee) repositoryUser.save(employee);
     }
 
     @Override
     public Instructor createInstructor(Instructor instructor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createInstructor'");
+        
+        if(repositoryUser.existsByEmail(instructor.getEmail())){
+            throw new UserAlreadyRegisteredException(instructor.getEmail());
+        } 
+
+        return (Instructor) repositoryUser.save(instructor);
     }
 
     @Override
     public Optional<User> findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+
+        if(repositoryUser.existsById(id)){
+            return repositoryUser.findById(id);
+        } 
+
+        throw new UserNotFoundException(id);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByEmail'");
+        if(repositoryUser.existsByEmail(email)){
+            return repositoryUser.findByEmail(email);
+        } 
+
+        throw new UserNotFoundException(email);
     }
 
     @Override
-    public List<User> findByDepartmentId(Long departmentId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByDepartmentId'");
+    public List<User> findAll() {
+        return repositoryUser.findAll();
     }
 
     @Override
@@ -53,20 +70,20 @@ public class UserService implements IUserService{
 
     @Override
     public Optional<User> delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        if (repositoryUser.existsById(id)) {
+            return repositoryUser.delete(id);
+        } 
+        throw new UserNotFoundException(id);
     }
 
     @Override
     public List<Employee> getRankingByDepartment(Long departmentId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRankingByDepartment'");
+        return repositoryUser.getRankingByDepartment(departmentId);
     }
 
     @Override
-    public List<User> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+    public List<User> findUsersByFilters(Long departmentId, String role, boolean status) {
+        return repositoryUser.findUsersByFilters(departmentId, role, status);
     }
-    
+
 }

@@ -14,4 +14,6 @@ public interface IRepositoryUser {
     Optional<User> delete(Long id);
     List<Employee> getRankingByDepartment(Long departmentId);
     List<User> findUsersByFilters(Long departmentId, String role, boolean status);
+    boolean existsById(Long id);
+    boolean existsByEmail(String email);
 }
