@@ -107,6 +107,7 @@ CREATE TABLE courses (
     duration_in_hours INT NOT NULL,
     season_id BIGINT NOT NULL,
     instructor_id BIGINT NOT NULL,
+    type_course ENUM('OPTIONAL', 'MANDATORY') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     

@@ -1,9 +1,12 @@
 package com.desarrollox.learncompany.persistence.entity;
 
 import java.util.List;
+import com.desarrollox.learncompany.domain.model.Course.TypeCourse;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -57,8 +60,9 @@ public class CourseEntity {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InscriptionEntity> inscriptions;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type_course", nullable = false)
-    private String typeCourse;
+    private TypeCourse typeCourse;
 
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
