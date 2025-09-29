@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.desarrollox.learncompany.core.logging.LoggingService;
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
-import com.desarrollox.learncompany.core.web.logging.LoggingService;
 import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.model.Instructor;
 import com.desarrollox.learncompany.domain.model.User;

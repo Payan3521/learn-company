@@ -2,7 +2,9 @@
 
 3. Crear los endpoints
 
-4. logs, encriptar contraseñas
+4. encriptar contraseñas
+5. agregar logs
+6. agregar documentacion
 
 1. postman ,integracion, unitarias, extremo a extremo
 
