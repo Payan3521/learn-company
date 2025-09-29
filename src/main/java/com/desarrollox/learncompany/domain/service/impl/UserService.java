@@ -64,8 +64,32 @@ public class UserService implements IUserService{
 
     @Override
     public Optional<User> updateUser(Long id, User user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateUser'");
+        if (repositoryUser.existsById(id)) {
+            User userDb = repositoryUser.findById(id).get();
+
+            if(user instanceof Employee && userDb instanceof Employee){
+                Employee employeeDb = (Employee) userDb;
+                Employee employeeEntrante = (Employee) user;
+                return repositoryUser.update(id, updateEmployee(employeeDb, employeeEntrante));
+            }
+
+            if(user instanceof Instructor && userDb instanceof Instructor){
+                Instructor instructorDb = (Instructor) userDb;
+                Instructor instructorEntrante = (Instructor) user;
+                return repositoryUser.update(id, updateInstructor(instructorDb, instructorEntrante));
+            }
+
+            return repositoryUser.update(id, user);
+        } 
+        throw new UserNotFoundException(id);
+    }
+
+    private Employee updateEmployee(Employee employeeDb, Employee employeeEntrante){
+        
+    }
+
+    private Instructor updateInstructor(Instructor instructorDb, Instructor instructorEntrante){
+
     }
 
     @Override

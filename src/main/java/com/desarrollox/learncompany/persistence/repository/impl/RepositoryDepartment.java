@@ -2,47 +2,62 @@ package com.desarrollox.learncompany.persistence.repository.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
 import com.desarrollox.learncompany.domain.model.Department;
+import com.desarrollox.learncompany.persistence.mapper.DepartmentMapper;
+import com.desarrollox.learncompany.persistence.repository.JpaRepositoryDepartment;
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class RepositoryDepartment implements IRepositoryDepartment{@Override
+public class RepositoryDepartment implements IRepositoryDepartment{
+
+    private final JpaRepositoryDepartment jpaRepositoryDepartment;
+    private final DepartmentMapper departmentMapper;
+    
+    @Override
     public Department save(Department department) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return departmentMapper.toDomain(jpaRepositoryDepartment.save(departmentMapper.toEntity(department)));
     }
 
     @Override
     public Optional<Department> update(Long id, Department department) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        return jpaRepositoryDepartment.findById(id).map(departmentEntity -> {
+            department.setId(id);
+            return departmentMapper.toDomain(jpaRepositoryDepartment.save(departmentMapper.toEntity(department)));
+        });
     }
 
     @Override
     public Optional<Department> findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return jpaRepositoryDepartment.findById(id).map(departmentMapper::toDomain);
     }
 
     @Override
     public Optional<Department> delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        return jpaRepositoryDepartment.findById(id).map(departmentEntity -> {
+            jpaRepositoryDepartment.delete(departmentEntity);
+            return departmentMapper.toDomain(departmentEntity);
+        });
     }
 
     @Override
     public List<Department> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return jpaRepositoryDepartment.findAll().stream().map(departmentMapper::toDomain).toList();
     }
 
     @Override
     public List<Department> findDepartmentsByFilters(String name, int hierarchy) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findDepartmentsByFilters'");
+        return jpaRepositoryDepartment.findByNameContainingAndHierarchy(name, hierarchy)
+                .stream()
+                .map(departmentMapper::toDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return jpaRepositoryDepartment.existsById(id);
     }
     
 }

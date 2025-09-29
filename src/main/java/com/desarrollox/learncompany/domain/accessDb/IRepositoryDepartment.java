@@ -10,5 +10,6 @@ public interface IRepositoryDepartment {
     Optional<Department> findById(Long id);
     Optional<Department> delete(Long id);
     List<Department> findAll();
+    boolean existsById(Long id);
     List<Department> findDepartmentsByFilters(String name, int hierarchy);
 }

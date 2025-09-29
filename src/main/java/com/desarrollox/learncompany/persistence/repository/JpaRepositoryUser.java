@@ -15,13 +15,14 @@ public interface JpaRepositoryUser extends JpaRepository<UserEntity, Long>{
     @Query(value = "SELECT * FROM employees e " +
                "WHERE e.department_id = :departmentId " +
                "ORDER BY e.puntos DESC",
-       nativeQuery = true)
+                nativeQuery = true)
     List<EmployeeEntity> findByDepartmentOrderByPuntosDesc(@Param("departmentId") Long departmentId);
 
-    @Query("SELECT u FROM UserEntity u WHERE " +
-       "(:departmentId IS NULL OR u.department.id = :departmentId) AND " +
-       "(:role IS NULL OR u.role = :role) AND " +
-       "(:status IS NULL OR u.status = :status)")
+    @Query(value = "SELECT * FROM users u " +
+               "WHERE (:departmentId IS NULL OR u.department_id = :departmentId) " +
+               "AND (:role IS NULL OR u.role = :role) " +
+               "AND (:status IS NULL OR u.status = :status)",
+                  nativeQuery = true)
     Optional<UserEntity> findByFilters(@Param("departmentId") Long departmentId, @Param("role") String role, @Param("status") boolean status);
 
     Optional<UserEntity> findByEmail(String email);

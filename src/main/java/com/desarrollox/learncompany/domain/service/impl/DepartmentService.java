@@ -2,45 +2,56 @@ package com.desarrollox.learncompany.domain.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
+import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
+import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.model.Department;
 import com.desarrollox.learncompany.domain.service.IDepartmentService;
+import lombok.RequiredArgsConstructor;
 
+@Service
+@RequiredArgsConstructor
 public class DepartmentService implements IDepartmentService {
+
+    private final IRepositoryDepartment repositoryDepartment;
 
     @Override
     public Department createDepartment(Department department) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createDepartment'");
+        return repositoryDepartment.save(department);
     }
 
     @Override
     public Optional<Department> updateDepartment(Long id, Department department) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateDepartment'");
+        if(repositoryDepartment.existsById(id)){
+            return repositoryDepartment.update(id, department);
+        }
+        throw new DepartmentNotFoundException(id);
     }
 
     @Override
     public Optional<Department> getDepartmentById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDepartmentById'");
+        if(repositoryDepartment.existsById(id)){
+            return repositoryDepartment.findById(id);
+        }
+         throw new DepartmentNotFoundException(id);
     }
 
     @Override
     public Optional<Department> deleteDepartment(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteDepartment'");
+        if(repositoryDepartment.existsById(id)){
+            return repositoryDepartment.delete(id);
+        }
+       throw new DepartmentNotFoundException(id);
     }
 
     @Override
     public List<Department> getAllDepartments() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllDepartments'");
+        return repositoryDepartment.findAll();
     }
 
     @Override
     public List<Department> findDepartmentsByFilters(String name, int hierarchy) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findDepartmentsByFilters'");
+        return repositoryDepartment.findDepartmentsByFilters(name, hierarchy);
     }
     
 }
