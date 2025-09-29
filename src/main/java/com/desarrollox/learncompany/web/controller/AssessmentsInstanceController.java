@@ -1,5 +1,6 @@
 package com.desarrollox.learncompany.web.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -30,7 +31,7 @@ public class AssessmentsInstanceController {
         AssessmentInstance assessmentInstance = assessmentInstanceWebMapper.requestToDomain(request);
         AssessmentInstance assessmentInstanceSaved = assessmentInstanceService.createAssessmentInstance(assessmentInstance);
         AssessmentInstanceResponse response = assessmentInstanceWebMapper.domainToResponse(assessmentInstanceSaved);
-        return ResponseEntity.ok(ApiResponse.success("Instancia de evaluacion creada correctamente", response));
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Evaluacion creada correctamente", response));
     }
 
     @GetMapping("/grade/{id}")

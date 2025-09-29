@@ -14,6 +14,6 @@ public interface JpaRepositoryCertificate extends JpaRepository<CertificateEntit
         value = "SELECT * FROM certificates c WHERE c.employee_id = :employeeId",
         nativeQuery = true
     )
-    List<CertificateEntity> findByUserId(@Param("employeeId") Long userId);
+    List<CertificateEntity> findByUserId(@Param("employeeId") Long employeeId);
     
 }

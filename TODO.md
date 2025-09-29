@@ -1,10 +1,7 @@
 1. tener en cuenta poblar las listas al mapear
 
-3. Crear los endpoints
-
 4. encriptar contraseñas
-5. agregar logs
-6. agregar documentacion
+5. asignar badge
 
 1. postman ,integracion, unitarias, extremo a extremo
 

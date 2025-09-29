@@ -10,4 +10,5 @@ public interface IRepositoryBadge {
     List<Badge> findAll();
     List<Badge> findBadgesByEmployeeId(Long employeeId);
     Optional<Badge> findBadgeByName(String name);
+    boolean existsById(Long id);
 }
