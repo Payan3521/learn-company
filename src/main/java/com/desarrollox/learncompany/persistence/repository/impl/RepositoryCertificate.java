@@ -2,35 +2,44 @@ package com.desarrollox.learncompany.persistence.repository.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCertificate;
 import com.desarrollox.learncompany.domain.model.Certificate;
+import com.desarrollox.learncompany.persistence.mapper.CertificateMapper;
+import com.desarrollox.learncompany.persistence.repository.JpaRepositoryCertificate;
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
-public class RepositoryCertificate implements IRepositoryCertificate{@Override
+public class RepositoryCertificate implements IRepositoryCertificate{
+
+    private final JpaRepositoryCertificate jpaRepositoryCertificate;
+    private final CertificateMapper certificateMapper;
+    
+    @Override
     public Certificate save(Certificate certificate) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return certificateMapper.toDomain(jpaRepositoryCertificate.save(certificateMapper.toEntity(certificate)));
     }
 
     @Override
     public List<Certificate> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return jpaRepositoryCertificate.findAll().stream().map(certificateMapper::toDomain).collect(Collectors.toList());
     }
 
     @Override
     public Optional<Certificate> findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return jpaRepositoryCertificate.findById(id).map(certificateMapper::toDomain);
     }
 
     @Override
     public List<Certificate> findCertificatesByUserId(Long userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findCertificatesByUserId'");
+        return jpaRepositoryCertificate.findByUserId(userId).stream().map(certificateMapper::toDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return jpaRepositoryCertificate.existsById(id);
     }
     
 }

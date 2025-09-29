@@ -9,4 +9,5 @@ public interface IRepositoryCertificate {
     List<Certificate> findAll();
     Optional<Certificate> findById(Long id);
     List<Certificate> findCertificatesByUserId(Long userId);
+    boolean existsById(Long id);
 }
