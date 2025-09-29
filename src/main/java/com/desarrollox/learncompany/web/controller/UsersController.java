@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
+import com.desarrollox.learncompany.core.web.logging.LoggingService;
 import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.model.Instructor;
 import com.desarrollox.learncompany.domain.model.User;
@@ -36,10 +37,13 @@ public class UsersController {
     private final EmployeeWebMapper employeeWebMapper;
     private final UserWebMapper userWebMapper;
     private final InstructorWebMapper instructorWebMapper;
-    
+    private final LoggingService loggingService;
+
     @PostMapping("/employee")
     public ResponseEntity<ApiResponse<UserResponse>> createEmployee(@Valid @RequestBody EmployeeRequest request) {
         //mapear de request a dominio
+        loggingService.logInfo("Creando usuario", request.getName());
+        loggingService.logDebug("GSSSSSSSSSSSSSAAGGGA", request.getDepartmentId());
         Employee employee = employeeWebMapper.requestToDomain(request);
         //lamar al servicio y mandarle el dominio
         Employee employeeSaved = userService.createEmployee(employee);
