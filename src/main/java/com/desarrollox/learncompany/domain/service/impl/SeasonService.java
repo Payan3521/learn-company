@@ -16,20 +16,17 @@ public class SeasonService implements ISeasonService {
 
     @Override
     public Season creatSeason(Season season) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'creatSeason'");
+        return repositorySeason.save(season);
     }
 
     @Override
     public Optional<Season> getSeasonById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSeasonById'");
+        return repositorySeason.findById(id);
     }
 
     @Override
     public List<Season> getAllSeasons() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllSeasons'");
+        return repositorySeason.findAll();
     }
     
 }

@@ -2,6 +2,8 @@ package com.desarrollox.learncompany.persistence.repository.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Component;
 import com.desarrollox.learncompany.domain.accessDb.IRepositorySeason;
 import com.desarrollox.learncompany.domain.model.Season;
@@ -18,26 +20,29 @@ public class RepositorySeason implements IRepositorySeason{
     
     @Override
     public Season save(Season season) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        return seasonMapper.toDomain(
+                jpaRepositorySeason.save(
+                        seasonMapper.toEntity(season)
+                )
+        );
     }
 
     @Override
     public Optional<Season> findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return jpaRepositorySeason.findById(id)
+                .map(seasonMapper::toDomain);
     }
 
     @Override
     public List<Season> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return jpaRepositorySeason.findAll()
+                .stream().map(seasonMapper::toDomain)
+                .collect(Collectors.toList());
     }
 
     @Override
     public boolean existsById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'existsById'");
+        return jpaRepositorySeason.existsById(id);
     }
     
 }
