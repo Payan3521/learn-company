@@ -1,5 +1,6 @@
 1. tener en cuenta poblar las listas al mapear
 
+3. probar apis, mejorarlas
 4. encriptar contraseñas
 5. asignar badge
 6. endpoint para obtener los finalizados
