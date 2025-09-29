@@ -2,21 +2,18 @@ package com.desarrollox.learncompany.web.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.model.Season;
 import com.desarrollox.learncompany.domain.service.ISeasonService;
 import com.desarrollox.learncompany.web.dto.SeasonRequest;
 import com.desarrollox.learncompany.web.dto.SeasonResponse;
 import com.desarrollox.learncompany.web.webMapper.SeasonWebMapper;
-
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

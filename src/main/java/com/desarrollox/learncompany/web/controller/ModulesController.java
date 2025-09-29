@@ -2,7 +2,7 @@ package com.desarrollox.learncompany.web.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,6 @@ import com.desarrollox.learncompany.domain.service.IModuleService;
 import com.desarrollox.learncompany.web.dto.ModuleRequest;
 import com.desarrollox.learncompany.web.dto.ModuleResponse;
 import com.desarrollox.learncompany.web.webMapper.ModuleWebMapper;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -34,7 +33,7 @@ public class ModulesController {
         Module module = moduleWebMapper.requestToDomain(request);
         Module createdModule = moduleService.createModule(module);
         ModuleResponse response = moduleWebMapper.domainToResponse(createdModule);
-        return ResponseEntity.ok(ApiResponse.success("Modulo creado correctamente", response));
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Modulo creado correctamente", response));
     }
 
     @GetMapping("/{id}")
@@ -50,13 +49,6 @@ public class ModulesController {
         List<ModuleResponse> response = modules.stream().map(moduleWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Modulos obtenidos correctamente", response));
     }
-
-    /* 
-    @GetMapping("/assessments/{id}")
-    public ResponseEntity<ApiResponse<List<ModuleResponse>>> getAssessmentsById(){
-        List<Module> modules = moduleService.getA
-    }
-    */
 
     @GetMapping("/course/{id}")
     public ResponseEntity<ApiResponse<List<ModuleResponse>>> getModulesByCourseId(@PathVariable Long id){
