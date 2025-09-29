@@ -387,3 +387,5 @@ INNER JOIN courses c ON m.course_id = c.id;
 -- ============================================
 
 COMMIT;
+
+-- DROP DATABASE learncompany;

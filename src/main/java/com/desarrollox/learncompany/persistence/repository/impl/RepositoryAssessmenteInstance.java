@@ -1,12 +1,14 @@
 package com.desarrollox.learncompany.persistence.repository.impl;
 
 import java.util.Optional;
+import org.springframework.stereotype.Component;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryAssessmentInstance;
 import com.desarrollox.learncompany.domain.model.AssessmentInstance;
 import com.desarrollox.learncompany.persistence.mapper.AssessmentInstanceMapper;
 import com.desarrollox.learncompany.persistence.repository.JpaRepositoryAssessmentInstance;
 import lombok.RequiredArgsConstructor;
 
+@Component
 @RequiredArgsConstructor
 public class RepositoryAssessmenteInstance implements IRepositoryAssessmentInstance {
 

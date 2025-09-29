@@ -3,7 +3,9 @@ package com.desarrollox.learncompany.domain.service.impl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
+import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
 import com.desarrollox.learncompany.domain.model.Employee;
@@ -17,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService implements IUserService{
 
     private final IRepositoryUser repositoryUser;
+    private final IRepositoryDepartment repositoryDepartment;
 
     @Override
     public Employee createEmployee(Employee employee) {
@@ -24,6 +27,10 @@ public class UserService implements IUserService{
         if(repositoryUser.existsByEmail(employee.getEmail())){
             throw new UserAlreadyRegisteredException(employee.getEmail());
         } 
+
+        if(!repositoryDepartment.existsById(employee.getDepartment().getId())){
+            throw new DepartmentNotFoundException(employee.getDepartment().getId());
+        }
 
         return (Employee) repositoryUser.save(employee);
     }
@@ -64,33 +71,12 @@ public class UserService implements IUserService{
 
     @Override
     public Optional<User> updateUser(Long id, User user) {
-        if (repositoryUser.existsById(id)) {
-            User userDb = repositoryUser.findById(id).get();
-
-            if(user instanceof Employee && userDb instanceof Employee){
-                Employee employeeDb = (Employee) userDb;
-                Employee employeeEntrante = (Employee) user;
-                return repositoryUser.update(id, updateEmployee(employeeDb, employeeEntrante));
-            }
-
-            if(user instanceof Instructor && userDb instanceof Instructor){
-                Instructor instructorDb = (Instructor) userDb;
-                Instructor instructorEntrante = (Instructor) user;
-                return repositoryUser.update(id, updateInstructor(instructorDb, instructorEntrante));
-            }
-
+        if(repositoryUser.existsById(id)){
             return repositoryUser.update(id, user);
-        } 
+        }
         throw new UserNotFoundException(id);
     }
 
-    private Employee updateEmployee(Employee employeeDb, Employee employeeEntrante){
-        
-    }
-
-    private Instructor updateInstructor(Instructor instructorDb, Instructor instructorEntrante){
-
-    }
 
     @Override
     public Optional<User> delete(Long id) {
