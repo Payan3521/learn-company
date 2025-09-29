@@ -1,6 +1,7 @@
 package com.desarrollox.learncompany.domain.accessDb;
 
 import java.util.List;
+import com.desarrollox.learncompany.domain.model.Module;
 import java.util.Optional;
 
 public interface IRepositoryModule {
@@ -8,5 +9,5 @@ public interface IRepositoryModule {
     Optional<Module> findById(Long id);
     List<Module> findAll();
     Optional<Module> delete(Long id);
-    List<Module> finModulesByCourseId(Long courseId);
+    List<Module> findModulesByCourseId(Long courseId);
 }
