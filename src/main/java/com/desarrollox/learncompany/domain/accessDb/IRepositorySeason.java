@@ -8,4 +8,5 @@ public interface IRepositorySeason {
     Season save(Season season);
     Optional<Season> findById(Long id);
     List<Season> findAll();
+    boolean existsById(Long id);
 }
