@@ -16,7 +16,6 @@ public interface CourseMapper {
     Course toDomain(CourseEntity entity);
     
     @Mapping(target = "durationInHours", source = "duration")
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "modules", ignore = true)
     @Mapping(target = "inscriptions", ignore = true)
     CourseEntity toEntity(Course domain);

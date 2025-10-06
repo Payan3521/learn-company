@@ -21,6 +21,7 @@ import com.desarrollox.learncompany.domain.exception.DepartmentIncorrectExceptio
 import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InscriptionNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidCredentialsException;
+import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
 import com.desarrollox.learncompany.domain.exception.ModuleNotFoundException;
 import com.desarrollox.learncompany.domain.exception.NotificationNotFoundException;
 import com.desarrollox.learncompany.domain.exception.SeasonAlreadyCreatedException;
@@ -73,7 +74,7 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.UNAUTHORIZED, "Credenciales inválidas", ex.getMessage());
     }
 
-    @ExceptionHandler(DepartmentIncorrectException.class)
+    @ExceptionHandler({DepartmentIncorrectException.class, InvalidRoleException.class})
     public ResponseEntity<Map<String, Object>> handleForbidden(DepartmentIncorrectException ex) {
         return buildResponse(HttpStatus.FORBIDDEN, "Acceso denegado", ex.getMessage());
     }

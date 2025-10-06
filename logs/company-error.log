@@ -11,3 +11,8 @@
 2025-10-06 01:28:36 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=487) Duplicate entry 'example@gmail.com' for key 'email'
 2025-10-06 01:31:42 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=497) Column 'role' cannot be null
 2025-10-06 01:47:32 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=507) Duplicate entry 'example@gmail.com' for key 'email'
+2025-10-06 15:01:20 [http-nio-8080-exec-3] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=643) Column 'instructor_id' cannot be null
+2025-10-06 15:23:29 [http-nio-8080-exec-6] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=653) Column 'instructor_id' cannot be null
+2025-10-06 15:24:23 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=665) Column 'instructor_id' cannot be null
+2025-10-06 15:35:30 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=675) Column 'instructor_id' cannot be null
+2025-10-06 15:40:25 [http-nio-8080-exec-5] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=695) Column 'instructor_id' cannot be null

@@ -27,10 +27,10 @@ public class CourseRequest {
 
     @Min(value = 1, message = "El nivel debe ser mínimo 1")
     @Max(value = 3, message = "El nivel no puede ser mayor a 3")
-    private int level;
+    private Integer level;
 
     @Min(value = 1, message = "La duración del curso debe ser al menos 1 hora")
-    private int duration;
+    private Integer duration;
 
     @NotNull(message = "El ID de la temporada es obligatorio")
     @Min(value = 1, message = "El ID de la temporada debe ser mayor que 0")
