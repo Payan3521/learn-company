@@ -1,5 +1,7 @@
 package com.desarrollox.learncompany.web.dto;
 
+import org.hibernate.validator.constraints.URL;
+
 import com.desarrollox.learncompany.domain.model.User.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
@@ -34,5 +36,6 @@ public class EmployeeRequest {
     private Long departmentId;
 
     @NotNull(message = "La url de la foto es obligatoria")
+    @URL(message = "La URL de la foto debe ser una dirección válida")
     private String urlPhoto;
 }

@@ -9,7 +9,7 @@ import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.model.User;
 import com.desarrollox.learncompany.persistence.entity.UserEntity;
 import com.desarrollox.learncompany.persistence.mapper.EmployeeMapper;
-import com.desarrollox.learncompany.persistence.mapper.UserMapper;
+import com.desarrollox.learncompany.persistence.mapper.PolymorphicUserMapper;
 import com.desarrollox.learncompany.persistence.repository.JpaRepositoryUser;
 import lombok.RequiredArgsConstructor;
 
@@ -18,35 +18,35 @@ import lombok.RequiredArgsConstructor;
 public class RepositoryUser implements IRepositoryUser {
 
     private final JpaRepositoryUser jpaRepositoryUser;
-    private final UserMapper userMapper;
+    private final PolymorphicUserMapper polymorphicUserMapper;
     private final EmployeeMapper employeeMapper;
 
     @Override
     public User save(User user) {
-        return userMapper.toDomain(jpaRepositoryUser.save(userMapper.toEntity(user)));
+        return polymorphicUserMapper.toDomain(jpaRepositoryUser.save(polymorphicUserMapper.toEntity(user)));
     }
 
     @Override
     public Optional<User> findById(Long id) {
-       return jpaRepositoryUser.findById(id).map(userMapper::toDomain);
+       return jpaRepositoryUser.findById(id).map(polymorphicUserMapper::toDomain);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return jpaRepositoryUser.findByEmail(email).map(userMapper::toDomain);
+        return jpaRepositoryUser.findByEmail(email).map(polymorphicUserMapper::toDomain);
     }
 
     @Override
     public List<User> findAll() {
-        return jpaRepositoryUser.findAll().stream().map(userMapper::toDomain).collect(Collectors.toList());
+        return jpaRepositoryUser.findAll().stream().map(polymorphicUserMapper::toDomain).collect(Collectors.toList());
     }
 
     @Override
     public Optional<User> update(Long id, User user) {
         return jpaRepositoryUser.findById(id).map(userEntity -> {
             user.setId(id);
-            UserEntity updatedUser = jpaRepositoryUser.save(userMapper.toEntity(user));
-            return userMapper.toDomain(updatedUser);
+            UserEntity updatedUser = jpaRepositoryUser.save(polymorphicUserMapper.toEntity(user));
+            return polymorphicUserMapper.toDomain(updatedUser);
         });
     }
 
@@ -55,7 +55,7 @@ public class RepositoryUser implements IRepositoryUser {
         return jpaRepositoryUser.findById(id).map(userEntity -> {
             userEntity.setStatus(false);
             UserEntity userDeleted = jpaRepositoryUser.save(userEntity);
-            return userMapper.toDomain(userDeleted);
+            return polymorphicUserMapper.toDomain(userDeleted);
         });
     }
 
@@ -69,7 +69,7 @@ public class RepositoryUser implements IRepositoryUser {
     @Override
     public List<User> findUsersByFilters(Long departmentId, String role, boolean status) {
         return jpaRepositoryUser.findByFilters(departmentId, role, status).stream()
-                .map(userMapper::toDomain)
+                .map(polymorphicUserMapper::toDomain)
                 .collect(Collectors.toList());
     }
 

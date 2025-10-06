@@ -42,8 +42,6 @@ public class UsersController {
     @PostMapping("/employee")
     public ResponseEntity<ApiResponse<UserResponse>> createEmployee(@Valid @RequestBody EmployeeRequest request) {
         //mapear de request a dominio
-        loggingService.logInfo("Creando usuario", request.getName());
-        loggingService.logDebug("GSSSSSSSSSSSSSAAGGGA", request.getDepartmentId());
         Employee employee = employeeWebMapper.requestToDomain(request);
         //lamar al servicio y mandarle el dominio
         Employee employeeSaved = userService.createEmployee(employee);

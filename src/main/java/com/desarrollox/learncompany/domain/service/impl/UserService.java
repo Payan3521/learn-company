@@ -24,6 +24,8 @@ public class UserService implements IUserService{
     @Override
     public Employee createEmployee(Employee employee) {
 
+        employee.setDepartment(repositoryDepartment.findById(employee.getDepartment().getId()).get());
+
         if(repositoryUser.existsByEmail(employee.getEmail())){
             throw new UserAlreadyRegisteredException(employee.getEmail());
         } 

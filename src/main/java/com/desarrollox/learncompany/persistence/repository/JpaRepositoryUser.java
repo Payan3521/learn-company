@@ -23,7 +23,7 @@ public interface JpaRepositoryUser extends JpaRepository<UserEntity, Long>{
                "AND (:role IS NULL OR u.role = :role) " +
                "AND (:status IS NULL OR u.status = :status)",
                   nativeQuery = true)
-    Optional<UserEntity> findByFilters(@Param("departmentId") Long departmentId, @Param("role") String role, @Param("status") boolean status);
+    List<UserEntity> findByFilters(@Param("departmentId") Long departmentId, @Param("role") String role, @Param("status") boolean status);
 
     Optional<UserEntity> findByEmail(String email);
 
