@@ -40,7 +40,7 @@ public class CourseService implements ICourseService {
         if(!repositoryUser.findById(course.getInstructor().getId()).get().isInstructor()){
             throw new InvalidRoleException("El usuario con ID " + course.getInstructor().getId() + " no tiene rol de INSTRUCTOR");
         }
-        if(course.getDuration()>course.getSeason().getDuration()){
+        if(course.getDuration() > repositorySeason.findById(course.getSeason().getId()).get().getDuration()){
             throw new DurationCourseInvalidException();
         }
 

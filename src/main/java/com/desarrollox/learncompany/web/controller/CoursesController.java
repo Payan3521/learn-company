@@ -40,6 +40,11 @@ public class CoursesController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<CourseResponse>>> getAllCourses(){
         List<Course> courses = courseService.getAllCourses();
+
+        if(courses.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<CourseResponse> courseResponses = courses.stream().map(courseWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Cursos encontrados", courseResponses));
     }
@@ -54,6 +59,12 @@ public class CoursesController {
     @GetMapping("/season/{seasonId}")
     public ResponseEntity<ApiResponse<List<CourseResponse>>> getCoursesBySeasonId(@PathVariable Long seasonId){
         List<Course> courses = courseService.getCoursesBySeasonId(seasonId);
+
+
+        if(courses.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<CourseResponse> courseResponses = courses.stream().map(courseWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Obtenidos los cursos pertenecientes a la temporada:" + seasonId, courseResponses ));
     }
@@ -61,6 +72,11 @@ public class CoursesController {
     @GetMapping("/department/{departmentId}")
     public ResponseEntity<ApiResponse<List<CourseResponse>>> getCoursesByDepartmentId(@PathVariable Long departmentId){
         List<Course> courses = courseService.findByDepartmentId(departmentId);
+
+        if(courses.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<CourseResponse> courseResponses = courses.stream().map(courseWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Cursos optenidos por temporada: " + departmentId, courseResponses));
     }
@@ -68,18 +84,24 @@ public class CoursesController {
     @GetMapping("/by-title")
     public ResponseEntity<ApiResponse<List<CourseResponse>>> getCoursesByTitle(@RequestParam(required = true) String title){
         List<Course> courses = courseService.findByTitleContaining(title);
+
+        if(courses.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<CourseResponse> courseResponses = courses.stream().map(courseWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Cursos optenidos", courseResponses));
     }
 
-    @GetMapping("/finished/{id}")
-    public ResponseEntity<?> getFinishById(){
-        throw new IllegalArgumentException();
-    }
 
     @GetMapping("/optional")
     public ResponseEntity<ApiResponse<List<CourseResponse>>> getOptionalsByDepartament(@RequestParam(required = true) Long departmentId){
         List<Course> courses = courseService.findByStatusOptional(departmentId);
+
+        if(courses.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<CourseResponse> courseResponses = courses.stream().map(courseWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Cursos opcionales optenidos por temporada: " + departmentId, courseResponses));
     }
@@ -87,6 +109,11 @@ public class CoursesController {
     @GetMapping("/mandatory")
     public ResponseEntity<ApiResponse<List<CourseResponse>>> getMandatorysByDepartamet(@RequestParam(required = true) Long departmentId){
         List<Course> courses = courseService.findByStatusMandatory(departmentId);
+
+        if(courses.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<CourseResponse> courseResponses = courses.stream().map(courseWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Cursos obligatorios optenidos por temporada: " + departmentId, courseResponses));
     }

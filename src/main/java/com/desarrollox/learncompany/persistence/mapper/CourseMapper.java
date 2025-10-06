@@ -7,7 +7,7 @@ import com.desarrollox.learncompany.domain.model.Course;
 import com.desarrollox.learncompany.persistence.entity.CourseEntity;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {SeasonMapper.class, InstructorMapper.class})
+        uses = {SeasonMapper.class, InstructorMapper.class, DepartmentMapper.class})
 public interface CourseMapper {
     
     @Mapping(target = "duration", source = "durationInHours" )

@@ -11,10 +11,15 @@
 2. capturas (metodo, endpoint, boton, datos, respuesta, codigo, hora)
 
 
-- metodo /asignar-badge
-- metodo /me
+- metodo /asignar-badge (api users)
+- metodo /me (api users)
 # crea en vez de reemplazar, y cuando elimino un error de esos y vuelvo e intento modificar, aparece con el false en status
-- metodo /update-employee
-- metodo /update-instructor
-- validacion de usuario no inactivo
-- poblar listas
+- metodo /update-employee (api users)
+- metodo /update-instructor (api users)
+- validacion de usuario no inactivo (api users)
+
+- poblar listas (all)
+
+- metodo /finished (api courses)
+- metodo /enrolled (api courses)
+- metodo /getModulesOfCourseId
