@@ -8,6 +8,7 @@ import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
 import com.desarrollox.learncompany.domain.accessDb.IRepositorySeason;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
+import com.desarrollox.learncompany.domain.exception.DurationCourseInvalidException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
 import com.desarrollox.learncompany.domain.exception.SeasonNotFoundException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
@@ -38,6 +39,9 @@ public class CourseService implements ICourseService {
         }
         if(!repositoryUser.findById(course.getInstructor().getId()).get().isInstructor()){
             throw new InvalidRoleException("El usuario con ID " + course.getInstructor().getId() + " no tiene rol de INSTRUCTOR");
+        }
+        if(course.getDuration()>course.getSeason().getDuration()){
+            throw new DurationCourseInvalidException();
         }
 
         course.setDepartment(repositoryDepartment.findById(course.getDepartment().getId()).get());

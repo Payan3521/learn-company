@@ -609,3 +609,30 @@ Using generated security password: fec5c3a6-2e96-491a-acb5-83845b260525
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
 2025-10-06 16:08:59 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.885 seconds (process running for 12.024)
+2025-10-06 16:30:27 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 332335 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 16:30:27 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 16:30:32 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 16:30:37 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 16:30:37 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d6ee53d2-7af0-4a78-8556-8c7b57fb4cc0
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 16:30:38 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 11.997 seconds (process running for 12.805)
+2025-10-06 16:31:29 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.StackOverflowError]
+2025-10-06 16:35:30 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [jakarta.servlet.ServletException: Handler dispatch failed: java.lang.StackOverflowError]
+2025-10-06 16:36:23 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'departmentId' for method parameter type Long is not present]
+2025-10-06 16:36:58 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/courses/modules/1.]
+2025-10-06 16:46:48 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 342623 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 16:46:48 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 16:46:52 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 16:46:56 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 16:46:56 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d1c9d770-2ce7-43ff-9999-2e343265f0fa
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 16:46:57 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.758 seconds (process running for 10.911)
+2025-10-06 16:47:10 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.DurationCourseInvalidException: La duración del curso no puede exceder la duración de la temporada actual]

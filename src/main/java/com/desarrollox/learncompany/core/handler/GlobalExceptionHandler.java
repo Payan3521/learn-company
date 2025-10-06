@@ -19,6 +19,7 @@ import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
 import com.desarrollox.learncompany.domain.exception.DepartmentAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.DepartmentIncorrectException;
 import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
+import com.desarrollox.learncompany.domain.exception.DurationCourseInvalidException;
 import com.desarrollox.learncompany.domain.exception.InscriptionNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidCredentialsException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
@@ -77,6 +78,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({DepartmentIncorrectException.class, InvalidRoleException.class})
     public ResponseEntity<Map<String, Object>> handleForbidden(DepartmentIncorrectException ex) {
         return buildResponse(HttpStatus.FORBIDDEN, "Acceso denegado", ex.getMessage());
+    }
+
+    @ExceptionHandler(DurationCourseInvalidException.class)
+    public ResponseEntity<Map<String, Object>> handleBusinessValidation(DurationCourseInvalidException ex){
+        return buildResponse(HttpStatus.UNPROCESSABLE_ENTITY, "Validacion de negocio fallida", ex.getMessage());
     }
 
     // === Errores comunes del cliente (HTTP 400) ===
