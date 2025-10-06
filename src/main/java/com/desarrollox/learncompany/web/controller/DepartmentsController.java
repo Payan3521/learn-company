@@ -47,11 +47,17 @@ public class DepartmentsController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<DepartmentResponse>>> getAllDepartments(){
+    public ResponseEntity<ApiResponse<List<DepartmentResponse>>> getAllDepartments() {
         List<Department> departments = departmentService.getAllDepartments();
+    
+        if (departments.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+    
         List<DepartmentResponse> departmentResponses = departments.stream()
                 .map(departmentWebMapper::domainToResponse)
                 .collect(Collectors.toList());
+    
         return ResponseEntity.ok(ApiResponse.success("Departamentos encontrados", departmentResponses));
     }
 
@@ -61,6 +67,11 @@ public class DepartmentsController {
             @RequestParam(required = false, defaultValue = "0") int hierarchy
         ){
         List<Department> departments = departmentService.findDepartmentsByFilters(name, hierarchy);
+
+        if (departments.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
         List<DepartmentResponse> departmentResponses = departments.stream()
                 .map(departmentWebMapper::domainToResponse)
                 .collect(Collectors.toList());
