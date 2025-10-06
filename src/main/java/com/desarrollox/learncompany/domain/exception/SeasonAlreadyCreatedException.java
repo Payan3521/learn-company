@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 public class SeasonAlreadyCreatedException extends RuntimeException{
 
     public SeasonAlreadyCreatedException() {
-        super("La temporada ya ha sido creada");
+        super("Ya existe una temporada creada");
     }
 
     public SeasonAlreadyCreatedException(Long id) {

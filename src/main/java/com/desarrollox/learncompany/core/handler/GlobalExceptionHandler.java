@@ -24,6 +24,7 @@ import com.desarrollox.learncompany.domain.exception.InvalidCredentialsException
 import com.desarrollox.learncompany.domain.exception.ModuleNotFoundException;
 import com.desarrollox.learncompany.domain.exception.NotificationNotFoundException;
 import com.desarrollox.learncompany.domain.exception.SeasonAlreadyCreatedException;
+import com.desarrollox.learncompany.domain.exception.SeasonNotFoundException;
 import com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
@@ -51,7 +52,8 @@ public class GlobalExceptionHandler {
         InscriptionNotFoundException.class,
         ModuleNotFoundException.class,
         NotificationNotFoundException.class,
-        UserNotFoundException.class
+        UserNotFoundException.class,
+        SeasonNotFoundException.class
     })
     public ResponseEntity<Map<String, Object>> handleNotFound(RuntimeException ex) {
         return buildResponse(HttpStatus.NOT_FOUND, "Recurso no encontrado", ex.getMessage());
