@@ -16,3 +16,6 @@
 2025-10-06 15:24:23 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=665) Column 'instructor_id' cannot be null
 2025-10-06 15:35:30 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=675) Column 'instructor_id' cannot be null
 2025-10-06 15:40:25 [http-nio-8080-exec-5] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=695) Column 'instructor_id' cannot be null
+2025-10-06 15:54:12 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=735) Column 'instructor_id' cannot be null
+2025-10-06 15:58:05 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=745) Column 'instructor_id' cannot be null
+2025-10-06 16:08:18 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=766) Column 'season_id' cannot be null

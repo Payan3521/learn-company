@@ -13,7 +13,6 @@ public interface InstructorMapper {
     @Mapping(target = "courses", ignore = true)
     Instructor toDomain(InstructorEntity entity);
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "courses", ignore = true)
     InstructorEntity toEntity(Instructor domain);
 }

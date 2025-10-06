@@ -8,7 +8,7 @@ import com.desarrollox.learncompany.web.dto.CourseRequest;
 import com.desarrollox.learncompany.web.dto.CourseResponse;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {ModuleWebMapper.class, InscriptionWebMapper.class, })
+        uses = {ModuleWebMapper.class, InscriptionWebMapper.class})
 public interface CourseWebMapper {
     
     @Mapping(target = "id", ignore = true)

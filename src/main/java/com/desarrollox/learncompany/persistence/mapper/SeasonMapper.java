@@ -14,7 +14,6 @@ public interface SeasonMapper {
     Season toDomain(SeasonEntity entity);
     
     @Mapping(target = "durationInHours", source = "duration" )
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "courses", ignore = true)
     SeasonEntity toEntity(Season domain);
 }
