@@ -16,6 +16,7 @@ import com.desarrollox.learncompany.domain.exception.AssessmentInstanceNotFoundE
 import com.desarrollox.learncompany.domain.exception.BadgeNotFoundException;
 import com.desarrollox.learncompany.domain.exception.CertificateNotFoundException;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
+import com.desarrollox.learncompany.domain.exception.DepartmentAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.DepartmentIncorrectException;
 import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InscriptionNotFoundException;
@@ -58,7 +59,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({
         UserAlreadyRegisteredException.class,
-        SeasonAlreadyCreatedException.class
+        SeasonAlreadyCreatedException.class,
+        DepartmentAlreadyRegisteredException.class
     })
     public ResponseEntity<Map<String, Object>> handleConflict(RuntimeException ex) {
         return buildResponse(HttpStatus.CONFLICT, "Conflicto en la solicitud", ex.getMessage());
