@@ -2,6 +2,7 @@ package com.desarrollox.learncompany.persistence.repository;
 
 import java.util.List;
 import java.util.Optional;
+import com.desarrollox.learncompany.domain.model.User.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,12 +19,11 @@ public interface JpaRepositoryUser extends JpaRepository<UserEntity, Long>{
                 nativeQuery = true)
     List<EmployeeEntity> findByDepartmentOrderByPuntosDesc(@Param("departmentId") Long departmentId);
 
-    @Query(value = "SELECT * FROM users u " +
-               "WHERE (:departmentId IS NULL OR u.department_id = :departmentId) " +
-               "AND (:role IS NULL OR u.role = :role) " +
-               "AND u.status = :status",
-                  nativeQuery = true)
-    List<UserEntity> findByFilters(@Param("departmentId") Long departmentId, @Param("role") String role, @Param("status") boolean status);
+    @Query("SELECT u FROM UserEntity u " +
+       "WHERE (:departmentId IS NULL OR u.department.id = :departmentId) " +
+       "AND (:role IS NULL OR u.role = :role) " +
+       "AND u.status = :status")
+    List<UserEntity> findByFilters(@Param("departmentId") Long departmentId, @Param("role") Role role, @Param("status") boolean status);
 
     Optional<UserEntity> findByEmail(String email);
 

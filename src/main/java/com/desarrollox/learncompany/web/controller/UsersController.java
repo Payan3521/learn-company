@@ -18,6 +18,7 @@ import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.model.Instructor;
 import com.desarrollox.learncompany.domain.model.User;
+import com.desarrollox.learncompany.domain.model.User.Role;
 import com.desarrollox.learncompany.domain.service.IUserService;
 import com.desarrollox.learncompany.web.dto.EmployeeRequest;
 import com.desarrollox.learncompany.web.dto.EmployeeUpdateRequest;
@@ -84,6 +85,11 @@ public class UsersController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers(){
         List<User> users = userService.findAll();
+
+        if(users.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<UserResponse> userResponses = users.stream().map(userWebMapper::userToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Usuarios encontrados", userResponses));
     }
@@ -91,10 +97,15 @@ public class UsersController {
     @GetMapping("/filters")
     public ResponseEntity<ApiResponse<List<UserResponse>>> getByUsersFilters(
             @RequestParam(required = false) Long departmentId,
-            @RequestParam(required = false) String role,
+            @RequestParam(required = false) Role role,
             @RequestParam(required = false, defaultValue = "true") boolean status
         ){
         List<User> users = userService.findUsersByFilters(departmentId, role, status);
+
+        if(users.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<UserResponse> userResponses = users.stream().map(userWebMapper::userToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Usuarios encontrados", userResponses));
     }

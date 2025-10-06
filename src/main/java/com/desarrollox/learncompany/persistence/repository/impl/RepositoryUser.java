@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.model.User;
+import com.desarrollox.learncompany.domain.model.User.Role;
 import com.desarrollox.learncompany.persistence.entity.UserEntity;
 import com.desarrollox.learncompany.persistence.mapper.EmployeeMapper;
 import com.desarrollox.learncompany.persistence.mapper.PolymorphicUserMapper;
@@ -67,7 +68,7 @@ public class RepositoryUser implements IRepositoryUser {
     }
 
     @Override
-    public List<User> findUsersByFilters(Long departmentId, String role, boolean status) {
+    public List<User> findUsersByFilters(Long departmentId, Role role, boolean status) {
         return jpaRepositoryUser.findByFilters(departmentId, role, status).stream()
                 .map(polymorphicUserMapper::toDomain)
                 .collect(Collectors.toList());

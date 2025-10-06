@@ -30,6 +30,5 @@ public class EmployeeUpdateRequest {
     
     @NotBlank(message = "La URL de la foto es obligatoria")
     private String urlPhoto;
-    
-    private int puntos;
+
 }
