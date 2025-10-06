@@ -14,4 +14,4 @@ public class DepartmentResponse {
     private String prize;
     private Integer hierarchy;
     private List<CourseResponse> courses;
-}
+} 

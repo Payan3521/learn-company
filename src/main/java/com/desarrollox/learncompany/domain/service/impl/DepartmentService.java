@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
+import com.desarrollox.learncompany.domain.exception.DepartmentAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.model.Department;
 import com.desarrollox.learncompany.domain.service.IDepartmentService;
-import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor; 
 
 @Service
 @RequiredArgsConstructor
@@ -17,15 +18,21 @@ public class DepartmentService implements IDepartmentService {
 
     @Override
     public Department createDepartment(Department department) {
+        if(repositoryDepartment.existsByName(department.getName())){
+            throw new DepartmentAlreadyRegisteredException(department.getName());
+        }
         return repositoryDepartment.save(department);
     }
 
     @Override
     public Optional<Department> updateDepartment(Long id, Department department) {
-        if(repositoryDepartment.existsById(id)){
-            return repositoryDepartment.update(id, department);
+        if(!repositoryDepartment.existsById(id)){
+            throw new DepartmentNotFoundException(id);
         }
-        throw new DepartmentNotFoundException(id);
+        if(repositoryDepartment.existsByName(department.getName())){
+            throw new DepartmentAlreadyRegisteredException(department.getName());
+        }
+        return repositoryDepartment.update(id, department);
     }
 
     @Override
@@ -38,10 +45,10 @@ public class DepartmentService implements IDepartmentService {
 
     @Override
     public Optional<Department> deleteDepartment(Long id) {
-        if(repositoryDepartment.existsById(id)){
-            return repositoryDepartment.delete(id);
+        if(!repositoryDepartment.existsById(id)){
+            throw new DepartmentNotFoundException(id);
         }
-       throw new DepartmentNotFoundException(id);
+        return repositoryDepartment.delete(id);
     }
 
     @Override

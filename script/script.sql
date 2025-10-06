@@ -108,16 +108,19 @@ CREATE TABLE courses (
     season_id BIGINT NOT NULL,
     instructor_id BIGINT NOT NULL,
     type_course ENUM('OPTIONAL', 'MANDATORY') NOT NULL,
+    department_id BIGINT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     
     FOREIGN KEY (season_id) REFERENCES seasons(id) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 
     INDEX idx_title (title), 
     INDEX idx_level (level_course),
     INDEX idx_season_id (season_id),
-    INDEX idx_instructor_id (instructor_id)
+    INDEX idx_instructor_id (instructor_id),
+    INDEX idx_department_id (department_id)
 );
 
 -- Tabla modules

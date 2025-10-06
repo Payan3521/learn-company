@@ -3,6 +3,7 @@ package com.desarrollox.learncompany.domain.service.impl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import com.desarrollox.learncompany.core.security.PasswordEncoderConfig;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
@@ -20,11 +21,13 @@ public class UserService implements IUserService{
 
     private final IRepositoryUser repositoryUser;
     private final IRepositoryDepartment repositoryDepartment;
+    private final PasswordEncoderConfig passwordEncoderConfig;
 
     @Override
     public Employee createEmployee(Employee employee) {
 
         employee.setDepartment(repositoryDepartment.findById(employee.getDepartment().getId()).get());
+        employee.setPassword(passwordEncoderConfig.passwordEncoder().encode(employee.getPassword()));
 
         if(repositoryUser.existsByEmail(employee.getEmail())){
             throw new UserAlreadyRegisteredException(employee.getEmail());
@@ -39,10 +42,17 @@ public class UserService implements IUserService{
 
     @Override
     public Instructor createInstructor(Instructor instructor) {
-        
+
+        instructor.setPassword(passwordEncoderConfig.passwordEncoder().encode(instructor.getPassword()));
+        instructor.setDepartment(repositoryDepartment.findById(instructor.getDepartment().getId()).get());
+
         if(repositoryUser.existsByEmail(instructor.getEmail())){
             throw new UserAlreadyRegisteredException(instructor.getEmail());
         } 
+
+        if(!repositoryDepartment.existsById(instructor.getDepartment().getId())){
+            throw new DepartmentNotFoundException(instructor.getDepartment().getId());
+        }
 
         return (Instructor) repositoryUser.save(instructor);
     }

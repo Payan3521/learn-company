@@ -7,7 +7,7 @@ public class Department {
     private String name;
     private String prize;
     private int hierarchy;
-    private List<Course> courses;
+    private List<Course> courses; 
 
     public Course findCourseByTitle(String title) {
         return courses.stream()

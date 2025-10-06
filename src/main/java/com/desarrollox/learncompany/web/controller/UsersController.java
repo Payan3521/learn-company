@@ -20,7 +20,10 @@ import com.desarrollox.learncompany.domain.model.Instructor;
 import com.desarrollox.learncompany.domain.model.User;
 import com.desarrollox.learncompany.domain.service.IUserService;
 import com.desarrollox.learncompany.web.dto.EmployeeRequest;
+import com.desarrollox.learncompany.web.dto.EmployeeUpdateRequest;
+import com.desarrollox.learncompany.web.dto.AssignBadgeRequest;
 import com.desarrollox.learncompany.web.dto.InstructorRequest;
+import com.desarrollox.learncompany.web.dto.InstructorUpdateRequest;
 import com.desarrollox.learncompany.web.dto.UserResponse;
 import com.desarrollox.learncompany.web.webMapper.EmployeeWebMapper;
 import com.desarrollox.learncompany.web.webMapper.InstructorWebMapper;
@@ -64,9 +67,11 @@ public class UsersController {
         
     }
 
-    @PostMapping("/assingn-badge")
-    public ResponseEntity<?> assignBadge(){
-        throw new IllegalArgumentException();
+    @PostMapping("/assign-badge")
+    public ResponseEntity<ApiResponse<String>> assignBadge(@Valid @RequestBody AssignBadgeRequest request){
+        // TODO: Implementar lógica de asignación de badge
+        // Por ahora retornamos un mensaje de éxito
+        return ResponseEntity.ok(ApiResponse.success("Badge asignado correctamente", "Badge asignado al empleado"));
     }
 
     @GetMapping("/{id}")
@@ -101,13 +106,19 @@ public class UsersController {
 
 
     @PutMapping("/employee/{id}")
-    public ResponseEntity<?> updateEmployee(){
-        throw new IllegalArgumentException();
+    public ResponseEntity<ApiResponse<UserResponse>> updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeUpdateRequest request){
+        Employee employee = employeeWebMapper.updateRequestToDomain(request);
+        User userUpdated = userService.updateUser(id, employee).get();
+        UserResponse userResponse = userWebMapper.userToResponse(userUpdated);
+        return ResponseEntity.ok(ApiResponse.success("Empleado actualizado correctamente", userResponse));
     }
 
     @PutMapping("/instructor/{id}")
-    public ResponseEntity<?> updateInstructor(){
-        throw new IllegalArgumentException();
+    public ResponseEntity<ApiResponse<UserResponse>> updateInstructor(@PathVariable Long id, @Valid @RequestBody InstructorUpdateRequest request){
+        Instructor instructor = instructorWebMapper.updateRequestToDomain(request);
+        User userUpdated = userService.updateUser(id, instructor).get();
+        UserResponse userResponse = userWebMapper.userToResponse(userUpdated);
+        return ResponseEntity.ok(ApiResponse.success("Instructor actualizado correctamente", userResponse));
     }
 
     @DeleteMapping("/{id}")

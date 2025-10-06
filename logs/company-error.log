@@ -60,3 +60,42 @@ Caused by: java.lang.RuntimeException: Driver org.mariadb.jdbc.Driver claims to 
 2025-10-05 18:45:10 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Unknown label 'clazz_'. Possible value [u.department_id, u.id, role, department_id, u.name, url_photo, created_at, u.role, lastname, u.created_at, u.lastname, password, u.password, u.url_photo, updated_at, name, u.email, id, u.updated_at, email, u.status, status]
 2025-10-05 18:52:32 [http-nio-8080-exec-4] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=162) Unknown column 'c1_0.department_id' in 'SELECT'
 2025-10-05 18:53:04 [http-nio-8080-exec-6] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=162) Unknown column 'c1_0.department_id' in 'SELECT'
+2025-10-05 21:58:46 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=196) Duplicate entry 'nombre_value' for key 'name'
+2025-10-05 22:06:09 [http-nio-8080-exec-4] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=196) Duplicate entry 'nombre_value' for key 'name'
+2025-10-05 22:15:45 [http-nio-8080-exec-4] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=206) Unknown column 'c1_0.department_id' in 'SELECT'
+2025-10-05 22:15:59 [http-nio-8080-exec-5] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=206) Unknown column 'c1_0.department_id' in 'SELECT'
+2025-10-05 22:32:39 [http-nio-8080-exec-3] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=206) Unknown column 'c1_0.department_id' in 'SELECT'
+2025-10-05 22:33:05 [http-nio-8080-exec-6] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=206) Unknown column 'c1_0.department_id' in 'SELECT'
+2025-10-05 22:40:24 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+   assessmentInstanceService defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/domain/service/impl/AssessmentInstanceService.class]
+      ↓
+   repositoryAssessmenteInstance defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/persistence/repository/impl/RepositoryAssessmenteInstance.class]
+      ↓
+   assessmentInstanceMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapper com.desarrollox.learncompany.persistence.mapper.AssessmentInstanceMapperImpl.assessmentTemplateMapper)
+      ↓
+   assessmentTemplateMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.ModuleMapper com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapperImpl.moduleMapper)
+      ↓
+   moduleMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.CourseMapper com.desarrollox.learncompany.persistence.mapper.ModuleMapperImpl.courseMapper)
+┌─────┐
+|  courseMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.InstructorMapper com.desarrollox.learncompany.persistence.mapper.CourseMapperImpl.instructorMapper)
+↑     ↓
+|  instructorMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.DepartmentMapper com.desarrollox.learncompany.persistence.mapper.InstructorMapperImpl.departmentMapper)
+↑     ↓
+|  departmentMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.CourseMapper com.desarrollox.learncompany.persistence.mapper.DepartmentMapperImpl.courseMapper)
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2025-10-05 23:08:03 [http-nio-8080-exec-4] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=298) Unknown column 'c1_0.department_id' in 'SELECT'

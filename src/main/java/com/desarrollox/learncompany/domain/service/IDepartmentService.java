@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import com.desarrollox.learncompany.domain.model.Department;
 
-public interface IDepartmentService {
+public interface IDepartmentService { 
     Department createDepartment(Department department);
     Optional<Department> updateDepartment(Long id, Department department);
     Optional<Department> getDepartmentById(Long id);

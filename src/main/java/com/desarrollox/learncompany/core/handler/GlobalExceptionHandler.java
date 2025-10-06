@@ -3,8 +3,13 @@ package com.desarrollox.learncompany.core.handler;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.desarrollox.learncompany.domain.exception.AssessmentInstanceNotFoundException;
@@ -20,160 +25,100 @@ import com.desarrollox.learncompany.domain.exception.NotificationNotFoundExcepti
 import com.desarrollox.learncompany.domain.exception.SeasonAlreadyCreatedException;
 import com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    
-   @ExceptionHandler(AssessmentInstanceNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleAssessmentInstanceNotFound(AssessmentInstanceNotFoundException ex) {
+
+    private ResponseEntity<Map<String, Object>> buildResponse(HttpStatus status, String error, String message) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "evaluación no encontrada");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+        body.put("status", status.value());
+        body.put("error", error);
+        body.put("message", message);
+        return new ResponseEntity<>(body, status);
     }
 
-    @ExceptionHandler(BadgeNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleBadgeNotFound(BadgeNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "badge no encontrado");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    // === Excepciones personalizadas ===
+
+    @ExceptionHandler({
+        AssessmentInstanceNotFoundException.class,
+        BadgeNotFoundException.class,
+        CertificateNotFoundException.class,
+        CourseNotFoundException.class,
+        DepartmentNotFoundException.class,
+        InscriptionNotFoundException.class,
+        ModuleNotFoundException.class,
+        NotificationNotFoundException.class,
+        UserNotFoundException.class
+    })
+    public ResponseEntity<Map<String, Object>> handleNotFound(RuntimeException ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, "Recurso no encontrado", ex.getMessage());
     }
 
-    @ExceptionHandler(CertificateNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleCertificateNotFound(CertificateNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "certificado no encontrado");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(CourseNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleCourseNotFound(CourseNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "curso no encontrado");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(DepartmentIncorrectException.class)
-    public ResponseEntity<Map<String, Object>> handleDepartmentIncorrect(DepartmentIncorrectException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.FORBIDDEN.value());
-        body.put("error", "departamento incorrecto");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
-    }
-
-    @ExceptionHandler(DepartmentNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleDepartmentNotFound(DepartmentNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "departamento no encontrado");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(InscriptionNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleInscriptionNotFound(InscriptionNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "inscripción no encontrada");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    @ExceptionHandler({
+        UserAlreadyRegisteredException.class,
+        SeasonAlreadyCreatedException.class
+    })
+    public ResponseEntity<Map<String, Object>> handleConflict(RuntimeException ex) {
+        return buildResponse(HttpStatus.CONFLICT, "Conflicto en la solicitud", ex.getMessage());
     }
 
     @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<Map<String, Object>> handleInvalidCredentials(InvalidCredentialsException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.UNAUTHORIZED.value());
-        body.put("error", "credenciales inválidas");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+        return buildResponse(HttpStatus.UNAUTHORIZED, "Credenciales inválidas", ex.getMessage());
     }
 
-    @ExceptionHandler(ModuleNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleModuleNotFound(ModuleNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "módulo no encontrado");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    @ExceptionHandler(DepartmentIncorrectException.class)
+    public ResponseEntity<Map<String, Object>> handleForbidden(DepartmentIncorrectException ex) {
+        return buildResponse(HttpStatus.FORBIDDEN, "Acceso denegado", ex.getMessage());
     }
 
-    @ExceptionHandler(NotificationNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleNotificationNotFound(NotificationNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "notificación no encontrada");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    // === Errores comunes del cliente (HTTP 400) ===
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex) {
+        Map<String, Object> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(err ->
+            errors.put(err.getField(), err.getDefaultMessage())
+        );
+        return buildResponse(HttpStatus.BAD_REQUEST, "Error de validación", errors.toString());
     }
 
-    @ExceptionHandler(SeasonAlreadyCreatedException.class)
-    public ResponseEntity<Map<String, Object>> handleSeasonAlreadyCreated(SeasonAlreadyCreatedException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.CONFLICT.value());
-        body.put("error", "temporada ya creada");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, Object>> handleMalformedJson(HttpMessageNotReadableException ex) {
+        return buildResponse(HttpStatus.BAD_REQUEST, "JSON mal formado", "Revisa la estructura del cuerpo de la solicitud");
     }
 
-    @ExceptionHandler(UserAlreadyRegisteredException.class)
-    public ResponseEntity<Map<String, Object>> handleUserAlreadyRegistered(UserAlreadyRegisteredException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.CONFLICT.value());
-        body.put("error", "usuario ya registrado");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Map<String, Object>> handleDataIntegrity(DataIntegrityViolationException ex) {
+        return buildResponse(HttpStatus.BAD_REQUEST, "Violación de integridad", "Datos duplicados o relaciones inválidas");
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleUserNotFound(UserNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "usuario no encontrado");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    // === Otros errores del cliente ===
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<Map<String, Object>> handleMethodNotAllowed(HttpRequestMethodNotSupportedException ex) {
+        return buildResponse(HttpStatus.METHOD_NOT_ALLOWED, "Método no permitido", ex.getMessage());
     }
 
-    // Handler genérico para cualquier excepción no controlada
-
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Map<String, Object>> handleRuntimeException(RuntimeException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        body.put("error", "Error de ejecución en tiempo de ejecución");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public ResponseEntity<Map<String, Object>> handleUnsupportedMedia(HttpMediaTypeNotSupportedException ex) {
+        return buildResponse(HttpStatus.UNSUPPORTED_MEDIA_TYPE, "Tipo de contenido no soportado", ex.getMessage());
     }
+
+    // === Errores de base de datos o entidad inexistente ===
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleEntityNotFound(EntityNotFoundException ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, "Entidad no encontrada", ex.getMessage());
+    }
+
+    // === Fallback genérico ===
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        body.put("error", "error interno del servidor");
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+        ex.printStackTrace(); // Para ver el error real en consola
+        return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Error interno del servidor", ex.getMessage());
     }
-
 }

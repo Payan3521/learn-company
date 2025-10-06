@@ -18,4 +18,4 @@ public class DepartmentRequest {
     @NotNull(message = "La jerarquía es obligatoria")
     @Min(value = 1, message = "La jerarquía debe ser mayor o igual a 1")
     private Integer hierarchy;
-}
+} 

@@ -40,7 +40,7 @@ public class RepositoryDepartment implements IRepositoryDepartment{
         return jpaRepositoryDepartment.findById(id).map(departmentEntity -> {
             jpaRepositoryDepartment.delete(departmentEntity);
             return departmentMapper.toDomain(departmentEntity);
-        });
+        }); 
     }
 
     @Override
@@ -52,12 +52,18 @@ public class RepositoryDepartment implements IRepositoryDepartment{
     public List<Department> findDepartmentsByFilters(String name, int hierarchy) {
         return jpaRepositoryDepartment.findByNameContainingAndHierarchy(name, hierarchy)
                 .stream()
-                .map(departmentMapper::toDomain).collect(Collectors.toList());
+                .map(departmentMapper::toDomain)
+                .collect(Collectors.toList());
     }
 
     @Override
     public boolean existsById(Long id) {
         return jpaRepositoryDepartment.existsById(id);
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return jpaRepositoryDepartment.existsByName(name);
     }
     
 }

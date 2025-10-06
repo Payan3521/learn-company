@@ -51,8 +51,13 @@ dependencies {
 	// Dependencias de MapStruct
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
 	// Para integrar MapStruct con Lombok y no choquen
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+	// Dependencia de starter security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 }
 
 tasks.named('test') {
