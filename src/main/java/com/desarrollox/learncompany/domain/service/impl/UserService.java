@@ -85,6 +85,10 @@ public class UserService implements IUserService{
 
     @Override
     public Optional<User> updateUser(Long id, User user) {
+        if(repositoryUser.existsByEmail(user.getEmail())){
+            throw new UserNotFoundException(user.getEmail());
+        }
+
         if(!repositoryUser.existsById(id)){
             throw new UserNotFoundException(id);
         }
