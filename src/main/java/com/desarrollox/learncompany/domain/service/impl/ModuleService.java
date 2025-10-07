@@ -26,6 +26,8 @@ public class ModuleService implements IModuleService {
         if(!repositoryCourse.existsById(module.getCourse().getId())){
             throw new CourseNotFoundException(module.getCourse().getId());
         }
+
+        //esto podria cambiar a solo una simple validacion
     
         // Obtener el curso existente
         Course course = repositoryCourse.findById(module.getCourse().getId())

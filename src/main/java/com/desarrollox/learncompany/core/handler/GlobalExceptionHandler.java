@@ -13,6 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.desarrollox.learncompany.domain.exception.AssessmentInstanceNotFoundException;
+import com.desarrollox.learncompany.domain.exception.AssessmentTemplateNotFoundException;
 import com.desarrollox.learncompany.domain.exception.BadgeNotFoundException;
 import com.desarrollox.learncompany.domain.exception.CertificateNotFoundException;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
@@ -47,6 +48,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({
         AssessmentInstanceNotFoundException.class,
+        AssessmentTemplateNotFoundException.class,
         BadgeNotFoundException.class,
         CertificateNotFoundException.class,
         CourseNotFoundException.class,

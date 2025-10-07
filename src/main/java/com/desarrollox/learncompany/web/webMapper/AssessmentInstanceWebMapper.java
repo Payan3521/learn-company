@@ -8,7 +8,7 @@ import com.desarrollox.learncompany.web.dto.AssessmentInstanceRequest;
 import com.desarrollox.learncompany.web.dto.AssessmentInstanceResponse;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {AssessmentTemplateWebMapper.class, AnswerWebMapper.class})
+        uses =  {AnswerWebMapper.class})
 public interface AssessmentInstanceWebMapper {
     
     @Mapping(target = "id", ignore = true)
@@ -31,7 +31,6 @@ public interface AssessmentInstanceWebMapper {
     @Mapping(target = "employee.inscriptions", ignore = true)
     @Mapping(target = "grade", constant = "0.0")
     @Mapping(target = "status", constant = "PENDING")
-    @Mapping(target = "answers", source = "answers")
     @Mapping(target = "createdAt", ignore = true)
     AssessmentInstance requestToDomain(AssessmentInstanceRequest request);
     

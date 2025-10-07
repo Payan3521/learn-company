@@ -16,6 +16,7 @@
 - metodo /update-employee (api users)
 - metodo /update-instructor (api users)
 - validacion de usuario no inactivo (api users)
+- buqueda de filtros esta buscando usuarios que no corresponden al departamento indicado (api users)
 
 - poblar listas (all)
 
@@ -25,3 +26,5 @@
 - refactorizar codigo para optionResponses (api module)
 - entender el codigo, flujo y que tenga las convenciones (api module)
 - separar responsabilidad de metodo de mapeo de salida (api module)
+
+- endpoint para obtener el feedback

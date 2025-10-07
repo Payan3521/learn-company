@@ -13,7 +13,6 @@ public interface AssessmentInstanceMapper {
     @Mapping(target = "answers", ignore = true)
     AssessmentInstance toDomain(AssessmentInstanceEntity entity);
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "answers", ignore = true)
     AssessmentInstanceEntity toEntity(AssessmentInstance domain);
