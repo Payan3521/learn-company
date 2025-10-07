@@ -8,6 +8,7 @@ import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
 import com.desarrollox.learncompany.domain.accessDb.IRepositorySeason;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
+import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.DurationCourseInvalidException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
 import com.desarrollox.learncompany.domain.exception.SeasonNotFoundException;
@@ -29,7 +30,7 @@ public class CourseService implements ICourseService {
     @Override
     public Course createCourse(Course course) {
         if(!repositoryDepartment.existsById(course.getDepartment().getId())){
-            throw new CourseNotFoundException(course.getDepartment().getId());
+            throw new DepartmentNotFoundException(course.getDepartment().getId());
         }
         if(!repositorySeason.existsById(course.getSeason().getId())){
             throw new SeasonNotFoundException(course.getSeason().getId());
