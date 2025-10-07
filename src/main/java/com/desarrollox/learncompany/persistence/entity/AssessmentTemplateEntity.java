@@ -35,7 +35,7 @@ public class AssessmentTemplateEntity {
     @JoinColumn(name = "module_id", referencedColumnName = "id", nullable = false)
     private ModuleEntity module;
 
-    @OneToMany(mappedBy = "assessmentTemplate", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "assessmentTemplate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<QuestionEntity> questions;
 
     @Enumerated(EnumType.STRING)

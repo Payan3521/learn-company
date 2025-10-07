@@ -209,7 +209,7 @@ CREATE TABLE questions (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     assessment_template_id BIGINT NOT NULL,
     question TEXT NOT NULL,
-    response_options JSON NOT NULL,
+    response_options TEXT NOT NULL,
     correct_answer VARCHAR(500) NOT NULL,
     question_order INT NOT NULL DEFAULT 1,
     
