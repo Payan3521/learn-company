@@ -749,3 +749,204 @@ Using generated security password: 16b1af7c-0170-48cb-8a56-061b589e442d
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
 2025-10-06 17:29:42 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.884 seconds (process running for 11.516)
+2025-10-06 17:52:52 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 374045 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 17:52:52 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 17:52:57 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 17:53:02 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 17:53:02 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: b3dfd024-dfce-4681-8cf1-6e9bb2b77de2
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 17:53:03 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 12.3 seconds (process running for 13.185)
+2025-10-06 17:54:20 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.desarrollox.learncompany.core.web.dto.ApiResponse<com.desarrollox.learncompany.web.dto.ModuleResponse>> com.desarrollox.learncompany.web.controller.ModulesController.createModule(com.desarrollox.learncompany.web.dto.ModuleRequest): [Field error in object 'moduleRequest' on field 'assessmentTemplate': rejected value [null]; codes [NotEmpty.moduleRequest.assessmentTemplate,NotEmpty.assessmentTemplate,NotEmpty.java.util.List,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [moduleRequest.assessmentTemplate,assessmentTemplate]; arguments []; default message [assessmentTemplate]]; default message [La lista de evaluaciones template no puede estar vacía]] ]
+2025-10-06 17:55:19 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.desarrollox.learncompany.core.web.dto.ApiResponse<com.desarrollox.learncompany.web.dto.ModuleResponse>> com.desarrollox.learncompany.web.controller.ModulesController.createModule(com.desarrollox.learncompany.web.dto.ModuleRequest) with 5 errors: [Field error in object 'moduleRequest' on field 'assessmentTemplate': rejected value [[AssessmentTemplateRequest(questions=[QuestionRequest(question=null, responseOptions=null, correctAnswer=An architecture pattern)], type=QUIZ, retries=3), AssessmentTemplateRequest(questions=[QuestionRequest(question=null, responseOptions=null, correctAnswer=A long text response.)], type=WORKSHOP, retries=1)]]; codes [Size.moduleRequest.assessmentTemplate,Size.assessmentTemplate,Size.java.util.List,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [moduleRequest.assessmentTemplate,assessmentTemplate]; arguments []; default message [assessmentTemplate],2147483647,3]; default message [La lista de evaluaciones template debe tener al menos 3 elementos]] [Field error in object 'moduleRequest' on field 'assessmentTemplate[1].questions[0].responseOptions': rejected value [null]; codes [NotBlank.moduleRequest.assessmentTemplate[1].questions[0].responseOptions,NotBlank.moduleRequest.assessmentTemplate[1].questions.responseOptions,NotBlank.moduleRequest.assessmentTemplate.questions.responseOptions,NotBlank.assessmentTemplate[1].questions[0].responseOptions,NotBlank.assessmentTemplate[1].questions.responseOptions,NotBlank.assessmentTemplate.questions.responseOptions,NotBlank.responseOptions,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [moduleRequest.assessmentTemplate[1].questions[0].responseOptions,assessmentTemplate[1].questions[0].responseOptions]; arguments []; default message [assessmentTemplate[1].questions[0].responseOptions]]; default message [Las opciones de respuesta no pueden estar vacías]] [Field error in object 'moduleRequest' on field 'assessmentTemplate[0].questions[0].responseOptions': rejected value [null]; codes [NotBlank.moduleRequest.assessmentTemplate[0].questions[0].responseOptions,NotBlank.moduleRequest.assessmentTemplate[0].questions.responseOptions,NotBlank.moduleRequest.assessmentTemplate.questions.responseOptions,NotBlank.assessmentTemplate[0].questions[0].responseOptions,NotBlank.assessmentTemplate[0].questions.responseOptions,NotBlank.assessmentTemplate.questions.responseOptions,NotBlank.responseOptions,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [moduleRequest.assessmentTemplate[0].questions[0].responseOptions,assessmentTemplate[0].questions[0].responseOptions]; arguments []; default message [assessmentTemplate[0].questions[0].responseOptions]]; default message [Las opciones de respuesta no pueden estar vacías]] [Field error in object 'moduleRequest' on field 'assessmentTemplate[1].questions[0].question': rejected value [null]; codes [NotBlank.moduleRequest.assessmentTemplate[1].questions[0].question,NotBlank.moduleRequest.assessmentTemplate[1].questions.question,NotBlank.moduleRequest.assessmentTemplate.questions.question,NotBlank.assessmentTemplate[1].questions[0].question,NotBlank.assessmentTemplate[1].questions.question,NotBlank.assessmentTemplate.questions.question,NotBlank.question,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [moduleRequest.assessmentTemplate[1].questions[0].question,assessmentTemplate[1].questions[0].question]; arguments []; default message [assessmentTemplate[1].questions[0].question]]; default message [La pregunta no puede estar vacía]] [Field error in object 'moduleRequest' on field 'assessmentTemplate[0].questions[0].question': rejected value [null]; codes [NotBlank.moduleRequest.assessmentTemplate[0].questions[0].question,NotBlank.moduleRequest.assessmentTemplate[0].questions.question,NotBlank.moduleRequest.assessmentTemplate.questions.question,NotBlank.assessmentTemplate[0].questions[0].question,NotBlank.assessmentTemplate[0].questions.question,NotBlank.assessmentTemplate.questions.question,NotBlank.question,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [moduleRequest.assessmentTemplate[0].questions[0].question,assessmentTemplate[0].questions[0].question]; arguments []; default message [assessmentTemplate[0].questions[0].question]]; default message [La pregunta no puede estar vacía]] ]
+2025-10-06 18:16:29 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 384289 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 18:16:29 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 18:16:33 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 18:16:37 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 18:16:37 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 6e1d3c00-0faa-4cbf-a0d9-8289793ff696
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 18:16:38 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.567 seconds (process running for 10.375)
+2025-10-06 18:16:43 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`)]
+2025-10-06 18:17:36 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`)]
+2025-10-06 18:18:27 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 385523 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 18:18:27 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 18:18:30 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 18:18:35 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 18:18:35 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 8a1cfe1e-809a-4c4b-bd13-b97e048d685c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 18:18:36 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.997 seconds (process running for 11.079)
+2025-10-06 18:18:42 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`)]
+2025-10-06 18:22:34 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`)]
+2025-10-06 18:24:53 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 390196 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 18:24:53 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 18:24:57 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 18:25:01 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 18:25:01 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 29c1ad97-50a9-44ac-978b-93bb0a47b13f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 18:25:02 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.85 seconds (process running for 10.561)
+2025-10-06 18:25:08 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.String` from Array value (token `JsonToken.START_ARRAY`)]
+2025-10-06 18:30:31 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 392925 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 18:30:31 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 18:30:35 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 18:30:39 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 18:30:39 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 86161277-e684-4ce7-95c0-ab808e3e809c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 18:30:41 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.372 seconds (process running for 11.091)
+2025-10-06 18:30:45 [http-nio-8080-exec-1] WARN  o.m.jdbc.message.server.ErrorPacket - Error: 1452-23000: Cannot add or update a child row: a foreign key constraint fails (`learncompany`.`modules`, CONSTRAINT `modules_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+2025-10-06 18:30:45 [http-nio-8080-exec-1] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1452, SQLState: 23000
+2025-10-06 18:30:45 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=941) Cannot add or update a child row: a foreign key constraint fails (`learncompany`.`modules`, CONSTRAINT `modules_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)
+2025-10-06 18:30:45 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=941) Cannot add or update a child row: a foreign key constraint fails (`learncompany`.`modules`, CONSTRAINT `modules_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)] [insert into modules (course_id,title) values (?,?)]; SQL [insert into modules (course_id,title) values (?,?)]; constraint [null]]
+2025-10-06 18:37:53 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 395616 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 18:37:53 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 18:37:57 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 18:38:01 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 18:38:01 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 551f70a7-dd6c-43cb-a704-6f00f99e4716
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 18:38:02 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.589 seconds (process running for 10.373)
+2025-10-06 18:38:08 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.CourseNotFoundException: Curso con id: 1 no encontrado]
+2025-10-06 18:39:36 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 396748 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 18:39:36 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 18:39:40 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 18:39:42 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'assessmentInstanceService' defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/domain/service/impl/AssessmentInstanceService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'repositoryAssessmenteInstance' defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/persistence/repository/impl/RepositoryAssessmenteInstance.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'assessmentInstanceMapperImpl': Unsatisfied dependency expressed through field 'assessmentTemplateMapper': Error creating bean with name 'assessmentTemplateMapperImpl': Unsatisfied dependency expressed through field 'moduleMapper': Error creating bean with name 'moduleMapperImpl': Unsatisfied dependency expressed through field 'assessmentTemplateMapper': Error creating bean with name 'assessmentTemplateMapperImpl': Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?
+2025-10-06 18:39:42 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+   assessmentInstanceService defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/domain/service/impl/AssessmentInstanceService.class]
+      ↓
+   repositoryAssessmenteInstance defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/persistence/repository/impl/RepositoryAssessmenteInstance.class]
+      ↓
+   assessmentInstanceMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapper com.desarrollox.learncompany.persistence.mapper.AssessmentInstanceMapperImpl.assessmentTemplateMapper)
+┌─────┐
+|  assessmentTemplateMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.ModuleMapper com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapperImpl.moduleMapper)
+↑     ↓
+|  moduleMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapper com.desarrollox.learncompany.persistence.mapper.ModuleMapperImpl.assessmentTemplateMapper)
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2025-10-06 18:39:58 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 397055 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 18:39:58 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 18:40:02 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 18:40:04 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'assessmentInstanceService' defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/domain/service/impl/AssessmentInstanceService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'repositoryAssessmenteInstance' defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/persistence/repository/impl/RepositoryAssessmenteInstance.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'assessmentInstanceMapperImpl': Unsatisfied dependency expressed through field 'assessmentTemplateMapper': Error creating bean with name 'assessmentTemplateMapperImpl': Unsatisfied dependency expressed through field 'moduleMapper': Error creating bean with name 'moduleMapperImpl': Unsatisfied dependency expressed through field 'assessmentTemplateMapper': Error creating bean with name 'assessmentTemplateMapperImpl': Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?
+2025-10-06 18:40:04 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+   assessmentInstanceService defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/domain/service/impl/AssessmentInstanceService.class]
+      ↓
+   repositoryAssessmenteInstance defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/persistence/repository/impl/RepositoryAssessmenteInstance.class]
+      ↓
+   assessmentInstanceMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapper com.desarrollox.learncompany.persistence.mapper.AssessmentInstanceMapperImpl.assessmentTemplateMapper)
+┌─────┐
+|  assessmentTemplateMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.ModuleMapper com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapperImpl.moduleMapper)
+↑     ↓
+|  moduleMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapper com.desarrollox.learncompany.persistence.mapper.ModuleMapperImpl.assessmentTemplateMapper)
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2025-10-06 18:42:23 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 398157 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 18:42:23 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 18:42:26 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 18:42:29 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'assessmentInstanceService' defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/domain/service/impl/AssessmentInstanceService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'repositoryAssessmenteInstance' defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/persistence/repository/impl/RepositoryAssessmenteInstance.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'assessmentInstanceMapperImpl': Unsatisfied dependency expressed through field 'assessmentTemplateMapper': Error creating bean with name 'assessmentTemplateMapperImpl': Unsatisfied dependency expressed through field 'moduleMapper': Error creating bean with name 'moduleMapperImpl': Unsatisfied dependency expressed through field 'assessmentTemplateMapper': Error creating bean with name 'assessmentTemplateMapperImpl': Requested bean is currently in creation: Is there an unresolvable circular reference or an asynchronous initialization dependency?
+2025-10-06 18:42:29 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+   assessmentInstanceService defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/domain/service/impl/AssessmentInstanceService.class]
+      ↓
+   repositoryAssessmenteInstance defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/persistence/repository/impl/RepositoryAssessmenteInstance.class]
+      ↓
+   assessmentInstanceMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapper com.desarrollox.learncompany.persistence.mapper.AssessmentInstanceMapperImpl.assessmentTemplateMapper)
+┌─────┐
+|  assessmentTemplateMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.ModuleMapper com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapperImpl.moduleMapper)
+↑     ↓
+|  moduleMapperImpl (field private com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapper com.desarrollox.learncompany.persistence.mapper.ModuleMapperImpl.assessmentTemplateMapper)
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2025-10-06 18:56:34 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 405866 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 18:56:34 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 18:56:38 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 18:56:42 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 18:56:42 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 45cb20cb-aac5-4a83-be54-d477f7fbdce0
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 18:56:43 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.561 seconds (process running for 10.261)
+2025-10-06 18:59:04 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 407159 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 18:59:04 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-06 18:59:08 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 18:59:12 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 18:59:12 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 631b0458-e3b7-48fa-bf2c-3013ab695a59
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 18:59:13 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.045 seconds (process running for 10.631)
+2025-10-06 19:02:14 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 409035 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-06 19:02:14 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
+2025-10-06 19:02:28 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-06 19:02:38 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-06 19:02:38 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d5677fc4-2ebc-4c21-9bd9-776fe3f264dd
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-06 19:02:40 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 30.679 seconds (process running for 34.112)

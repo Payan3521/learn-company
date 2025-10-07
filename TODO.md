@@ -22,4 +22,5 @@
 
 - metodo /finished (api courses)
 - metodo /enrolled (api courses)
-- metodo /getModulesOfCourseId
+
+- refactorizar codigo para optionResponses (api module)

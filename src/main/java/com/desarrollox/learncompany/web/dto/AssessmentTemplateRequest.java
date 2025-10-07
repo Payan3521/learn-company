@@ -24,5 +24,5 @@ public class AssessmentTemplateRequest {
     @NotNull(message = "Los reintentos son obligatorios")
     @Min(value = 0, message = "El número de reintentos debe ser cero o mayor")
     @Max(value = 3, message = "El número de reintentos no puede ser mayor que 3")
-    private int retries;
+    private Integer retries;
 }

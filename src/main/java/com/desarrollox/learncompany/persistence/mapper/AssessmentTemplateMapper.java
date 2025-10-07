@@ -12,8 +12,7 @@ public interface AssessmentTemplateMapper {
     
     @Mapping(target = "questions", ignore = true)
     AssessmentTemplate toDomain(AssessmentTemplateEntity entity);
-
-    @Mapping(target = "id", ignore = true)
+    
     @Mapping(target = "questions", ignore = true)
     AssessmentTemplateEntity toEntity(AssessmentTemplate domain);
 }
