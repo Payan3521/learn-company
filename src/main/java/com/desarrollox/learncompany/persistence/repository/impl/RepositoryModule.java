@@ -3,9 +3,7 @@ package com.desarrollox.learncompany.persistence.repository.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
-
 import com.desarrollox.learncompany.persistence.entity.ModuleEntity;
 import com.desarrollox.learncompany.persistence.mapper.ModuleMapper;
 import com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapper;
@@ -120,5 +118,10 @@ public class RepositoryModule implements IRepositoryModule{
         }
         
         return module;
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return jpaRepositoryModule.existsById(id);
     }
 }

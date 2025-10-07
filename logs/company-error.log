@@ -471,3 +471,5 @@ Caused by: java.net.BindException: La dirección ya se está usando
 	... 25 common frames omitted
 2025-10-06 20:20:41 [http-nio-8080-exec-6] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=213) Table 'learncompany.assessments_template' doesn't exist
 2025-10-06 20:21:28 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=225) Table 'learncompany.assessments_template' doesn't exist
+2025-10-06 20:29:03 [http-nio-8080-exec-6] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1038) Table 'learncompany.assessments_template' doesn't exist
+2025-10-06 20:33:58 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1048) Table 'learncompany.assessments_templates' doesn't exist

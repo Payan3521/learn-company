@@ -10,4 +10,5 @@ public interface IRepositoryModule {
     List<Module> findAll();
     Optional<Module> delete(Long id);
     List<Module> findModulesByCourseId(Long courseId);
+    boolean existsById(Long id);
 }

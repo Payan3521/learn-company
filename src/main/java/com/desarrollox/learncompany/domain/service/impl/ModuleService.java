@@ -10,6 +10,7 @@ import com.desarrollox.learncompany.domain.model.Question;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryModule;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
+import com.desarrollox.learncompany.domain.exception.ModuleNotFoundException;
 import com.desarrollox.learncompany.domain.service.IModuleService;
 import lombok.RequiredArgsConstructor;
 
@@ -52,6 +53,9 @@ public class ModuleService implements IModuleService {
 
     @Override
     public Optional<Module> getModuleById(Long id) {
+        if(!repositoryModule.existsById(id)){
+            throw new ModuleNotFoundException(id);
+        }
         return repositoryModule.findById(id);
     }
 
@@ -62,6 +66,9 @@ public class ModuleService implements IModuleService {
 
     @Override
     public Optional<Module> deleteModule(Long id) {
+        if(!repositoryModule.existsById(id)){
+            throw new ModuleNotFoundException(id);
+        }
         return repositoryModule.delete(id);
     }
 
@@ -69,7 +76,5 @@ public class ModuleService implements IModuleService {
     public List<Module> getModulesByCourseId(Long courseId) {
         return repositoryModule.findModulesByCourseId(courseId);
     }
-
-    
     
 }

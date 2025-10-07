@@ -24,3 +24,4 @@
 - metodo /enrolled (api courses)
 
 - refactorizar codigo para optionResponses (api module)
+- entender el codigo, flujo y que tenga las convenciones (api module)

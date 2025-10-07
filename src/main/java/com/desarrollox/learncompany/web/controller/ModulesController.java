@@ -46,6 +46,11 @@ public class ModulesController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<ModuleResponse>>> getAllModules(){
         List<Module> modules = moduleService.getAllModules();
+
+        if(modules.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<ModuleResponse> response = modules.stream().map(moduleWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Modulos obtenidos correctamente", response));
     }
@@ -53,6 +58,12 @@ public class ModulesController {
     @GetMapping("/course/{id}")
     public ResponseEntity<ApiResponse<List<ModuleResponse>>> getModulesByCourseId(@PathVariable Long id){
         List<Module> modules = moduleService.getModulesByCourseId(id);
+
+
+        if(modules.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        
         List<ModuleResponse> response = modules.stream().map(moduleWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Modulos obtenidos correctamente", response));
     }

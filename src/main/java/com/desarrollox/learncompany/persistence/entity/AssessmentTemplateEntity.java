@@ -21,7 +21,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "assessments_template")
+@Table(name = "assessment_templates")
 @Getter
 @Setter
 @NoArgsConstructor
