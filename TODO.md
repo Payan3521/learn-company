@@ -10,10 +10,9 @@
 
 2. capturas (metodo, endpoint, boton, datos, respuesta, codigo, hora)
 
-
 - metodo /asignar-badge (api users)
 - metodo /me (api users)
-# crea en vez de reemplazar, y cuando elimino un error de esos y vuelvo e intento modificar, aparece con el false en status
+    # crea en vez de reemplazar, y cuando elimino un error de esos y vuelvo e intento modificar, aparece con el false en status
 - metodo /update-employee (api users)
 - metodo /update-instructor (api users)
 - validacion de usuario no inactivo (api users)
@@ -25,3 +24,4 @@
 
 - refactorizar codigo para optionResponses (api module)
 - entender el codigo, flujo y que tenga las convenciones (api module)
+- separar responsabilidad de metodo de mapeo de salida (api module)
