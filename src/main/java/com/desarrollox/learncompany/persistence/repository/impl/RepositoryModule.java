@@ -53,7 +53,8 @@ public class RepositoryModule implements IRepositoryModule{
     
     @Override
     public List<Module> findModulesByCourseId(Long courseId) {
-        return jpaRepositoryModule.findById(courseId).stream()
+        return jpaRepositoryModule.findByCourseId(courseId)
+                .stream()
                 .map(moduleMapper::toDomain)
                 .collect(Collectors.toList());
     }

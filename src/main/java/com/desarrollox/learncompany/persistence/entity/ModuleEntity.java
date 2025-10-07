@@ -25,6 +25,6 @@ public class ModuleEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<AssessmentTemplateEntity> assessmentTemplate;
 }

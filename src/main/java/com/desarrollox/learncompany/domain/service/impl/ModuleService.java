@@ -31,14 +31,11 @@ public class ModuleService implements IModuleService {
             .orElseThrow(() -> new CourseNotFoundException(module.getCourse().getId()));
         module.setCourse(course);
         
-        // Guardar el módulo primero para obtener ID
-        Module savedModule = repositoryModule.save(module);
-        
-        // Establecer las relaciones bidireccionales y guardar AssessmentTemplates
+        // Establecer las relaciones bidireccionales ANTES de guardar
         if (module.getAssessmentTemplate() != null) {
             for (AssessmentTemplate assessmentTemplate : module.getAssessmentTemplate()) {
                 // Establecer la relación con el módulo
-                assessmentTemplate.setModule(savedModule);
+                assessmentTemplate.setModule(module);
                 
                 // Establecer relaciones bidireccionales con Questions
                 if (assessmentTemplate.getQuestions() != null) {
@@ -47,12 +44,10 @@ public class ModuleService implements IModuleService {
                     }
                 }
             }
-            
-            // Guardar todo el árbol de entidades
-            savedModule = repositoryModule.save(savedModule);
         }
         
-        return savedModule;
+        // Guardar el módulo con todas sus relaciones
+        return repositoryModule.save(module);
     }
 
     @Override
