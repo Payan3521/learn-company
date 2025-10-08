@@ -131,8 +131,7 @@ CREATE TABLE modules (
     title VARCHAR(255) NOT NULL,
     
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    INDEX idx_course_id (course_id),
-    INDEX idx_module_order (module_order) -- Orden dentro del curso
+    INDEX idx_course_id (course_id)
 );
 
 -- Tabla inscriptions (n:m entre employee y course)
@@ -237,11 +236,11 @@ CREATE TABLE answers (
 
 CREATE TABLE notifications_content (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    type ENUM('NEW_EVALUATION', 'RANKING_WINNER') NOT NULL,
+    type_notification ENUM('NEW_EVALUATION', 'RANKING_WINNER') NOT NULL,
     reference_id BIGINT NOT NULL,
-    message TEXT NOT NULL,
+    message_notification TEXT,
     -- Índices para filtrar notificaciones
-    INDEX idx_type (type),
+    INDEX idx_type (type_notification),
     INDEX idx_reference_id (reference_id)
 );
 

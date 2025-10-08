@@ -30,3 +30,5 @@
 - endpoint para obtener el feedback
 
 - transactional en metodos
+
+- validar que la referencia y el mensaje no sean nulos (api notifications)

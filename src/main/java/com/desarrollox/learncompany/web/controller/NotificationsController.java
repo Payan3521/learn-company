@@ -39,6 +39,11 @@ public class NotificationsController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<NotificationResponse>>> getAllNotifications(){
         List<Notification> notifications = notificationService.getAllNotifications();
+
+        if(notifications.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<NotificationResponse> response = notifications.stream().map(notificationWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Notificaciones obtenidas correctamente", response));
     }
@@ -53,6 +58,11 @@ public class NotificationsController {
     @GetMapping("/users/{id}")
     public ResponseEntity<ApiResponse<List<NotificationResponse>>> getUsersById(@PathVariable Long id){
         List<Notification> notifications = notificationService.getNotificationsByUserId(id);
+
+        if(notifications.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        
         List<NotificationResponse> response = notifications.stream().map(notificationWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Notificaciones obtenidas correctamente", response));
     }

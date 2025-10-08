@@ -56,5 +56,10 @@ public class RepositoryNotification implements IRepositoryNotification {
                     );
                 }).orElse(null);
     }
+
+    @Override
+    public boolean existsById(Long id) {
+        return jpaRepositoryNotification.existsById(id);
+    }
     
 }

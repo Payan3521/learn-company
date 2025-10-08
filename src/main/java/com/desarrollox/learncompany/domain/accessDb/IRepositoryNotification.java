@@ -10,4 +10,5 @@ public interface IRepositoryNotification {
     List<Notification> findAll();
     List<Notification> findNotificationsByUserId(Long userId);
     Notification markAsRead(Long notificationId);
+    boolean existsById(Long id);
 }

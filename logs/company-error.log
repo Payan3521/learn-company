@@ -539,3 +539,10 @@ Caused by: java.net.BindException: La dirección ya se está usando
 	... 25 common frames omitted
 2025-10-08 15:14:08 [restartedMain] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1304) Unknown database 'learncompany'
 2025-10-08 15:14:49 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1305) Unknown database 'learncompany'
+2025-10-08 15:53:32 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1374) Column 'message' cannot be null
+2025-10-08 16:15:22 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1394) Column 'message' cannot be null
+2025-10-08 16:18:09 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1406) Data truncated for column 'type' at row 1
+2025-10-08 16:27:46 [http-nio-8080-exec-3] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1416) Unknown column 'message_evaluation' in 'INSERT INTO'
+2025-10-08 16:33:34 [http-nio-8080-exec-4] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1448) Data truncated for column 'type_evaluation' at row 1
+2025-10-08 16:44:28 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1458) Data truncated for column 'type_evaluation' at row 1
+2025-10-08 16:49:26 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1468) Unknown column 'message_notification' in 'INSERT INTO'
