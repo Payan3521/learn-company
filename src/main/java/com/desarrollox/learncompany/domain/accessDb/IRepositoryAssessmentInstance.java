@@ -7,4 +7,5 @@ public interface IRepositoryAssessmentInstance {
     AssessmentInstance createAssessmentInstance(AssessmentInstance instance);
     Optional<AssessmentInstance> getAssessmentInstanceById(Long id);
     Optional<AssessmentInstance> assignGrade(Long id, Double grade);
+    boolean existsById(Long id);
 }

@@ -52,7 +52,6 @@ public class AssessmentsInstanceController {
         AssessmentInstance assessmentInstance = assessmentInstanceService.assignGrade( assessmentId, grade).get();
         AssessmentInstanceResponse response = assessmentInstanceWebMapper.domainToResponse(assessmentInstance);
         return ResponseEntity.ok(ApiResponse.success("Nota asignada correctamente", response));
-        
     }
 
 }

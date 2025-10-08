@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryAssessmentInstance;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryAssessmentTemplate;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
+import com.desarrollox.learncompany.domain.exception.AssessmentInstanceNotFoundException;
 import com.desarrollox.learncompany.domain.exception.AssessmentTemplateNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
@@ -54,6 +55,9 @@ public class AssessmentInstanceService implements IAssessmentInstanceService{
 
     @Override
     public Optional<AssessmentInstance> getAssessmentInstanceById(Long id) {
+        if(!repositoryAssessmentInstance.existsById(id)){
+            throw new AssessmentInstanceNotFoundException(id);
+        }
         return repositoryAssessmentInstance.getAssessmentInstanceById(id);
     }
 
@@ -63,7 +67,7 @@ public class AssessmentInstanceService implements IAssessmentInstanceService{
         if(instanceOpt.isPresent()){
             return instanceOpt.get().getGrade();
         }
-        return null;
+        throw new AssessmentInstanceNotFoundException(id);
     }
 
     @Override
@@ -72,7 +76,7 @@ public class AssessmentInstanceService implements IAssessmentInstanceService{
         if(instanceOpt.isPresent()){
             return repositoryAssessmentInstance.assignGrade(id, grade);
         }
-        return Optional.empty();
+        throw new AssessmentInstanceNotFoundException(id);
     }
     
 }

@@ -119,5 +119,10 @@ public class RepositoryAssessmenteInstance implements IRepositoryAssessmentInsta
         
         return assessmentInstance;
     }
+
+    @Override
+    public boolean existsById(Long id) {
+        return jpaRepositoryAssessmentInstance.existsById(id);
+    }
     
 }

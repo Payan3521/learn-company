@@ -129,7 +129,6 @@ CREATE TABLE modules (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     course_id BIGINT NOT NULL,
     title VARCHAR(255) NOT NULL,
-    module_order INT NOT NULL DEFAULT 1,
     
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE ON UPDATE CASCADE,
     INDEX idx_course_id (course_id),
@@ -223,7 +222,6 @@ CREATE TABLE answers (
     question_id BIGINT NOT NULL,
     content_answer TEXT NOT NULL,
     date_issued TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_correct BOOLEAN NULL,
     
     FOREIGN KEY (assessment_instance_id) REFERENCES assessment_instances(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -379,8 +377,7 @@ SELECT
     c.title AS course_title,
     ai.grade,
     ai.status_instance,
-    ai.created_at,
-    ai.submitted_at
+    ai.created_at
 FROM assessment_instances ai
 INNER JOIN employees e ON ai.employee_id = e.id
 INNER JOIN users u ON e.id = u.id
