@@ -28,3 +28,5 @@
 - separar responsabilidad de metodo de mapeo de salida (api module)
 
 - endpoint para obtener el feedback
+
+- transactional en metodos

@@ -31,11 +31,11 @@ public class AnswerEntity {
     @Column(name = "content_answer", nullable = false)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "id", nullable = false)
     private QuestionEntity question;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "assessment_instance_id", referencedColumnName = "id", nullable = false)
     private AssessmentInstanceEntity assessmentInstance;
 

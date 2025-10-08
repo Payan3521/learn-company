@@ -8,7 +8,9 @@ import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.AssessmentTemplateNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
+import com.desarrollox.learncompany.domain.model.Answer;
 import com.desarrollox.learncompany.domain.model.AssessmentInstance;
+import com.desarrollox.learncompany.domain.model.AssessmentTemplate;
 import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.service.IAssessmentInstanceService;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +35,20 @@ public class AssessmentInstanceService implements IAssessmentInstanceService{
             throw new InvalidRoleException("El usuario con ID: " + instance.getEmployee().getId() + "no tiene rol de EMPLOYEE");
         }
 
-        instance.setAssessmentTemplate(repositoryAssessmentTemplate.findById(instance.getAssessmentTemplate().getId()).get());
-        instance.setEmployee((Employee)repositoryUser.findById(instance.getEmployee().getId()).get());
+        // Obtener las entidades completas de la base de datos
+        AssessmentTemplate assessmentTemplate = repositoryAssessmentTemplate.findById(instance.getAssessmentTemplate().getId()).get();
+        Employee employee = (Employee) repositoryUser.findById(instance.getEmployee().getId()).get();
+        
+        // Establecer las entidades en la instancia
+        instance.setAssessmentTemplate(assessmentTemplate);
+        instance.setEmployee(employee);
+
+        if (instance.getAnswers() != null) {
+            for (Answer answer : instance.getAnswers()) {
+                answer.setAssessmentInstance(instance);
+            }
+        }
+        
         return repositoryAssessmentInstance.createAssessmentInstance(instance);
     }
 

@@ -1,277 +1,51 @@
-2025-10-07 15:58:45 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 515096 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 15:58:45 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-07 15:58:49 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 15:58:53 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 15:58:53 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-08 00:00:56 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 65104 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-08 00:00:56 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-08 00:00:58 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-08 00:01:00 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-08 00:01:00 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: 36aaae45-bafc-416c-a400-2a799755299b
+Using generated security password: 949114df-dd6e-4bc6-8f97-c6c540efa208
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-07 15:58:54 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.965 seconds (process running for 10.626)
-2025-10-07 16:00:59 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.desarrollox.learncompany.core.web.dto.ApiResponse<com.desarrollox.learncompany.web.dto.AssessmentInstanceResponse>> com.desarrollox.learncompany.web.controller.AssessmentsInstanceController.createAssessmentInstance(com.desarrollox.learncompany.web.dto.AssessmentInstanceRequest): [Field error in object 'assessmentInstanceRequest' on field 'answers[0].questionId': rejected value [null]; codes [NotNull.assessmentInstanceRequest.answers[0].questionId,NotNull.assessmentInstanceRequest.answers.questionId,NotNull.answers[0].questionId,NotNull.answers.questionId,NotNull.questionId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [assessmentInstanceRequest.answers[0].questionId,answers[0].questionId]; arguments []; default message [answers[0].questionId]]; default message [El ID de la pregunta es obligatorio]] ]
-2025-10-07 16:01:42 [http-nio-8080-exec-6] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
+2025-10-08 00:01:01 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.325 seconds (process running for 5.708)
+2025-10-08 00:01:06 [http-nio-8080-exec-2] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
+	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>])
+	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AnswerEntity#<null>]])
+	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AnswerEntity.assessmentInstance])
+2025-10-08 00:01:06 [http-nio-8080-exec-2] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
 	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.EmployeeEntity#<null>])
 	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>]])
 	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee])
-2025-10-07 16:01:42 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee -> com.desarrollox.learncompany.persistence.entity.EmployeeEntity]
-2025-10-07 16:33:49 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 528766 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 16:33:49 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-07 16:33:53 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 16:33:57 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 16:33:57 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-08 00:01:06 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee -> com.desarrollox.learncompany.persistence.entity.EmployeeEntity]
+2025-10-08 00:02:30 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 66239 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-08 00:02:30 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-08 00:02:32 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-08 00:02:34 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-08 00:02:34 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: 42616650-1356-48ea-809a-0a5459befb7c
+Using generated security password: f7be4937-17b7-49c8-b6b1-64884ef8ae3e
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-07 16:33:58 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.947 seconds (process running for 11.015)
-2025-10-07 16:34:08 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Failure in @ExceptionHandler com.desarrollox.learncompany.core.handler.GlobalExceptionHandler#handleForbidden(DepartmentIncorrectException)
-java.lang.IllegalStateException: Could not resolve parameter [0] in public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> com.desarrollox.learncompany.core.handler.GlobalExceptionHandler.handleForbidden(com.desarrollox.learncompany.domain.exception.DepartmentIncorrectException): No suitable resolver
-	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:224)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:181)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:471)
-	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:73)
-	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:182)
-	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80)
-	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1360)
-	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1161)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1106)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125)
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
-	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$4(HandlerMappingIntrospector.java:267)
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
-	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240)
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-2025-10-07 16:34:08 [http-nio-8080-exec-2] WARN  o.s.w.s.m.a.ResponseStatusExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.InvalidRoleException: El usuario con ID: 1no tiene rol de EMPLOYEE]
-2025-10-07 16:35:17 [http-nio-8080-exec-5] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
+2025-10-08 00:02:34 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 4.863 seconds (process running for 5.335)
+2025-10-08 00:02:40 [http-nio-8080-exec-2] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
+	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>])
+	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AnswerEntity#<null>]])
+	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AnswerEntity.assessmentInstance])
+2025-10-08 00:02:40 [http-nio-8080-exec-2] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
 	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.EmployeeEntity#<null>])
 	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>]])
 	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee])
-2025-10-07 16:35:17 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee -> com.desarrollox.learncompany.persistence.entity.EmployeeEntity]
-2025-10-07 16:51:29 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 533563 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 16:51:29 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-07 16:51:33 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 16:51:37 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 16:51:37 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-08 00:02:40 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AnswerEntity.assessmentInstance -> com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity]
+2025-10-08 00:05:27 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 68042 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-08 00:05:27 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-08 00:05:29 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-08 00:05:31 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-08 00:05:31 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: fe91ed17-6bec-4514-83ca-44732349e30a
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-07 16:51:38 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.116 seconds (process running for 10.85)
-2025-10-07 16:54:47 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 535456 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 16:54:47 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-07 16:54:51 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 16:54:55 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 16:54:55 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 638cb86f-3e0c-4c37-94c8-f06c796a9cd0
+Using generated security password: b5e4aeae-253c-49c5-9ce4-d1b0c5a0ae91
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-07 16:54:56 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.073 seconds (process running for 10.881)
-2025-10-07 16:58:25 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 538112 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 16:58:25 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-07 16:58:29 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 16:58:33 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 16:58:33 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 127f8f1c-1581-4c85-b48d-1ffdad4ba4f5
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-07 16:58:35 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.633 seconds (process running for 11.752)
-2025-10-07 17:08:32 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 543704 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 17:08:32 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-07 17:08:36 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 17:08:40 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 17:08:40 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 55a2da55-fd73-4192-88ad-f5d8c690f9ba
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-07 17:08:41 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.83 seconds (process running for 10.554)
-2025-10-07 17:08:55 [http-nio-8080-exec-1] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
-	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.EmployeeEntity#<null>])
-	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>]])
-	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee])
-2025-10-07 17:08:56 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee -> com.desarrollox.learncompany.persistence.entity.EmployeeEntity]
-2025-10-07 17:10:39 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 545046 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 17:10:39 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-07 17:10:44 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 17:10:48 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 17:10:49 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 9f9bdc52-00e1-4d57-8c8c-e76814f1119e
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-07 17:10:50 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 11.655 seconds (process running for 12.72)
-2025-10-07 17:10:57 [http-nio-8080-exec-2] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
-	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.EmployeeEntity#<null>])
-	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>]])
-	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee])
-2025-10-07 17:10:57 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee -> com.desarrollox.learncompany.persistence.entity.EmployeeEntity]
-2025-10-07 17:27:56 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 555775 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 17:27:56 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-07 17:28:00 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 17:28:04 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 17:28:04 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 8c85307e-b8b7-4e84-ab90-b93d78aa9cbd
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-07 17:28:05 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.605 seconds (process running for 10.375)
-2025-10-07 17:28:11 [http-nio-8080-exec-1] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
-	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.EmployeeEntity#<null>])
-	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>]])
-	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee])
-2025-10-07 17:28:11 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee -> com.desarrollox.learncompany.persistence.entity.EmployeeEntity]
-2025-10-07 17:29:15 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 556551 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 17:29:15 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-07 17:29:30 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 17:29:41 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 17:29:41 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: daceaca4-3e3f-4266-97fb-6fafd39ef3a8
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-07 17:29:43 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 31.973 seconds (process running for 35.739)
-2025-10-07 17:31:26 [http-nio-8080-exec-1] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
-	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.EmployeeEntity#<null>])
-	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>]])
-	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee])
-2025-10-07 17:31:26 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee -> com.desarrollox.learncompany.persistence.entity.EmployeeEntity]
-2025-10-07 17:32:46 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 558145 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 17:32:46 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-07 17:32:58 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 17:33:07 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 17:33:07 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: ecd040e0-f792-4a75-9253-041097ef5380
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-07 17:33:09 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 25.485 seconds (process running for 30.046)
-2025-10-07 17:36:17 [http-nio-8080-exec-1] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
-	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.EmployeeEntity#<null>])
-	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>]])
-	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee])
-2025-10-07 17:36:17 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee -> com.desarrollox.learncompany.persistence.entity.EmployeeEntity]
-2025-10-07 17:41:54 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 561722 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 17:41:54 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-07 17:41:58 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 17:42:02 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 17:42:02 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 59eb5882-c15a-483d-bc8b-747c8e1e9623
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-07 17:42:03 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.838 seconds (process running for 10.481)
-2025-10-07 17:42:08 [http-nio-8080-exec-1] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
-	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.EmployeeEntity#<null>])
-	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>]])
-	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee])
-2025-10-07 17:42:08 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee -> com.desarrollox.learncompany.persistence.entity.EmployeeEntity]
-2025-10-07 17:43:45 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 562939 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-07 17:43:45 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-07 17:43:48 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-07 17:43:52 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-07 17:43:52 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 0a80fbe0-6e75-4fd5-afc0-f653d6af4709
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-07 17:43:53 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.597 seconds (process running for 10.366)
-2025-10-07 17:43:58 [http-nio-8080-exec-2] WARN  o.h.a.i.UnresolvedEntityInsertActions - HHH000437: Attempting to save one or more entities that have a non-nullable association with an unsaved transient entity. The unsaved transient entity must be saved in an operation prior to saving these dependent entities.
-	Unsaved transient entity: ([com.desarrollox.learncompany.persistence.entity.EmployeeEntity#<null>])
-	Dependent entities: ([[com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity#<null>]])
-	Non-nullable association(s): ([com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee])
-2025-10-07 17:43:58 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: Not-null property references a transient value - transient instance must be saved before current operation: com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity.employee -> com.desarrollox.learncompany.persistence.entity.EmployeeEntity]
+2025-10-08 00:05:31 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 4.843 seconds (process running for 5.263)

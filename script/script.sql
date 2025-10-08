@@ -192,7 +192,6 @@ CREATE TABLE assessment_instances (
     grade DOUBLE NOT NULL DEFAULT 0.0,
     status_instance ENUM('PENDING', 'GRADED') NOT NULL DEFAULT 'PENDING',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    submitted_at TIMESTAMP NULL,
     
     FOREIGN KEY (assessment_template_id) REFERENCES assessment_templates(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE CASCADE ON UPDATE CASCADE,

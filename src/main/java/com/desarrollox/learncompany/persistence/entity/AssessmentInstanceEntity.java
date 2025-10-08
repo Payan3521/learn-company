@@ -23,7 +23,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "assessments_instaces")
+@Table(name = "assessment_instances")
 @Getter
 @Setter
 @SuperBuilder
@@ -49,7 +49,7 @@ public class AssessmentInstanceEntity {
     @Column(name = "status_instance", nullable = false)
     private Status status;
 
-    @OneToMany(mappedBy = "assessmentInstance", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "assessmentInstance", cascade = CascadeType.ALL, orphanRemoval = true,  fetch = FetchType.LAZY)
     private List<AnswerEntity> answers;
 
     @Column(name = "created_at", nullable = false)
