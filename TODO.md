@@ -10,7 +10,7 @@
 
 2. capturas (metodo, endpoint, boton, datos, respuesta, codigo, hora)
 
-- metodo /asignar-badge (api users)
+
 - metodo /me (api users)
     # crea en vez de reemplazar, y cuando elimino un error de esos y vuelvo e intento modificar, aparece con el false en status
 - metodo /update-employee (api users)
@@ -32,3 +32,6 @@
 - transactional en metodos
 
 - validar que la referencia y el mensaje no sean nulos (api notifications)
+
+- metodo /asignar-badge (api badge)
+- metodo obtener badge correspondientes a cierto employee (api badge)

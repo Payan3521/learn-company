@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.desarrollox.learncompany.domain.exception.AssessmentInstanceNotFoundException;
 import com.desarrollox.learncompany.domain.exception.AssessmentTemplateNotFoundException;
+import com.desarrollox.learncompany.domain.exception.BadgeAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.BadgeNotFoundException;
 import com.desarrollox.learncompany.domain.exception.CertificateNotFoundException;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
@@ -66,7 +67,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
         UserAlreadyRegisteredException.class,
         SeasonAlreadyCreatedException.class,
-        DepartmentAlreadyRegisteredException.class
+        DepartmentAlreadyRegisteredException.class,
+        BadgeAlreadyRegisteredException.class
     })
     public ResponseEntity<Map<String, Object>> handleConflict(RuntimeException ex) {
         return buildResponse(HttpStatus.CONFLICT, "Conflicto en la solicitud", ex.getMessage());

@@ -2,7 +2,6 @@ package com.desarrollox.learncompany.web.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +39,11 @@ public class BadgesController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<BadgeResponse>>> getAllBadges(){
         List<Badge> badges = badgeService.getAllBadges();
+
+        if(badges.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<BadgeResponse> badgeResponses = badges.stream().map(badgeWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Badges encontrados", badgeResponses));
     }
@@ -54,6 +58,11 @@ public class BadgesController {
     @GetMapping("/employee/{id}")
     public ResponseEntity<ApiResponse<List<BadgeResponse>>> getBadgesByEmployeeId(@PathVariable Long id){
         List<Badge> badges = badgeService.getBadgesByEmployeeId(id);
+
+        if(badges.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<BadgeResponse> badgeResponses = badges.stream().map(badgeWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Badge correspondientes al empleado: " +id , badgeResponses));
     }

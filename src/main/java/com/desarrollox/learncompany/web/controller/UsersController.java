@@ -68,12 +68,6 @@ public class UsersController {
         
     }
 
-    @PostMapping("/assign-badge")
-    public ResponseEntity<ApiResponse<String>> assignBadge(@Valid @RequestBody AssignBadgeRequest request){
-        // TODO: Implementar lógica de asignación de badge
-        // Por ahora retornamos un mensaje de éxito
-        return ResponseEntity.ok(ApiResponse.success("Badge asignado correctamente", "Badge asignado al empleado"));
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> getUsersById(@PathVariable Long id){
