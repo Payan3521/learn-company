@@ -77,3 +77,14 @@ This generated password is for development use only. Your security configuration
 2025-10-09 00:49:42 [http-nio-8080-exec-1] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1048, SQLState: 23000
 2025-10-09 00:49:42 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1561) Column 'employee_id' cannot be null
 2025-10-09 00:49:42 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=1561) Column 'employee_id' cannot be null] [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; SQL [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; constraint [null]]
+2025-10-09 01:00:32 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 757960 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-09 01:00:32 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
+2025-10-09 01:00:37 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-09 01:00:41 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-09 01:00:41 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 133a338c-bf70-431b-a2b8-3da3f772444e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-09 01:00:42 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.416 seconds (process running for 11.235)

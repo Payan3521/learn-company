@@ -14,7 +14,6 @@ public interface EmployeeMapper {
     @Mapping(target = "inscriptions", ignore = true)
     Employee toDomain(EmployeeEntity entity);
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "certificates", ignore = true)
     @Mapping(target = "inscriptions", ignore = true)
     EmployeeEntity toEntity(Employee domain);
