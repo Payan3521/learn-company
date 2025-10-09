@@ -27,4 +27,6 @@ public class InscriptionsController {
     public ResponseEntity<?> deleteInscription(){
         throw new IllegalArgumentException();
     }
+
+    //optener las inscriptciones de cierto curso
 }

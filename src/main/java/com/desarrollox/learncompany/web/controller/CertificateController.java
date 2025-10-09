@@ -37,6 +37,11 @@ public class CertificateController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<CertificateResponse>>> getAllCertificates(){
         List<Certificate> certificates = certificateService.getAllCertificates();
+
+        if(certificates.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<CertificateResponse> responses = certificates.stream()
                 .map(certificateWebMapper::domainToResponse)
                 .collect(Collectors.toList());
@@ -47,6 +52,11 @@ public class CertificateController {
     @GetMapping("/users/{id}")
     public ResponseEntity<ApiResponse<List<CertificateResponse>>> getUsersById(@PathVariable Long id){
         List<Certificate> certificates = certificateService.getCertificatesByUserId(id);
+
+        if(certificates.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
         List<CertificateResponse> responses = certificates.stream()
                 .map(certificateWebMapper::domainToResponse)
                 .collect(Collectors.toList());

@@ -4,8 +4,14 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCertificate;
+import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
+import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.CertificateNotFoundException;
+import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
+import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
+import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
 import com.desarrollox.learncompany.domain.model.Certificate;
+import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.service.ICertificateService;
 import lombok.RequiredArgsConstructor;
 
@@ -14,9 +20,23 @@ import lombok.RequiredArgsConstructor;
 public class CertificateService implements ICertificateService {
 
     private final IRepositoryCertificate repositoryCertificate;
+    private final IRepositoryUser repositoryUser;
+    private final IRepositoryCourse repositoryCourse;
 
     @Override
     public Certificate createCertificate(Certificate certificate) {
+        if(!repositoryCourse.existsById(certificate.getCourse().getId())){
+            throw new CourseNotFoundException(certificate.getCourse().getId());
+        }
+        if(!repositoryUser.existsById(certificate.getEmployee().getId())){
+            throw new UserNotFoundException(certificate.getEmployee().getId());
+        }
+        if(!repositoryUser.findById(certificate.getEmployee().getId()).get().isEmployee()){
+            throw new InvalidRoleException("El usuario con ID " + certificate.getEmployee().getId() + " no tiene rol de EMPLOYEE");
+        }
+
+        certificate.setCourse(repositoryCourse.findById(certificate.getCourse().getId()).get());
+        certificate.setEmployee((Employee)repositoryUser.findById(certificate.getEmployee().getId()).get());
         return repositoryCertificate.save(certificate);
     }
 
@@ -37,6 +57,9 @@ public class CertificateService implements ICertificateService {
 
     @Override
     public List<Certificate> getCertificatesByUserId(Long userId) {
+        if(!repositoryUser.existsById(userId)){
+            throw new UserNotFoundException(userId);
+        }
         return repositoryCertificate.findCertificatesByUserId(userId);
     }
     

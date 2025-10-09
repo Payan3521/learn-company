@@ -92,6 +92,9 @@ public class CourseService implements ICourseService {
 
     @Override
     public Optional<Course> deleteCourse(Long courseId) {
+        if(!repositoryCourse.existsById(courseId)){
+            throw new CourseNotFoundException(courseId);
+        }
         return repositoryCourse.delete(courseId);
     }
     
