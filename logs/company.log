@@ -54,3 +54,28 @@ This generated password is for development use only. Your security configuration
 
 2025-10-12 17:34:45 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.433 seconds (process running for 5.865)
 2025-10-12 17:36:23 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException: El usuario con email Ya existe un usuario con el email ingresado ya está registrado]
+2025-10-12 17:39:33 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 171418 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:39:33 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:39:35 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:39:37 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:39:37 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: f68574e7-4eb4-4062-bb38-0b7dbf4d6dc7
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-12 17:39:38 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 4.997 seconds (process running for 5.363)
+2025-10-12 17:41:45 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException: El usuario con email Ya existe un usuario con el email ingresado ya está registrado]
+2025-10-12 17:42:57 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException: El usuario con email Ya existe un usuario con el email ingresado ya está registrado]
+2025-10-12 17:44:05 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.desarrollox.learncompany.core.web.dto.ApiResponse<com.desarrollox.learncompany.web.dto.UserResponse>> com.desarrollox.learncompany.web.controller.UsersController.updateInstructor(java.lang.Long,com.desarrollox.learncompany.web.dto.InstructorUpdateRequest): [Field error in object 'instructorUpdateRequest' on field 'biography': rejected value [hhhhh]; codes [Size.instructorUpdateRequest.biography,Size.biography,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [instructorUpdateRequest.biography,biography]; arguments []; default message [biography],2147483647,10]; default message [La biografía debe tener al menos 10 caracteres]] ]
+2025-10-12 17:49:41 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 179294 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:49:41 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:49:44 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:49:46 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:49:46 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 6e02fbdb-e5a0-4e2c-8609-9dc5f7f12491
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-12 17:49:47 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.624 seconds (process running for 5.961)
