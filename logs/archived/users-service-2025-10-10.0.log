@@ -1,0 +1,15 @@
+2025-10-10 00:11:59 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 11904 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-10 00:11:59 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-10 00:12:02 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-10 00:12:04 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-10 00:12:04 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 7e04a283-857f-4416-a5a2-23c54e577819
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-10 00:12:04 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.274 seconds (process running for 5.665)
+2025-10-10 00:27:42 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'name' for method parameter type String is not present]
+2025-10-10 00:28:03 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.BadgeNotFoundException: No existe badge con nombre: heroico]
+2025-10-10 00:40:13 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.desarrollox.learncompany.core.web.dto.ApiResponse<com.desarrollox.learncompany.web.dto.BadgeResponse>> com.desarrollox.learncompany.web.controller.BadgesController.createBadge(com.desarrollox.learncompany.web.dto.BadgeRequest): [Field error in object 'badgeRequest' on field 'urlIcon': rejected value [null]; codes [NotBlank.badgeRequest.urlIcon,NotBlank.urlIcon,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [badgeRequest.urlIcon,urlIcon]; arguments []; default message [urlIcon]]; default message [La URL del ícono es obligatoria]] ]
+2025-10-10 00:43:48 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.BadgeNotFoundException: Badge con id: 4 no encontrado]

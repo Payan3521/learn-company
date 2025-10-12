@@ -22,7 +22,6 @@ import com.desarrollox.learncompany.domain.model.User.Role;
 import com.desarrollox.learncompany.domain.service.IUserService;
 import com.desarrollox.learncompany.web.dto.EmployeeRequest;
 import com.desarrollox.learncompany.web.dto.EmployeeUpdateRequest;
-import com.desarrollox.learncompany.web.dto.AssignBadgeRequest;
 import com.desarrollox.learncompany.web.dto.InstructorRequest;
 import com.desarrollox.learncompany.web.dto.InstructorUpdateRequest;
 import com.desarrollox.learncompany.web.dto.UserResponse;
