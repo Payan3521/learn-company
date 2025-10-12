@@ -1,24 +1,12 @@
-1. tener en cuenta poblar las listas al mapear
 
-3. probar apis, mejorarlas
-4. encriptar contraseñas
-5. asignar badge
-6. endpoint para obtener los finalizados
 7. endpoint para obtener los assessmentTemplate de un modulo
-
-1. postman ,integracion, unitarias, extremo a extremo
-
-2. capturas (metodo, endpoint, boton, datos, respuesta, codigo, hora)
 
 
 - metodo /me (api users)
     # crea en vez de reemplazar, y cuando elimino un error de esos y vuelvo e intento modificar, aparece con el false en status
 - metodo /update-employee (api users)
 - metodo /update-instructor (api users)
-- validacion de usuario no inactivo (api users)
 - buqueda de filtros esta buscando usuarios que no corresponden al departamento indicado (api users)
-
-- poblar listas (all)
 
 - metodo /finished (api courses)
 - metodo /enrolled (api courses)
@@ -31,7 +19,7 @@
 
 - transactional en metodos
 
-- validar que la referencia y el mensaje no sean nulos (api notifications)
+- validar que la referencia y el mensaje no sean nulos, y encontrar la referencia, osea la evaluacion encontrarla (api notifications)
 
 - metodo /asignar-badge (api badge)
 - metodo obtener badge correspondientes a cierto employee (api badge)
