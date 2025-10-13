@@ -26,45 +26,95 @@ public class UserService implements IUserService{
 
     @Override
     public Employee createEmployee(Employee employee) {
-
-        if(repositoryUser.existsByEmail(employee.getEmail())){
-            throw new UserAlreadyRegisteredException(employee.getEmail());
-        } 
-
-        if(!repositoryDepartment.existsById(employee.getDepartment().getId())){
+    
+        Optional<User> existingUser = repositoryUser.findByEmailIncludingInactive(employee.getEmail());
+    
+        if (existingUser.isPresent()) {
+            User existing = existingUser.get();
+    
+            if (existing.isActive()) {
+                // Ya hay un usuario activo con ese correo → error
+                throw new UserAlreadyRegisteredException(employee.getEmail());
+            } else {
+                // Reactivar usuario inactivo
+                existing.setStatus(true);
+                existing.setName(employee.getName());
+                existing.setLastname(employee.getLastname());
+                existing.setPassword(passwordEncoderConfig.passwordEncoder().encode(employee.getPassword()));
+                existing.setRole(employee.getRole());
+                existing.setUrlPhoto(employee.getUrlPhoto());
+                
+                // Validar y asignar departamento
+                if (!repositoryDepartment.existsById(employee.getDepartment().getId())) {
+                    throw new DepartmentNotFoundException(employee.getDepartment().getId());
+                }
+                existing.setDepartment(repositoryDepartment.findById(employee.getDepartment().getId()).get());
+    
+                // Guardar cambios y devolver como Employee
+                return (Employee) repositoryUser.save(existing);
+            }
+        }
+    
+        // Si no existía el usuario, crear normalmente
+        if (!repositoryDepartment.existsById(employee.getDepartment().getId())) {
             throw new DepartmentNotFoundException(employee.getDepartment().getId());
         }
-
+    
         employee.setDepartment(repositoryDepartment.findById(employee.getDepartment().getId()).get());
         employee.setPassword(passwordEncoderConfig.passwordEncoder().encode(employee.getPassword()));
-
-
+    
         return (Employee) repositoryUser.save(employee);
     }
 
     @Override
     public Instructor createInstructor(Instructor instructor) {
-
-        if(repositoryUser.existsByEmail(instructor.getEmail())){
-            throw new UserAlreadyRegisteredException(instructor.getEmail());
-        } 
-
-        if(!repositoryDepartment.existsById(instructor.getDepartment().getId())){
+    
+        Optional<User> existingUser = repositoryUser.findByEmailIncludingInactive(instructor.getEmail());
+    
+        if (existingUser.isPresent()) {
+            User existing = existingUser.get();
+    
+            if (existing.isActive()) {
+                // Si el usuario ya está activo, no se puede registrar nuevamente
+                throw new UserAlreadyRegisteredException(instructor.getEmail());
+            } else {
+                // Reactivar usuario inactivo
+                existing.setStatus(true);
+                existing.setName(instructor.getName());
+                existing.setLastname(instructor.getLastname());
+                existing.setPassword(passwordEncoderConfig.passwordEncoder().encode(instructor.getPassword()));
+                existing.setRole(instructor.getRole());
+                existing.setUrlPhoto(instructor.getUrlPhoto());
+    
+                // Validar y asignar departamento
+                if (!repositoryDepartment.existsById(instructor.getDepartment().getId())) {
+                    throw new DepartmentNotFoundException(instructor.getDepartment().getId());
+                }
+                existing.setDepartment(repositoryDepartment.findById(instructor.getDepartment().getId()).get());
+    
+                // Guardar cambios y devolver como Instructor
+                return (Instructor) repositoryUser.save(existing);
+            }
+        }
+    
+        // Si no existía el usuario, crear normalmente
+        if (!repositoryDepartment.existsById(instructor.getDepartment().getId())) {
             throw new DepartmentNotFoundException(instructor.getDepartment().getId());
         }
-
+    
         instructor.setPassword(passwordEncoderConfig.passwordEncoder().encode(instructor.getPassword()));
         instructor.setDepartment(repositoryDepartment.findById(instructor.getDepartment().getId()).get());
-
+    
         return (Instructor) repositoryUser.save(instructor);
     }
+    
 
     @Override
     public Optional<User> findById(Long id) {
 
         if(!repositoryUser.existsById(id)){
             throw new UserNotFoundException(id);
-        } 
+        }
 
         return repositoryUser.findById(id);
     }

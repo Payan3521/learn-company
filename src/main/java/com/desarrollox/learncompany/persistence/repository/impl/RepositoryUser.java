@@ -29,34 +29,37 @@ public class RepositoryUser implements IRepositoryUser {
 
     @Override
     public Optional<User> findById(Long id) {
-       return jpaRepositoryUser.findById(id).map(polymorphicUserMapper::toDomain);
+        return jpaRepositoryUser.findByIdAndStatusTrue(id)
+                .map(polymorphicUserMapper::toDomain);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return jpaRepositoryUser.findByEmail(email).map(polymorphicUserMapper::toDomain);
+        return jpaRepositoryUser.findByEmailAndStatusTrue(email)
+                .map(polymorphicUserMapper::toDomain);
     }
 
     @Override
     public List<User> findAll() {
-        return jpaRepositoryUser.findAll().stream().map(polymorphicUserMapper::toDomain).collect(Collectors.toList());
+        return jpaRepositoryUser.findAllByStatusTrue().stream()
+                .map(polymorphicUserMapper::toDomain)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<User> update(Long id, User user) {
-        return jpaRepositoryUser.findById(id).map(userEntity -> {
+        return jpaRepositoryUser.findByIdAndStatusTrue(id).map(userEntity -> {
             user.setId(id);
             UserEntity updatedUser = jpaRepositoryUser.save(polymorphicUserMapper.toEntity(user));
             return polymorphicUserMapper.toDomain(updatedUser);
         });
     }
 
-    @Override
     public Optional<User> delete(Long id) {
-        return jpaRepositoryUser.findById(id).map(userEntity -> {
+        return jpaRepositoryUser.findByIdAndStatusTrue(id).map(userEntity -> {
             userEntity.setStatus(false);
-            UserEntity userDeleted = jpaRepositoryUser.save(userEntity);
-            return polymorphicUserMapper.toDomain(userDeleted);
+            UserEntity deletedUser = jpaRepositoryUser.save(userEntity);
+            return polymorphicUserMapper.toDomain(deletedUser);
         });
     }
 
@@ -76,12 +79,17 @@ public class RepositoryUser implements IRepositoryUser {
 
     @Override
     public boolean existsById(Long id) {
-        return jpaRepositoryUser.existsById(id);
+        return jpaRepositoryUser.existsByIdAndStatusTrue(id);
     }
 
     @Override
     public boolean existsByEmail(String email) {
-        return jpaRepositoryUser.existsByEmail(email);
+        return jpaRepositoryUser.existsByEmailAndStatusTrue(email);
+    }
+
+    @Override
+    public Optional<User> findByEmailIncludingInactive(String email) {
+        return jpaRepositoryUser.findByEmail(email).map(polymorphicUserMapper::toDomain);
     }
     
 }

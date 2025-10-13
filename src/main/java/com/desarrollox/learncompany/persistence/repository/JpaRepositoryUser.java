@@ -25,8 +25,16 @@ public interface JpaRepositoryUser extends JpaRepository<UserEntity, Long>{
        "AND u.status = :status")
     List<UserEntity> findByFilters(@Param("departmentId") Long departmentId, @Param("role") Role role, @Param("status") boolean status);
 
+    Optional<UserEntity> findByEmailAndStatusTrue(String email);
+
     Optional<UserEntity> findByEmail(String email);
 
-    boolean existsByEmail(String email);
+    Optional<UserEntity> findByIdAndStatusTrue(Long id);
+
+    boolean existsByEmailAndStatusTrue(String email);
+    
+    boolean existsByIdAndStatusTrue(Long id);
+
+    List<UserEntity> findAllByStatusTrue();
     
 }
