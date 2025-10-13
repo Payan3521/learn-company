@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.desarrollox.learncompany.persistence.entity.ModuleEntity;
 import com.desarrollox.learncompany.persistence.mapper.ModuleMapper;
 import com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapper;
+import com.desarrollox.learncompany.persistence.mapper.MapperModuleWithRelations;
 import com.desarrollox.learncompany.persistence.mapper.QuestionMapper;
 import com.desarrollox.learncompany.persistence.repository.JpaRepositoryModule;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryModule;
@@ -21,6 +22,7 @@ public class RepositoryModule implements IRepositoryModule{
     private final ModuleMapper moduleMapper;
     private final AssessmentTemplateMapper assessmentTemplateMapper;
     private final QuestionMapper questionMapper;
+    private final MapperModuleWithRelations mapperModuleWithRelations;
 
     @Override
     public Module save(Module module) {
@@ -54,19 +56,20 @@ public class RepositoryModule implements IRepositoryModule{
         }
         
         ModuleEntity savedEntity = jpaRepositoryModule.save(entity);
-        return mapToDomainWithRelations(savedEntity);
+        return mapperModuleWithRelations.mapToDomainWithRelations(savedEntity);
     }
 
     @Override
     public Optional<Module> findById(Long id) {
         return jpaRepositoryModule.findById(id)
-                .map(this::mapToDomainWithRelations);
+            .map(mapperModuleWithRelations::mapToDomainWithRelations);
     }
 
     @Override
     public List<Module> findAll() {
         return jpaRepositoryModule.findAll()
-                .stream().map(this::mapToDomainWithRelations)
+                .stream()
+                .map(mapperModuleWithRelations::mapToDomainWithRelations)
                 .collect(Collectors.toList());
     }
 
@@ -74,7 +77,7 @@ public class RepositoryModule implements IRepositoryModule{
     public Optional<Module> delete(Long id) {
         return jpaRepositoryModule.findById(id).map(moduleEntity -> {
             jpaRepositoryModule.delete(moduleEntity);
-            return mapToDomainWithRelations(moduleEntity);
+            return mapperModuleWithRelations.mapToDomainWithRelations(moduleEntity);
         });
     }
 
@@ -83,41 +86,8 @@ public class RepositoryModule implements IRepositoryModule{
     public List<Module> findModulesByCourseId(Long courseId) {
         return jpaRepositoryModule.findByCourseId(courseId)
                 .stream()
-                .map(this::mapToDomainWithRelations)
+                    .map(mapperModuleWithRelations::mapToDomainWithRelations)
                 .collect(Collectors.toList());
-    }
-    
-    private Module mapToDomainWithRelations(ModuleEntity entity) {
-        Module module = moduleMapper.toDomain(entity);
-        
-        // Mapear AssessmentTemplates con Questions
-        if (entity.getAssessmentTemplate() != null) {
-            module.setAssessmentTemplate(
-                entity.getAssessmentTemplate().stream()
-                    .map(assessmentTemplateEntity -> {
-                        var assessmentTemplate = assessmentTemplateMapper.toDomain(assessmentTemplateEntity);
-                        assessmentTemplate.setModule(module);
-                        
-                        // Mapear Questions manualmente
-                        if (assessmentTemplateEntity.getQuestions() != null) {
-                            assessmentTemplate.setQuestions(
-                                assessmentTemplateEntity.getQuestions().stream()
-                                    .map(questionEntity -> {
-                                        var question = questionMapper.toDomain(questionEntity);
-                                        question.setAssessmentTemplate(assessmentTemplate);
-                                        return question;
-                                    })
-                                    .collect(Collectors.toList())
-                            );
-                        }
-                        
-                        return assessmentTemplate;
-                    })
-                    .collect(Collectors.toList())
-            );
-        }
-        
-        return module;
     }
 
     @Override

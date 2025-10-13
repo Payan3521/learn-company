@@ -10,8 +10,7 @@ import com.desarrollox.learncompany.persistence.entity.AssessmentInstanceEntity;
 import com.desarrollox.learncompany.persistence.entity.AssessmentTemplateEntity;
 import com.desarrollox.learncompany.persistence.entity.EmployeeEntity;
 import com.desarrollox.learncompany.persistence.entity.QuestionEntity;
-import com.desarrollox.learncompany.persistence.mapper.AnswerMapper;
-import com.desarrollox.learncompany.persistence.mapper.AssessmentInstanceMapper;
+import com.desarrollox.learncompany.persistence.mapper.MapperAssessmentInstanceWithRelations;
 import com.desarrollox.learncompany.persistence.mapper.QuestionMapper;
 import com.desarrollox.learncompany.persistence.repository.JpaRepositoryAssessmentInstance;
 import com.desarrollox.learncompany.persistence.repository.JpaRepositoryAssessmentTemplate;
@@ -25,9 +24,8 @@ public class RepositoryAssessmenteInstance implements IRepositoryAssessmentInsta
     private final JpaRepositoryAssessmentInstance jpaRepositoryAssessmentInstance;
     private final JpaRepositoryAssessmentTemplate jpaRepositoryAssessmentTemplate;
     private final JpaRepositoryUser jpaRepositoryUser;
-    private final AssessmentInstanceMapper assessmentInstanceMapper;
-    private final AnswerMapper answerMapper;
     private final QuestionMapper questionMapper;
+    private final MapperAssessmentInstanceWithRelations mapperAssessmentInstanceWithRelations;
 
     @Override
     public AssessmentInstance createAssessmentInstance(AssessmentInstance instance) {
@@ -74,13 +72,13 @@ public class RepositoryAssessmenteInstance implements IRepositoryAssessmentInsta
         }
         
         AssessmentInstanceEntity savedEntity = jpaRepositoryAssessmentInstance.save(entity);
-        return mapToDomainWithRelations(savedEntity);
+        return mapperAssessmentInstanceWithRelations.mapToDomainWithRelations(savedEntity);
     }
 
     @Override
     public Optional<AssessmentInstance> getAssessmentInstanceById(Long id) {
         return jpaRepositoryAssessmentInstance.findById(id)
-                .map(this::mapToDomainWithRelations);
+                .map(mapperAssessmentInstanceWithRelations::mapToDomainWithRelations);
     }
 
     @Override
@@ -88,36 +86,10 @@ public class RepositoryAssessmenteInstance implements IRepositoryAssessmentInsta
         return jpaRepositoryAssessmentInstance.findById(id)
                 .map(entity -> {
                     entity.setGrade(grade);
-                    return mapToDomainWithRelations(
+                    return mapperAssessmentInstanceWithRelations.mapToDomainWithRelations(
                             jpaRepositoryAssessmentInstance.save(entity)
                     );
                 });
-    }
-    
-    private AssessmentInstance mapToDomainWithRelations(AssessmentInstanceEntity entity) {
-        AssessmentInstance assessmentInstance = assessmentInstanceMapper.toDomain(entity);
-        
-        // Mapear Answers con Questions
-        if (entity.getAnswers() != null) {
-            assessmentInstance.setAnswers(
-                entity.getAnswers().stream()
-                    .map(answerEntity -> {
-                        var answer = answerMapper.toDomain(answerEntity);
-                        answer.setAssessmentInstance(assessmentInstance);
-                        
-                        // Mapear Question manualmente
-                        if (answerEntity.getQuestion() != null) {
-                            var question = questionMapper.toDomain(answerEntity.getQuestion());
-                            answer.setQuestion(question);
-                        }
-                        
-                        return answer;
-                    })
-                    .collect(Collectors.toList())
-            );
-        }
-        
-        return assessmentInstance;
     }
 
     @Override
