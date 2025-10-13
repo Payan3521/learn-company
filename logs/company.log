@@ -1,199 +1,81 @@
-2025-10-09 00:07:31 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 727496 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 00:07:31 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-09 00:07:35 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 00:07:39 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 00:07:39 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-12 15:56:46 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 92064 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 15:56:46 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 15:56:48 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 15:56:50 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 15:56:50 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: c2488d4a-8939-47ae-a0ef-9b36b519bd39
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-09 00:07:40 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.024 seconds (process running for 10.687)
-2025-10-09 00:07:45 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.CourseNotFoundException: Curso con id: 5 no encontrado]
-2025-10-09 00:07:55 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.CourseNotFoundException: Curso con id: 1 no encontrado]
-2025-10-09 00:08:07 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.SeasonNotFoundException: la temporada con id: 1 no fue encontrada]
-2025-10-09 00:08:23 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: Usuario con id: 2 no encontrado]
-2025-10-09 00:08:57 [http-nio-8080-exec-9] WARN  o.m.jdbc.message.server.ErrorPacket - Error: 1048-23000: Column 'employee_id' cannot be null
-2025-10-09 00:08:57 [http-nio-8080-exec-9] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1048, SQLState: 23000
-2025-10-09 00:08:57 [http-nio-8080-exec-9] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1519) Column 'employee_id' cannot be null
-2025-10-09 00:08:57 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=1519) Column 'employee_id' cannot be null] [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; SQL [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; constraint [null]]
-2025-10-09 00:13:48 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 730957 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 00:13:48 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-09 00:13:52 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 00:13:57 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 00:13:57 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 7ba598d4-18c6-4c2f-8b0e-ae8104db1ae9
+Using generated security password: 06dedfc3-aab5-41b0-a12a-b5c881cd8843
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-09 00:13:58 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.67 seconds (process running for 11.444)
-2025-10-09 00:14:01 [http-nio-8080-exec-2] WARN  o.m.jdbc.message.server.ErrorPacket - Error: 1048-23000: Column 'employee_id' cannot be null
-2025-10-09 00:14:01 [http-nio-8080-exec-2] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1048, SQLState: 23000
-2025-10-09 00:14:01 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1529) Column 'employee_id' cannot be null
-2025-10-09 00:14:01 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=1529) Column 'employee_id' cannot be null] [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; SQL [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; constraint [null]]
-2025-10-09 00:28:38 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 740725 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 00:28:38 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-09 00:28:49 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 00:28:59 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 00:28:59 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-12 15:56:51 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.174 seconds (process running for 5.554)
+2025-10-12 16:04:20 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity<com.desarrollox.learncompany.core.web.dto.ApiResponse<com.desarrollox.learncompany.web.dto.UserResponse>> com.desarrollox.learncompany.web.controller.UsersController.updateEmployee(java.lang.Long,com.desarrollox.learncompany.web.dto.EmployeeUpdateRequest)]
+2025-10-12 16:07:19 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: sebastian@gmail.com]
+2025-10-12 16:08:17 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: sebastian@gmail.com]
+2025-10-12 17:02:05 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 146475 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:02:05 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:02:07 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:02:09 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:02:09 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: 5bc64707-ecb1-4c48-a3da-14ef14662899
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-09 00:29:01 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 25.905 seconds (process running for 29.05)
-2025-10-09 00:30:29 [http-nio-8080-exec-2] WARN  o.m.jdbc.message.server.ErrorPacket - Error: 1048-23000: Column 'employee_id' cannot be null
-2025-10-09 00:30:29 [http-nio-8080-exec-2] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1048, SQLState: 23000
-2025-10-09 00:30:29 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1539) Column 'employee_id' cannot be null
-2025-10-09 00:30:29 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=1539) Column 'employee_id' cannot be null] [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; SQL [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; constraint [null]]
-2025-10-09 00:44:04 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 747901 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 00:44:04 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-09 00:44:08 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 00:44:12 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 00:44:12 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 7dc398d6-388d-4d10-9072-d1442aa1a038
+Using generated security password: f72af515-862a-4ca7-bedf-c3720a0226b1
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-09 00:44:13 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.317 seconds (process running for 10.95)
-2025-10-09 00:44:21 [http-nio-8080-exec-1] WARN  o.m.jdbc.message.server.ErrorPacket - Error: 1048-23000: Column 'employee_id' cannot be null
-2025-10-09 00:44:21 [http-nio-8080-exec-1] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1048, SQLState: 23000
-2025-10-09 00:44:21 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1551) Column 'employee_id' cannot be null
-2025-10-09 00:44:21 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=1551) Column 'employee_id' cannot be null] [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; SQL [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; constraint [null]]
-2025-10-09 00:49:22 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 751482 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 00:49:22 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-09 00:49:25 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 00:49:29 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 00:49:29 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-12 17:02:10 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.156 seconds (process running for 5.477)
+2025-10-12 17:02:32 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: sebastian@gmail.com]
+2025-10-12 17:04:32 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: instructorExample@gmail.com]
+2025-10-12 17:04:45 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: InstructorExample@gmail.com]
+2025-10-12 17:05:05 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: InstructorExample@gmail.com]
+2025-10-12 17:06:47 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: cursor@gmail.com]
+2025-10-12 17:07:32 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: vvvvvvv@gmail.com]
+2025-10-12 17:31:26 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 165212 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:31:26 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:31:28 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:31:30 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:31:30 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: c6f315df-e0e6-4e3e-b95b-c49fd4e6a41f
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-09 00:49:30 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.517 seconds (process running for 10.319)
-2025-10-09 00:49:42 [http-nio-8080-exec-1] WARN  o.m.jdbc.message.server.ErrorPacket - Error: 1048-23000: Column 'employee_id' cannot be null
-2025-10-09 00:49:42 [http-nio-8080-exec-1] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1048, SQLState: 23000
-2025-10-09 00:49:42 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1561) Column 'employee_id' cannot be null
-2025-10-09 00:49:42 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=1561) Column 'employee_id' cannot be null] [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; SQL [insert into certificates (course_id,date_issued,employee_id) values (?,?,?)]; constraint [null]]
-2025-10-09 01:00:32 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 757960 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 01:00:32 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-09 01:00:37 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 01:00:41 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 01:00:41 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 133a338c-bf70-431b-a2b8-3da3f772444e
+Using generated security password: d645d5be-cc35-4290-a06b-89b74e209430
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-09 01:00:42 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.416 seconds (process running for 11.235)
-2025-10-09 01:27:54 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 768702 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 01:27:54 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-09 01:27:58 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 01:28:02 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 01:28:02 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-12 17:31:31 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.45 seconds (process running for 5.821)
+2025-10-12 17:32:33 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: The given id must not be null]
+2025-10-12 17:34:00 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: The given id must not be null]
+2025-10-12 17:34:40 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 167872 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:34:40 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:34:42 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:34:44 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:34:44 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: 8670ccd8-c1ec-4844-b2b6-a552fa68180f
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-09 01:28:03 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.954 seconds (process running for 10.541)
-2025-10-09 01:28:53 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.CertificateNotFoundException: Certificado con id: 11 no encontrado]
-2025-10-09 01:45:52 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 775789 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 01:45:52 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-09 01:45:56 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 01:46:00 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 01:46:00 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: b328a395-8173-4c37-891c-5d33f4d14a46
+Using generated security password: 041321f3-5fcb-4d13-b307-d14d69e807ac
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-09 01:46:01 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.946 seconds (process running for 11.733)
-2025-10-09 01:46:09 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.desarrollox.learncompany.core.web.dto.ApiResponse<com.desarrollox.learncompany.web.dto.BadgeResponse>> com.desarrollox.learncompany.web.controller.BadgesController.createBadge(com.desarrollox.learncompany.web.dto.BadgeRequest): [Field error in object 'badgeRequest' on field 'urlIcon': rejected value [null]; codes [NotBlank.badgeRequest.urlIcon,NotBlank.urlIcon,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [badgeRequest.urlIcon,urlIcon]; arguments []; default message [urlIcon]]; default message [La URL del ícono es obligatoria]] ]
-2025-10-09 01:55:42 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 781324 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 01:55:42 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "debug"
-2025-10-09 01:55:47 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 01:55:51 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 01:55:51 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-12 17:34:45 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.433 seconds (process running for 5.865)
+2025-10-12 17:36:23 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException: El usuario con email Ya existe un usuario con el email ingresado ya está registrado]
+2025-10-12 17:39:33 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 171418 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:39:33 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:39:35 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:39:37 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:39:37 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: daeabf35-0cf9-40c9-b85b-d3e9cfbb36d5
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-09 01:55:52 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 11.032 seconds (process running for 12.041)
-2025-10-09 01:56:03 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.BadgeAlreadyRegisteredException: Ya existe un badge con este nombre: maestro]
-2025-10-09 01:56:12 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException: No value present]
-2025-10-09 01:57:17 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException: No value present]
-2025-10-09 01:59:00 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 783434 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 01:59:00 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-09 01:59:04 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 01:59:08 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 01:59:08 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 65b98c9a-3a07-4740-8b18-7625be0164fb
+Using generated security password: f68574e7-4eb4-4062-bb38-0b7dbf4d6dc7
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-09 01:59:09 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.822 seconds (process running for 10.42)
-2025-10-09 01:59:15 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.BadgeNotFoundException: No existe badge con nombre: maestro2]
-2025-10-09 01:59:38 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.BadgeNotFoundException: Badge con id: 11 no encontrado]
-2025-10-09 17:28:00 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 817968 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 17:28:00 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-09 17:28:04 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 17:28:08 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 17:28:09 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-12 17:39:38 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 4.997 seconds (process running for 5.363)
+2025-10-12 17:41:45 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException: El usuario con email Ya existe un usuario con el email ingresado ya está registrado]
+2025-10-12 17:42:57 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException: El usuario con email Ya existe un usuario con el email ingresado ya está registrado]
+2025-10-12 17:44:05 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.desarrollox.learncompany.core.web.dto.ApiResponse<com.desarrollox.learncompany.web.dto.UserResponse>> com.desarrollox.learncompany.web.controller.UsersController.updateInstructor(java.lang.Long,com.desarrollox.learncompany.web.dto.InstructorUpdateRequest): [Field error in object 'instructorUpdateRequest' on field 'biography': rejected value [hhhhh]; codes [Size.instructorUpdateRequest.biography,Size.biography,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [instructorUpdateRequest.biography,biography]; arguments []; default message [biography],2147483647,10]; default message [La biografía debe tener al menos 10 caracteres]] ]
+2025-10-12 17:49:41 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 179294 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:49:41 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:49:44 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:49:46 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:49:46 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: 1e2ba31f-4c61-43a8-b31d-3aaa3f2c6700
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-09 17:28:10 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.13 seconds (process running for 10.985)
-2025-10-09 17:31:23 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: Usuario con id: 2 no encontrado]
-2025-10-09 17:31:40 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: Usuario con id: 2 no encontrado]
-2025-10-09 17:32:00 [http-nio-8080-exec-7] WARN  o.m.jdbc.message.server.ErrorPacket - Error: 1062-23000: Duplicate entry 'InstructorExample@gmail.com' for key 'email'
-2025-10-09 17:32:00 [http-nio-8080-exec-7] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1062, SQLState: 23000
-2025-10-09 17:32:00 [http-nio-8080-exec-7] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1621) Duplicate entry 'InstructorExample@gmail.com' for key 'email'
-2025-10-09 17:32:00 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=1621) Duplicate entry 'InstructorExample@gmail.com' for key 'email'] [insert into users (department_id,email,lastname,name,password,role,status,url_photo) values (?,?,?,?,?,?,?,?)]; SQL [insert into users (department_id,email,lastname,name,password,role,status,url_photo) values (?,?,?,?,?,?,?,?)]; constraint [email]]
-2025-10-09 17:38:25 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 824142 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 17:38:25 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-09 17:38:30 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 17:38:34 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 17:38:34 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 2bc5ecc1-fcec-4af5-a62f-191108d5801f
+Using generated security password: 6e02fbdb-e5a0-4e2c-8609-9dc5f7f12491
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-09 17:38:35 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 11.984 seconds (process running for 12.857)
-2025-10-09 17:38:49 [http-nio-8080-exec-2] WARN  o.m.jdbc.message.server.ErrorPacket - Error: 1062-23000: Duplicate entry 'InstructorExample@gmail.com' for key 'email'
-2025-10-09 17:38:49 [http-nio-8080-exec-2] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1062, SQLState: 23000
-2025-10-09 17:38:49 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1631) Duplicate entry 'InstructorExample@gmail.com' for key 'email'
-2025-10-09 17:38:49 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=1631) Duplicate entry 'InstructorExample@gmail.com' for key 'email'] [insert into users (department_id,email,lastname,name,password,role,status,url_photo) values (?,?,?,?,?,?,?,?)]; SQL [insert into users (department_id,email,lastname,name,password,role,status,url_photo) values (?,?,?,?,?,?,?,?)]; constraint [email]]
-2025-10-09 17:41:40 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 826492 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 17:41:40 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-09 17:41:44 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 17:41:48 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 17:41:48 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 98579171-b379-4658-acc3-741154f8d94b
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-09 17:41:49 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.581 seconds (process running for 11.374)
-2025-10-09 17:41:57 [http-nio-8080-exec-1] WARN  o.m.jdbc.message.server.ErrorPacket - Error: 1062-23000: Duplicate entry 'InstructorExample@gmail.com' for key 'email'
-2025-10-09 17:41:57 [http-nio-8080-exec-1] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 1062, SQLState: 23000
-2025-10-09 17:41:57 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1643) Duplicate entry 'InstructorExample@gmail.com' for key 'email'
-2025-10-09 17:41:57 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement [(conn=1643) Duplicate entry 'InstructorExample@gmail.com' for key 'email'] [insert into users (department_id,email,lastname,name,password,role,status,url_photo) values (?,?,?,?,?,?,?,?)]; SQL [insert into users (department_id,email,lastname,name,password,role,status,url_photo) values (?,?,?,?,?,?,?,?)]; constraint [email]]
-2025-10-09 17:50:23 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 832377 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-09 17:50:23 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-09 17:50:27 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-09 17:50:31 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-09 17:50:31 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 4a253421-3716-4194-b007-524b424b18a7
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-09 17:50:32 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 11.023 seconds (process running for 12.787)
+2025-10-12 17:49:47 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.624 seconds (process running for 5.961)

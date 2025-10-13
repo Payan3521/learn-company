@@ -22,7 +22,6 @@ import com.desarrollox.learncompany.domain.model.User.Role;
 import com.desarrollox.learncompany.domain.service.IUserService;
 import com.desarrollox.learncompany.web.dto.EmployeeRequest;
 import com.desarrollox.learncompany.web.dto.EmployeeUpdateRequest;
-import com.desarrollox.learncompany.web.dto.AssignBadgeRequest;
 import com.desarrollox.learncompany.web.dto.InstructorRequest;
 import com.desarrollox.learncompany.web.dto.InstructorUpdateRequest;
 import com.desarrollox.learncompany.web.dto.UserResponse;
@@ -114,7 +113,7 @@ public class UsersController {
     public ResponseEntity<ApiResponse<UserResponse>> updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeUpdateRequest request){
         Employee employee = employeeWebMapper.updateRequestToDomain(request);
         User userUpdated = userService.updateUser(id, employee).get();
-        UserResponse userResponse = userWebMapper.userToResponse(userUpdated);
+        UserResponse userResponse = userWebMapper.employeeToResponse( (Employee)userUpdated);
         return ResponseEntity.ok(ApiResponse.success("Empleado actualizado correctamente", userResponse));
     }
 
@@ -122,7 +121,7 @@ public class UsersController {
     public ResponseEntity<ApiResponse<UserResponse>> updateInstructor(@PathVariable Long id, @Valid @RequestBody InstructorUpdateRequest request){
         Instructor instructor = instructorWebMapper.updateRequestToDomain(request);
         User userUpdated = userService.updateUser(id, instructor).get();
-        UserResponse userResponse = userWebMapper.userToResponse(userUpdated);
+        UserResponse userResponse = userWebMapper.instructorToResponse( (Instructor)userUpdated);
         return ResponseEntity.ok(ApiResponse.success("Instructor actualizado correctamente", userResponse));
     }
 
