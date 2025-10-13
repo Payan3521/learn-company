@@ -1,8 +1,16 @@
-2025-10-09 00:08:57 [http-nio-8080-exec-9] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1519) Column 'employee_id' cannot be null
-2025-10-09 00:14:01 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1529) Column 'employee_id' cannot be null
-2025-10-09 00:30:29 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1539) Column 'employee_id' cannot be null
-2025-10-09 00:44:21 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1551) Column 'employee_id' cannot be null
-2025-10-09 00:49:42 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1561) Column 'employee_id' cannot be null
-2025-10-09 17:32:00 [http-nio-8080-exec-7] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1621) Duplicate entry 'InstructorExample@gmail.com' for key 'email'
-2025-10-09 17:38:49 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1631) Duplicate entry 'InstructorExample@gmail.com' for key 'email'
-2025-10-09 17:41:57 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=1643) Duplicate entry 'InstructorExample@gmail.com' for key 'email'
+2025-10-13 01:53:10 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Unknown label 'clazz_'. Possible value [u.department_id, u.id, role, department_id, u.name, url_photo, created_at, u.role, lastname, u.created_at, u.lastname, password, u.password, u.url_photo, updated_at, name, u.email, id, u.updated_at, email, u.status, status]
+2025-10-13 02:07:48 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 4 of constructor in com.desarrollox.learncompany.persistence.repository.impl.RepositoryAssessmenteInstance required a bean of type 'com.desarrollox.learncompany.persistence.mapper.MapperAssessmentInstanceWithRelations' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.desarrollox.learncompany.persistence.mapper.MapperAssessmentInstanceWithRelations' in your configuration.
+
