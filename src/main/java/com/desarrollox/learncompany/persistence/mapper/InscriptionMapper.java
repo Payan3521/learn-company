@@ -12,7 +12,6 @@ public interface InscriptionMapper {
     
     Inscription toDomain(InscriptionEntity entity);
     
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "dateIssued", ignore = true)
     InscriptionEntity toEntity(Inscription domain);
 }

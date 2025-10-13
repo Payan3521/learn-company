@@ -10,4 +10,6 @@ public interface IRepositoryIncription {
     Optional<Inscription> delete(Long id);
     List<Inscription> findInscriptionsByEmployeeId(Long employeeId);
     List<Inscription> findInscriptionsByCourseId(Long courseId);
+    List<Inscription> findAll();
+    boolean existsById(Long id);
 }
