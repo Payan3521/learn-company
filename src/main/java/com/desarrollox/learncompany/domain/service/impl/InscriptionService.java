@@ -9,6 +9,7 @@ import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
 import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InscriptionAlreadyRegisteredException;
+import com.desarrollox.learncompany.domain.exception.InscriptionNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
 import com.desarrollox.learncompany.domain.model.Employee;
@@ -20,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class InscriptionService implements IInscriptionService{
 
-    private final IRepositoryIncription repositoryIncription;
+    private final IRepositoryIncription repositoryInscription;
     private final IRepositoryUser repositoryUser;
     private final IRepositoryCourse repositoryCourse;
 
@@ -39,10 +40,10 @@ public class InscriptionService implements IInscriptionService{
             throw new CourseNotFoundException(inscription.getCourse().getId());
         }
 
-        List<Inscription> inscriptions = repositoryIncription.findAll();
+        List<Inscription> inscriptions = repositoryInscription.findAll();
 
         for (Inscription ins : inscriptions) {
-            if(ins.getEmployee().equals(inscription.getEmployee())){
+            if(ins.getEmployee().getId().equals(inscription.getEmployee().getId())){
                 throw new InscriptionAlreadyRegisteredException(inscription.getEmployee().getId(), inscription.getCourse().getId());
             }
         }
@@ -50,22 +51,25 @@ public class InscriptionService implements IInscriptionService{
         inscription.setEmployee((Employee)repositoryUser.findById(inscription.getEmployee().getId()).get());
         inscription.setCourse(repositoryCourse.findById(inscription.getCourse().getId()).get());
         
-        return repositoryIncription.save(inscription);  
+        return repositoryInscription.save(inscription);  
     }
 
     @Override
     public Optional<Inscription> getInscriptionById(Long id) {
-        if(repositoryIncription.existsById(id)){
-            return repositoryIncription.findById(id);
+        if(repositoryInscription.existsById(id)){
+            return repositoryInscription.findById(id);
         }
-         throw new DepartmentNotFoundException(id);
+         throw new InscriptionNotFoundException(id);
     }
 
     @Override
     public Optional<Inscription> deleteInscription(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteInscription'");
+        if(!repositoryInscription.existsById(id)){
+            throw new InscriptionNotFoundException(id);
+        }
+        return repositoryInscription.delete(id);
     }
+    
 
     @Override
     public List<Inscription> findByEmployeeId(Long employeeId) {

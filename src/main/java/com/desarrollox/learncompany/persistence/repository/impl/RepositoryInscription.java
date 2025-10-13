@@ -33,7 +33,6 @@ public class RepositoryInscription implements IRepositoryIncription{
     public Optional<Inscription> delete(Long id) {
         return jpaRepositoryInscription.findById(id).map(inscripcionEntity -> {
                 jpaRepositoryInscription.delete(inscripcionEntity);
-                //Revisar
                 return inscriptionMapper.toDomain(inscripcionEntity);
         });
     }

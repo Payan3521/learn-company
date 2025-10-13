@@ -42,9 +42,13 @@ public class InscriptionsController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteInscription(){
-        throw new IllegalArgumentException();
+    public ResponseEntity<ApiResponse<InscriptionResponse>> deleteInscription(@PathVariable Long id){
+        Inscription inscriptionDeleted = inscriptionService.deleteInscription(id).get();
+        InscriptionResponse inscriptionResponse = inscriptionWebMapper.domainToResponse(inscriptionDeleted);
+        return ResponseEntity.ok(ApiResponse.success("Inscripcion eliminada correctamente", inscriptionResponse)); 
     }
 
-    //optener las inscriptciones de cierto curso
+    //optener las inscriptciones curso id
+    //optener las inscriptciones mpleado id
+
 }
