@@ -141,7 +141,7 @@ CREATE TABLE inscriptions (
     employee_id BIGINT NOT NULL,
     course_id BIGINT NOT NULL,
     date_issued TIMESTAMP NOT NULL,
-    status_inscription ENUM('Accepted', 'inProgress', 'rejected') NOT NULL,
+    status_inscription ENUM('ACCEPTED', 'IN_PROGRESS', 'REJECTED') NOT NULL,
     
     FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE ON UPDATE CASCADE,
