@@ -1,10 +1,8 @@
 package com.desarrollox.learncompany.domain.exception;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-@Getter
 @ResponseStatus(HttpStatus.CONFLICT)
 public class BadgeAlreadyRegisteredException extends RuntimeException{
     
