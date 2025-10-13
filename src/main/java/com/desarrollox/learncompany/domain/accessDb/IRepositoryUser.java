@@ -10,6 +10,7 @@ public interface IRepositoryUser {
     User save (User user);
     Optional<User> findById(Long id);
     Optional<User> findByEmail(String email);
+    Optional<User> findByEmailIncludingInactive(String email);
     List<User> findAll();
     Optional<User> update(Long id, User user);
     Optional<User> delete(Long id);
