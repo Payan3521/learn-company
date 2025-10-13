@@ -1,5 +1,7 @@
 package com.desarrollox.learncompany.web.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,7 +50,28 @@ public class InscriptionsController {
         return ResponseEntity.ok(ApiResponse.success("Inscripcion eliminada correctamente", inscriptionResponse)); 
     }
 
-    //optener las inscriptciones curso id
-    //optener las inscriptciones mpleado id
+    @GetMapping("/course/{id}")
+    public ResponseEntity<ApiResponse<List<InscriptionResponse>>> getInscriptionsByCourseById(@PathVariable Long id){
+        List<Inscription> inscriptions = inscriptionService.findByCourseId(id);
+
+        if(inscriptions.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        List<InscriptionResponse> inscriptionResponses = inscriptions.stream().map(inscriptionWebMapper::domainToResponse).collect(Collectors.toList());
+        return ResponseEntity.ok(ApiResponse.success("Obtenidas las inscripciones pertenecientes al curso:" + id, inscriptionResponses ));
+    }
+
+    @GetMapping("/employee/{id}")
+    public ResponseEntity<ApiResponse<List<InscriptionResponse>>> getInscriptionsByEmployeeById(@PathVariable Long id){
+        List<Inscription> inscriptions = inscriptionService.findByEmployeeId(id);
+
+        if(inscriptions.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        List<InscriptionResponse> inscriptionResponses = inscriptions.stream().map(inscriptionWebMapper::domainToResponse).collect(Collectors.toList());
+        return ResponseEntity.ok(ApiResponse.success("Obtenidas las inscripciones pertenecientes al empleado:" + id, inscriptionResponses ));
+    }
 
 }

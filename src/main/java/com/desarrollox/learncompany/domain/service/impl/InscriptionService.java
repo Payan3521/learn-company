@@ -7,7 +7,6 @@ import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryIncription;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
-import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InscriptionAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.InscriptionNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
@@ -73,14 +72,18 @@ public class InscriptionService implements IInscriptionService{
 
     @Override
     public List<Inscription> findByEmployeeId(Long employeeId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByEmployeeId'");
+        if(!repositoryUser.existsById(employeeId)){
+            throw new UserNotFoundException(employeeId);
+        }
+        return repositoryInscription.findInscriptionsByEmployeeId(employeeId);
     }
 
     @Override
     public List<Inscription> findByCourseId(Long courseId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByCourseId'");
+        if(!repositoryCourse.existsById(courseId)){
+            throw new CourseNotFoundException(courseId);
+        }
+        return repositoryInscription.findInscriptionsByCourseId(courseId);
     }
     
 }

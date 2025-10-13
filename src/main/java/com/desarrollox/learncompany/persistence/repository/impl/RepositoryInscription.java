@@ -8,7 +8,6 @@ import com.desarrollox.learncompany.domain.accessDb.IRepositoryIncription;
 import com.desarrollox.learncompany.domain.model.Inscription;
 import com.desarrollox.learncompany.persistence.mapper.InscriptionMapper;
 import com.desarrollox.learncompany.persistence.repository.JpaRepositoryInscription;
-import com.desarrollox.learncompany.persistence.repository.JpaRepositoryUser;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -16,9 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class RepositoryInscription implements IRepositoryIncription{
     
     private final JpaRepositoryInscription jpaRepositoryInscription;
-    private final JpaRepositoryUser jpaRepositoryUser;
     private final InscriptionMapper inscriptionMapper;
-    
     @Override
     public Inscription save(Inscription inscription) {
         return inscriptionMapper.toDomain(jpaRepositoryInscription.save(inscriptionMapper.toEntity(inscription)));
@@ -39,13 +36,12 @@ public class RepositoryInscription implements IRepositoryIncription{
 
     @Override
     public List<Inscription> findInscriptionsByEmployeeId(Long employeeId) {
-        return null;
+       return jpaRepositoryInscription.findInscriptionsByEmployeeId(employeeId).stream().map(inscriptionMapper::toDomain).collect(Collectors.toList());
     }
 
     @Override
     public List<Inscription> findInscriptionsByCourseId(Long courseId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findInscriptionsByCourseId'");
+        return jpaRepositoryInscription.findInscriptionsByCourseId(courseId).stream().map(inscriptionMapper::toDomain).collect(Collectors.toList());
     }
 
     @Override
@@ -59,6 +55,5 @@ public class RepositoryInscription implements IRepositoryIncription{
     public boolean existsById(Long id) {
         return jpaRepositoryInscription.existsById(id);
     }
-
 
 }
