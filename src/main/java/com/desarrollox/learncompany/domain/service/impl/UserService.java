@@ -135,18 +135,20 @@ public class UserService implements IUserService{
 
     @Override
     public Optional<User> updateUser(Long id, User user) {
-        if(repositoryUser.existsByEmail(user.getEmail())){
-            throw new UserNotFoundException(user.getEmail());
-        }
 
         if(!repositoryUser.existsById(id)){
             throw new UserNotFoundException(id);
         }
-        
+
         if(!repositoryDepartment.existsById(user.getDepartment().getId())){
             throw new DepartmentNotFoundException(user.getDepartment().getId());
         }
 
+        if (!user.getEmail().equals(repositoryUser.findById(id).get().getEmail())) {
+            if (repositoryUser.existsByEmail(user.getEmail())) {
+                throw new UserAlreadyRegisteredException("Ya existe un usuario con el email ingresado");
+            }
+        }
         // Get the existing user to preserve the role and other fields
         User existingUser = repositoryUser.findById(id).get();
         

@@ -1,68 +1,81 @@
-2025-10-13 01:49:47 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 1045040 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-13 01:49:47 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-13 01:49:53 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-13 01:49:57 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-13 01:49:57 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-12 15:56:46 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 92064 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 15:56:46 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 15:56:48 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 15:56:50 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 15:56:50 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: 8ea9bcac-6b48-4b5e-970d-06d2c59fd60d
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-13 01:49:58 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 11.701 seconds (process running for 12.851)
-2025-10-13 01:52:55 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 1047265 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-13 01:52:55 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-13 01:52:59 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-13 01:53:02 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-13 01:53:02 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: 0c16ab3e-5db9-4e5a-a6c9-6d060cc944b1
+Using generated security password: 06dedfc3-aab5-41b0-a12a-b5c881cd8843
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-13 01:53:03 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.164 seconds (process running for 9.788)
-2025-10-13 01:53:10 [http-nio-8080-exec-2] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: null
-2025-10-13 01:53:10 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Unknown label 'clazz_'. Possible value [u.department_id, u.id, role, department_id, u.name, url_photo, created_at, u.role, lastname, u.created_at, u.lastname, password, u.password, u.url_photo, updated_at, name, u.email, id, u.updated_at, email, u.status, status]
-2025-10-13 01:53:10 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.orm.jpa.JpaSystemException: Unable to find column position by name: clazz_ [Unknown label 'clazz_'. Possible value [u.department_id, u.id, role, department_id, u.name, url_photo, created_at, u.role, lastname, u.created_at, u.lastname, password, u.password, u.url_photo, updated_at, name, u.email, id, u.updated_at, email, u.status, status]] [n/a]]
-2025-10-13 01:54:56 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 1048546 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-13 01:54:56 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-13 01:54:59 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-13 01:55:03 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-13 01:55:03 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+2025-10-12 15:56:51 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.174 seconds (process running for 5.554)
+2025-10-12 16:04:20 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity<com.desarrollox.learncompany.core.web.dto.ApiResponse<com.desarrollox.learncompany.web.dto.UserResponse>> com.desarrollox.learncompany.web.controller.UsersController.updateEmployee(java.lang.Long,com.desarrollox.learncompany.web.dto.EmployeeUpdateRequest)]
+2025-10-12 16:07:19 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: sebastian@gmail.com]
+2025-10-12 16:08:17 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: sebastian@gmail.com]
+2025-10-12 17:02:05 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 146475 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:02:05 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:02:07 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:02:09 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:02:09 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: 6dc67348-44a5-45f6-8d67-1be4042cbc41
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-2025-10-13 01:55:04 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.684 seconds (process running for 10.553)
-2025-10-13 02:07:37 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 1053698 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-13 02:07:37 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-13 02:07:42 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-13 02:07:48 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'assessmentInstanceService' defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/domain/service/impl/AssessmentInstanceService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'repositoryAssessmenteInstance' defined in file [/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main/com/desarrollox/learncompany/persistence/repository/impl/RepositoryAssessmenteInstance.class]: Unsatisfied dependency expressed through constructor parameter 4: No qualifying bean of type 'com.desarrollox.learncompany.persistence.mapper.MapperAssessmentInstanceWithRelations' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
-2025-10-13 02:07:48 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Parameter 4 of constructor in com.desarrollox.learncompany.persistence.repository.impl.RepositoryAssessmenteInstance required a bean of type 'com.desarrollox.learncompany.persistence.mapper.MapperAssessmentInstanceWithRelations' that could not be found.
-
-
-Action:
-
-Consider defining a bean of type 'com.desarrollox.learncompany.persistence.mapper.MapperAssessmentInstanceWithRelations' in your configuration.
-
-2025-10-13 02:08:28 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 1054241 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
-2025-10-13 02:08:28 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
-2025-10-13 02:08:32 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-10-13 02:08:36 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-13 02:08:36 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
-
-Using generated security password: f087f406-b230-4e3f-b9b0-781ee501eeed
+Using generated security password: f72af515-862a-4ca7-bedf-c3720a0226b1
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-10-13 02:08:37 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.694 seconds (process running for 11.811)
-2025-10-13 02:08:54 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.CourseNotFoundException: Curso con id: 1 no encontrado]
-2025-10-13 02:09:03 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.CourseNotFoundException: Curso con id: 2 no encontrado]
+2025-10-12 17:02:10 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.156 seconds (process running for 5.477)
+2025-10-12 17:02:32 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: sebastian@gmail.com]
+2025-10-12 17:04:32 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: instructorExample@gmail.com]
+2025-10-12 17:04:45 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: InstructorExample@gmail.com]
+2025-10-12 17:05:05 [http-nio-8080-exec-8] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: InstructorExample@gmail.com]
+2025-10-12 17:06:47 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: cursor@gmail.com]
+2025-10-12 17:07:32 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: vvvvvvv@gmail.com]
+2025-10-12 17:31:26 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 165212 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:31:26 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:31:28 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:31:30 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:31:30 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d645d5be-cc35-4290-a06b-89b74e209430
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-12 17:31:31 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.45 seconds (process running for 5.821)
+2025-10-12 17:32:33 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: The given id must not be null]
+2025-10-12 17:34:00 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.dao.InvalidDataAccessApiUsageException: The given id must not be null]
+2025-10-12 17:34:40 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 167872 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:34:40 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:34:42 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:34:44 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:34:44 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 041321f3-5fcb-4d13-b307-d14d69e807ac
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-12 17:34:45 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.433 seconds (process running for 5.865)
+2025-10-12 17:36:23 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException: El usuario con email Ya existe un usuario con el email ingresado ya está registrado]
+2025-10-12 17:39:33 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 171418 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:39:33 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:39:35 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:39:37 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:39:37 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: f68574e7-4eb4-4062-bb38-0b7dbf4d6dc7
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-12 17:39:38 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 4.997 seconds (process running for 5.363)
+2025-10-12 17:41:45 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException: El usuario con email Ya existe un usuario con el email ingresado ya está registrado]
+2025-10-12 17:42:57 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException: El usuario con email Ya existe un usuario con el email ingresado ya está registrado]
+2025-10-12 17:44:05 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.desarrollox.learncompany.core.web.dto.ApiResponse<com.desarrollox.learncompany.web.dto.UserResponse>> com.desarrollox.learncompany.web.controller.UsersController.updateInstructor(java.lang.Long,com.desarrollox.learncompany.web.dto.InstructorUpdateRequest): [Field error in object 'instructorUpdateRequest' on field 'biography': rejected value [hhhhh]; codes [Size.instructorUpdateRequest.biography,Size.biography,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [instructorUpdateRequest.biography,biography]; arguments []; default message [biography],2147483647,10]; default message [La biografía debe tener al menos 10 caracteres]] ]
+2025-10-12 17:49:41 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 179294 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-12 17:49:41 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-12 17:49:44 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-12 17:49:46 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-12 17:49:46 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 6e02fbdb-e5a0-4e2c-8609-9dc5f7f12491
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-12 17:49:47 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.624 seconds (process running for 5.961)
