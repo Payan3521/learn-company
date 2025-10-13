@@ -22,6 +22,7 @@ import com.desarrollox.learncompany.domain.exception.DepartmentAlreadyRegistered
 import com.desarrollox.learncompany.domain.exception.DepartmentIncorrectException;
 import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.DurationCourseInvalidException;
+import com.desarrollox.learncompany.domain.exception.InscriptionAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.InscriptionNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidCredentialsException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
@@ -68,7 +69,8 @@ public class GlobalExceptionHandler {
         UserAlreadyRegisteredException.class,
         SeasonAlreadyCreatedException.class,
         DepartmentAlreadyRegisteredException.class,
-        BadgeAlreadyRegisteredException.class
+        BadgeAlreadyRegisteredException.class,
+        InscriptionAlreadyRegisteredException.class
     })
     public ResponseEntity<Map<String, Object>> handleConflict(RuntimeException ex) {
         return buildResponse(HttpStatus.CONFLICT, "Conflicto en la solicitud", ex.getMessage());

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class AssessmentTemplateNotFoundException extends RuntimeException{
 
     public AssessmentTemplateNotFoundException(Long id){
-        super("Evalucion template con id: " +id + "no encontrada");
+        super("Evalucion template con id: " +id + " no encontrada");
     }
 
     public AssessmentTemplateNotFoundException(String message){
