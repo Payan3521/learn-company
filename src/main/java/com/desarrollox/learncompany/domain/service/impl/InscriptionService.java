@@ -7,6 +7,7 @@ import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryIncription;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
+import com.desarrollox.learncompany.domain.exception.DepartmentIncorrectException;
 import com.desarrollox.learncompany.domain.exception.InscriptionAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.InscriptionNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
@@ -37,6 +38,10 @@ public class InscriptionService implements IInscriptionService{
 
         if (!repositoryCourse.existsById(inscription.getCourse().getId())) {
             throw new CourseNotFoundException(inscription.getCourse().getId());
+        }
+
+        if(!repositoryCourse.findById(inscription.getCourse().getId()).get().getDepartment().getId().equals(repositoryUser.findById(inscription.getEmployee().getId()).get().getDepartment().getId())){
+            throw new DepartmentIncorrectException();
         }
 
         List<Inscription> inscriptions = repositoryInscription.findAll();

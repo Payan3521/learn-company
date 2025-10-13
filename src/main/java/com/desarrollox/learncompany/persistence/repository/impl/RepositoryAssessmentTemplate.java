@@ -2,6 +2,7 @@ package com.desarrollox.learncompany.persistence.repository.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryAssessmentTemplate;
 import com.desarrollox.learncompany.domain.model.AssessmentTemplate;
@@ -18,8 +19,7 @@ public class RepositoryAssessmentTemplate implements IRepositoryAssessmentTempla
 
     @Override
     public List<AssessmentTemplate> findAssessmentsByModuleId(Long moduleId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAssessmentsByModuleId'");
+        return jpaRepositoryAssessmentTemplate.findAssessmentsByModuleId(moduleId).stream().map(assessmentTemplateMapper::toDomain).collect(Collectors.toList());
     }
 
     @Override
