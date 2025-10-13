@@ -9,7 +9,6 @@ import com.desarrollox.learncompany.domain.exception.BadgeAlreadyRegisteredExcep
 import com.desarrollox.learncompany.domain.exception.BadgeNotFoundException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
 import com.desarrollox.learncompany.domain.model.Badge;
-import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.service.IBadgeService;
 import lombok.RequiredArgsConstructor;
 
@@ -56,12 +55,6 @@ public class BadgeService implements IBadgeService{
             throw new BadgeNotFoundException("No existe badge con nombre: " + name);
         }
         return repositoryBadge.findBadgeByName(name);
-    }
-
-    @Override
-    public Badge assignBadgeToEmployee(Employee employee) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assignBadgeToEmployee'");
     }
     
 }

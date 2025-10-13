@@ -22,6 +22,7 @@ import com.desarrollox.learncompany.domain.exception.DepartmentAlreadyRegistered
 import com.desarrollox.learncompany.domain.exception.DepartmentIncorrectException;
 import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.DurationCourseInvalidException;
+import com.desarrollox.learncompany.domain.exception.EmployeeBadgeNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InscriptionNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidCredentialsException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
@@ -58,7 +59,8 @@ public class GlobalExceptionHandler {
         ModuleNotFoundException.class,
         NotificationNotFoundException.class,
         UserNotFoundException.class,
-        SeasonNotFoundException.class
+        SeasonNotFoundException.class,
+        EmployeeBadgeNotFoundException.class
     })
     public ResponseEntity<Map<String, Object>> handleNotFound(RuntimeException ex) {
         return buildResponse(HttpStatus.NOT_FOUND, "Recurso no encontrado", ex.getMessage());

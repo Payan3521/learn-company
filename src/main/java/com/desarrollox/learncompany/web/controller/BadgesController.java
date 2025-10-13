@@ -73,8 +73,4 @@ public class BadgesController {
         BadgeResponse badgeResponse = badgeWebMapper.domainToResponse(badge);
         return ResponseEntity.ok(ApiResponse.success("Badge encontrado", badgeResponse));
     }
-
-    public ResponseEntity<?> assignBadgeToEmployee(){
-        throw new IllegalArgumentException();
-    }
 }

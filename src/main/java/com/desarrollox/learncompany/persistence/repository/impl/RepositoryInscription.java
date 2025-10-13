@@ -16,6 +16,7 @@ public class RepositoryInscription implements IRepositoryIncription{
     
     private final JpaRepositoryInscription jpaRepositoryInscription;
     private final InscriptionMapper inscriptionMapper;
+    
     @Override
     public Inscription save(Inscription inscription) {
         return inscriptionMapper.toDomain(jpaRepositoryInscription.save(inscriptionMapper.toEntity(inscription)));

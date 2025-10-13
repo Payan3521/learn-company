@@ -29,7 +29,7 @@ public class InscriptionsController {
     private final InscriptionWebMapper inscriptionWebMapper;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<InscriptionResponse>> createCourse(@Valid @RequestBody InscriptionRequest request){
+    public ResponseEntity<ApiResponse<InscriptionResponse>> createINscription(@Valid @RequestBody InscriptionRequest request){
         Inscription inscription = inscriptionWebMapper.requestToDomain(request);
         Inscription inscriptionSaved = inscriptionService.createInscription(inscription);
         InscriptionResponse response = inscriptionWebMapper.domainToResponse(inscriptionSaved);
