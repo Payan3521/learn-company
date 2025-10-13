@@ -12,7 +12,6 @@ import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
 import com.desarrollox.learncompany.domain.model.Employee;
 import com.desarrollox.learncompany.domain.model.Inscription;
-import com.desarrollox.learncompany.domain.model.User;
 import com.desarrollox.learncompany.domain.service.IInscriptionService;
 import lombok.RequiredArgsConstructor;
 
@@ -26,10 +25,6 @@ public class InscriptionService implements IInscriptionService{
 
     @Override
     public Inscription createInscription(Inscription inscription) {
-        
-
-        User employee = repositoryUser.findById(inscription.getEmployee().getId())
-        .orElseThrow(() -> new UserNotFoundException(inscription.getEmployee().getId()));
         
         if (!repositoryUser.existsById(inscription.getEmployee().getId())) {
             throw new UserNotFoundException(inscription.getEmployee().getId());
