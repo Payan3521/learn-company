@@ -56,5 +56,10 @@ public class RepositoryInscription implements IRepositoryIncription{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public boolean existsById(Long id) {
+        return jpaRepositoryInscription.existsById(id);
+    }
+
 
 }

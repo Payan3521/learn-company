@@ -7,6 +7,7 @@ import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryIncription;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
+import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InscriptionAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
@@ -54,8 +55,10 @@ public class InscriptionService implements IInscriptionService{
 
     @Override
     public Optional<Inscription> getInscriptionById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getInscriptionById'");
+        if(repositoryIncription.existsById(id)){
+            return repositoryIncription.findById(id);
+        }
+         throw new DepartmentNotFoundException(id);
     }
 
     @Override
