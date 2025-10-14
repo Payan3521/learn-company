@@ -22,6 +22,7 @@ import com.desarrollox.learncompany.domain.exception.DepartmentAlreadyRegistered
 import com.desarrollox.learncompany.domain.exception.DepartmentIncorrectException;
 import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.DurationCourseInvalidException;
+import com.desarrollox.learncompany.domain.exception.EmployeeBadgeNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InscriptionAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.InscriptionNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidCredentialsException;

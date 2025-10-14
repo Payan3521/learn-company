@@ -281,15 +281,6 @@ CREATE TABLE employee_badges (
     INDEX idx_date_earned (date_earned)
 );
 
--- ======================================================
--- ESTADÍSTICAS
--- ======================================================
-
-CREATE TABLE statistics (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY
-    -- agregar columnas necesarias más adelante
-);
-
 -- ============================================
 -- CONFIGURACIONES FINALES
 -- ============================================
@@ -318,7 +309,6 @@ ALTER TABLE assessment_templates COMMENT = 'Plantillas de evaluaciones asociadas
 ALTER TABLE questions COMMENT = 'Preguntas de cada evaluación con sus opciones y respuesta correcta';
 ALTER TABLE assessment_instances COMMENT = 'Instancias de evaluaciones tomadas por empleados';
 ALTER TABLE answers COMMENT = 'Respuestas de empleados a las preguntas de una evaluación';
-ALTER TABLE statistics COMMENT = 'Tabla para almacenar estadísticas de uso y rendimiento';
 -- ============================================
 
 -- ============================================

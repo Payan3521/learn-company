@@ -9,7 +9,7 @@ public class InscriptionAlreadyRegisteredException extends RuntimeException{
         super(message);
     }
     public InscriptionAlreadyRegisteredException(Long idEmployee, Long idCourse){
-        super("empleado con id: "+idEmployee +"ya registrado en el curso: " +idCourse );
+        super("empleado con id: " + idEmployee +"ya registrado en el curso: " + idCourse );
     }
     public InscriptionAlreadyRegisteredException(){
         super("Empleado ya registrado en el curso");    

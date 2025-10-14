@@ -1,8 +1,19 @@
 package com.desarrollox.learncompany.web.webMapper;
 
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import com.desarrollox.learncompany.domain.model.Statistic;
+import com.desarrollox.learncompany.web.dto.StatisticResponse;
 
-@Component
-public class StatisticWebMapper {
-    
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+public interface StatisticWebMapper {
+
+    @Mapping(target = "topCourseId", source = "courseTop.id")
+    @Mapping(target = "topCourseName", source = "courseTop.title")
+    @Mapping(target = "topCourseInscriptions", source = "courseTop.totalInscriptions")
+    @Mapping(target = "lessCourseId", source = "courseLess.id")
+    @Mapping(target = "lessCourseName", source = "courseLess.title")
+    @Mapping(target = "lessCourseInscriptions", source = "courseLess.totalInscriptions")
+    StatisticResponse domainToResponse(Statistic statistic);
 }
