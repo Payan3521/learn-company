@@ -1,12 +1,17 @@
 package com.desarrollox.learncompany.web.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 @Data
 @NoArgsConstructor
-@SuperBuilder
+@AllArgsConstructor
 public class StatisticResponse {
-    // TODO: define fields when Statistic model is implemented
+    private Long topCourseId;
+    private String topCourseName;
+    private Integer topCourseInscriptions;
+    private Long lessCourseId;
+    private String lessCourseName;
+    private Integer lessCourseInscriptions;
 }

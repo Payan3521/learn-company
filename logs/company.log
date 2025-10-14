@@ -835,3 +835,17 @@ This generated password is for development use only. Your security configuration
 2025-10-13 14:20:37 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 9.933 seconds (process running for 10.861)
 2025-10-13 14:22:33 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.DepartmentAlreadyRegisteredException: El departamento con nombre: nombre_value ya está registrado]
 2025-10-13 14:23:30 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.DepartmentIncorrectException: No perteneces al mismo departamento]
+2025-10-13 17:49:11 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 1167016 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-13 17:49:11 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-13 17:49:15 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-13 17:49:19 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-13 17:49:19 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: db485fe8-9e99-46c4-bfc6-bef845cdd74a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-13 17:49:21 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.51 seconds (process running for 11.557)
+2025-10-13 17:49:36 [http-nio-8080-exec-1] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: null
+2025-10-13 17:49:36 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Unknown label 'department_id'. Possible value [total, .total, c.title, id, c.id, title]
+2025-10-13 17:49:36 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.orm.jpa.JpaSystemException: Unable to find column position by name: department_id [Unknown label 'department_id'. Possible value [total, .total, c.title, id, c.id, title]] [n/a]]

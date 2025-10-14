@@ -200,3 +200,4 @@ Caused by: java.net.BindException: La dirección ya se está usando
 2025-10-13 00:46:04 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=330) Data truncated for column 'status_inscription' at row 1
 2025-10-13 01:00:06 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=340) Data truncated for column 'status_inscription' at row 1
 2025-10-13 01:37:37 [http-nio-8080-exec-6] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=393) Duplicate entry '3-2' for key 'unique_employee_course'
+2025-10-13 17:49:36 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Unknown label 'department_id'. Possible value [total, .total, c.title, id, c.id, title]
