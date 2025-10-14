@@ -8,6 +8,7 @@ import com.desarrollox.learncompany.domain.accessDb.IRepositoryBadge;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryEmployeeBadge;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.BadgeNotFoundException;
+import com.desarrollox.learncompany.domain.exception.EmployeeBadgeAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.EmployeeBadgeNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
@@ -39,6 +40,15 @@ public class EmployeeBadgeService implements IEmployeeBadgeService{
         if (!repositoryBadge.existsById(employeeBadge.getBadge().getId())) {
             throw new BadgeNotFoundException("Insignia no encontrada");
         }
+
+        List<EmployeeBadge> employeeBadges = repositoryEmployeeBadge.findAll();
+        
+        for (EmployeeBadge emplBad : employeeBadges) {
+            if(emplBad.getEmployee().getId().equals(employeeBadge.getEmployee().getId())){
+                throw new EmployeeBadgeAlreadyRegisteredException(employeeBadge.getEmployee().getId(), employeeBadge.getBadge().getId());
+            }
+        }
+
 
         employeeBadge.setEmployee((Employee)repositoryUser.findById(employeeBadge.getEmployee().getId()).get());
         employeeBadge.setBadge(repositoryBadge.findById(employeeBadge.getBadge().getId()).get());
