@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryIncription;
+import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
 import com.desarrollox.learncompany.domain.model.Course;
 import com.desarrollox.learncompany.domain.model.Statistic;
 import com.desarrollox.learncompany.domain.service.IStatisticService;
@@ -27,7 +28,7 @@ public class StatisticService implements IStatisticService {
 
         // Si no hay cursos, retornar vacío
         if (courses == null || courses.isEmpty()) {
-            return Optional.empty();
+            throw new CourseNotFoundException("No existen cursos disponibles");
         }
 
         for (Course course : courses) {
