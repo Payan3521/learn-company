@@ -25,13 +25,13 @@ public class StatisticService implements IStatisticService {
         // Obtener todos los cursos
         List<Course> courses = repositoryCourse.findAll();
 
-        for (Course course : courses) {
-            course.setInscriptions(repositoryIncription.findInscriptionsByCourseId(course.getId()));
-        }
-        
         // Si no hay cursos, retornar vacío
         if (courses == null || courses.isEmpty()) {
             return Optional.empty();
+        }
+
+        for (Course course : courses) {
+            course.setInscriptions(repositoryIncription.findInscriptionsByCourseId(course.getId()));
         }
         
         // Encontrar el curso con más inscripciones
