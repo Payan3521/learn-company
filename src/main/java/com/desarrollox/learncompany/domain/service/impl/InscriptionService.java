@@ -3,6 +3,7 @@ package com.desarrollox.learncompany.domain.service.impl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryIncription;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
@@ -25,6 +26,7 @@ public class InscriptionService implements IInscriptionService{
     private final IRepositoryUser repositoryUser;
     private final IRepositoryCourse repositoryCourse;
 
+    @Transactional(readOnly = false)
     @Override
     public Inscription createInscription(Inscription inscription) {
         
@@ -58,6 +60,7 @@ public class InscriptionService implements IInscriptionService{
         return repositoryInscription.save(inscription);  
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Inscription> getInscriptionById(Long id) {
         if(repositoryInscription.existsById(id)){
@@ -66,6 +69,7 @@ public class InscriptionService implements IInscriptionService{
          throw new InscriptionNotFoundException(id);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public Optional<Inscription> deleteInscription(Long id) {
         if(!repositoryInscription.existsById(id)){
@@ -74,7 +78,7 @@ public class InscriptionService implements IInscriptionService{
         return repositoryInscription.delete(id);
     }
     
-
+    @Transactional(readOnly = true)
     @Override
     public List<Inscription> findByEmployeeId(Long employeeId) {
         if(!repositoryUser.existsById(employeeId)){
@@ -83,6 +87,7 @@ public class InscriptionService implements IInscriptionService{
         return repositoryInscription.findInscriptionsByEmployeeId(employeeId);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Inscription> findByCourseId(Long courseId) {
         if(!repositoryCourse.existsById(courseId)){

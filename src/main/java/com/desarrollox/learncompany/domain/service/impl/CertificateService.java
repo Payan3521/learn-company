@@ -3,6 +3,7 @@ package com.desarrollox.learncompany.domain.service.impl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCertificate;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
@@ -23,6 +24,7 @@ public class CertificateService implements ICertificateService {
     private final IRepositoryUser repositoryUser;
     private final IRepositoryCourse repositoryCourse;
 
+    @Transactional(readOnly = false)
     @Override
     public Certificate createCertificate(Certificate certificate) {
         if(!repositoryCourse.existsById(certificate.getCourse().getId())){
@@ -40,11 +42,13 @@ public class CertificateService implements ICertificateService {
         return repositoryCertificate.save(certificate);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Certificate> getAllCertificates() {
         return repositoryCertificate.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Certificate> getCertificateById(Long id) {
 
@@ -55,6 +59,7 @@ public class CertificateService implements ICertificateService {
         throw new CertificateNotFoundException(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Certificate> getCertificatesByUserId(Long userId) {
         if(!repositoryUser.existsById(userId)){

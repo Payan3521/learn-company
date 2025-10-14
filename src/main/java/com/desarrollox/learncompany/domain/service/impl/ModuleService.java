@@ -3,6 +3,7 @@ package com.desarrollox.learncompany.domain.service.impl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.desarrollox.learncompany.domain.model.AssessmentTemplate;
 import com.desarrollox.learncompany.domain.model.Course;
 import com.desarrollox.learncompany.domain.model.Module;
@@ -21,6 +22,7 @@ public class ModuleService implements IModuleService {
     private final IRepositoryModule repositoryModule;
     private final IRepositoryCourse repositoryCourse;
 
+    @Transactional(readOnly = false)
     @Override
     public Module createModule(Module module) {
         if(!repositoryCourse.existsById(module.getCourse().getId())){
@@ -53,6 +55,7 @@ public class ModuleService implements IModuleService {
         return repositoryModule.save(module);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Module> getModuleById(Long id) {
         if(!repositoryModule.existsById(id)){
@@ -61,11 +64,13 @@ public class ModuleService implements IModuleService {
         return repositoryModule.findById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Module> getAllModules() {
         return repositoryModule.findAll();
     }
 
+    @Transactional(readOnly = false)
     @Override
     public Optional<Module> deleteModule(Long id) {
         if(!repositoryModule.existsById(id)){
@@ -74,6 +79,7 @@ public class ModuleService implements IModuleService {
         return repositoryModule.delete(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Module> getModulesByCourseId(Long courseId) {
         return repositoryModule.findModulesByCourseId(courseId);

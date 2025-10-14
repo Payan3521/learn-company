@@ -2,6 +2,7 @@ package com.desarrollox.learncompany.domain.service.impl;
 
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryAssessmentInstance;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryAssessmentTemplate;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
@@ -24,6 +25,7 @@ public class AssessmentInstanceService implements IAssessmentInstanceService{
     private final IRepositoryUser repositoryUser;
     private final IRepositoryAssessmentTemplate repositoryAssessmentTemplate;
 
+    @Transactional(readOnly = false)
     @Override
     public AssessmentInstance createAssessmentInstance(AssessmentInstance instance) {
         if(!repositoryAssessmentTemplate.existsById(instance.getAssessmentTemplate().getId())){
@@ -53,6 +55,7 @@ public class AssessmentInstanceService implements IAssessmentInstanceService{
         return repositoryAssessmentInstance.createAssessmentInstance(instance);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<AssessmentInstance> getAssessmentInstanceById(Long id) {
         if(!repositoryAssessmentInstance.existsById(id)){
@@ -61,6 +64,7 @@ public class AssessmentInstanceService implements IAssessmentInstanceService{
         return repositoryAssessmentInstance.getAssessmentInstanceById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Double getGrade(Long id) {
         Optional<AssessmentInstance> instanceOpt = repositoryAssessmentInstance.getAssessmentInstanceById(id);
@@ -70,6 +74,7 @@ public class AssessmentInstanceService implements IAssessmentInstanceService{
         throw new AssessmentInstanceNotFoundException(id);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public Optional<AssessmentInstance> assignGrade(Long id, Double grade) {
        Optional<AssessmentInstance> instanceOpt = repositoryAssessmentInstance.getAssessmentInstanceById(id);

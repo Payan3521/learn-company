@@ -3,6 +3,7 @@ package com.desarrollox.learncompany.domain.service.impl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryNotification;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
 import com.desarrollox.learncompany.domain.exception.NotificationNotFoundException;
@@ -18,6 +19,7 @@ public class NotificationService implements INotificationService {
     private final IRepositoryNotification repositoryNotification;
     private final IRepositoryUser repositoryUser;
 
+    @Transactional(readOnly = false)
     @Override
     public Notification createNotification(Notification notification) {
         if(!repositoryUser.existsById(notification.getUser().getId())){
@@ -29,6 +31,7 @@ public class NotificationService implements INotificationService {
         return repositoryNotification.save(notification);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Notification> getNotificationById(Long id) {
         if(!repositoryNotification.existsById(id)){
@@ -37,11 +40,13 @@ public class NotificationService implements INotificationService {
         return repositoryNotification.findById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Notification> getAllNotifications() {
         return repositoryNotification.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Notification> getNotificationsByUserId(Long userId) {
         if(!repositoryUser.existsById(userId)){
@@ -50,6 +55,7 @@ public class NotificationService implements INotificationService {
         return repositoryNotification.findNotificationsByUserId(userId);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public Notification markAsRead(Long notificationId) {
         if(!repositoryNotification.existsById(notificationId)){

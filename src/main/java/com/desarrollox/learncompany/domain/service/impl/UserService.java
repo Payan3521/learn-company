@@ -3,6 +3,7 @@ package com.desarrollox.learncompany.domain.service.impl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.desarrollox.learncompany.core.security.PasswordEncoderConfig;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
@@ -24,6 +25,7 @@ public class UserService implements IUserService{
     private final IRepositoryDepartment repositoryDepartment;
     private final PasswordEncoderConfig passwordEncoderConfig;
 
+    @Transactional(readOnly = false)
     @Override
     public Employee createEmployee(Employee employee) {
     
@@ -66,6 +68,7 @@ public class UserService implements IUserService{
         return (Employee) repositoryUser.save(employee);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public Instructor createInstructor(Instructor instructor) {
     
@@ -108,7 +111,7 @@ public class UserService implements IUserService{
         return (Instructor) repositoryUser.save(instructor);
     }
     
-
+    @Transactional(readOnly = true)
     @Override
     public Optional<User> findById(Long id) {
 
@@ -119,6 +122,7 @@ public class UserService implements IUserService{
         return repositoryUser.findById(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<User> findByEmail(String email) {
         if(!repositoryUser.existsByEmail(email)){
@@ -128,11 +132,13 @@ public class UserService implements IUserService{
         return repositoryUser.findByEmail(email);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<User> findAll() {
         return repositoryUser.findAll();
     }
 
+    @Transactional(readOnly = false)
     @Override
     public Optional<User> updateUser(Long id, User user) {
 
@@ -172,7 +178,7 @@ public class UserService implements IUserService{
         return repositoryUser.update(id, existingUser);
     }
 
-
+    @Transactional(readOnly = false)
     @Override
     public Optional<User> delete(Long id) {
         if (!repositoryUser.existsById(id)) {
@@ -181,11 +187,13 @@ public class UserService implements IUserService{
         return repositoryUser.delete(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Employee> getRankingByDepartment(Long departmentId) {
         return repositoryUser.getRankingByDepartment(departmentId);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<User> findUsersByFilters(Long departmentId, Role role, boolean status) {
         return repositoryUser.findUsersByFilters(departmentId, role, status);

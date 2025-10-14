@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryIncription;
 import com.desarrollox.learncompany.domain.model.Course;
@@ -18,6 +19,7 @@ public class StatisticService implements IStatisticService {
     private final IRepositoryCourse repositoryCourse;
     private final IRepositoryIncription repositoryIncription;
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Statistic> getStatistic() {
         // Obtener todos los cursos

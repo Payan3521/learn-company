@@ -3,6 +3,7 @@ package com.desarrollox.learncompany.domain.service.impl;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
 import com.desarrollox.learncompany.domain.accessDb.IRepositorySeason;
@@ -27,6 +28,7 @@ public class CourseService implements ICourseService {
     private final IRepositorySeason repositorySeason;
     private final IRepositoryUser repositoryUser;
 
+    @Transactional(readOnly = false)
     @Override
     public Course createCourse(Course course) {
         if(!repositoryDepartment.existsById(course.getDepartment().getId())){
@@ -52,11 +54,13 @@ public class CourseService implements ICourseService {
         return repositoryCourse.save(course);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Course> getCoursesBySeasonId(Long seasonId) {
         return repositoryCourse.getCoursesBySeasonId(seasonId);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Course> getCourseById(Long courseId) {
         if(repositoryCourse.existsById(courseId)){
@@ -65,31 +69,37 @@ public class CourseService implements ICourseService {
         throw new CourseNotFoundException(courseId);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Course> getAllCourses() {
         return repositoryCourse.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Course> findByDepartmentId(Long departmentId) {
         return repositoryCourse.findByDepartmentId(departmentId);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Course> findByTitleContaining(String title) {
         return repositoryCourse.findByTitleContaining(title);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Course> findByStatusOptional(Long departmentId) {
         return repositoryCourse.findByStatusOptional(departmentId);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Course> findByStatusMandatory(Long departmentId) {
         return repositoryCourse.findByStatusMandatory(departmentId);
     }
 
+    @Transactional(readOnly = false)
     @Override
     public Optional<Course> deleteCourse(Long courseId) {
         if(!repositoryCourse.existsById(courseId)){

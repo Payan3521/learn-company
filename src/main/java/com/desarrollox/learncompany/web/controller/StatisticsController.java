@@ -21,8 +21,7 @@ public class StatisticsController {
     
     @GetMapping
     public ResponseEntity<ApiResponse<StatisticResponse>> getStatistics(){
-        Statistic statistic = statisticService.getStatistic()
-        .orElseThrow(() -> new RuntimeException("No se pudieron obtener las estadísticas"));
+        Statistic statistic = statisticService.getStatistic().get();
 
         StatisticResponse response = statisticWebMapper.domainToResponse(statistic);
 

@@ -941,3 +941,17 @@ Using generated security password: 9750b4d1-6df6-4ea8-9c7b-e2d33648fc7b
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
 2025-10-13 22:39:13 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.243 seconds (process running for 10.979)
+2025-10-13 23:08:24 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 1210766 (/home/payan/Escritorio/Apps-empresariales/learn-company/build/classes/java/main started by payan in /home/payan/Escritorio/Apps-empresariales/learn-company)
+2025-10-13 23:08:24 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-13 23:08:28 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-13 23:08:32 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-13 23:08:32 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 8501acfd-dd9e-4ce6-ac9e-28e7ee28ed30
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-13 23:08:34 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 10.507 seconds (process running for 11.742)
+2025-10-13 23:10:26 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.BadgeNotFoundException: Insignia no encontrada]
+2025-10-13 23:11:25 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.UserNotFoundException: Usuario con id: 12 no encontrado]
+2025-10-13 23:11:36 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.BadgeNotFoundException: Badge con id: 4 no encontrado]
