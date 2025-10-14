@@ -19,4 +19,5 @@ public interface CourseMapper {
     @Mapping(target = "modules", ignore = true)
     @Mapping(target = "inscriptions", ignore = true)
     CourseEntity toEntity(Course domain);
+    
 }

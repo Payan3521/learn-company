@@ -11,7 +11,9 @@ public interface StatisticWebMapper {
 
     @Mapping(target = "topCourseId", source = "courseTop.id")
     @Mapping(target = "topCourseName", source = "courseTop.title")
+    @Mapping(target = "topCourseInscriptions", source = "courseTop.totalInscriptions")
     @Mapping(target = "lessCourseId", source = "courseLess.id")
     @Mapping(target = "lessCourseName", source = "courseLess.title")
+    @Mapping(target = "lessCourseInscriptions", source = "courseLess.totalInscriptions")
     StatisticResponse domainToResponse(Statistic statistic);
 }
