@@ -11,7 +11,7 @@ import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.model.AssessmentTemplate;
 import com.desarrollox.learncompany.domain.service.IAssessmentTemplateService;
 import com.desarrollox.learncompany.web.dto.AssessmentTemplateResponse;
-import com.desarrollox.learncompany.web.webMapper.AssessmentTemplateWebMapperImpl;
+import com.desarrollox.learncompany.web.webMapper.AssessmentTemplateWebMapper;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/assessmentTemplate")
 public class AssessmentTemplateController {
     private final IAssessmentTemplateService assessmentTemplateService;
-    private final AssessmentTemplateWebMapperImpl assessmentTemplateWebMapperImpl;
+    private final AssessmentTemplateWebMapper assessmentTemplateWebMapper;
 
     @GetMapping("/module/{id}")
     public ResponseEntity<ApiResponse<List<AssessmentTemplateResponse>>> getAssessmentTemplateByModuleId(@PathVariable Long id){
@@ -29,14 +29,14 @@ public class AssessmentTemplateController {
             return ResponseEntity.noContent().build();
         }
 
-        List<AssessmentTemplateResponse> responses = assessmentTemplates.stream().map(assessmentTemplateWebMapperImpl::domainToResponse).collect(Collectors.toList());
+        List<AssessmentTemplateResponse> responses = assessmentTemplates.stream().map(assessmentTemplateWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Evaluciones encontradas correspondientes al modulo: " +id, responses));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<AssessmentTemplateResponse>> getAssessmentTemplateById(@PathVariable Long id){
         AssessmentTemplate assessmentTemplate = assessmentTemplateService.findById(id).get();
-        AssessmentTemplateResponse assessmentTemplateResponse = assessmentTemplateWebMapperImpl.domainToResponse(assessmentTemplate);
+        AssessmentTemplateResponse assessmentTemplateResponse = assessmentTemplateWebMapper.domainToResponse(assessmentTemplate);
         return ResponseEntity.ok(ApiResponse.success("AssesmentTemplate obtenida correctamente", assessmentTemplateResponse));
     }
 }
