@@ -93,7 +93,6 @@ public class CoursesController {
         return ResponseEntity.ok(ApiResponse.success("Cursos optenidos", courseResponses));
     }
 
-
     @GetMapping("/optional")
     public ResponseEntity<ApiResponse<List<CourseResponse>>> getOptionalsByDepartament(@RequestParam(required = true) Long departmentId){
         List<Course> courses = courseService.findByStatusOptional(departmentId);

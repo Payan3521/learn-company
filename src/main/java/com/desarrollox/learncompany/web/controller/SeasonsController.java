@@ -47,11 +47,10 @@ public class SeasonsController {
         return ResponseEntity.ok(ApiResponse.success("Temporadas encontradas", seasonsResponses));
     }
 
-
-    @GetMapping("/courses/{id}")
-    public ResponseEntity<ApiResponse<SeasonResponse>> getCoursesById(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<SeasonResponse>> getSeasonById(@PathVariable Long id){
         Season season = seasonService.getSeasonById(id).get();
         SeasonResponse response = seasonWebMapper.domainToResponse(season);
-        return ResponseEntity.ok(ApiResponse.success("Curso encontrado correctamente", response));
+        return ResponseEntity.ok(ApiResponse.success("temporada encontrada correctamente", response));
     }
 }

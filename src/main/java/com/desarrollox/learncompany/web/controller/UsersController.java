@@ -66,8 +66,6 @@ public class UsersController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Instructor registrado correctamente", userResponse));
         
     }
-
-
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> getUsersById(@PathVariable Long id){
         User user = userService.findById(id).get();

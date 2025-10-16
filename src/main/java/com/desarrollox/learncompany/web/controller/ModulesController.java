@@ -27,7 +27,7 @@ public class ModulesController {
 
     private final IModuleService moduleService;
     private final ModuleWebMapper moduleWebMapper; 
-    
+
     @PostMapping
     public ResponseEntity<ApiResponse<ModuleResponse>> createModule(@Valid @RequestBody ModuleRequest request){
         Module module = moduleWebMapper.requestToDomain(request);

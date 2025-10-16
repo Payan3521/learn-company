@@ -27,7 +27,7 @@ public class NotificationsController {
 
     private final INotificationService notificationService;
     private final NotificationWebMapper notificationWebMapper;
-    
+
     @PostMapping
     public ResponseEntity<ApiResponse<NotificationResponse>> createNotification(@Valid @RequestBody NotificationRequest request){
         Notification notification = notificationWebMapper.requestToDomain(request);

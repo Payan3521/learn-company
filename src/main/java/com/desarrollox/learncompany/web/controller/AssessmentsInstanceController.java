@@ -33,20 +33,20 @@ public class AssessmentsInstanceController {
         AssessmentInstanceResponse response = assessmentInstanceWebMapper.domainToResponse(assessmentInstanceSaved);
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Evaluacion creada correctamente", response));
     }
-
+   
     @GetMapping("/grade/{id}")
     public ResponseEntity<ApiResponse<Double>> getGradeById(@PathVariable Long id){
         Double grade = assessmentInstanceService.getGrade(id);
         return ResponseEntity.ok(ApiResponse.success("Nota obtenida correctamente", grade));
     }
-
+   
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<AssessmentInstanceResponse>> getAssessmentsById(@PathVariable Long id){
         AssessmentInstance assessmentInstance = assessmentInstanceService.getAssessmentInstanceById(id).get();
         AssessmentInstanceResponse response = assessmentInstanceWebMapper.domainToResponse(assessmentInstance);
         return ResponseEntity.ok(ApiResponse.success("Instancia de evaluacion obtenida correctamente", response));
     }
-
+   
     @PatchMapping("/assign-grade/{grade}/{assessmentId}")
     public ResponseEntity<ApiResponse<AssessmentInstanceResponse>> asignarGrade(@PathVariable Double grade, @PathVariable Long assessmentId){
         AssessmentInstance assessmentInstance = assessmentInstanceService.assignGrade( assessmentId, grade).get();

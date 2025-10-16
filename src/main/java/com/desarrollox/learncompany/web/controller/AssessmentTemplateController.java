@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/api/assessmentTemplate")
 public class AssessmentTemplateController {
+    
     private final IAssessmentTemplateService assessmentTemplateService;
     private final AssessmentTemplateWebMapper assessmentTemplateWebMapper;
 

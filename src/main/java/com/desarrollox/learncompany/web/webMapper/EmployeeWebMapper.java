@@ -28,6 +28,7 @@ public interface EmployeeWebMapper {
     @Mapping(target = "department.name", ignore = true)
     @Mapping(target = "department.prize", ignore = true)
     @Mapping(target = "department.hierarchy", ignore = true)
+    @Mapping(target = "puntos", constant = "0")
     @Mapping(target = "certificates", ignore = true)
     @Mapping(target = "inscriptions", ignore = true)
     Employee updateRequestToDomain(EmployeeUpdateRequest request);
