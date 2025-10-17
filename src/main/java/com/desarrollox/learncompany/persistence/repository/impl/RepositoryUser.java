@@ -91,5 +91,15 @@ public class RepositoryUser implements IRepositoryUser {
     public Optional<User> findByEmailIncludingInactive(String email) {
         return jpaRepositoryUser.findByEmail(email).map(polymorphicUserMapper::toDomain);
     }
+
+    @Override
+    public List<Employee> findEmployeesFinished() {
+        return jpaRepositoryUser.findEmployeesFinished().stream().map(employeeMapper::toDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Employee> findEmployeesFinishedByCourseId(Long id) {
+        return jpaRepositoryUser.findEmployeesFinishedByCourseId(id).stream().map(employeeMapper::toDomain).collect(Collectors.toList());
+    }
     
 }

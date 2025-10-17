@@ -5,8 +5,10 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.desarrollox.learncompany.core.security.PasswordEncoderConfig;
+import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryUser;
+import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
 import com.desarrollox.learncompany.domain.exception.DepartmentNotFoundException;
 import com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
@@ -23,6 +25,7 @@ public class UserService implements IUserService{
 
     private final IRepositoryUser repositoryUser;
     private final IRepositoryDepartment repositoryDepartment;
+    private final IRepositoryCourse repositoryCourse;
     private final PasswordEncoderConfig passwordEncoderConfig;
 
     @Transactional(readOnly = false)
@@ -197,6 +200,21 @@ public class UserService implements IUserService{
     @Override
     public List<User> findUsersByFilters(Long departmentId, Role role, boolean status) {
         return repositoryUser.findUsersByFilters(departmentId, role, status);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Employee> findEmployeesFinished() {
+        return repositoryUser.findEmployeesFinished();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Employee> findEmployeesFinishedByCourseId(Long id) {
+        if(!repositoryCourse.existsById(id)){
+            throw new CourseNotFoundException(id);
+        }
+        return repositoryUser.findEmployeesFinishedByCourseId(id);
     }
 
 }

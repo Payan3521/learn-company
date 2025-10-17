@@ -18,4 +18,6 @@ public interface IRepositoryUser {
     List<User> findUsersByFilters(Long departmentId, Role role, boolean status);
     boolean existsById(Long id);
     boolean existsByEmail(String email);
+    List<Employee> findEmployeesFinished();
+    List<Employee> findEmployeesFinishedByCourseId(Long id);
 }

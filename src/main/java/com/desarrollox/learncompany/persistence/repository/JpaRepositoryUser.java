@@ -36,5 +36,44 @@ public interface JpaRepositoryUser extends JpaRepository<UserEntity, Long>{
     boolean existsByIdAndStatusTrue(Long id);
 
     List<UserEntity> findAllByStatusTrue();
+
+    @Query(value = """
+        SELECT DISTINCT 
+            u.id, 
+            u.email, 
+            u.password, 
+            u.name, 
+            u.lastname, 
+            u.status, 
+            u.role, 
+            u.department_id, 
+            u.url_photo,
+            e.puntos
+        FROM certificates c
+        INNER JOIN employees e ON c.employee_id = e.id
+        INNER JOIN users u ON e.id = u.id
+    """, nativeQuery = true)
+    List<EmployeeEntity> findEmployeesFinished();
+
+    @Query(value = """
+        SELECT 
+            u.id, 
+            u.email, 
+            u.password, 
+            u.name, 
+            u.lastname, 
+            u.status, 
+            u.role, 
+            u.department_id, 
+            u.url_photo,
+            u.created_at,
+            u.updated_at,
+            e.puntos
+        FROM certificates c
+        INNER JOIN employees e ON c.employee_id = e.id
+        INNER JOIN users u ON e.id = u.id
+        WHERE c.course_id = :courseId
+    """, nativeQuery = true)
+    List<EmployeeEntity> findEmployeesFinishedByCourseId(@Param("courseId") Long courseId);
     
 }
