@@ -17,4 +17,6 @@ public interface IUserService {
     Optional<User> delete(Long id);
     List<Employee> getRankingByDepartment(Long departmentId);
     List<User> findUsersByFilters(Long departmentId, Role role, boolean status);
+    List<Employee> findEmployeesFinished();
+    List<Employee> findEmployeesFinishedByCourseId(Long id);
 }

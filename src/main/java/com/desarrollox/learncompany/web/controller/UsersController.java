@@ -129,4 +129,28 @@ public class UsersController {
         UserResponse userResponse = userWebMapper.userToResponse(userDeleted);
         return ResponseEntity.ok(ApiResponse.success("Usuario eliminado correctamente", userResponse));
     }
+
+    @GetMapping("/finished")
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getEmployeesFinished(){
+        List<Employee> users = userService.findEmployeesFinished();
+
+        if(users.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        List<UserResponse> userResponses = users.stream().map(userWebMapper::userToResponse).collect(Collectors.toList());
+        return ResponseEntity.ok(ApiResponse.success("Usuarios que han finalizado cursos", userResponses));
+    }
+
+    @GetMapping("/finished/{id}")
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getEmployeesFinishedByIdCourse(@PathVariable Long id){
+        List<Employee> users = userService.findEmployeesFinishedByCourseId(id);
+
+        if(users.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        List<UserResponse> userResponses = users.stream().map(userWebMapper::userToResponse).collect(Collectors.toList());
+        return ResponseEntity.ok(ApiResponse.success("Usuarios que han finalizado el curso: " + id, userResponses));
+    }
 }
