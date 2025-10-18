@@ -556,3 +556,14 @@ This generated password is for development use only. Your security configuration
 2025-10-18 15:49:54 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.154 seconds (process running for 5.507)
 2025-10-18 15:51:17 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource swagger-ui.]
 2025-10-18 15:51:40 [http-nio-8080-exec-1] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 629 ms
+2025-10-18 15:59:13 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 100710 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-18 15:59:13 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-18 15:59:15 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-18 15:59:17 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-18 15:59:17 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 274d5d8f-6b71-47f2-a4f7-60b16e1942ef
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-18 15:59:18 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.339 seconds (process running for 5.655)
