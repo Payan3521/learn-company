@@ -130,7 +130,7 @@ CREATE TABLE modules (
     course_id BIGINT NOT NULL,
     url_video VARCHAR(255) NOT NULL,
     url_guia VARCHAR(255) NOT NULL,
-    hierarchy INT NOT NULL,
+    hierarchy_module INT NOT NULL,
 
     title VARCHAR(255) NOT NULL,
     

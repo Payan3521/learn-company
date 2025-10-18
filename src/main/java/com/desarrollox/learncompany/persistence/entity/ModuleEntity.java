@@ -28,7 +28,7 @@ public class ModuleEntity {
     @Column(name = "url_guia", nullable = false)
     private String urlGuia;
 
-    @Column(name = "hierarchy", nullable = false)
+    @Column(name = "hierarchy_module", nullable = false)
     private int hierarchy;
 
     @Column(name = "title", nullable = false)
