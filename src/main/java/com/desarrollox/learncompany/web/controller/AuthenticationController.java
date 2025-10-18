@@ -26,13 +26,35 @@ public class AuthenticationController {
     private final AuthenticationWebMapper authenticationWebMapper;
     
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest request, HttpServletRequest rServletRequest){
-        String ipAddress = getClientIpAddress(rServletRequest);
-        String userAgent = rServletRequest.getHeader("User-Agent");
+    public ResponseEntity<ApiResponse<LoginResponse>> login(
+            @Valid @RequestBody LoginRequest request, 
+            HttpServletRequest httpServletRequest) {
+        
+        String ipAddress = getClientIpAddress(httpServletRequest);
+        String userAgent = httpServletRequest.getHeader("User-Agent");
 
-        Login login = authenticationService.authenticate(request.getEmail(), request.getPassword(), ipAddress, userAgent);
+        Login login = authenticationService.authenticate(
+            request.getEmail(), 
+            request.getPassword(), 
+            ipAddress, 
+            userAgent
+        );
+        
         LoginResponse response = authenticationWebMapper.toResponse(login);
         return ResponseEntity.ok(ApiResponse.success("Login exitoso", response));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<ApiResponse<Void>> logout(@Valid @RequestBody LogoutRequest request) {
+        authenticationService.logout(request.getRefreshToken());
+        return ResponseEntity.ok(ApiResponse.success("Logout exitoso", null));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<ApiResponse<LoginResponse>> refresh(@Valid @RequestBody RefreshTokenRequest request) {
+        Login login = authenticationService.refreshToken(request.getRefreshToken());
+        LoginResponse response = authenticationWebMapper.toResponse(login);
+        return ResponseEntity.ok(ApiResponse.success("Token renovado exitosamente", response));
     }
 
     private String getClientIpAddress(HttpServletRequest request) {
@@ -48,16 +70,4 @@ public class AuthenticationController {
         
         return request.getRemoteAddr();
     }
-
-    @PostMapping("/logout")
-    public ResponseEntity<ApiResponse<LoginResponse>> logout(@Valid @RequestBody RefreshTokenRequest request){
-        throw new IllegalArgumentException();
-    }
-
-    @PostMapping("/refresh")
-    public ResponseEntity<ApiResponse<Void>> refresh(@Valid @RequestBody LogoutRequest logoutRequest){
-        throw new IllegalArgumentException();
-    }
-
-    //posiblemente validate token
 }

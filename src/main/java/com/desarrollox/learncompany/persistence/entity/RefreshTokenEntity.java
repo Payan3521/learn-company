@@ -1,12 +1,7 @@
 package com.desarrollox.learncompany.persistence.entity;
 
 import java.time.LocalDateTime;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class RefreshTokenEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,11 +29,28 @@ public class RefreshTokenEntity {
     private LocalDateTime expiryDate;
     
     @Column(name = "revoked", nullable = false)
-    private boolean revoked;
+    private boolean revoked = false;
     
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
     
     @Column(name = "revoked_at")
     private LocalDateTime revokedAt;
+    
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+        if (expiryDate == null) {
+            expiryDate = LocalDateTime.now().plusDays(30);
+        }
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        if (revoked && revokedAt == null) {
+            revokedAt = LocalDateTime.now();
+        }
+    }
 }
