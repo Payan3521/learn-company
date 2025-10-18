@@ -24,8 +24,7 @@ public class AuthenticationController {
 
     private final IAuthenticationService authenticationService;
     private final AuthenticationWebMapper authenticationWebMapper;
-    
-    
+  
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<LoginResponse>> login(
             @Valid @RequestBody LoginRequest request, 
