@@ -28,11 +28,13 @@ import com.desarrollox.learncompany.domain.exception.InscriptionAlreadyRegistere
 import com.desarrollox.learncompany.domain.exception.InscriptionNotFoundException;
 import com.desarrollox.learncompany.domain.exception.InvalidCredentialsException;
 import com.desarrollox.learncompany.domain.exception.InvalidRoleException;
+import com.desarrollox.learncompany.domain.exception.InvalidTokenException;
 import com.desarrollox.learncompany.domain.exception.ModuleNotFoundException;
 import com.desarrollox.learncompany.domain.exception.NotificationNotFoundException;
 import com.desarrollox.learncompany.domain.exception.SeasonAlreadyCreatedException;
 import com.desarrollox.learncompany.domain.exception.SeasonNotFoundException;
 import com.desarrollox.learncompany.domain.exception.UserAlreadyRegisteredException;
+import com.desarrollox.learncompany.domain.exception.UserNotActiveException;
 import com.desarrollox.learncompany.domain.exception.UserNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -80,12 +82,12 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.CONFLICT, "Conflicto en la solicitud", ex.getMessage());
     }
 
-    @ExceptionHandler(InvalidCredentialsException.class)
+    @ExceptionHandler({InvalidCredentialsException.class, InvalidTokenException.class})
     public ResponseEntity<Map<String, Object>> handleInvalidCredentials(InvalidCredentialsException ex) {
         return buildResponse(HttpStatus.UNAUTHORIZED, "Credenciales inválidas", ex.getMessage());
     }
 
-    @ExceptionHandler({DepartmentIncorrectException.class, InvalidRoleException.class})
+    @ExceptionHandler({DepartmentIncorrectException.class, InvalidRoleException.class, UserNotActiveException.class})
     public ResponseEntity<Map<String, Object>> handleForbidden(DepartmentIncorrectException ex) {
         return buildResponse(HttpStatus.FORBIDDEN, "Acceso denegado", ex.getMessage());
     }

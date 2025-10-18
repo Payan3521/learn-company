@@ -281,6 +281,35 @@ CREATE TABLE employee_badges (
     INDEX idx_date_earned (date_earned)
 );
 
+CREATE TABLE login_attempts (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    ip_address VARCHAR(100) NOT NULL,
+    successful_attempt BOOLEAN NOT NULL DEFAULT FALSE,
+    failure_reason TEXT NULL,
+    attempt_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_agent VARCHAR(500) NULL,
+
+    INDEX idx_email (email),
+    INDEX idx_ip_address (ip_address),
+    INDEX idx_attempt_time (attempt_time),
+    INDEX idx_successful (successful_attempt)
+);
+
+CREATE TABLE refresh_tokens (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    token_refresh VARCHAR(500),
+    user_email VARCHAR(255) NOT NULL,
+    expiry_date_refresh TIMESTAMP NOT NULL,
+    revoked BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    revoked_at TIMESTAMP NULL,
+
+    INDEX idx_user_email (user_email),
+    INDEX idx_expiry_date (expiry_date_refresh),
+    INDEX idx_revoked (revoked)
+);
+
 -- ============================================
 -- CONFIGURACIONES FINALES
 -- ============================================
@@ -309,6 +338,8 @@ ALTER TABLE assessment_templates COMMENT = 'Plantillas de evaluaciones asociadas
 ALTER TABLE questions COMMENT = 'Preguntas de cada evaluación con sus opciones y respuesta correcta';
 ALTER TABLE assessment_instances COMMENT = 'Instancias de evaluaciones tomadas por empleados';
 ALTER TABLE answers COMMENT = 'Respuestas de empleados a las preguntas de una evaluación';
+ALTER TABLE login_attempts COMMENT = 'Registra cada intento de inicio de sesión, exitoso o fallido, con IP y user-agent.';
+ALTER TABLE refresh_tokens COMMENT = 'Tokens JWT de refresco para mantener sesiones seguras y controladas.';
 -- ============================================
 
 -- ============================================
