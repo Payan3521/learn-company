@@ -20,6 +20,7 @@ import com.desarrollox.learncompany.web.webMapper.InscriptionWebMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,28 +39,53 @@ public class InscriptionsController {
 
     @Operation(
         summary = "Crear una nueva inscripción",
-        description = "Registra la inscripción de un empleado a un curso específico.",
+        description = "Permite registrar una nueva inscripción de un empleado en un curso.",
         requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
             required = true,
             content = @Content(
                 mediaType = "application/json",
                 examples = @ExampleObject(
-                    name = "Ejemplo de creación de inscripción",
+                    name = "Ejemplo de solicitud",
                     value = """
-                    {
-                      "employeeId": 4,
-                      "courseId": 7,
-                      "inscriptionDate": "2025-10-15"
-                    }
-                    """
+                        {
+                            "employeeId": 2,
+                            "courseId": 5
+                        }
+                        """
                 )
             )
         ),
         responses = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Inscripción creada correctamente"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos o incompletos", content = @Content),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Empleado o curso no encontrado", content = @Content),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "201",
+                description = "Inscripción creada correctamente",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Inscripcion craeada correctamente",
+                                "data": {
+                                    "id": 1,
+                                    "employeeId": 1,
+                                    "dateAndHour": "2025-10-18T15:23:39.750960352",
+                                    "courseId": 1,
+                                    "status": "IN_PROGRESS"
+                                },
+                                "timestamp": "2025-10-18T15:23:39.766021441"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Empleado o curso no encontrado", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Ya existe una inscripción del empleado en el curso", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
         }
     )
     @PostMapping
@@ -71,11 +97,45 @@ public class InscriptionsController {
     }
 
     @Operation(
-        summary = "Obtener una inscripción por su ID",
-        description = "Devuelve la información detallada de una inscripción específica.",
+        summary = "Obtener inscripción por ID",
+        description = "Devuelve la información detallada de una inscripción según su ID.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador de la inscripción",
+                required = true,
+                example = "10"
+            )
+        },
         responses = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Inscripción encontrada correctamente"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Inscripción no encontrada", content = @Content)
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Inscripción encontrada",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Inscripcion encontrada",
+                                "data": {
+                                    "id": 1,
+                                    "employeeId": 1,
+                                    "dateAndHour": "2025-10-18T15:23:39",
+                                    "courseId": 1,
+                                    "status": "IN_PROGRESS"
+                                },
+                                "timestamp": "2025-10-18T15:26:00.36592405"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Inscripción no encontrada", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
         }
     )
     @GetMapping("/{id}")
@@ -86,12 +146,44 @@ public class InscriptionsController {
     }
 
     @Operation(
-        summary = "Eliminar una inscripción por su ID",
-        description = "Elimina una inscripción previamente registrada.",
+        summary = "Eliminar una inscripción",
+        description = "Elimina una inscripción existente según su ID.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador de la inscripción a eliminar",
+                required = true,
+                example = "10"
+            )
+        },
         responses = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Inscripción eliminada correctamente"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Inscripción no encontrada", content = @Content),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Inscripción eliminada correctamente",
+                content = @Content(
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Inscripcion encontrada",
+                                "data": {
+                                    "id": 1,
+                                    "employeeId": 1,
+                                    "dateAndHour": "2025-10-18T15:23:39",
+                                    "courseId": 1,
+                                    "status": "IN_PROGRESS"
+                                },
+                                "timestamp": "2025-10-18T15:26:00.36592405"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Inscripción no encontrada", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
         }
     )
     @DeleteMapping("/{id}")
@@ -102,12 +194,54 @@ public class InscriptionsController {
     }
 
     @Operation(
-        summary = "Obtener todas las inscripciones de un curso",
-        description = "Devuelve la lista de inscripciones asociadas a un curso específico identificado por su ID.",
+        summary = "Obtener inscripciones por curso",
+        description = "Devuelve la lista de inscripciones asociadas a un curso específico.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del curso",
+                required = true,
+                example = "5"
+            )
+        },
         responses = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Inscripciones del curso obtenidas correctamente"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "El curso no tiene inscripciones registradas", content = @Content),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Curso no encontrado", content = @Content)
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Inscripciones encontradas para el curso especificado",
+                content = @Content(
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Obtenidas las inscripciones pertenecientes al curso: 5",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "employeeId": 2,
+                                        "dateAndHour": "2025-10-18T15:23:39",
+                                        "courseId": 5,
+                                        "status": "IN_PROGRESS"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "employeeId": 6,
+                                        "dateAndHour": "2025-10-18T15:23:39",
+                                        "courseId": 5,
+                                        "status": "IN_PROGRESS"
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T10:35:50.200Z"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista vacía", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Curso no encontrado para filtrar", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
         }
     )
     @GetMapping("/course/{id}")
@@ -123,12 +257,54 @@ public class InscriptionsController {
     }
 
     @Operation(
-        summary = "Obtener todas las inscripciones de un empleado",
-        description = "Devuelve la lista de inscripciones asociadas a un empleado específico identificado por su ID.",
+        summary = "Obtener inscripciones por empleado",
+        description = "Devuelve la lista de inscripciones asociadas a un empleado específico.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del empleado",
+                required = true,
+                example = "5"
+            )
+        },
         responses = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Inscripciones del empleado obtenidas correctamente"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "El empleado no tiene inscripciones registradas", content = @Content),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Empleado no encontrado", content = @Content)
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Inscripciones encontradas para el empleado especificado",
+                content = @Content(
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Obtenidas las inscripciones pertenecientes al empleado: 5",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "employeeId": 5,
+                                        "dateAndHour": "2025-10-18T15:23:39",
+                                        "courseId": 2,
+                                        "status": "IN_PROGRESS"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "employeeId": 5,
+                                        "dateAndHour": "2025-10-18T15:23:39",
+                                        "courseId": 3,
+                                        "status": "IN_PROGRESS"
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T10:35:50.200Z"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista vacía", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Empleado no encontrado para filtrar", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
         }
     )
     @GetMapping("/employee/{id}")
