@@ -128,6 +128,10 @@ CREATE TABLE courses (
 CREATE TABLE modules (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     course_id BIGINT NOT NULL,
+    url_video VARCHAR(255) NOT NULL,
+    url_guia VARCHAR(255) NOT NULL,
+    hierarchy INT NOT NULL,
+
     title VARCHAR(255) NOT NULL,
     
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE ON UPDATE CASCADE,
