@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryAssessmentTemplate;
 import com.desarrollox.learncompany.domain.model.AssessmentTemplate;
+import com.desarrollox.learncompany.domain.model.FeedBack;
+
 import lombok.RequiredArgsConstructor;
 import com.desarrollox.learncompany.persistence.mapper.AssessmentTemplateMapper;
 import com.desarrollox.learncompany.persistence.repository.JpaRepositoryAssessmentTemplate;
@@ -30,6 +32,11 @@ public class RepositoryAssessmentTemplate implements IRepositoryAssessmentTempla
     @Override
     public Optional<AssessmentTemplate> findById(Long id) {
         return jpaRepositoryAssessmentTemplate.findById(id).map(assessmentTemplateMapper::toDomain);
+    }
+
+    @Override
+    public List<FeedBack> getFeedback(Long id) {
+        return jpaRepositoryAssessmentTemplate.getFeedback(id);
     }
     
 }
