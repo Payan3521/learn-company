@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.model.AssessmentTemplate;
+import com.desarrollox.learncompany.domain.model.FeedBack;
 import com.desarrollox.learncompany.domain.service.IAssessmentTemplateService;
 import com.desarrollox.learncompany.web.dto.AssessmentTemplateResponse;
+import com.desarrollox.learncompany.web.dto.FeedBackResponse;
 import com.desarrollox.learncompany.web.webMapper.AssessmentTemplateWebMapper;
+import com.desarrollox.learncompany.web.webMapper.FeedBackWebMapper;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -21,6 +25,7 @@ public class AssessmentTemplateController {
     
     private final IAssessmentTemplateService assessmentTemplateService;
     private final AssessmentTemplateWebMapper assessmentTemplateWebMapper;
+    private final FeedBackWebMapper feedBackWebMapper;
 
     @GetMapping("/module/{id}")
     public ResponseEntity<ApiResponse<List<AssessmentTemplateResponse>>> getAssessmentTemplateByModuleId(@PathVariable Long id){
@@ -39,5 +44,12 @@ public class AssessmentTemplateController {
         AssessmentTemplate assessmentTemplate = assessmentTemplateService.findById(id).get();
         AssessmentTemplateResponse assessmentTemplateResponse = assessmentTemplateWebMapper.domainToResponse(assessmentTemplate);
         return ResponseEntity.ok(ApiResponse.success("AssesmentTemplate obtenida correctamente", assessmentTemplateResponse));
+    }
+
+    @GetMapping("/feedback/{id}")
+    public ResponseEntity<ApiResponse<List<FeedBackResponse>>> getFeedback(@PathVariable Long id){
+        List<FeedBack> feedBack = assessmentTemplateService.getFeedbackById(id);
+        List<FeedBackResponse> response = feedBack.stream().map(feedBackWebMapper::domainToResponse).collect(Collectors.toList());
+        return ResponseEntity.ok(ApiResponse.success("FeedBack obtenido correctamente", response));
     }
 }

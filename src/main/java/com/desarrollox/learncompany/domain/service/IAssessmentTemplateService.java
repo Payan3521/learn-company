@@ -9,5 +9,6 @@ public interface IAssessmentTemplateService {
 
     List<AssessmentTemplate> getAssessmentsByModuleId(Long moduleId);
     Optional<AssessmentTemplate> findById(Long id);
-    FeedBack getFeedbackById(Long id);
+    List<FeedBack> getFeedbackById(Long id);
+
 }

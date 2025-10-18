@@ -1,5 +1,6 @@
 package com.desarrollox.learncompany.domain.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -39,9 +40,9 @@ public class AssessmentTemplateService implements IAssessmentTemplateService{
         return repositoryAssessmentTemplate.findById(id);
     }
     
+
     @Override
-    public FeedBack getFeedbackById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getFeedbackById'");
+    public List<FeedBack> getFeedbackById(Long id) {
+        return repositoryAssessmentTemplate.getFeedback(id);
     }
 }
