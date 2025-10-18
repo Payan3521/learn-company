@@ -12,16 +12,38 @@ import java.util.Optional;
 
 @Repository
 public interface JpaRepositoryRefreshToken extends JpaRepository<RefreshTokenEntity, Long> {
-    
-    Optional<RefreshTokenEntity> findByToken(String token);
-    
-    List<RefreshTokenEntity> findByUserEmailAndRevokedFalse(String userEmail);
-    
+
+    @Query(value = "SELECT * FROM refresh_tokens WHERE token = :token LIMIT 1", nativeQuery = true)
+    Optional<RefreshTokenEntity> findByToken(@Param("token") String token);
+
+    @Query(value = "SELECT * FROM refresh_tokens WHERE user_email = :userEmail AND revoked = FALSE", nativeQuery = true)
+    List<RefreshTokenEntity> findByUserEmailAndRevokedFalse(@Param("userEmail") String userEmail);
+
     @Modifying
-    @Query("UPDATE RefreshTokenEntity r SET r.revoked = true, r.revokedAt = :revokedAt WHERE r.userEmail = :userEmail AND r.revoked = false")
-    int revokeAllByUserEmail(@Param("userEmail") String userEmail, @Param("revokedAt") LocalDateTime revokedAt);
-    
+    @Query(value = """
+        UPDATE refresh_tokens
+        SET revoked = TRUE,
+            revoked_at = :revokedAt
+        WHERE user_email = :userEmail
+          AND revoked = FALSE
+        """, nativeQuery = true)
+    int revokeAllByUserEmail(
+        @Param("userEmail") String userEmail,
+        @Param("revokedAt") LocalDateTime revokedAt
+    );
+
     @Modifying
-    @Query("UPDATE RefreshTokenEntity r SET r.revoked = true, r.revokedAt = :revokedAt WHERE r.userEmail = :userEmail AND r.token <> :currentToken AND r.revoked = false")
-    int revokeAllExceptCurrent(@Param("userEmail") String userEmail, @Param("currentToken") String currentToken, @Param("revokedAt") LocalDateTime revokedAt);
+    @Query(value = """
+        UPDATE refresh_tokens
+        SET revoked = TRUE,
+            revoked_at = :revokedAt
+        WHERE user_email = :userEmail
+          AND token <> :currentToken
+          AND revoked = FALSE
+        """, nativeQuery = true)
+    int revokeAllExceptCurrent(
+        @Param("userEmail") String userEmail,
+        @Param("currentToken") String currentToken,
+        @Param("revokedAt") LocalDateTime revokedAt
+    );
 }

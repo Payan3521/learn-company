@@ -1,0 +1,12 @@
+2025-10-17 17:48:49 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Unknown label 'department_id'. Possible value [e.puntos, e.id, id, puntos]
+2025-10-17 17:51:39 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=79) Unknown column 'c.employee' in 'ON'
+2025-10-17 17:53:20 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Unknown label 'department_id'. Possible value [e.puntos, e.id, id, puntos]
+2025-10-17 18:05:46 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=119) Unknown column 'courseId' in 'ON'
+2025-10-17 18:07:10 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=130) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ': courseId
+    INNER JOIN users u ON e.id = u.id' at line 13
+2025-10-17 18:11:09 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=140) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ': courseId
+    INNER JOIN users u ON e.id = u.id' at line 13
+2025-10-17 19:27:02 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=194) Unknown column 'e.department_id' in 'WHERE'
+2025-10-17 19:30:27 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Unknown label 'department_id'. Possible value [e.puntos, e.id, id, puntos]
+2025-10-17 23:06:10 [http-nio-8080-exec-5] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=248) Column 'token' cannot be null
+2025-10-17 23:11:22 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=260) Unknown column 'successful_attempt' in 'INSERT INTO'

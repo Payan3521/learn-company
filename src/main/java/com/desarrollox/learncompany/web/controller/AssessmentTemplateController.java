@@ -49,6 +49,9 @@ public class AssessmentTemplateController {
     @GetMapping("/feedback/{id}")
     public ResponseEntity<ApiResponse<List<FeedBackResponse>>> getFeedback(@PathVariable Long id){
         List<FeedBack> feedBack = assessmentTemplateService.getFeedbackById(id);
+        if(feedBack.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
         List<FeedBackResponse> response = feedBack.stream().map(feedBackWebMapper::domainToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("FeedBack obtenido correctamente", response));
     }
