@@ -1,8 +1,13 @@
 package com.desarrollox.learncompany.web.webMapper;
 
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+import com.desarrollox.learncompany.domain.model.Login;
+import com.desarrollox.learncompany.web.dto.LoginResponse;
 
-@Component
-public class AuthenticationWebMapper {
-    
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = UserWebMapper.class)
+public interface AuthenticationWebMapper {
+
+    LoginResponse toResponse(Login login);
+
 }
