@@ -30,10 +30,19 @@ import com.desarrollox.learncompany.web.webMapper.InstructorWebMapper;
 import com.desarrollox.learncompany.web.webMapper.UserWebMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
+@Tag(
+    name = "Users",
+    description = "Endpoints para la gestión de usuarios (empleados, instructores y administradores) dentro de la organización."
+)
 public class UsersController {
 
     private final IUserService userService;
@@ -42,30 +51,194 @@ public class UsersController {
     private final InstructorWebMapper instructorWebMapper;
     private final LoggingService loggingService;
 
+    @Operation(
+        summary = "Crear un empleado",
+        description = "Permite registrar un nuevo empleado en el sistema.",
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    name = "Ejemplo de solicitud",
+                    value = """
+                        {
+                            "email": "empleado@example.com",
+                            "password": "password123",
+                            "name": "Juan",
+                            "lastname": "Pérez",
+                            "role": "EMPLOYEE",
+                            "departmentId": 1,
+                            "urlPhoto": "https://example.com/photo.jpg"
+                        }
+                        """
+                )
+            )
+        ),
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "201",
+                description = "Empleado registrado correctamente",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Empleado registrado correctamente",
+                                "data": {
+                                    "id": 1,
+                                    "email": "empleado@example.com",
+                                    "name": "Juan",
+                                    "lastname": "Pérez",
+                                    "status": true,
+                                    "role": "EMPLOYEE",
+                                    "departmentId": 1,
+                                    "urlPhoto": "https://example.com/photo.jpg",
+                                    "puntos": 0,
+                                    "certificates": [],
+                                    "inscriptions": []
+                                },
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Departamento no encontrado", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "El email ya está registrado", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @PostMapping("/employee")
     public ResponseEntity<ApiResponse<UserResponse>> createEmployee(@Valid @RequestBody EmployeeRequest request) {
-        //mapear de request a dominio
         Employee employee = employeeWebMapper.requestToDomain(request);
-        //lamar al servicio y mandarle el dominio
         Employee employeeSaved = userService.createEmployee(employee);
-        //mapear de dominio a response
         UserResponse userResponse = userWebMapper.employeeToResponse(employeeSaved);
-        //retornar con api response
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Empleado registrado correctamente", userResponse));
     }
 
+    @Operation(
+        summary = "Crear un instructor",
+        description = "Permite registrar un nuevo instructor en el sistema.",
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    name = "Ejemplo de solicitud",
+                    value = """
+                        {
+                            "email": "instructor@example.com",
+                            "password": "password123",
+                            "name": "María",
+                            "lastname": "González",
+                            "role": "INSTRUCTOR",
+                            "departmentId": 2,
+                            "urlPhoto": "https://example.com/photo.jpg",
+                            "specialty": "Desarrollo Web",
+                            "biography": "Ingeniera de software con 10 años de experiencia"
+                        }
+                        """
+                )
+            )
+        ),
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "201",
+                description = "Instructor registrado correctamente",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Instructor registrado correctamente",
+                                "data": {
+                                    "id": 2,
+                                    "email": "instructor@example.com",
+                                    "name": "María",
+                                    "lastname": "González",
+                                    "status": true,
+                                    "role": "INSTRUCTOR",
+                                    "departmentId": 2,
+                                    "urlPhoto": "https://example.com/photo.jpg",
+                                    "specialty": "Desarrollo Web",
+                                    "biography": "Ingeniera de software con 10 años de experiencia",
+                                    "courses": []
+                                },
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Departamento no encontrado", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "El email ya está registrado", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @PostMapping("/instructor")
     public ResponseEntity<ApiResponse<UserResponse>> createInstructor(@Valid @RequestBody InstructorRequest request) {
-        //mapear de request a dominio
         Instructor instructor = instructorWebMapper.requestToDomain(request);
-        //lamar al servicio y mandarle el dominio
         Instructor employeeSaved = userService.createInstructor(instructor);
-        //mapear de dominio a response
         UserResponse userResponse = userWebMapper.instructorToResponse(employeeSaved);
-        //retornar con api response
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Instructor registrado correctamente", userResponse));
-        
     }
+
+    @Operation(
+        summary = "Obtener usuario por ID",
+        description = "Devuelve la información detallada de un usuario según su ID.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del usuario",
+                required = true,
+                example = "1"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Usuario encontrado",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Usuario encontrado",
+                                "data": {
+                                    "id": 1,
+                                    "email": "empleado@example.com",
+                                    "name": "Juan",
+                                    "lastname": "Pérez",
+                                    "status": true,
+                                    "role": "EMPLOYEE",
+                                    "departmentId": 1,
+                                    "urlPhoto": "https://example.com/photo.jpg",
+                                    "puntos": 0
+                                },
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> getUsersById(@PathVariable Long id){
         User user = userService.findById(id).get();
@@ -73,6 +246,55 @@ public class UsersController {
         return ResponseEntity.ok(ApiResponse.success("Usuario encontrado", userResponse));
     }
 
+    @Operation(
+        summary = "Obtener todos los usuarios",
+        description = "Devuelve la lista completa de usuarios registrados en el sistema.",
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Usuarios encontrados",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Usuarios encontrados",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "email": "empleado@example.com",
+                                        "name": "Juan",
+                                        "lastname": "Pérez",
+                                        "status": true,
+                                        "role": "EMPLOYEE",
+                                        "departmentId": 1,
+                                        "urlPhoto": "https://example.com/photo.jpg"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "email": "instructor@example.com",
+                                        "name": "María",
+                                        "lastname": "González",
+                                        "status": true,
+                                        "role": "INSTRUCTOR",
+                                        "departmentId": 2,
+                                        "urlPhoto": "https://example.com/photo2.jpg"
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista vacía", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @GetMapping
     public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers(){
         List<User> users = userService.findAll();
@@ -85,6 +307,62 @@ public class UsersController {
         return ResponseEntity.ok(ApiResponse.success("Usuarios encontrados", userResponses));
     }
 
+    @Operation(
+        summary = "Obtener usuarios con filtros",
+        description = "Devuelve usuarios filtrados por departamento, rol y/o estado.",
+        parameters = {
+            @Parameter(
+                name = "departmentId",
+                description = "Identificador del departamento (opcional)",
+                example = "1"
+            ),
+            @Parameter(
+                name = "role",
+                description = "Rol del usuario: EMPLOYEE, INSTRUCTOR, ADMIN (opcional)",
+                example = "EMPLOYEE"
+            ),
+            @Parameter(
+                name = "status",
+                description = "Estado del usuario: true (activo) o false (inactivo). Por defecto: true",
+                example = "true"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Usuarios encontrados",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Usuarios encontrados",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "email": "empleado@example.com",
+                                        "name": "Juan",
+                                        "lastname": "Pérez",
+                                        "status": true,
+                                        "role": "EMPLOYEE",
+                                        "departmentId": 1,
+                                        "urlPhoto": "https://example.com/photo.jpg"
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista vacía", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @GetMapping("/filters")
     public ResponseEntity<ApiResponse<List<UserResponse>>> getByUsersFilters(
             @RequestParam(required = false) Long departmentId,
@@ -101,12 +379,111 @@ public class UsersController {
         return ResponseEntity.ok(ApiResponse.success("Usuarios encontrados", userResponses));
     }
 
+    @Operation(
+        summary = "Obtener información del usuario autenticado",
+        description = "Devuelve la información del usuario que está actualmente autenticado.",
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Usuario autenticado",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Usuario autenticado",
+                                "data": {
+                                    "id": 1,
+                                    "email": "empleado@example.com",
+                                    "name": "Juan",
+                                    "lastname": "Pérez",
+                                    "status": true,
+                                    "role": "EMPLOYEE",
+                                    "departmentId": 1,
+                                    "urlPhoto": "https://example.com/photo.jpg"
+                                },
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "No autenticado", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @GetMapping("/me")
     public ResponseEntity<?> getMe(){
         throw new IllegalArgumentException();
     }
 
-
+    @Operation(
+        summary = "Actualizar un empleado",
+        description = "Actualiza la información de un empleado existente.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del empleado",
+                required = true,
+                example = "1"
+            )
+        },
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    name = "Ejemplo de solicitud",
+                    value = """
+                        {
+                            "name": "Juan Carlos",
+                            "lastname": "Pérez López",
+                            "email": "juan.perez@example.com",
+                            "password": "newpassword123",
+                            "departmentId": 2,
+                            "urlPhoto": "https://example.com/new-photo.jpg"
+                        }
+                        """
+                )
+            )
+        ),
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Empleado actualizado correctamente",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Empleado actualizado correctamente",
+                                "data": {
+                                    "id": 1,
+                                    "email": "juan.perez@example.com",
+                                    "name": "Juan Carlos",
+                                    "lastname": "Pérez López",
+                                    "status": true,
+                                    "role": "EMPLOYEE",
+                                    "departmentId": 2,
+                                    "urlPhoto": "https://example.com/new-photo.jpg"
+                                },
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Empleado o departamento no encontrado", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @PutMapping("/employee/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeUpdateRequest request){
         Employee employee = employeeWebMapper.updateRequestToDomain(request);
@@ -115,6 +492,75 @@ public class UsersController {
         return ResponseEntity.ok(ApiResponse.success("Empleado actualizado correctamente", userResponse));
     }
 
+    @Operation(
+        summary = "Actualizar un instructor",
+        description = "Actualiza la información de un instructor existente.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del instructor",
+                required = true,
+                example = "2"
+            )
+        },
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    name = "Ejemplo de solicitud",
+                    value = """
+                        {
+                            "name": "María José",
+                            "lastname": "González Martínez",
+                            "email": "maria.gonzalez@example.com",
+                            "password": "newpassword123",
+                            "departmentId": 3,
+                            "urlPhoto": "https://example.com/new-photo2.jpg",
+                            "specialty": "Desarrollo Full Stack",
+                            "biography": "Ingeniera de software con 12 años de experiencia en desarrollo web"
+                        }
+                        """
+                )
+            )
+        ),
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Instructor actualizado correctamente",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Instructor actualizado correctamente",
+                                "data": {
+                                    "id": 2,
+                                    "email": "maria.gonzalez@example.com",
+                                    "name": "María José",
+                                    "lastname": "González Martínez",
+                                    "status": true,
+                                    "role": "INSTRUCTOR",
+                                    "departmentId": 3,
+                                    "urlPhoto": "https://example.com/new-photo2.jpg",
+                                    "specialty": "Desarrollo Full Stack",
+                                    "biography": "Ingeniera de software con 12 años de experiencia en desarrollo web"
+                                },
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Instructor o departamento no encontrado", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @PutMapping("/instructor/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> updateInstructor(@PathVariable Long id, @Valid @RequestBody InstructorUpdateRequest request){
         Instructor instructor = instructorWebMapper.updateRequestToDomain(request);
@@ -123,6 +569,51 @@ public class UsersController {
         return ResponseEntity.ok(ApiResponse.success("Instructor actualizado correctamente", userResponse));
     }
 
+    @Operation(
+        summary = "Eliminar un usuario",
+        description = "Elimina (desactiva) un usuario según su ID.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del usuario a eliminar",
+                required = true,
+                example = "1"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Usuario eliminado correctamente",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Usuario eliminado correctamente",
+                                "data": {
+                                    "id": 1,
+                                    "email": "empleado@example.com",
+                                    "name": "Juan",
+                                    "lastname": "Pérez",
+                                    "status": false,
+                                    "role": "EMPLOYEE",
+                                    "departmentId": 1,
+                                    "urlPhoto": "https://example.com/photo.jpg"
+                                },
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Usuario no encontrado", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> deleteUserById(@PathVariable Long id){
         User userDeleted = userService.delete(id).get();
@@ -130,6 +621,46 @@ public class UsersController {
         return ResponseEntity.ok(ApiResponse.success("Usuario eliminado correctamente", userResponse));
     }
 
+    @Operation(
+        summary = "Obtener empleados que finalizaron cursos",
+        description = "Devuelve la lista de empleados que han completado al menos un curso.",
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Usuarios que han finalizado cursos",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Usuarios que han finalizado cursos",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "email": "empleado@example.com",
+                                        "name": "Juan",
+                                        "lastname": "Pérez",
+                                        "status": true,
+                                        "role": "EMPLOYEE",
+                                        "departmentId": 1,
+                                        "urlPhoto": "https://example.com/photo.jpg",
+                                        "puntos": 150
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista vacía", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @GetMapping("/finished")
     public ResponseEntity<ApiResponse<List<UserResponse>>> getEmployeesFinished(){
         List<Employee> users = userService.findEmployeesFinished();
@@ -142,6 +673,55 @@ public class UsersController {
         return ResponseEntity.ok(ApiResponse.success("Usuarios que han finalizado cursos", userResponses));
     }
 
+    @Operation(
+        summary = "Obtener empleados que finalizaron un curso específico",
+        description = "Devuelve la lista de empleados que han completado un curso en particular.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del curso",
+                required = true,
+                example = "5"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Usuarios que han finalizado el curso especificado",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Usuarios que han finalizado el curso: 5",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "email": "empleado@example.com",
+                                        "name": "Juan",
+                                        "lastname": "Pérez",
+                                        "status": true,
+                                        "role": "EMPLOYEE",
+                                        "departmentId": 1,
+                                        "urlPhoto": "https://example.com/photo.jpg",
+                                        "puntos": 150
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista vacía", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Curso no encontrado para filtrar", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @GetMapping("/finished/{id}")
     public ResponseEntity<ApiResponse<List<UserResponse>>> getEmployeesFinishedByIdCourse(@PathVariable Long id){
         List<Employee> users = userService.findEmployeesFinishedByCourseId(id);
@@ -154,6 +734,66 @@ public class UsersController {
         return ResponseEntity.ok(ApiResponse.success("Usuarios que han finalizado el curso: " + id, userResponses));
     }
 
+    @Operation(
+        summary = "Obtener ranking de empleados por departamento",
+        description = "Devuelve el ranking de empleados ordenados por puntos dentro de un departamento específico.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del departamento",
+                required = true,
+                example = "1"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Ranking obtenido para el departamento especificado",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Ranking obtenido para el departamento: 1",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "email": "empleado1@example.com",
+                                        "name": "Juan",
+                                        "lastname": "Pérez",
+                                        "status": true,
+                                        "role": "EMPLOYEE",
+                                        "departmentId": 1,
+                                        "urlPhoto": "https://example.com/photo.jpg",
+                                        "puntos": 250
+                                    },
+                                    {
+                                        "id": 3,
+                                        "email": "empleado2@example.com",
+                                        "name": "Carlos",
+                                        "lastname": "López",
+                                        "status": true,
+                                        "role": "EMPLOYEE",
+                                        "departmentId": 1,
+                                        "urlPhoto": "https://example.com/photo3.jpg",
+                                        "puntos": 180
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T15:50:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista vacía", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Departamento no encontrado para filtrar", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @GetMapping("/ranking/{id}")
     public ResponseEntity<ApiResponse<List<UserResponse>>> getRanking(@PathVariable Long id){
         List<Employee> users = userService.getRankingByDepartment(id);

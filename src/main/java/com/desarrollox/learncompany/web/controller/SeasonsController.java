@@ -18,15 +18,72 @@ import com.desarrollox.learncompany.web.dto.SeasonResponse;
 import com.desarrollox.learncompany.web.webMapper.SeasonWebMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/seasons")
 @RequiredArgsConstructor
+@Tag(
+    name = "Seasons",
+    description = "Endpoints para la gestión de temporadas de cursos dentro de la organización."
+)
 public class SeasonsController {
 
     private final ISeasonService seasonService;
     private final SeasonWebMapper seasonWebMapper;
     
+    @Operation(
+        summary = "Crear una nueva temporada",
+        description = "Permite registrar una nueva temporada para la organización de cursos.",
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    name = "Ejemplo de solicitud",
+                    value = """
+                        {
+                            "duration": 720,
+                            "name": "Temporada Primavera 2025"
+                        }
+                        """
+                )
+            )
+        ),
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "201",
+                description = "Temporada creada correctamente",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Temporada creada correctamente",
+                                "data": {
+                                    "id": 1,
+                                    "duration": 720,
+                                    "name": "Temporada Primavera 2025",
+                                    "courses": []
+                                },
+                                "timestamp": "2025-10-18T15:40:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @PostMapping
     public ResponseEntity<ApiResponse<SeasonResponse>> createSeason(@Valid @RequestBody SeasonRequest request){
         Season season = seasonWebMapper.requestToDomain(request);
@@ -35,6 +92,47 @@ public class SeasonsController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Temporada creada correctamente", response));
     }
 
+    @Operation(
+        summary = "Obtener todas las temporadas",
+        description = "Devuelve la lista completa de temporadas registradas en el sistema.",
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Temporadas encontradas",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Temporadas encontradas",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "duration": 720,
+                                        "name": "Temporada Primavera 2025",
+                                        "courses": []
+                                    },
+                                    {
+                                        "id": 2,
+                                        "duration": 672,
+                                        "name": "Temporada Verano 2025",
+                                        "courses": []
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T15:40:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista vacía", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @GetMapping
     public ResponseEntity<ApiResponse<List<SeasonResponse>>> getAllSeansos(){
         List<Season> seasons = seasonService.getAllSeasons();
@@ -47,6 +145,47 @@ public class SeasonsController {
         return ResponseEntity.ok(ApiResponse.success("Temporadas encontradas", seasonsResponses));
     }
 
+    @Operation(
+        summary = "Obtener temporada por ID",
+        description = "Devuelve la información detallada de una temporada según su ID.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador de la temporada",
+                required = true,
+                example = "1"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                responseCode = "200",
+                description = "Temporada encontrada correctamente",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "temporada encontrada correctamente",
+                                "data": {
+                                    "id": 1,
+                                    "duration": 720,
+                                    "name": "Temporada Primavera 2025",
+                                    "courses": []
+                                },
+                                "timestamp": "2025-10-18T15:40:00.123456789"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Temporada no encontrada", content = @Content()),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
+        }
+    )
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<SeasonResponse>> getSeasonById(@PathVariable Long id){
         Season season = seasonService.getSeasonById(id).get();
