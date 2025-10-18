@@ -13,10 +13,23 @@ import com.desarrollox.learncompany.persistence.entity.UserEntity;
 @Repository
 public interface JpaRepositoryUser extends JpaRepository<UserEntity, Long>{
 
-    @Query(value = "SELECT * FROM employees e " +
-               "WHERE e.department_id = :departmentId " +
-               "ORDER BY e.puntos DESC",
-                nativeQuery = true)
+    @Query(value = """
+        SELECT 
+            u.id,
+            u.email,
+            u.password,
+            u.name,
+            u.lastname,
+            u.status,
+            u.role,
+            u.department_id,
+            u.url_photo,
+            e.puntos
+        FROM users u
+        INNER JOIN employees e ON u.id = e.id
+        WHERE u.department_id = :departmentId
+        ORDER BY e.puntos DESC
+        """, nativeQuery = true)
     List<EmployeeEntity> findByDepartmentOrderByPuntosDesc(@Param("departmentId") Long departmentId);
 
     @Query("SELECT u FROM UserEntity u " +
