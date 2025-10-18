@@ -11,6 +11,9 @@ import lombok.experimental.SuperBuilder;
 public class ModuleResponse {
     private Long id;
     private Long courseId;
+    private String urlVideo;
+    private String urlGuia;
+    private int hierarchy;
     private String title;
     private List<AssessmentTemplateResponse> assessmentTemplate;
 }
