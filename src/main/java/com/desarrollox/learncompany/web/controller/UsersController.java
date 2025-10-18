@@ -138,7 +138,7 @@ public class UsersController {
             return ResponseEntity.noContent().build();
         }
 
-        List<UserResponse> userResponses = users.stream().map(userWebMapper::userToResponse).collect(Collectors.toList());
+        List<UserResponse> userResponses = users.stream().map(userWebMapper::employeeToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Usuarios que han finalizado cursos", userResponses));
     }
 
@@ -150,7 +150,19 @@ public class UsersController {
             return ResponseEntity.noContent().build();
         }
 
-        List<UserResponse> userResponses = users.stream().map(userWebMapper::userToResponse).collect(Collectors.toList());
+        List<UserResponse> userResponses = users.stream().map(userWebMapper::employeeToResponse).collect(Collectors.toList());
         return ResponseEntity.ok(ApiResponse.success("Usuarios que han finalizado el curso: " + id, userResponses));
+    }
+
+    @GetMapping("/ranking/{id}")
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getRanking(@PathVariable Long id){
+        List<Employee> users = userService.getRankingByDepartment(id);
+
+        if(users.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        List<UserResponse> responses = users.stream().map(userWebMapper::employeeToResponse).collect(Collectors.toList());
+        return ResponseEntity.ok(ApiResponse.success("Ranking obtenido para el departamento: " + id, responses));
     }
 }

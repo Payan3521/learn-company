@@ -6,3 +6,5 @@
     INNER JOIN users u ON e.id = u.id' at line 13
 2025-10-17 18:11:09 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=140) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ': courseId
     INNER JOIN users u ON e.id = u.id' at line 13
+2025-10-17 19:27:02 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=194) Unknown column 'e.department_id' in 'WHERE'
+2025-10-17 19:30:27 [http-nio-8080-exec-1] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Unknown label 'department_id'. Possible value [e.puntos, e.id, id, puntos]
