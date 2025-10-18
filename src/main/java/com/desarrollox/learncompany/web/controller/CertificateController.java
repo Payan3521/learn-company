@@ -139,7 +139,7 @@ public class CertificateController {
 
     @Operation(
         summary = "Obtener certificados por id de empleado",
-        description = "Busca y devuelve un empleado por el id de un empleado especifico",
+        description = "Busca y devuelve un certificado por el id de un empleado especifico",
         parameters = {
             @Parameter(
                 name = "id",
@@ -197,7 +197,7 @@ public class CertificateController {
         parameters = {
             @Parameter(
                 name = "id",
-                description = "Identificador de la certificado",
+                description = "Identificador de el certificado",
                 required = true,
                 example = "1"
             )
