@@ -22,6 +22,15 @@ public class ModuleEntity {
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     private CourseEntity course;
 
+    @Column(name = "url_video", nullable = false)
+    private String urlVideo;
+
+    @Column(name = "url_guia", nullable = false)
+    private String urlGuia;
+
+    @Column(name = "hierarchy", nullable = false)
+    private int hierarchy;
+
     @Column(name = "title", nullable = false)
     private String title;
 
