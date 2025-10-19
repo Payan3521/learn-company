@@ -62,8 +62,8 @@ public class AssessmentTemplateController {
                     )
                 )
             ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Plantilla de evaluación no encontrada"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor")
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Plantilla de evaluación no encontrada", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content)
         }
     )
     @GetMapping("/module/{id}")
@@ -136,8 +136,8 @@ public class AssessmentTemplateController {
                     )
                 )
             ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Plantilla de evaluación no encontrada"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor")
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Plantilla de evaluación no encontrada", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content)
         }
     )
     @GetMapping("/{id}")
@@ -190,8 +190,9 @@ public class AssessmentTemplateController {
                     )
                 )
             ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Plantilla de evaluación no encontrada"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor")
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Plantilla de evaluación no encontrada", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista sin contenido", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content)
         }
     )
     @GetMapping("/feedback/{id}")
