@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.desarrollox.learncompany.core.logging.LoggingService;
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.model.Season;
 import com.desarrollox.learncompany.domain.service.ISeasonService;
@@ -35,7 +36,8 @@ public class SeasonsController {
 
     private final ISeasonService seasonService;
     private final SeasonWebMapper seasonWebMapper;
-    
+    private final LoggingService loggingService;
+
     @Operation(
         summary = "Crear una nueva temporada",
         description = "Permite registrar una nueva temporada para la organización de cursos.",
@@ -85,11 +87,23 @@ public class SeasonsController {
         }
     )
     @PostMapping
-    public ResponseEntity<ApiResponse<SeasonResponse>> createSeason(@Valid @RequestBody SeasonRequest request){
-        Season season = seasonWebMapper.requestToDomain(request);
-        Season seasonSaved = seasonService.creatSeason(season);
-        SeasonResponse response = seasonWebMapper.domainToResponse(seasonSaved);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Temporada creada correctamente", response));
+    public ResponseEntity<ApiResponse<SeasonResponse>> createSeason(@Valid @RequestBody SeasonRequest request) {
+        loggingService.logInfo("Iniciando creación de Season con nombre: {}", 
+                request != null && request.getName() != null ? request.getName() : "null");
+        try {
+            Season season = seasonWebMapper.requestToDomain(request);
+            Season seasonSaved = seasonService.creatSeason(season);
+            SeasonResponse response = seasonWebMapper.domainToResponse(seasonSaved);
+            loggingService.logInfo("Season creada exitosamente con ID: {} y nombre: {}", 
+                    seasonSaved.getId(), seasonSaved.getName());
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(ApiResponse.success("Temporada creada correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al crear Season con nombre: {}: {}", 
+                    request != null && request.getName() != null ? request.getName() : "null", 
+                    e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -134,15 +148,25 @@ public class SeasonsController {
         }
     )
     @GetMapping
-    public ResponseEntity<ApiResponse<List<SeasonResponse>>> getAllSeansos(){
-        List<Season> seasons = seasonService.getAllSeasons();
+    public ResponseEntity<ApiResponse<List<SeasonResponse>>> getAllSeansos() {
+        loggingService.logInfo("Obteniendo todas las Seasons");
+        try {
+            List<Season> seasons = seasonService.getAllSeasons();
 
-        if(seasons.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (seasons.isEmpty()) {
+                loggingService.logWarning("No se encontraron Seasons");
+                return ResponseEntity.noContent().build();
+            }
+
+            List<SeasonResponse> seasonsResponses = seasons.stream()
+                    .map(seasonWebMapper::domainToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Seasons", seasonsResponses.size());
+            return ResponseEntity.ok(ApiResponse.success("Temporadas encontradas", seasonsResponses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener todas las Seasons: {}", e.getMessage(), e);
+            throw e;
         }
-
-        List<SeasonResponse> seasonsResponses = seasons.stream().map(seasonWebMapper::domainToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Temporadas encontradas", seasonsResponses));
     }
 
     @Operation(
@@ -187,9 +211,17 @@ public class SeasonsController {
         }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<SeasonResponse>> getSeasonById(@PathVariable Long id){
-        Season season = seasonService.getSeasonById(id).get();
-        SeasonResponse response = seasonWebMapper.domainToResponse(season);
-        return ResponseEntity.ok(ApiResponse.success("temporada encontrada correctamente", response));
+    public ResponseEntity<ApiResponse<SeasonResponse>> getSeasonById(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo Season con ID: {}", id);
+        try {
+            Season season = seasonService.getSeasonById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Season con ID " + id + " no encontrada"));
+            SeasonResponse response = seasonWebMapper.domainToResponse(season);
+            loggingService.logInfo("Season ID {} obtenida exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("temporada encontrada correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Season ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 }

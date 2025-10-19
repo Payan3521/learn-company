@@ -115,10 +115,22 @@ public class UsersController {
     )
     @PostMapping("/employee")
     public ResponseEntity<ApiResponse<UserResponse>> createEmployee(@Valid @RequestBody EmployeeRequest request) {
-        Employee employee = employeeWebMapper.requestToDomain(request);
-        Employee employeeSaved = userService.createEmployee(employee);
-        UserResponse userResponse = userWebMapper.employeeToResponse(employeeSaved);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Empleado registrado correctamente", userResponse));
+        loggingService.logInfo("Iniciando creación de Employee con email: {}", 
+                request != null && request.getEmail() != null ? request.getEmail() : "null");
+        try {
+            Employee employee = employeeWebMapper.requestToDomain(request);
+            Employee employeeSaved = userService.createEmployee(employee);
+            UserResponse userResponse = userWebMapper.employeeToResponse(employeeSaved);
+            loggingService.logInfo("Employee creado exitosamente con ID: {} y email: {}", 
+                    employeeSaved.getId(), employeeSaved.getEmail());
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(ApiResponse.success("Empleado registrado correctamente", userResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al crear Employee con email: {}: {}", 
+                    request != null && request.getEmail() != null ? request.getEmail() : "null", 
+                    e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -187,10 +199,22 @@ public class UsersController {
     )
     @PostMapping("/instructor")
     public ResponseEntity<ApiResponse<UserResponse>> createInstructor(@Valid @RequestBody InstructorRequest request) {
-        Instructor instructor = instructorWebMapper.requestToDomain(request);
-        Instructor employeeSaved = userService.createInstructor(instructor);
-        UserResponse userResponse = userWebMapper.instructorToResponse(employeeSaved);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Instructor registrado correctamente", userResponse));
+        loggingService.logInfo("Iniciando creación de Instructor con email: {}", 
+                request != null && request.getEmail() != null ? request.getEmail() : "null");
+        try {
+            Instructor instructor = instructorWebMapper.requestToDomain(request);
+            Instructor instructorSaved = userService.createInstructor(instructor);
+            UserResponse userResponse = userWebMapper.instructorToResponse(instructorSaved);
+            loggingService.logInfo("Instructor creado exitosamente con ID: {} y email: {}", 
+                    instructorSaved.getId(), instructorSaved.getEmail());
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(ApiResponse.success("Instructor registrado correctamente", userResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al crear Instructor con email: {}: {}", 
+                    request != null && request.getEmail() != null ? request.getEmail() : "null", 
+                    e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -240,10 +264,18 @@ public class UsersController {
         }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<UserResponse>> getUsersById(@PathVariable Long id){
-        User user = userService.findById(id).get();
-        UserResponse userResponse = userWebMapper.userToResponse(user);
-        return ResponseEntity.ok(ApiResponse.success("Usuario encontrado", userResponse));
+    public ResponseEntity<ApiResponse<UserResponse>> getUsersById(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo User con ID: {}", id);
+        try {
+            User user = userService.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Usuario con ID " + id + " no encontrado"));
+            UserResponse userResponse = userWebMapper.userToResponse(user);
+            loggingService.logInfo("User ID {} obtenido exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Usuario encontrado", userResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener User ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -296,15 +328,25 @@ public class UsersController {
         }
     )
     @GetMapping
-    public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers(){
-        List<User> users = userService.findAll();
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers() {
+        loggingService.logInfo("Obteniendo todos los Users");
+        try {
+            List<User> users = userService.findAll();
 
-        if(users.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (users.isEmpty()) {
+                loggingService.logWarning("No se encontraron Users");
+                return ResponseEntity.noContent().build();
+            }
+
+            List<UserResponse> userResponses = users.stream()
+                    .map(userWebMapper::userToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Users", userResponses.size());
+            return ResponseEntity.ok(ApiResponse.success("Usuarios encontrados", userResponses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener todos los Users: {}", e.getMessage(), e);
+            throw e;
         }
-
-        List<UserResponse> userResponses = users.stream().map(userWebMapper::userToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Usuarios encontrados", userResponses));
     }
 
     @Operation(
@@ -367,56 +409,29 @@ public class UsersController {
     public ResponseEntity<ApiResponse<List<UserResponse>>> getByUsersFilters(
             @RequestParam(required = false) Long departmentId,
             @RequestParam(required = false) Role role,
-            @RequestParam(required = false, defaultValue = "true") boolean status
-        ){
-        List<User> users = userService.findUsersByFilters(departmentId, role, status);
+            @RequestParam(required = false, defaultValue = "true") boolean status) {
+        loggingService.logInfo("Obteniendo Users con filtros - departmentId: {}, role: {}, status: {}", 
+                departmentId != null ? departmentId : "null", role != null ? role : "null", status);
+        try {
+            List<User> users = userService.findUsersByFilters(departmentId, role, status);
 
-        if(users.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (users.isEmpty()) {
+                loggingService.logWarning("No se encontraron Users con filtros - departmentId: {}, role: {}, status: {}", 
+                        departmentId != null ? departmentId : "null", role != null ? role : "null", status);
+                return ResponseEntity.noContent().build();
+            }
+
+            List<UserResponse> userResponses = users.stream()
+                    .map(userWebMapper::userToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Users con filtros - departmentId: {}, role: {}, status: {}", 
+                    userResponses.size(), departmentId != null ? departmentId : "null", role != null ? role : "null", status);
+            return ResponseEntity.ok(ApiResponse.success("Usuarios encontrados", userResponses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Users con filtros - departmentId: {}, role: {}, status: {}: {}", 
+                    departmentId != null ? departmentId : "null", role != null ? role : "null", status, e.getMessage(), e);
+            throw e;
         }
-
-        List<UserResponse> userResponses = users.stream().map(userWebMapper::userToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Usuarios encontrados", userResponses));
-    }
-
-    @Operation(
-        summary = "Obtener información del usuario autenticado",
-        description = "Devuelve la información del usuario que está actualmente autenticado.",
-        responses = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
-                responseCode = "200",
-                description = "Usuario autenticado",
-                content = @Content(
-                    mediaType = "application/json",
-                    examples = @ExampleObject(
-                        name = "Ejemplo de respuesta exitosa",
-                        value = """
-                            {
-                                "success": true,
-                                "message": "Usuario autenticado",
-                                "data": {
-                                    "id": 1,
-                                    "email": "empleado@example.com",
-                                    "name": "Juan",
-                                    "lastname": "Pérez",
-                                    "status": true,
-                                    "role": "EMPLOYEE",
-                                    "departmentId": 1,
-                                    "urlPhoto": "https://example.com/photo.jpg"
-                                },
-                                "timestamp": "2025-10-18T15:50:00.123456789"
-                            }
-                            """
-                    )
-                )
-            ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "No autenticado", content = @Content()),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content())
-        }
-    )
-    @GetMapping("/me")
-    public ResponseEntity<?> getMe(){
-        throw new IllegalArgumentException();
     }
 
     @Operation(
@@ -485,11 +500,19 @@ public class UsersController {
         }
     )
     @PutMapping("/employee/{id}")
-    public ResponseEntity<ApiResponse<UserResponse>> updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeUpdateRequest request){
-        Employee employee = employeeWebMapper.updateRequestToDomain(request);
-        User userUpdated = userService.updateUser(id, employee).get();
-        UserResponse userResponse = userWebMapper.employeeToResponse( (Employee)userUpdated);
-        return ResponseEntity.ok(ApiResponse.success("Empleado actualizado correctamente", userResponse));
+    public ResponseEntity<ApiResponse<UserResponse>> updateEmployee(@PathVariable Long id, @Valid @RequestBody EmployeeUpdateRequest request) {
+        loggingService.logInfo("Iniciando actualización de Employee con ID: {}", id);
+        try {
+            Employee employee = employeeWebMapper.updateRequestToDomain(request);
+            User userUpdated = userService.updateUser(id, employee)
+                    .orElseThrow(() -> new IllegalArgumentException("Empleado con ID " + id + " no encontrado"));
+            UserResponse userResponse = userWebMapper.employeeToResponse((Employee) userUpdated);
+            loggingService.logInfo("Employee ID {} actualizado exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Empleado actualizado correctamente", userResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al actualizar Employee ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -562,11 +585,19 @@ public class UsersController {
         }
     )
     @PutMapping("/instructor/{id}")
-    public ResponseEntity<ApiResponse<UserResponse>> updateInstructor(@PathVariable Long id, @Valid @RequestBody InstructorUpdateRequest request){
-        Instructor instructor = instructorWebMapper.updateRequestToDomain(request);
-        User userUpdated = userService.updateUser(id, instructor).get();
-        UserResponse userResponse = userWebMapper.instructorToResponse( (Instructor)userUpdated);
-        return ResponseEntity.ok(ApiResponse.success("Instructor actualizado correctamente", userResponse));
+    public ResponseEntity<ApiResponse<UserResponse>> updateInstructor(@PathVariable Long id, @Valid @RequestBody InstructorUpdateRequest request) {
+        loggingService.logInfo("Iniciando actualización de Instructor con ID: {}", id);
+        try {
+            Instructor instructor = instructorWebMapper.updateRequestToDomain(request);
+            User userUpdated = userService.updateUser(id, instructor)
+                    .orElseThrow(() -> new IllegalArgumentException("Instructor con ID " + id + " no encontrado"));
+            UserResponse userResponse = userWebMapper.instructorToResponse((Instructor) userUpdated);
+            loggingService.logInfo("Instructor ID {} actualizado exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Instructor actualizado correctamente", userResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al actualizar Instructor ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -615,10 +646,18 @@ public class UsersController {
         }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<UserResponse>> deleteUserById(@PathVariable Long id){
-        User userDeleted = userService.delete(id).get();
-        UserResponse userResponse = userWebMapper.userToResponse(userDeleted);
-        return ResponseEntity.ok(ApiResponse.success("Usuario eliminado correctamente", userResponse));
+    public ResponseEntity<ApiResponse<UserResponse>> deleteUserById(@PathVariable Long id) {
+        loggingService.logInfo("Iniciando eliminación de User con ID: {}", id);
+        try {
+            User userDeleted = userService.delete(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Usuario con ID " + id + " no encontrado"));
+            UserResponse userResponse = userWebMapper.userToResponse(userDeleted);
+            loggingService.logInfo("User ID {} eliminado exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Usuario eliminado correctamente", userResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al eliminar User ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -662,15 +701,25 @@ public class UsersController {
         }
     )
     @GetMapping("/finished")
-    public ResponseEntity<ApiResponse<List<UserResponse>>> getEmployeesFinished(){
-        List<Employee> users = userService.findEmployeesFinished();
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getEmployeesFinished() {
+        loggingService.logInfo("Obteniendo Employees que han finalizado cursos");
+        try {
+            List<Employee> users = userService.findEmployeesFinished();
 
-        if(users.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (users.isEmpty()) {
+                loggingService.logWarning("No se encontraron Employees que han finalizado cursos");
+                return ResponseEntity.noContent().build();
+            }
+
+            List<UserResponse> userResponses = users.stream()
+                    .map(userWebMapper::employeeToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Employees que han finalizado cursos", userResponses.size());
+            return ResponseEntity.ok(ApiResponse.success("Usuarios que han finalizado cursos", userResponses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Employees que han finalizado cursos: {}", e.getMessage(), e);
+            throw e;
         }
-
-        List<UserResponse> userResponses = users.stream().map(userWebMapper::employeeToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Usuarios que han finalizado cursos", userResponses));
     }
 
     @Operation(
@@ -680,7 +729,6 @@ public class UsersController {
             @Parameter(
                 name = "id",
                 description = "Identificador del curso",
-                required = true,
                 example = "5"
             )
         },
@@ -723,15 +771,25 @@ public class UsersController {
         }
     )
     @GetMapping("/finished/{id}")
-    public ResponseEntity<ApiResponse<List<UserResponse>>> getEmployeesFinishedByIdCourse(@PathVariable Long id){
-        List<Employee> users = userService.findEmployeesFinishedByCourseId(id);
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getEmployeesFinishedByIdCourse(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo Employees que han finalizado el curso ID: {}", id);
+        try {
+            List<Employee> users = userService.findEmployeesFinishedByCourseId(id);
 
-        if(users.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (users.isEmpty()) {
+                loggingService.logWarning("No se encontraron Employees que han finalizado el curso ID: {}", id);
+                return ResponseEntity.noContent().build();
+            }
+
+            List<UserResponse> userResponses = users.stream()
+                    .map(userWebMapper::employeeToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Employees que han finalizado el curso ID: {}", userResponses.size(), id);
+            return ResponseEntity.ok(ApiResponse.success("Usuarios que han finalizado el curso: " + id, userResponses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Employees que han finalizado el curso ID {}: {}", id, e.getMessage(), e);
+            throw e;
         }
-
-        List<UserResponse> userResponses = users.stream().map(userWebMapper::employeeToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Usuarios que han finalizado el curso: " + id, userResponses));
     }
 
     @Operation(
@@ -795,14 +853,24 @@ public class UsersController {
         }
     )
     @GetMapping("/ranking/{id}")
-    public ResponseEntity<ApiResponse<List<UserResponse>>> getRanking(@PathVariable Long id){
-        List<Employee> users = userService.getRankingByDepartment(id);
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getRanking(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo ranking de Employees para departmentId: {}", id);
+        try {
+            List<Employee> users = userService.getRankingByDepartment(id);
 
-        if(users.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (users.isEmpty()) {
+                loggingService.logWarning("No se encontraron Employees para el ranking de departmentId: {}", id);
+                return ResponseEntity.noContent().build();
+            }
+
+            List<UserResponse> responses = users.stream()
+                    .map(userWebMapper::employeeToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Employees para el ranking de departmentId: {}", responses.size(), id);
+            return ResponseEntity.ok(ApiResponse.success("Ranking obtenido para el departamento: " + id, responses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener ranking de Employees para departmentId {}: {}", id, e.getMessage(), e);
+            throw e;
         }
-
-        List<UserResponse> responses = users.stream().map(userWebMapper::employeeToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Ranking obtenido para el departamento: " + id, responses));
     }
 }

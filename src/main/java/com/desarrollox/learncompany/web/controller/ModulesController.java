@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.desarrollox.learncompany.core.logging.LoggingService;
 import com.desarrollox.learncompany.domain.model.Module;
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.service.IModuleService;
@@ -35,7 +36,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class ModulesController {
 
     private final IModuleService moduleService;
-    private final ModuleWebMapper moduleWebMapper; 
+    private final ModuleWebMapper moduleWebMapper;
+    private final LoggingService loggingService;
 
     @Operation(
         summary = "Crear un nuevo módulo",
@@ -114,11 +116,25 @@ public class ModulesController {
         }
     )
     @PostMapping
-    public ResponseEntity<ApiResponse<ModuleResponse>> createModule(@Valid @RequestBody ModuleRequest request){
-        Module module = moduleWebMapper.requestToDomain(request);
-        Module createdModule = moduleService.createModule(module);
-        ModuleResponse response = moduleWebMapper.domainToResponse(createdModule);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Modulo creado correctamente", response));
+    public ResponseEntity<ApiResponse<ModuleResponse>> createModule(@Valid @RequestBody ModuleRequest request) {
+        loggingService.logInfo("Iniciando creación de Module para courseId: {} y title: {}", 
+                request != null && request.getCourseId() != null ? request.getCourseId() : "null", 
+                request != null && request.getTitle() != null ? request.getTitle() : "null");
+        try {
+            Module module = moduleWebMapper.requestToDomain(request);
+            Module createdModule = moduleService.createModule(module);
+            ModuleResponse response = moduleWebMapper.domainToResponse(createdModule);
+            loggingService.logInfo("Module creado exitosamente con ID: {} para courseId: {}", 
+                    createdModule.getId(), createdModule.getCourse().getId());
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(ApiResponse.success("Modulo creado correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al crear Module para courseId: {} y title: {}: {}", 
+                    request != null && request.getCourseId() != null ? request.getCourseId() : "null", 
+                    request != null && request.getTitle() != null ? request.getTitle() : "null", 
+                    e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -166,10 +182,18 @@ public class ModulesController {
         }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<ModuleResponse>> getModuleById(@PathVariable Long id){
-        Module module = moduleService.getModuleById(id).get();
-        ModuleResponse response = moduleWebMapper.domainToResponse(module);
-        return ResponseEntity.ok(ApiResponse.success("Modulo encontrado correctamente", response));
+    public ResponseEntity<ApiResponse<ModuleResponse>> getModuleById(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo Module con ID: {}", id);
+        try {
+            Module module = moduleService.getModuleById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Module con ID " + id + " no encontrado"));
+            ModuleResponse response = moduleWebMapper.domainToResponse(module);
+            loggingService.logInfo("Module ID {} obtenido exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Modulo encontrado correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Module ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -220,15 +244,25 @@ public class ModulesController {
         }
     )
     @GetMapping
-    public ResponseEntity<ApiResponse<List<ModuleResponse>>> getAllModules(){
-        List<Module> modules = moduleService.getAllModules();
+    public ResponseEntity<ApiResponse<List<ModuleResponse>>> getAllModules() {
+        loggingService.logInfo("Obteniendo todos los Modules");
+        try {
+            List<Module> modules = moduleService.getAllModules();
 
-        if(modules.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (modules.isEmpty()) {
+                loggingService.logWarning("No se encontraron Modules");
+                return ResponseEntity.noContent().build();
+            }
+
+            List<ModuleResponse> response = modules.stream()
+                    .map(moduleWebMapper::domainToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Modules", response.size());
+            return ResponseEntity.ok(ApiResponse.success("Modulos obtenidos correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener todos los Modules: {}", e.getMessage(), e);
+            throw e;
         }
-
-        List<ModuleResponse> response = modules.stream().map(moduleWebMapper::domainToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Modulos obtenidos correctamente", response));
     }
 
     @Operation(
@@ -288,15 +322,25 @@ public class ModulesController {
         }
     )
     @GetMapping("/course/{id}")
-    public ResponseEntity<ApiResponse<List<ModuleResponse>>> getModulesByCourseId(@PathVariable Long id){
-        List<Module> modules = moduleService.getModulesByCourseId(id);
+    public ResponseEntity<ApiResponse<List<ModuleResponse>>> getModulesByCourseId(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo Modules para courseId: {}", id);
+        try {
+            List<Module> modules = moduleService.getModulesByCourseId(id);
 
-        if(modules.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (modules.isEmpty()) {
+                loggingService.logWarning("No se encontraron Modules para courseId: {}", id);
+                return ResponseEntity.noContent().build();
+            }
+
+            List<ModuleResponse> response = modules.stream()
+                    .map(moduleWebMapper::domainToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Modules para courseId: {}", response.size(), id);
+            return ResponseEntity.ok(ApiResponse.success("Modulos obtenidos correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Modules para courseId {}: {}", id, e.getMessage(), e);
+            throw e;
         }
-        
-        List<ModuleResponse> response = modules.stream().map(moduleWebMapper::domainToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Modulos obtenidos correctamente", response));
     }
 
     @Operation(
@@ -344,9 +388,17 @@ public class ModulesController {
         }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<ModuleResponse>> deleteModule(@PathVariable Long id){
-        Module moduleDeleted = moduleService.deleteModule(id).get();
-        ModuleResponse moduleResponse = moduleWebMapper.domainToResponse(moduleDeleted);
-        return ResponseEntity.ok(ApiResponse.success("Modulo eliminado correctamente", moduleResponse));
+    public ResponseEntity<ApiResponse<ModuleResponse>> deleteModule(@PathVariable Long id) {
+        loggingService.logInfo("Iniciando eliminación de Module con ID: {}", id);
+        try {
+            Module moduleDeleted = moduleService.deleteModule(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Module con ID " + id + " no encontrado"));
+            ModuleResponse moduleResponse = moduleWebMapper.domainToResponse(moduleDeleted);
+            loggingService.logInfo("Module ID {} eliminado exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Modulo eliminado correctamente", moduleResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al eliminar Module ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 }

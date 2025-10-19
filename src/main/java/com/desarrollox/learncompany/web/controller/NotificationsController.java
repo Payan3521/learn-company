@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.desarrollox.learncompany.core.logging.LoggingService;
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.model.Notification;
 import com.desarrollox.learncompany.domain.service.INotificationService;
@@ -36,6 +37,7 @@ public class NotificationsController {
 
     private final INotificationService notificationService;
     private final NotificationWebMapper notificationWebMapper;
+    private final LoggingService loggingService;
 
     @Operation(
         summary = "Crear una nueva notificación",
@@ -100,11 +102,25 @@ public class NotificationsController {
         }
     )
     @PostMapping
-    public ResponseEntity<ApiResponse<NotificationResponse>> createNotification(@Valid @RequestBody NotificationRequest request){
-        Notification notification = notificationWebMapper.requestToDomain(request);
-        Notification createdNotification = notificationService.createNotification(notification);
-        NotificationResponse response = notificationWebMapper.domainToResponse(createdNotification);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Notificacion creada correctamente", response));
+    public ResponseEntity<ApiResponse<NotificationResponse>> createNotification(@Valid @RequestBody NotificationRequest request) {
+        loggingService.logInfo("Iniciando creación de Notification para userId: {} y title: {}", 
+                request != null && request.getUserId() != null ? request.getUserId() : "null", 
+                request != null && request.getTitle() != null ? request.getTitle() : "null");
+        try {
+            Notification notification = notificationWebMapper.requestToDomain(request);
+            Notification createdNotification = notificationService.createNotification(notification);
+            NotificationResponse response = notificationWebMapper.domainToResponse(createdNotification);
+            loggingService.logInfo("Notification creada exitosamente con ID: {} para userId: {}", 
+                    createdNotification.getId(), createdNotification.getUser().getId());
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(ApiResponse.success("Notificacion creada correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al crear Notification para userId: {} y title: {}: {}", 
+                    request != null && request.getUserId() != null ? request.getUserId() : "null", 
+                    request != null && request.getTitle() != null ? request.getTitle() : "null", 
+                    e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -165,15 +181,25 @@ public class NotificationsController {
         }
     )
     @GetMapping
-    public ResponseEntity<ApiResponse<List<NotificationResponse>>> getAllNotifications(){
-        List<Notification> notifications = notificationService.getAllNotifications();
+    public ResponseEntity<ApiResponse<List<NotificationResponse>>> getAllNotifications() {
+        loggingService.logInfo("Obteniendo todas las Notifications");
+        try {
+            List<Notification> notifications = notificationService.getAllNotifications();
 
-        if(notifications.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (notifications.isEmpty()) {
+                loggingService.logWarning("No se encontraron Notifications");
+                return ResponseEntity.noContent().build();
+            }
+
+            List<NotificationResponse> response = notifications.stream()
+                    .map(notificationWebMapper::domainToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Notifications", response.size());
+            return ResponseEntity.ok(ApiResponse.success("Notificaciones obtenidas correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener todas las Notifications: {}", e.getMessage(), e);
+            throw e;
         }
-
-        List<NotificationResponse> response = notifications.stream().map(notificationWebMapper::domainToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Notificaciones obtenidas correctamente", response));
     }
 
     @Operation(
@@ -226,10 +252,18 @@ public class NotificationsController {
         }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<NotificationResponse>> getNotificationsById(@PathVariable Long id){
-        Notification notification = notificationService.getNotificationById(id).get();
-        NotificationResponse response = notificationWebMapper.domainToResponse(notification);
-        return ResponseEntity.ok(ApiResponse.success("Notificacion obtenida correctamente", response));
+    public ResponseEntity<ApiResponse<NotificationResponse>> getNotificationsById(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo Notification con ID: {}", id);
+        try {
+            Notification notification = notificationService.getNotificationById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Notification con ID " + id + " no encontrada"));
+            NotificationResponse response = notificationWebMapper.domainToResponse(notification);
+            loggingService.logInfo("Notification ID {} obtenida exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Notificacion obtenida correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Notification ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -285,15 +319,25 @@ public class NotificationsController {
         }
     )
     @GetMapping("/users/{id}")
-    public ResponseEntity<ApiResponse<List<NotificationResponse>>> getUsersById(@PathVariable Long id){
-        List<Notification> notifications = notificationService.getNotificationsByUserId(id);
+    public ResponseEntity<ApiResponse<List<NotificationResponse>>> getUsersById(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo Notifications para userId: {}", id);
+        try {
+            List<Notification> notifications = notificationService.getNotificationsByUserId(id);
 
-        if(notifications.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (notifications.isEmpty()) {
+                loggingService.logWarning("No se encontraron Notifications para userId: {}", id);
+                return ResponseEntity.noContent().build();
+            }
+
+            List<NotificationResponse> response = notifications.stream()
+                    .map(notificationWebMapper::domainToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Notifications para userId: {}", response.size(), id);
+            return ResponseEntity.ok(ApiResponse.success("Notificaciones obtenidas correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Notifications para userId {}: {}", id, e.getMessage(), e);
+            throw e;
         }
-        
-        List<NotificationResponse> response = notifications.stream().map(notificationWebMapper::domainToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Notificaciones obtenidas correctamente", response));
     }
 
     @Operation(
@@ -346,9 +390,16 @@ public class NotificationsController {
         }
     )
     @PatchMapping("/mark-read/{id}")
-    public ResponseEntity<ApiResponse<NotificationResponse>> markNotificationRead(@PathVariable Long id){
-        Notification notification = notificationService.markAsRead(id);
-        NotificationResponse response = notificationWebMapper.domainToResponse(notification);
-        return ResponseEntity.ok(ApiResponse.success("Notificacion marcada como leida correctamente", response));
+    public ResponseEntity<ApiResponse<NotificationResponse>> markNotificationRead(@PathVariable Long id) {
+        loggingService.logInfo("Iniciando marcado como leída de Notification con ID: {}", id);
+        try {
+            Notification notification = notificationService.markAsRead(id);
+            NotificationResponse response = notificationWebMapper.domainToResponse(notification);
+            loggingService.logInfo("Notification ID {} marcada como leída exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Notificacion marcada como leida correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al marcar como leída Notification ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 }

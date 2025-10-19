@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.desarrollox.learncompany.core.logging.LoggingService;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
-import com.desarrollox.learncompany.domain.accessDb.IRepositoryIncription;
+import com.desarrollox.learncompany.domain.accessDb.IRepositoryInscription;
 import com.desarrollox.learncompany.domain.exception.CourseNotFoundException;
 import com.desarrollox.learncompany.domain.model.Course;
 import com.desarrollox.learncompany.domain.model.Statistic;
@@ -18,40 +19,60 @@ import lombok.RequiredArgsConstructor;
 public class StatisticService implements IStatisticService {
 
     private final IRepositoryCourse repositoryCourse;
-    private final IRepositoryIncription repositoryIncription;
+    private final IRepositoryInscription repositoryIncription;
+    private final LoggingService loggingService; // Inyectar LoggingService
 
     @Transactional(readOnly = true)
     @Override
     public Optional<Statistic> getStatistic() {
-        // Obtener todos los cursos
-        List<Course> courses = repositoryCourse.findAll();
+        loggingService.logInfo("Iniciando obtención de Statistic");
+        try {
+            // Obtener todos los cursos
+            loggingService.logDebug("Obteniendo todos los Courses");
+            List<Course> courses = repositoryCourse.findAll();
 
-        // Si no hay cursos, retornar vacío
-        if (courses == null || courses.isEmpty()) {
-            throw new CourseNotFoundException("No existen cursos disponibles");
-        }
+            // Si no hay cursos, retornar vacío
+            if (courses == null || courses.isEmpty()) {
+                loggingService.logError("No existen cursos disponibles");
+                throw new CourseNotFoundException("No existen cursos disponibles");
+            }
+            loggingService.logInfo("Se encontraron {} Courses", courses.size());
 
-        for (Course course : courses) {
-            course.setInscriptions(repositoryIncription.findInscriptionsByCourseId(course.getId()));
+            // Asignar inscripciones a cada curso
+            loggingService.logDebug("Obteniendo inscripciones para cada Course");
+            for (Course course : courses) {
+                course.setInscriptions(repositoryIncription.findInscriptionsByCourseId(course.getId()));
+                loggingService.logDebug("Curso ID: {} tiene {} inscripciones", 
+                        course.getId(), course.getTotalInscriptions());
+            }
+
+            // Encontrar el curso con más inscripciones
+            loggingService.logDebug("Buscando curso con más inscripciones");
+            Course courseTop = courses.stream()
+                    .max(Comparator.comparingInt(Course::getTotalInscriptions))
+                    .orElse(null);
+
+            // Encontrar el curso con menos inscripciones
+            loggingService.logDebug("Buscando curso con menos inscripciones");
+            Course courseLess = courses.stream()
+                    .min(Comparator.comparingInt(Course::getTotalInscriptions))
+                    .orElse(null);
+
+            // Si no encontramos cursos, retornar vacío
+            if (courseTop == null || courseLess == null) {
+                loggingService.logWarning("No se encontraron cursos válidos para generar Statistic");
+                return Optional.empty();
+            }
+
+            // Crear y retornar la estadística
+            loggingService.logInfo("Creando Statistic con courseTop ID: {} (inscripciones: {}) y courseLess ID: {} (inscripciones: {})", 
+                    courseTop.getId(), courseTop.getTotalInscriptions(), courseLess.getId(), courseLess.getTotalInscriptions());
+            Statistic statistic = new Statistic(courseTop, courseLess);
+            loggingService.logInfo("Statistic generada exitosamente");
+            return Optional.of(statistic);
+        } catch (Exception e) {
+            loggingService.logError("Error al generar Statistic: {}", e.getMessage(), e);
+            throw e;
         }
-        
-        // Encontrar el curso con más inscripciones
-        Course courseTop = courses.stream()
-            .max(Comparator.comparingInt(Course::getTotalInscriptions))
-            .orElse(null);
-        
-        // Encontrar el curso con menos inscripciones
-        Course courseLess = courses.stream()
-            .min(Comparator.comparingInt(Course::getTotalInscriptions))
-            .orElse(null);
-        
-        // Si no encontramos cursos, retornar vacío
-        if (courseTop == null || courseLess == null) {
-            return Optional.empty();
-        }
-        
-        // Crear y retornar la estadística
-        Statistic statistic = new Statistic(courseTop, courseLess);
-        return Optional.of(statistic);
     }
 }

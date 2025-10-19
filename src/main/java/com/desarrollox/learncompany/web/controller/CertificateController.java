@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.desarrollox.learncompany.core.logging.LoggingService;
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.model.Certificate;
 import com.desarrollox.learncompany.domain.service.ICertificateService;
@@ -26,51 +27,93 @@ public class CertificateController {
 
     private final ICertificateService certificateService;
     private final CertificateWebMapper certificateWebMapper;
-    
+    private final LoggingService loggingService; // Inyectar LoggingService
+
     @PostMapping
-    public ResponseEntity<ApiResponse<CertificateResponse>> createCertificate(@Valid @RequestBody CertificateRequest request){
-        Certificate certificate = certificateWebMapper.requestToDomain(request);
-        Certificate savedCertificate = certificateService.createCertificate(certificate);
-        CertificateResponse response = certificateWebMapper.domainToResponse(savedCertificate);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Certificado creado exitosamente", response));
+    public ResponseEntity<ApiResponse<CertificateResponse>> createCertificate(@Valid @RequestBody CertificateRequest request) {
+        loggingService.logInfo("Iniciando creación de Certificate para userId: {}", 
+                request != null && request.getEmployeeId() != null ? request.getEmployeeId() : "null");
+        try {
+            Certificate certificate = certificateWebMapper.requestToDomain(request);
+            Certificate savedCertificate = certificateService.createCertificate(certificate);
+            CertificateResponse response = certificateWebMapper.domainToResponse(savedCertificate);
+            loggingService.logInfo("Certificate creado exitosamente con ID: {} para userId: {}", 
+                    savedCertificate.getId(), 
+                    savedCertificate.getEmployee().getId());
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(ApiResponse.success("Certificado creado exitosamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al crear Certificate para userId {}: {}", 
+                    request != null && request.getEmployeeId() != null ? request.getEmployeeId() : "null", 
+                    e.getMessage(), e);
+            throw e;
+        }
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<CertificateResponse>>> getAllCertificates(){
-        List<Certificate> certificates = certificateService.getAllCertificates();
+    public ResponseEntity<ApiResponse<List<CertificateResponse>>> getAllCertificates() {
+        loggingService.logInfo("Obteniendo todos los Certificates");
+        try {
+            List<Certificate> certificates = certificateService.getAllCertificates();
 
-        if(certificates.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (certificates.isEmpty()) {
+                loggingService.logWarning("No se encontraron Certificates");
+                return ResponseEntity.noContent().build();
+            }
+
+            List<CertificateResponse> responses = certificates.stream()
+                    .map(certificateWebMapper::domainToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Certificates", responses.size());
+            return ResponseEntity.ok(ApiResponse.success("Lista de certificados", responses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener todos los Certificates: {}", e.getMessage(), e);
+            throw e;
         }
-
-        List<CertificateResponse> responses = certificates.stream()
-                .map(certificateWebMapper::domainToResponse)
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(ApiResponse.success("Lista de certificados", responses));
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<ApiResponse<List<CertificateResponse>>> getUsersById(@PathVariable Long id){
-        List<Certificate> certificates = certificateService.getCertificatesByUserId(id);
+    public ResponseEntity<ApiResponse<List<CertificateResponse>>> getUsersById(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo Certificates para userId: {}", id);
+        try {
+            List<Certificate> certificates = certificateService.getCertificatesByUserId(id);
 
-        if(certificates.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (certificates.isEmpty()) {
+                loggingService.logWarning("No se encontraron Certificates para userId: {}", id);
+                return ResponseEntity.noContent().build();
+            }
+
+            List<CertificateResponse> responses = certificates.stream()
+                    .map(certificateWebMapper::domainToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Certificates para userId: {}", responses.size(), id);
+            return ResponseEntity.ok(ApiResponse.success("Lista de certificados del usuario con id: " + id, responses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Certificates para userId {}: {}", id, e.getMessage(), e);
+            throw e;
         }
-
-        List<CertificateResponse> responses = certificates.stream()
-                .map(certificateWebMapper::domainToResponse)
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(ApiResponse.success("Lista de certificados del usuario con id: " + id, responses));
-        
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<CertificateResponse>> getCertificatesById(@PathVariable Long id) {
-        Certificate certificate = certificateService.getCertificateById(id).get();
-        CertificateResponse response = certificateWebMapper.domainToResponse(certificate);
-        return ResponseEntity.ok(ApiResponse.success("Certificado con id: " + id, response));
+        loggingService.logInfo("Obteniendo Certificate con ID: {}", id);
+        try {
+            Certificate certificate = certificateService.getCertificateById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Certificate con ID " + id + " no encontrado"));
+            CertificateResponse response = certificateWebMapper.domainToResponse(certificate);
+            loggingService.logInfo("Certificate ID {} obtenido exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Certificado con id: " + id, response));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Certificate ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
-    
+
+    // Método auxiliar para truncar nombres de certificados en los logs (si se necesita en el futuro)
+    private String truncateName(String name) {
+        if (name == null) {
+            return "null";
+        }
+        return name.length() > 30 ? name.substring(0, 30) + "..." : name;
+    }
 }
