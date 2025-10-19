@@ -136,11 +136,4 @@ public class RepositoryNotification implements IRepositoryNotification {
         }
     }
 
-    // Método auxiliar para truncar mensajes largos en los logs (si se necesita en el futuro)
-    private String truncateMessage(String message) {
-        if (message == null) {
-            return "null";
-        }
-        return message.length() > 30 ? message.substring(0, 30) + "..." : message;
-    }
 }
