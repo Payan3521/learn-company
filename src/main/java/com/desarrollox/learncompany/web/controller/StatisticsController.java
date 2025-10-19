@@ -68,8 +68,7 @@ public class StatisticsController {
     public ResponseEntity<ApiResponse<StatisticResponse>> getStatistics() {
         loggingService.logInfo("Obteniendo estadísticas de cursos");
         try {
-            Statistic statistic = statisticService.getStatistic()
-                    .orElseThrow(() -> new IllegalArgumentException("No hay cursos registrados para generar estadísticas"));
+            Statistic statistic = statisticService.getStatistic().get();
             StatisticResponse response = statisticWebMapper.domainToResponse(statistic);
 
             String message = String.format(

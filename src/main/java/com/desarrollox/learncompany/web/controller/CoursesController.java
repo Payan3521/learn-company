@@ -77,8 +77,7 @@ public class CoursesController {
     public ResponseEntity<ApiResponse<CourseResponse>> getCourseById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo Course con ID: {}", id);
         try {
-            Course course = courseService.getCourseById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Course con ID " + id + " no encontrado"));
+            Course course = courseService.getCourseById(id).get();
             CourseResponse courseResponse = courseWebMapper.domainToResponse(course);
             loggingService.logInfo("Course ID {} obtenido exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Curso obtenido correctamente", courseResponse));
@@ -202,8 +201,7 @@ public class CoursesController {
     public ResponseEntity<ApiResponse<CourseResponse>> deleteCourse(@PathVariable Long id) {
         loggingService.logInfo("Iniciando eliminación de Course con ID: {}", id);
         try {
-            Course course = courseService.deleteCourse(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Course con ID " + id + " no encontrado"));
+            Course course = courseService.deleteCourse(id).get();
             CourseResponse courseResponse = courseWebMapper.domainToResponse(course);
             loggingService.logInfo("Course ID {} eliminado exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Curso eliminado correctamente", courseResponse));

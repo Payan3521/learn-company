@@ -54,8 +54,7 @@ public class AssessmentTemplateController {
     public ResponseEntity<ApiResponse<AssessmentTemplateResponse>> getAssessmentTemplateById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo AssessmentTemplate con ID: {}", id);
         try {
-            AssessmentTemplate assessmentTemplate = assessmentTemplateService.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("AssessmentTemplate con ID " + id + " no encontrado"));
+            AssessmentTemplate assessmentTemplate = assessmentTemplateService.findById(id).get();
             AssessmentTemplateResponse assessmentTemplateResponse = assessmentTemplateWebMapper.domainToResponse(assessmentTemplate);
             loggingService.logInfo("AssessmentTemplate ID {} obtenido exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("AssessmentTemplate obtenida correctamente", assessmentTemplateResponse));

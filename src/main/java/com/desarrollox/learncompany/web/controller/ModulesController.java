@@ -185,8 +185,7 @@ public class ModulesController {
     public ResponseEntity<ApiResponse<ModuleResponse>> getModuleById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo Module con ID: {}", id);
         try {
-            Module module = moduleService.getModuleById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Module con ID " + id + " no encontrado"));
+            Module module = moduleService.getModuleById(id).get();
             ModuleResponse response = moduleWebMapper.domainToResponse(module);
             loggingService.logInfo("Module ID {} obtenido exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Modulo encontrado correctamente", response));
@@ -391,8 +390,7 @@ public class ModulesController {
     public ResponseEntity<ApiResponse<ModuleResponse>> deleteModule(@PathVariable Long id) {
         loggingService.logInfo("Iniciando eliminación de Module con ID: {}", id);
         try {
-            Module moduleDeleted = moduleService.deleteModule(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Module con ID " + id + " no encontrado"));
+            Module moduleDeleted = moduleService.deleteModule(id).get();
             ModuleResponse moduleResponse = moduleWebMapper.domainToResponse(moduleDeleted);
             loggingService.logInfo("Module ID {} eliminado exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Modulo eliminado correctamente", moduleResponse));

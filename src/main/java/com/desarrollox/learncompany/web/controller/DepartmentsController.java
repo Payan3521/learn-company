@@ -57,8 +57,7 @@ public class DepartmentsController {
     public ResponseEntity<ApiResponse<DepartmentResponse>> getDepartmentById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo Department con ID: {}", id);
         try {
-            Department department = departmentService.getDepartmentById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Department con ID " + id + " no encontrado"));
+            Department department = departmentService.getDepartmentById(id).get();
             DepartmentResponse departmentResponse = departmentWebMapper.domainToResponse(department);
             loggingService.logInfo("Department ID {} obtenido exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Departamento encontrado", departmentResponse));
@@ -125,8 +124,7 @@ public class DepartmentsController {
                 id, truncateName(request != null && request.getName() != null ? request.getName() : "null"));
         try {
             Department department = departmentWebMapper.updateRequestToDomain(request);
-            Department departmentUpdated = departmentService.updateDepartment(id, department)
-                    .orElseThrow(() -> new IllegalArgumentException("Department con ID " + id + " no encontrado"));
+            Department departmentUpdated = departmentService.updateDepartment(id, department).get();
             DepartmentResponse departmentResponse = departmentWebMapper.domainToResponse(departmentUpdated);
             loggingService.logInfo("Department ID {} actualizado exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Departamento actualizado correctamente", departmentResponse));
@@ -142,8 +140,7 @@ public class DepartmentsController {
     public ResponseEntity<ApiResponse<DepartmentResponse>> deleteDepartment(@PathVariable Long id) {
         loggingService.logInfo("Iniciando eliminación de Department con ID: {}", id);
         try {
-            Department departmentDeleted = departmentService.deleteDepartment(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Department con ID " + id + " no encontrado"));
+            Department departmentDeleted = departmentService.deleteDepartment(id).get();
             DepartmentResponse departmentResponse = departmentWebMapper.domainToResponse(departmentDeleted);
             loggingService.logInfo("Department ID {} eliminado exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Departamento eliminado correctamente", departmentResponse));

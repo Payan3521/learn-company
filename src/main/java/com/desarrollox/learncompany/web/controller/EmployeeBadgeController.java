@@ -155,8 +155,7 @@ public class EmployeeBadgeController {
     public ResponseEntity<ApiResponse<EmployeeBadgeResponse>> delete(@PathVariable Long id) {
         loggingService.logInfo("Iniciando eliminación de EmployeeBadge con ID: {}", id);
         try {
-            EmployeeBadge employeeBadgeDeleted = employeeBadgeService.delete(id)
-                    .orElseThrow(() -> new IllegalArgumentException("EmployeeBadge con ID " + id + " no encontrado"));
+            EmployeeBadge employeeBadgeDeleted = employeeBadgeService.delete(id).get();
             EmployeeBadgeResponse employeeBadgeResponse = employeeBadgeWebMapper.domainToResponse(employeeBadgeDeleted);
             loggingService.logInfo("EmployeeBadge ID {} eliminado exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Insignia eliminada a empleado correctamente", employeeBadgeResponse));
@@ -210,8 +209,7 @@ public class EmployeeBadgeController {
     public ResponseEntity<ApiResponse<EmployeeBadgeResponse>> findById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo EmployeeBadge con ID: {}", id);
         try {
-            EmployeeBadge employeeBadge = employeeBadgeService.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("EmployeeBadge con ID " + id + " no encontrado"));
+            EmployeeBadge employeeBadge = employeeBadgeService.findById(id).get();
             EmployeeBadgeResponse employeeBadgeResponse = employeeBadgeWebMapper.domainToResponse(employeeBadge);
             loggingService.logInfo("EmployeeBadge ID {} obtenido exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("insignia de empleado obtenido correctamente", employeeBadgeResponse));

@@ -255,8 +255,7 @@ public class NotificationsController {
     public ResponseEntity<ApiResponse<NotificationResponse>> getNotificationsById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo Notification con ID: {}", id);
         try {
-            Notification notification = notificationService.getNotificationById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Notification con ID " + id + " no encontrada"));
+            Notification notification = notificationService.getNotificationById(id).get();
             NotificationResponse response = notificationWebMapper.domainToResponse(notification);
             loggingService.logInfo("Notification ID {} obtenida exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Notificacion obtenida correctamente", response));

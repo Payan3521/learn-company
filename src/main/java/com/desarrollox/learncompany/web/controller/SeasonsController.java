@@ -214,8 +214,7 @@ public class SeasonsController {
     public ResponseEntity<ApiResponse<SeasonResponse>> getSeasonById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo Season con ID: {}", id);
         try {
-            Season season = seasonService.getSeasonById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Season con ID " + id + " no encontrada"));
+            Season season = seasonService.getSeasonById(id).get();
             SeasonResponse response = seasonWebMapper.domainToResponse(season);
             loggingService.logInfo("Season ID {} obtenida exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("temporada encontrada correctamente", response));

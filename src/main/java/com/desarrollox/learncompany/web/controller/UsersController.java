@@ -267,8 +267,7 @@ public class UsersController {
     public ResponseEntity<ApiResponse<UserResponse>> getUsersById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo User con ID: {}", id);
         try {
-            User user = userService.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Usuario con ID " + id + " no encontrado"));
+            User user = userService.findById(id).get();
             UserResponse userResponse = userWebMapper.userToResponse(user);
             loggingService.logInfo("User ID {} obtenido exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Usuario encontrado", userResponse));
@@ -504,8 +503,7 @@ public class UsersController {
         loggingService.logInfo("Iniciando actualización de Employee con ID: {}", id);
         try {
             Employee employee = employeeWebMapper.updateRequestToDomain(request);
-            User userUpdated = userService.updateUser(id, employee)
-                    .orElseThrow(() -> new IllegalArgumentException("Empleado con ID " + id + " no encontrado"));
+            User userUpdated = userService.updateUser(id, employee).get();
             UserResponse userResponse = userWebMapper.employeeToResponse((Employee) userUpdated);
             loggingService.logInfo("Employee ID {} actualizado exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Empleado actualizado correctamente", userResponse));
@@ -589,8 +587,7 @@ public class UsersController {
         loggingService.logInfo("Iniciando actualización de Instructor con ID: {}", id);
         try {
             Instructor instructor = instructorWebMapper.updateRequestToDomain(request);
-            User userUpdated = userService.updateUser(id, instructor)
-                    .orElseThrow(() -> new IllegalArgumentException("Instructor con ID " + id + " no encontrado"));
+            User userUpdated = userService.updateUser(id, instructor).get();
             UserResponse userResponse = userWebMapper.instructorToResponse((Instructor) userUpdated);
             loggingService.logInfo("Instructor ID {} actualizado exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Instructor actualizado correctamente", userResponse));
@@ -649,8 +646,7 @@ public class UsersController {
     public ResponseEntity<ApiResponse<UserResponse>> deleteUserById(@PathVariable Long id) {
         loggingService.logInfo("Iniciando eliminación de User con ID: {}", id);
         try {
-            User userDeleted = userService.delete(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Usuario con ID " + id + " no encontrado"));
+            User userDeleted = userService.delete(id).get();
             UserResponse userResponse = userWebMapper.userToResponse(userDeleted);
             loggingService.logInfo("User ID {} eliminado exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Usuario eliminado correctamente", userResponse));

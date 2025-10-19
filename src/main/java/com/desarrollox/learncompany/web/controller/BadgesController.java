@@ -76,8 +76,7 @@ public class BadgesController {
     public ResponseEntity<ApiResponse<BadgeResponse>> getBadgesById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo Badge con ID: {}", id);
         try {
-            Badge badge = badgeService.getBadgeById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Badge con ID " + id + " no encontrado"));
+            Badge badge = badgeService.getBadgeById(id).get();
             BadgeResponse badgeResponse = badgeWebMapper.domainToResponse(badge);
             loggingService.logInfo("Badge ID {} obtenido exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Badge encontrado", badgeResponse));
@@ -113,8 +112,7 @@ public class BadgesController {
     public ResponseEntity<ApiResponse<BadgeResponse>> getBadgeByName(@RequestParam(required = true) String name) {
         loggingService.logInfo("Obteniendo Badge con nombre: {}", truncateName(name));
         try {
-            Badge badge = badgeService.findByName(name)
-                    .orElseThrow(() -> new IllegalArgumentException("Badge con nombre " + name + " no encontrado"));
+            Badge badge = badgeService.findByName(name).get();
             BadgeResponse badgeResponse = badgeWebMapper.domainToResponse(badge);
             loggingService.logInfo("Badge con nombre {} obtenido exitosamente", truncateName(name));
             return ResponseEntity.ok(ApiResponse.success("Badge encontrado", badgeResponse));

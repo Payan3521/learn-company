@@ -158,8 +158,7 @@ public class InscriptionsController {
     public ResponseEntity<ApiResponse<InscriptionResponse>> getInscriptionById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo Inscription con ID: {}", id);
         try {
-            Inscription inscription = inscriptionService.getInscriptionById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Inscription con ID " + id + " no encontrada"));
+            Inscription inscription = inscriptionService.getInscriptionById(id).get();
             InscriptionResponse inscriptionResponse = inscriptionWebMapper.domainToResponse(inscription);
             loggingService.logInfo("Inscription ID {} obtenida exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Inscripcion encontrada", inscriptionResponse));
@@ -214,8 +213,7 @@ public class InscriptionsController {
     public ResponseEntity<ApiResponse<InscriptionResponse>> deleteInscription(@PathVariable Long id) {
         loggingService.logInfo("Iniciando eliminación de Inscription con ID: {}", id);
         try {
-            Inscription inscriptionDeleted = inscriptionService.deleteInscription(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Inscription con ID " + id + " no encontrada"));
+            Inscription inscriptionDeleted = inscriptionService.deleteInscription(id).get();
             InscriptionResponse inscriptionResponse = inscriptionWebMapper.domainToResponse(inscriptionDeleted);
             loggingService.logInfo("Inscription ID {} eliminada exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Inscripcion eliminada correctamente", inscriptionResponse));

@@ -98,8 +98,7 @@ public class CertificateController {
     public ResponseEntity<ApiResponse<CertificateResponse>> getCertificatesById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo Certificate con ID: {}", id);
         try {
-            Certificate certificate = certificateService.getCertificateById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Certificate con ID " + id + " no encontrado"));
+            Certificate certificate = certificateService.getCertificateById(id).get();
             CertificateResponse response = certificateWebMapper.domainToResponse(certificate);
             loggingService.logInfo("Certificate ID {} obtenido exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Certificado con id: " + id, response));
@@ -109,11 +108,4 @@ public class CertificateController {
         }
     }
 
-    // Método auxiliar para truncar nombres de certificados en los logs (si se necesita en el futuro)
-    private String truncateName(String name) {
-        if (name == null) {
-            return "null";
-        }
-        return name.length() > 30 ? name.substring(0, 30) + "..." : name;
-    }
 }

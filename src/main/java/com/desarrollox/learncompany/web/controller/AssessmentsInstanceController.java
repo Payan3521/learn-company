@@ -64,8 +64,7 @@ public class AssessmentsInstanceController {
     public ResponseEntity<ApiResponse<AssessmentInstanceResponse>> getAssessmentsById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo AssessmentInstance con ID: {}", id);
         try {
-            AssessmentInstance assessmentInstance = assessmentInstanceService.getAssessmentInstanceById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("AssessmentInstance con ID " + id + " no encontrado"));
+            AssessmentInstance assessmentInstance = assessmentInstanceService.getAssessmentInstanceById(id).get();
             AssessmentInstanceResponse response = assessmentInstanceWebMapper.domainToResponse(assessmentInstance);
             loggingService.logInfo("AssessmentInstance ID {} obtenido exitosamente", id);
             return ResponseEntity.ok(ApiResponse.success("Instancia de evaluacion obtenida correctamente", response));
@@ -79,8 +78,7 @@ public class AssessmentsInstanceController {
     public ResponseEntity<ApiResponse<AssessmentInstanceResponse>> asignarGrade(@PathVariable Double grade, @PathVariable Long assessmentId) {
         loggingService.logInfo("Iniciando asignación de nota {} para AssessmentInstance ID: {}", grade, assessmentId);
         try {
-            AssessmentInstance assessmentInstance = assessmentInstanceService.assignGrade(assessmentId, grade)
-                    .orElseThrow(() -> new IllegalArgumentException("AssessmentInstance con ID " + assessmentId + " no encontrado"));
+            AssessmentInstance assessmentInstance = assessmentInstanceService.assignGrade(assessmentId, grade).get();
             AssessmentInstanceResponse response = assessmentInstanceWebMapper.domainToResponse(assessmentInstance);
             loggingService.logInfo("Nota {} asignada exitosamente para AssessmentInstance ID: {}", grade, assessmentId);
             return ResponseEntity.ok(ApiResponse.success("Nota asignada correctamente", response));
