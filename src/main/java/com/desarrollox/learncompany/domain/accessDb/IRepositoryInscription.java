@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import com.desarrollox.learncompany.domain.model.Inscription;
 
-public interface IRepositoryIncription {
+public interface IRepositoryInscription {
     Inscription save(Inscription inscription);
     Optional<Inscription> findById(Long id);
     Optional<Inscription> delete(Long id);
