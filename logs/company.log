@@ -814,3 +814,15 @@ java.lang.IllegalStateException: Could not resolve parameter [0] in public org.s
 2025-10-18 17:28:12 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.CourseNotFoundException: Curso con id: 17 no encontrado]
 2025-10-18 17:46:41 [http-nio-8080-exec-10] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `com.desarrollox.learncompany.domain.model.Course$TypeCourse` from String "Mandatory": not one of the values accepted for Enum class: [OPTIONAL, MANDATORY]]
 2025-10-18 17:53:31 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.desarrollox.learncompany.domain.exception.DepartmentAlreadyRegisteredException: El departamento con nombre: nombre_value ya está registrado]
+2025-10-18 20:02:59 [restartedMain] INFO  c.d.l.LearncompanyApplication - Starting LearncompanyApplication using Java 17.0.16 with PID 10582 (/home/sebastian/Documentos/learn-company/build/classes/java/main started by sebastian in /home/sebastian/Documentos/learn-company)
+2025-10-18 20:02:59 [restartedMain] INFO  c.d.l.LearncompanyApplication - The following 1 profile is active: "dev"
+2025-10-18 20:03:01 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-10-18 20:03:03 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-18 20:03:03 [restartedMain] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 3529e438-6e4d-4508-9b88-aec50e8da4e1
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-10-18 20:03:04 [restartedMain] INFO  c.d.l.LearncompanyApplication - Started LearncompanyApplication in 5.415 seconds (process running for 5.82)
+2025-10-18 20:11:49 [http-nio-8080-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
