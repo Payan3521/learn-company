@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.desarrollox.learncompany.core.logging.LoggingService;
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.model.EmployeeBadge;
 import com.desarrollox.learncompany.domain.service.IEmployeeBadgeService;
@@ -36,6 +37,7 @@ public class EmployeeBadgeController {
 
     private final IEmployeeBadgeService employeeBadgeService;
     private final EmployeeBadgeWebMapper employeeBadgeWebMapper;
+    private final LoggingService loggingService; // Inyectar LoggingService
 
     @Operation(
         summary = "Asignar nuevo badge a un empleado",
@@ -53,7 +55,6 @@ public class EmployeeBadgeController {
                         }
                         """
                 )
-
             )
         ),
         responses = {
@@ -79,7 +80,6 @@ public class EmployeeBadgeController {
                             """
                     )
                 )
-
             ),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos invalidos", content = @Content()),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "", content = @Content()),
@@ -90,11 +90,25 @@ public class EmployeeBadgeController {
         }
     )
     @PostMapping
-    public ResponseEntity<ApiResponse<EmployeeBadgeResponse>> assignBadgeToEmployee(@Valid @RequestBody AssignBadgeRequest request){
-        EmployeeBadge employeeBadge = employeeBadgeWebMapper.requestToDomain(request);
-        EmployeeBadge employeeBadgeSaved = employeeBadgeService.assignBadgeToEmployee(employeeBadge);
-        EmployeeBadgeResponse response = employeeBadgeWebMapper.domainToResponse(employeeBadgeSaved);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("insignia asignada correctamente", response));
+    public ResponseEntity<ApiResponse<EmployeeBadgeResponse>> assignBadgeToEmployee(@Valid @RequestBody AssignBadgeRequest request) {
+        loggingService.logInfo("Iniciando asignación de Badge para employeeId: {} y badgeId: {}", 
+                request != null && request.getEmployeeId() != null ? request.getEmployeeId() : "null", 
+                request != null && request.getBadgeId() != null ? request.getBadgeId() : "null");
+        try {
+            EmployeeBadge employeeBadge = employeeBadgeWebMapper.requestToDomain(request);
+            EmployeeBadge employeeBadgeSaved = employeeBadgeService.assignBadgeToEmployee(employeeBadge);
+            EmployeeBadgeResponse response = employeeBadgeWebMapper.domainToResponse(employeeBadgeSaved);
+            loggingService.logInfo("Badge asignado exitosamente con ID: {} para employeeId: {} y badgeId: {}", 
+                    employeeBadgeSaved.getId(), employeeBadgeSaved.getEmployee().getId(), employeeBadgeSaved.getBadge().getId());
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(ApiResponse.success("insignia asignada correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al asignar Badge para employeeId: {} y badgeId: {}: {}", 
+                    request != null && request.getEmployeeId() != null ? request.getEmployeeId() : "null", 
+                    request != null && request.getBadgeId() != null ? request.getBadgeId() : "null", 
+                    e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -103,7 +117,7 @@ public class EmployeeBadgeController {
         parameters = {
             @Parameter(
                 name = "id",
-                description = "Identificados del EmployeeBadge a eliminar",
+                description = "Identificador del EmployeeBadge a eliminar",
                 required = true,
                 example = "1"
             )
@@ -138,10 +152,18 @@ public class EmployeeBadgeController {
         }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<EmployeeBadgeResponse>> delete(@PathVariable Long id){
-        EmployeeBadge employeeeBadgeDeleted = employeeBadgeService.delete(id).get();
-        EmployeeBadgeResponse employeeBadgeResponse = employeeBadgeWebMapper.domainToResponse(employeeeBadgeDeleted);
-        return ResponseEntity.ok(ApiResponse.success("Insignia eliminada a empleado correctamente", employeeBadgeResponse));
+    public ResponseEntity<ApiResponse<EmployeeBadgeResponse>> delete(@PathVariable Long id) {
+        loggingService.logInfo("Iniciando eliminación de EmployeeBadge con ID: {}", id);
+        try {
+            EmployeeBadge employeeBadgeDeleted = employeeBadgeService.delete(id)
+                    .orElseThrow(() -> new IllegalArgumentException("EmployeeBadge con ID " + id + " no encontrado"));
+            EmployeeBadgeResponse employeeBadgeResponse = employeeBadgeWebMapper.domainToResponse(employeeBadgeDeleted);
+            loggingService.logInfo("EmployeeBadge ID {} eliminado exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Insignia eliminada a empleado correctamente", employeeBadgeResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al eliminar EmployeeBadge ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -150,7 +172,7 @@ public class EmployeeBadgeController {
         parameters = {
             @Parameter(
                 name = "id",
-                description = "Identificados del EmployeeBadge a buscar",
+                description = "Identificador del EmployeeBadge a buscar",
                 required = true,
                 example = "1"
             )
@@ -185,11 +207,18 @@ public class EmployeeBadgeController {
         }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<EmployeeBadgeResponse>> findById(@PathVariable Long id){
-        EmployeeBadge employeeBadge = employeeBadgeService.findById(id).get();
-        EmployeeBadgeResponse employeeBadgeResponse = employeeBadgeWebMapper.domainToResponse(employeeBadge);
-        return ResponseEntity.ok(ApiResponse.success("insignia de empleado obtenido correctamente", employeeBadgeResponse));
-
+    public ResponseEntity<ApiResponse<EmployeeBadgeResponse>> findById(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo EmployeeBadge con ID: {}", id);
+        try {
+            EmployeeBadge employeeBadge = employeeBadgeService.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("EmployeeBadge con ID " + id + " no encontrado"));
+            EmployeeBadgeResponse employeeBadgeResponse = employeeBadgeWebMapper.domainToResponse(employeeBadge);
+            loggingService.logInfo("EmployeeBadge ID {} obtenido exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("insignia de empleado obtenido correctamente", employeeBadgeResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener EmployeeBadge ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -239,14 +268,24 @@ public class EmployeeBadgeController {
         }
     ) 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<EmployeeBadgeResponse>>> findAll(){
-        List<EmployeeBadge> employeeBadges = employeeBadgeService.findAll();
+    public ResponseEntity<ApiResponse<List<EmployeeBadgeResponse>>> findAll() {
+        loggingService.logInfo("Obteniendo todas las asignaciones de EmployeeBadge");
+        try {
+            List<EmployeeBadge> employeeBadges = employeeBadgeService.findAll();
 
-        if(employeeBadges.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (employeeBadges.isEmpty()) {
+                loggingService.logWarning("No se encontraron asignaciones de EmployeeBadge");
+                return ResponseEntity.noContent().build();
+            }
+
+            List<EmployeeBadgeResponse> employeeBadgeResponses = employeeBadges.stream()
+                    .map(employeeBadgeWebMapper::domainToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} asignaciones de EmployeeBadge", employeeBadgeResponses.size());
+            return ResponseEntity.ok(ApiResponse.success("insignias encontradas", employeeBadgeResponses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener todas las asignaciones de EmployeeBadge: {}", e.getMessage(), e);
+            throw e;
         }
-
-        List<EmployeeBadgeResponse> employeeBadgeResponses = employeeBadges.stream().map(employeeBadgeWebMapper::domainToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("insignias encontradas", employeeBadgeResponses));
     }
 }

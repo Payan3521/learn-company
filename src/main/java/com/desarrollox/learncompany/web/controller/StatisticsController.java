@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.desarrollox.learncompany.core.logging.LoggingService;
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.model.Statistic;
 import com.desarrollox.learncompany.domain.service.IStatisticService;
@@ -26,7 +27,8 @@ public class StatisticsController {
 
     private final IStatisticService statisticService;
     private final StatisticWebMapper statisticWebMapper;
-    
+    private final LoggingService loggingService;
+
     @Operation(
         summary = "Obtener estadísticas de cursos",
         description = "Devuelve estadísticas sobre los cursos más y menos tomados en el sistema.",
@@ -63,21 +65,30 @@ public class StatisticsController {
         }
     )
     @GetMapping
-    public ResponseEntity<ApiResponse<StatisticResponse>> getStatistics(){
-        Statistic statistic = statisticService.getStatistic().get();
+    public ResponseEntity<ApiResponse<StatisticResponse>> getStatistics() {
+        loggingService.logInfo("Obteniendo estadísticas de cursos");
+        try {
+            Statistic statistic = statisticService.getStatistic()
+                    .orElseThrow(() -> new IllegalArgumentException("No hay cursos registrados para generar estadísticas"));
+            StatisticResponse response = statisticWebMapper.domainToResponse(statistic);
 
-        StatisticResponse response = statisticWebMapper.domainToResponse(statistic);
+            String message = String.format(
+                "📊 Estadísticas de cursos:\n" +
+                "✅ Curso más tomado: '%s' con %d inscripciones.\n" +
+                "⚠️ Curso menos tomado: '%s' con %d inscripciones.",
+                response.getTopCourseName(),
+                response.getTopCourseInscriptions(),
+                response.getLessCourseName(),
+                response.getLessCourseInscriptions()
+            );
 
-        String message = String.format(
-            "📊 Estadísticas de cursos:\n" +
-            "✅ Curso más tomado: '%s' con %d inscripciones.\n" +
-            "⚠️ Curso menos tomado: '%s' con %d inscripciones.",
-            response.getTopCourseName(),
-            response.getTopCourseInscriptions(),
-            response.getLessCourseName(),
-            response.getLessCourseInscriptions()
-        );
-
-        return ResponseEntity.ok(ApiResponse.success(message, response));
+            loggingService.logInfo("Estadísticas obtenidas exitosamente: Curso más tomado '{}' con {} inscripciones, Curso menos tomado '{}' con {} inscripciones",
+                    response.getTopCourseName(), response.getTopCourseInscriptions(),
+                    response.getLessCourseName(), response.getLessCourseInscriptions());
+            return ResponseEntity.ok(ApiResponse.success(message, response));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener estadísticas de cursos: {}", e.getMessage(), e);
+            throw e;
+        }
     }
 }

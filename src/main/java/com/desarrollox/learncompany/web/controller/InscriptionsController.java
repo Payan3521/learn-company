@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.desarrollox.learncompany.core.logging.LoggingService;
 import com.desarrollox.learncompany.core.web.dto.ApiResponse;
 import com.desarrollox.learncompany.domain.model.Inscription;
 import com.desarrollox.learncompany.domain.service.IInscriptionService;
@@ -36,6 +37,7 @@ public class InscriptionsController {
     
     private final IInscriptionService inscriptionService;
     private final InscriptionWebMapper inscriptionWebMapper;
+    private final LoggingService loggingService; // Inyectar LoggingService
 
     @Operation(
         summary = "Crear una nueva inscripción",
@@ -66,7 +68,7 @@ public class InscriptionsController {
                         value = """
                             {
                                 "success": true,
-                                "message": "Inscripcion craeada correctamente",
+                                "message": "Inscripcion creada correctamente",
                                 "data": {
                                     "id": 1,
                                     "employeeId": 1,
@@ -89,11 +91,25 @@ public class InscriptionsController {
         }
     )
     @PostMapping
-    public ResponseEntity<ApiResponse<InscriptionResponse>> createINscription(@Valid @RequestBody InscriptionRequest request){
-        Inscription inscription = inscriptionWebMapper.requestToDomain(request);
-        Inscription inscriptionSaved = inscriptionService.createInscription(inscription);
-        InscriptionResponse response = inscriptionWebMapper.domainToResponse(inscriptionSaved);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Inscripcion craeada correctamente", response));
+    public ResponseEntity<ApiResponse<InscriptionResponse>> createInscription(@Valid @RequestBody InscriptionRequest request) {
+        loggingService.logInfo("Iniciando creación de Inscription para employeeId: {} y courseId: {}", 
+                request != null && request.getEmployeeId() != null ? request.getEmployeeId() : "null", 
+                request != null && request.getCourseId() != null ? request.getCourseId() : "null");
+        try {
+            Inscription inscription = inscriptionWebMapper.requestToDomain(request);
+            Inscription inscriptionSaved = inscriptionService.createInscription(inscription);
+            InscriptionResponse response = inscriptionWebMapper.domainToResponse(inscriptionSaved);
+            loggingService.logInfo("Inscription creada exitosamente con ID: {} para employeeId: {} y courseId: {}", 
+                    inscriptionSaved.getId(), inscriptionSaved.getEmployee().getId(), inscriptionSaved.getCourse().getId());
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(ApiResponse.success("Inscripcion creada correctamente", response));
+        } catch (Exception e) {
+            loggingService.logError("Error al crear Inscription para employeeId: {} y courseId: {}: {}", 
+                    request != null && request.getEmployeeId() != null ? request.getEmployeeId() : "null", 
+                    request != null && request.getCourseId() != null ? request.getCourseId() : "null", 
+                    e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -139,10 +155,18 @@ public class InscriptionsController {
         }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<InscriptionResponse>> getInscriptionById(@PathVariable Long id){
-        Inscription inscription = inscriptionService.getInscriptionById(id).get();
-        InscriptionResponse inscriptionResponse = inscriptionWebMapper.domainToResponse(inscription);
-        return ResponseEntity.ok(ApiResponse.success("Inscripcion encontrada", inscriptionResponse));
+    public ResponseEntity<ApiResponse<InscriptionResponse>> getInscriptionById(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo Inscription con ID: {}", id);
+        try {
+            Inscription inscription = inscriptionService.getInscriptionById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Inscription con ID " + id + " no encontrada"));
+            InscriptionResponse inscriptionResponse = inscriptionWebMapper.domainToResponse(inscription);
+            loggingService.logInfo("Inscription ID {} obtenida exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Inscripcion encontrada", inscriptionResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Inscription ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -187,10 +211,18 @@ public class InscriptionsController {
         }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<InscriptionResponse>> deleteInscription(@PathVariable Long id){
-        Inscription inscriptionDeleted = inscriptionService.deleteInscription(id).get();
-        InscriptionResponse inscriptionResponse = inscriptionWebMapper.domainToResponse(inscriptionDeleted);
-        return ResponseEntity.ok(ApiResponse.success("Inscripcion eliminada correctamente", inscriptionResponse)); 
+    public ResponseEntity<ApiResponse<InscriptionResponse>> deleteInscription(@PathVariable Long id) {
+        loggingService.logInfo("Iniciando eliminación de Inscription con ID: {}", id);
+        try {
+            Inscription inscriptionDeleted = inscriptionService.deleteInscription(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Inscription con ID " + id + " no encontrada"));
+            InscriptionResponse inscriptionResponse = inscriptionWebMapper.domainToResponse(inscriptionDeleted);
+            loggingService.logInfo("Inscription ID {} eliminada exitosamente", id);
+            return ResponseEntity.ok(ApiResponse.success("Inscripcion eliminada correctamente", inscriptionResponse));
+        } catch (Exception e) {
+            loggingService.logError("Error al eliminar Inscription ID {}: {}", id, e.getMessage(), e);
+            throw e;
+        }
     }
 
     @Operation(
@@ -245,15 +277,25 @@ public class InscriptionsController {
         }
     )
     @GetMapping("/course/{id}")
-    public ResponseEntity<ApiResponse<List<InscriptionResponse>>> getInscriptionsByCourseById(@PathVariable Long id){
-        List<Inscription> inscriptions = inscriptionService.findByCourseId(id);
+    public ResponseEntity<ApiResponse<List<InscriptionResponse>>> getInscriptionsByCourseById(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo Inscriptions para courseId: {}", id);
+        try {
+            List<Inscription> inscriptions = inscriptionService.findByCourseId(id);
 
-        if(inscriptions.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (inscriptions.isEmpty()) {
+                loggingService.logWarning("No se encontraron Inscriptions para courseId: {}", id);
+                return ResponseEntity.noContent().build();
+            }
+
+            List<InscriptionResponse> inscriptionResponses = inscriptions.stream()
+                    .map(inscriptionWebMapper::domainToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Inscriptions para courseId: {}", inscriptionResponses.size(), id);
+            return ResponseEntity.ok(ApiResponse.success("Obtenidas las inscripciones pertenecientes al curso: " + id, inscriptionResponses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Inscriptions para courseId {}: {}", id, e.getMessage(), e);
+            throw e;
         }
-
-        List<InscriptionResponse> inscriptionResponses = inscriptions.stream().map(inscriptionWebMapper::domainToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Obtenidas las inscripciones pertenecientes al curso:" + id, inscriptionResponses ));
     }
 
     @Operation(
@@ -308,15 +350,24 @@ public class InscriptionsController {
         }
     )
     @GetMapping("/employee/{id}")
-    public ResponseEntity<ApiResponse<List<InscriptionResponse>>> getInscriptionsByEmployeeById(@PathVariable Long id){
-        List<Inscription> inscriptions = inscriptionService.findByEmployeeId(id);
+    public ResponseEntity<ApiResponse<List<InscriptionResponse>>> getInscriptionsByEmployeeById(@PathVariable Long id) {
+        loggingService.logInfo("Obteniendo Inscriptions para employeeId: {}", id);
+        try {
+            List<Inscription> inscriptions = inscriptionService.findByEmployeeId(id);
 
-        if(inscriptions.isEmpty()){
-            return ResponseEntity.noContent().build();
+            if (inscriptions.isEmpty()) {
+                loggingService.logWarning("No se encontraron Inscriptions para employeeId: {}", id);
+                return ResponseEntity.noContent().build();
+            }
+
+            List<InscriptionResponse> inscriptionResponses = inscriptions.stream()
+                    .map(inscriptionWebMapper::domainToResponse)
+                    .collect(Collectors.toList());
+            loggingService.logInfo("Se encontraron {} Inscriptions para employeeId: {}", inscriptionResponses.size(), id);
+            return ResponseEntity.ok(ApiResponse.success("Obtenidas las inscripciones pertenecientes al empleado: " + id, inscriptionResponses));
+        } catch (Exception e) {
+            loggingService.logError("Error al obtener Inscriptions para employeeId {}: {}", id, e.getMessage(), e);
+            throw e;
         }
-
-        List<InscriptionResponse> inscriptionResponses = inscriptions.stream().map(inscriptionWebMapper::domainToResponse).collect(Collectors.toList());
-        return ResponseEntity.ok(ApiResponse.success("Obtenidas las inscripciones pertenecientes al empleado:" + id, inscriptionResponses ));
     }
-
 }
