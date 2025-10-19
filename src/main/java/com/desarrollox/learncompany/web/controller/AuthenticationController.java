@@ -14,6 +14,9 @@ import com.desarrollox.learncompany.web.dto.LoginResponse;
 import com.desarrollox.learncompany.web.dto.LogoutRequest;
 import com.desarrollox.learncompany.web.dto.RefreshTokenRequest;
 import com.desarrollox.learncompany.web.webMapper.AuthenticationWebMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +30,64 @@ public class AuthenticationController {
     private final AuthenticationWebMapper authenticationWebMapper;
     private final LoggingService loggingService; // Inyectar LoggingService
 
+  
+    @Operation(
+        summary = "Crear un nuevo login",
+        description = "Permite a los usuarios hacer nuevo login",
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    name = "Ejemplo solicitud",
+                    value = """
+                        {
+                            "email":"juan@gmail.com",
+                            "password":"password123!"
+                        }
+                        """
+                )
+            )
+        ),
+        responses =  {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Login exitoso",
+                content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitoso",
+                        value = """
+                            { 
+                                "success": true,
+                                "message": "Login exitoso",
+                                "data": {
+                                    "accessToken": "placeholder_access_token_juan@gmail.com",
+                                    "refreshToken": "placeholder_refresh_token_1760835999117",
+                                    "tokenType": "Bearer",
+                                    "expiresIn": 3600,
+                                    "user": {
+                                        "id": 1,
+                                        "email": "juan@gmail.com",
+                                        "password": "$2a$10$dqyiLDQ7tR7V8355zOcIQOnOFf.IkHf2eut8uxzBBfiPCnFILlyDy",
+                                        "name": "name",
+                                        "lastname": "lastname",
+                                        "status": true,
+                                        "role": "EMPLOYEE",
+                                        "departmentId": 1,
+                                        "urlPhoto": "https://tasks.google.com/tasks",
+                                        "puntos": 0
+                                    },
+                                    "scope": "read write"
+                                },
+                                "timestamp": "2025-10-18T20:06:39.15597201"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Objeto no encontrado", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content)
+        }
+    )
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<LoginResponse>> login(
             @Valid @RequestBody LoginRequest request, 

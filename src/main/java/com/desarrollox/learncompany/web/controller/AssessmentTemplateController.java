@@ -16,6 +16,11 @@ import com.desarrollox.learncompany.web.dto.AssessmentTemplateResponse;
 import com.desarrollox.learncompany.web.dto.FeedBackResponse;
 import com.desarrollox.learncompany.web.webMapper.AssessmentTemplateWebMapper;
 import com.desarrollox.learncompany.web.webMapper.FeedBackWebMapper;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,6 +33,41 @@ public class AssessmentTemplateController {
     private final FeedBackWebMapper feedBackWebMapper;
     private final LoggingService loggingService; // Inyectar LoggingService
 
+    @Operation(
+        summary = "Obtener plantillas de evaluaciones por id de modulo ",
+        description = "Busca y devuelve una plantilla de evalución por el id de un modulo especifico",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del modulo",
+                required = true,
+                example = "1"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Plantilla de evaluación encontrada",
+                content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "AssesmentTemplate obtenida correctamente",
+                                "data": {
+                                    "id": 1,
+                                    "type": "QUIZ",
+                                    "retries": 3
+                                },
+                                "timestamp": "2025-10-18T16:02:26.568169539"
+                            }
+                                """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Plantilla de evaluación no encontrada", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content)
+        }
+    )
     @GetMapping("/module/{id}")
     public ResponseEntity<ApiResponse<List<AssessmentTemplateResponse>>> getAssessmentTemplateByModuleId(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo AssessmentTemplates para moduleId: {}", id);
@@ -50,6 +90,68 @@ public class AssessmentTemplateController {
         }
     }
 
+    @Operation(
+        summary = "Obtener evaluaciones por id",
+        description = "Busca y devuelve una plantilla de evalución por su id en especifico",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador de la plantilla de evaluación",
+                required = true,
+                example = "1"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Plantilla evaluación encontrada",
+                content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Evaluciones encontradas correspondientes al modulo: 1",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "type": "QUIZ",
+                                        "retries": 3
+                                    },
+                                    {
+                                        "id": 2,
+                                        "type": "WORKSHOP",
+                                        "retries": 1
+                                    },
+                                    {
+                                        "id": 3,
+                                        "type": "FINAL_ASSESSMENT",
+                                        "retries": 1
+                                    },
+                                    {
+                                        "id": 4,
+                                        "type": "QUIZ",
+                                        "retries": 3
+                                    },
+                                    {
+                                        "id": 5,
+                                        "type": "WORKSHOP",
+                                        "retries": 1
+                                    },
+                                    {
+                                        "id": 6,
+                                        "type": "FINAL_ASSESSMENT",
+                                        "retries": 1
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T16:07:06.193336228"
+                            }
+                                """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Plantilla de evaluación no encontrada", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content)
+        }
+    )
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<AssessmentTemplateResponse>> getAssessmentTemplateById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo AssessmentTemplate con ID: {}", id);
@@ -64,6 +166,54 @@ public class AssessmentTemplateController {
         }
     }
 
+    @Operation(
+        summary = "Obtener plantillas de evaluaciones por id de feedback ",
+        description = "Busca y devuelve una plantilla de evalución por el id de un feedback especifico",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del feedback",
+                required = true,
+                example = "1"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Plantilla de evaluación encontrada",
+                content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "FeedBack obtenido correctamente",
+                                "data": [
+                                    {
+                                        "id": 3,
+                                        "question": "What is a microservice?",
+                                        "answer": "An architecture pattern"
+                                    },
+                                    {
+                                        "id": 4,
+                                        "question": "What is a microservice?",
+                                        "answer": "An architecture pattern"
+                                    },
+                                    {
+                                        "id": 5,
+                                        "question": "What is a microservice?",
+                                        "answer": "An architecture pattern"
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T16:12:32.157766829"
+                            }
+                                """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Plantilla de evaluación no encontrada", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista sin contenido", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content)
+        }
+    )
     @GetMapping("/feedback/{id}")
     public ResponseEntity<ApiResponse<List<FeedBackResponse>>> getFeedback(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo FeedBack para AssessmentTemplate ID: {}", id);

@@ -1,3 +1,6 @@
 2025-10-18 10:29:50 [restartedMain] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=354) Unknown database 'learncompany'
 2025-10-18 10:32:30 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=355) Unknown database 'learncompany'
 2025-10-18 10:33:15 [restartedMain] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=357) Unknown database 'learncompany'
+2025-10-18 14:44:08 [http-nio-8080-exec-7] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=5) Unknown column 'hierarchy_module' in 'INSERT INTO'
+2025-10-18 16:21:40 [http-nio-8080-exec-2] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=68) Table 'learncompany.refresh_tokens' doesn't exist
+2025-10-18 17:06:06 [http-nio-8080-exec-7] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - (conn=89) Duplicate entry '2-1' for key 'unique_employee_course_cert'

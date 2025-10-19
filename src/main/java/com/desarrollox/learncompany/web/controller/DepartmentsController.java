@@ -21,6 +21,10 @@ import com.desarrollox.learncompany.web.dto.DepartmentRequest;
 import com.desarrollox.learncompany.web.dto.DepartmentResponse;
 import com.desarrollox.learncompany.web.dto.DepartmentUpdateRequest;
 import com.desarrollox.learncompany.web.webMapper.DepartmentWebMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -33,6 +37,51 @@ public class DepartmentsController {
     private final DepartmentWebMapper departmentWebMapper;
     private final LoggingService loggingService; // Inyectar LoggingService
 
+    @Operation(
+        summary = "Crear un nuevo departamento",
+        description = "Permite a los instructores crear un nuevo departamento.",
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    name = "Ejemplo solicitud",
+                    value = """
+                        {
+                            "name": "Software",
+                            "prize": 3,
+                            "hierarchy": "3"
+                        }
+                        """
+                )
+            )
+        ),
+        responses =  {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Departamento creado exitosamente",
+                content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitoso",
+                        value = """
+                            { 
+                                "success": true,
+                                "message": "Departamento creado correctamente",
+                                "data": {
+                                    "id": 2,
+                                    "name": "Software",
+                                    "prize": "3",
+                                    "hierarchy": 3
+                                },
+                                "timestamp": "2025-10-18T17:53:45.032806252"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Datos ya registrados", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content)
+        }
+    )
     @PostMapping
     public ResponseEntity<ApiResponse<DepartmentResponse>> createDepartment(@Valid @RequestBody DepartmentRequest request) {
         loggingService.logInfo("Iniciando creación de Department con nombre: {}", 
@@ -53,6 +102,42 @@ public class DepartmentsController {
         }
     }
 
+    @Operation(
+        summary = "Obtener departamento por id",
+        description = "Busca y devuelve un departamento por su id en especifico",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador de el departamento",
+                required = true,
+                example = "1"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Departamento encontrado",
+                content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Departamento encontrado",
+                                "data": {
+                                    "id": 1,
+                                    "name": "nombre_value",
+                                    "prize": "3",
+                                    "hierarchy": 3
+                                },
+                                "timestamp": "2025-10-18T18:03:57.254458657"
+                            }
+                                """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Departamento no encontrado", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content)
+        }
+    )
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<DepartmentResponse>> getDepartmentById(@PathVariable Long id) {
         loggingService.logInfo("Obteniendo Department con ID: {}", id);
@@ -67,6 +152,44 @@ public class DepartmentsController {
         }
     }
 
+    @Operation(
+        summary = "Obtener todos los departamentos",
+        description = "Devuelve la lista completa de departamentos registrados.",
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Lista obtenida correctamente",
+                content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Departamentos encontrados",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "name": "nombre_value",
+                                        "prize": "3",
+                                        "hierarchy": 3
+                                    },
+                                    {
+                                        "id": 2,
+                                        "name": "Software",
+                                        "prize": "3",
+                                        "hierarchy": 3
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T18:06:37.225531854"
+                            }
+                            
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lista sin contenido", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+        }
+    )
     @GetMapping
     public ResponseEntity<ApiResponse<List<DepartmentResponse>>> getAllDepartments() {
         loggingService.logInfo("Obteniendo todos los Departments");
@@ -89,6 +212,56 @@ public class DepartmentsController {
         }
     }
 
+     @Operation(
+        summary = "Buscar y asignar nota a evaluación",
+        description = "Busca y asigna nota a evalucion",
+        parameters ={
+            @Parameter(
+                name = "name",
+                description = "Nombre del departamento",
+                required = true,
+                example = "software"
+            ),
+            @Parameter(
+                name = "hierarchy",
+                description = "Jerarquia de los departamentos",
+                required = true,
+                example = "1"
+                )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Nota asignada correctamente",
+                content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Departamentos encontrados",
+                                "data": [
+                                    {
+                                        "id": 1,
+                                        "name": "nombre_value",
+                                        "prize": "3",
+                                        "hierarchy": 3
+                                    },
+                                    {
+                                        "id": 2,
+                                        "name": "Software",
+                                        "prize": "3",
+                                        "hierarchy": 3
+                                    }
+                                ],
+                                "timestamp": "2025-10-18T18:10:24.040730519"
+                            }        
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Lsta sin contenido", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno en el servidor", content = @Content)
+        }
+    )
     @GetMapping("/filters")
     public ResponseEntity<ApiResponse<List<DepartmentResponse>>> getDepartmentsByFilters(
             @RequestParam(required = false) String name,
@@ -117,6 +290,59 @@ public class DepartmentsController {
         }
     }
 
+    @Operation(
+        summary = "Actualizar un departamento existente",
+        description = "Modifica los datos de un departamento según su ID.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del departamento a actualizar",
+                required = true,
+                example = "1"
+            )
+        },
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @Content(
+                mediaType = "application/json",
+                examples = @ExampleObject(
+                    name = "Ejemplo de solicitud",
+                    value = """
+                        {
+                            "name": "ii",
+                            "prize": "premio_value",
+                            "hierarchy": 4
+                        }
+                        """
+                )
+            )
+        ),
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Empleado actualizado correctamente",
+                content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(
+                        name = "Ejemplo de respuesta exitosa",
+                        value = """
+                            {
+                                "success": true,
+                                "message": "Departamento actualizado correctamente",
+                                "data": {
+                                    "id": 1,
+                                    "name": "ii",
+                                    "prize": "premio_value",
+                                    "hierarchy": 4
+                                },
+                                "timestamp": "2025-10-18T18:15:56.737400357"
+                            }
+                            """
+                    )
+                )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos inválidos", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Departamento no encontrado", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+        }
+    )
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<DepartmentResponse>> updateDepartment(@PathVariable Long id, 
             @Valid @RequestBody DepartmentUpdateRequest request) {
@@ -136,6 +362,23 @@ public class DepartmentsController {
         }
     }
 
+    @Operation(
+        summary = "Eliminar un departamento",
+        description = "Elimina el registro de un departamento según su ID.",
+        parameters = {
+            @Parameter(
+                name = "id",
+                description = "Identificador del departamento a eliminar",
+                required = true,
+                example = "1"
+            )
+        },
+        responses = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Departamento eliminado correctamente", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Departamento no encontrado", content = @Content),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
+        }
+    )   
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<DepartmentResponse>> deleteDepartment(@PathVariable Long id) {
         loggingService.logInfo("Iniciando eliminación de Department con ID: {}", id);
