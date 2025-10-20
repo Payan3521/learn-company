@@ -10,10 +10,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // 🔹 Nueva forma recomendada (ya no se usa http.csrf().disable())
+            // forma recomendada (ya no se usa http.csrf().disable())
             .csrf(csrf -> csrf.disable())
 
-            // 🔹 Autoriza todas las peticiones
+            // Autoriza todas las peticiones
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().permitAll()
             );

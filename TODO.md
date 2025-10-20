@@ -1,5 +1,1 @@
-documentacion
-pruebas unitarias
-logs
-prubeas de aceptacion
-configuracion de cors
+crear pruebas y colocar anotaciones de allure, despues correr en orden con las fotos que tengo
