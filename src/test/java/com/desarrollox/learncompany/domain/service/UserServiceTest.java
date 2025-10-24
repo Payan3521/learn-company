@@ -1,5 +1,6 @@
 package com.desarrollox.learncompany.domain.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,6 +61,10 @@ public class UserServiceTest {
         instructor.setId(2L);
         instructor.setDepartment(department);
         instructor.setRole(Role.INSTRUCTOR);
+
+        userList = new ArrayList<>();
+        userList.add(employee);
+        userList.add(instructor);
     }
 
     @Test //201
