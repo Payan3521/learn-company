@@ -265,6 +265,10 @@ public class UserService implements IUserService {
     public List<Employee> getRankingByDepartment(Long departmentId) {
         loggingService.logInfo("Obteniendo ranking de Employees para departmentId: {}", departmentId);
         try {
+            if (!repositoryDepartment.existsById(departmentId)) {
+                loggingService.logError("Departamento con ID {} no encontrado", departmentId);
+                throw new DepartmentNotFoundException(departmentId);
+            }
             List<Employee> ranking = repositoryUser.getRankingByDepartment(departmentId);
             if (ranking.isEmpty()) {
                 loggingService.logWarning("No se encontraron Employees para el ranking en departmentId: {}", departmentId);

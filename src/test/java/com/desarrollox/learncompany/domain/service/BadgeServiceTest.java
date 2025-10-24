@@ -197,4 +197,5 @@ public class BadgeServiceTest {
         verify(repositoryBadge).findBadgeByName(anyString());
     }
 
+    
 }

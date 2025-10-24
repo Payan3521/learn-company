@@ -78,6 +78,10 @@ public class CourseService implements ICourseService {
     public List<Course> getCoursesBySeasonId(Long seasonId) {
         loggingService.logInfo("Obteniendo Courses para seasonId: {}", seasonId);
         try {
+            if(!repositorySeason.existsById(seasonId)){
+                loggingService.logError("Temporada con ID {} no encontrada", seasonId);
+                throw new SeasonNotFoundException(seasonId);
+            }
             List<Course> courses = repositoryCourse.getCoursesBySeasonId(seasonId);
             if (courses.isEmpty()) {
                 loggingService.logWarning("No se encontraron Courses para seasonId: {}", seasonId);
@@ -132,6 +136,10 @@ public class CourseService implements ICourseService {
     public List<Course> findByDepartmentId(Long departmentId) {
         loggingService.logInfo("Obteniendo Courses para departmentId: {}", departmentId);
         try {
+            if(!repositoryDepartment.existsById(departmentId)){
+                loggingService.logError("Departamento con ID {} no encontrado", departmentId);
+                throw new DepartmentNotFoundException(departmentId);
+            }
             List<Course> courses = repositoryCourse.findByDepartmentId(departmentId);
             if (courses.isEmpty()) {
                 loggingService.logWarning("No se encontraron Courses para departmentId: {}", departmentId);
@@ -168,6 +176,10 @@ public class CourseService implements ICourseService {
     public List<Course> findByStatusOptional(Long departmentId) {
         loggingService.logInfo("Obteniendo Courses opcionales para departmentId: {}", departmentId);
         try {
+            if(!repositoryDepartment.existsById(departmentId)){
+                loggingService.logError("Departamento con ID {} no encontrado", departmentId);
+                throw new DepartmentNotFoundException(departmentId);
+            }
             List<Course> courses = repositoryCourse.findByStatusOptional(departmentId);
             if (courses.isEmpty()) {
                 loggingService.logWarning("No se encontraron Courses opcionales para departmentId: {}", departmentId);
@@ -186,6 +198,10 @@ public class CourseService implements ICourseService {
     public List<Course> findByStatusMandatory(Long departmentId) {
         loggingService.logInfo("Obteniendo Courses obligatorios para departmentId: {}", departmentId);
         try {
+            if(!repositoryDepartment.existsById(departmentId)){
+                loggingService.logError("Departamento con ID {} no encontrado", departmentId);
+                throw new DepartmentNotFoundException(departmentId);
+            }
             List<Course> courses = repositoryCourse.findByStatusMandatory(departmentId);
             if (courses.isEmpty()) {
                 loggingService.logWarning("No se encontraron Courses obligatorios para departmentId: {}", departmentId);

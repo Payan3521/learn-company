@@ -66,6 +66,10 @@ public class AssessmentTemplateService implements IAssessmentTemplateService {
     public List<FeedBack> getFeedbackById(Long id) {
         loggingService.logInfo("Obteniendo feedback para AssessmentTemplate con ID: {}", id);
         try {
+            if(!repositoryAssessmentTemplate.existsById(id)){
+                loggingService.logError("AssessmentTemplate con ID {} no encontrado", id);
+                throw new AssessmentTemplateNotFoundException(id);
+            }
             List<FeedBack> feedbackList = repositoryAssessmentTemplate.getFeedback(id);
             if (feedbackList.isEmpty()) {
                 loggingService.logWarning("No se encontraron feedbacks para AssessmentTemplate ID: {}", id);

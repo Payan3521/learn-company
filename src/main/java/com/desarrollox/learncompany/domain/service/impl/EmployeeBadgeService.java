@@ -49,6 +49,7 @@ public class EmployeeBadgeService implements IEmployeeBadgeService {
             }
 
             List<EmployeeBadge> employeeBadges = repositoryEmployeeBadge.findAll();
+            
             for (EmployeeBadge emplBad : employeeBadges) {
                 if (emplBad.getEmployee().getId().equals(employeeBadge.getEmployee().getId()) &&
                         emplBad.getBadge().getId().equals(employeeBadge.getBadge().getId())) {

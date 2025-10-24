@@ -58,8 +58,11 @@ public class StatisticService implements IStatisticService {
                     .min(Comparator.comparingInt(Course::getTotalInscriptions))
                     .orElse(null);
 
-            // Si no encontramos cursos, retornar vacío
-            if (courseTop == null || courseLess == null) {
+            // Si no encontramos cursos o todos tienen 0 inscripciones
+            boolean allCoursesEmpty = courses.stream()
+                    .allMatch(course -> course.getTotalInscriptions() == 0);
+
+            if (courseTop == null || courseLess == null || allCoursesEmpty) {
                 loggingService.logWarning("No se encontraron cursos válidos para generar Statistic");
                 return Optional.empty();
             }

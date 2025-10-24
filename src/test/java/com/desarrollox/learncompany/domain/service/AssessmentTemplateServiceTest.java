@@ -151,4 +151,19 @@ public class AssessmentTemplateServiceTest {
         verify(repositoryAssessmentTemplate).getFeedback(anyLong());
     }
 
+    @Test
+    void getFeedbackById_AssessmentTemplateNotFound(){
+        when(repositoryAssessmentTemplate.existsById(anyLong())).thenReturn(false);
+
+        AssessmentTemplateNotFoundException thrown = assertThrows(
+            AssessmentTemplateNotFoundException.class, 
+            () -> assessmentTemplateService.getFeedbackById(1L)
+        );
+
+        assertNotNull(thrown);
+
+        verify(repositoryAssessmentTemplate).existsById(anyLong());
+        verify(repositoryAssessmentTemplate, never()).getFeedback(anyLong());
+    }
+
 }

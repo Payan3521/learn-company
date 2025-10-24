@@ -5,6 +5,9 @@ public class Statistic {
     private Course courseTop;
     private Course courseLess;
 
+    public Statistic() {
+    }
+
     public Statistic(Long id, Course courseTop, Course courseLess) {
         this.id = id;
         this.courseTop = courseTop;

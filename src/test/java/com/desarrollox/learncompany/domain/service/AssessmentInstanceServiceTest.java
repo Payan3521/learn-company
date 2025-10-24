@@ -69,6 +69,7 @@ public class AssessmentInstanceServiceTest {
 
         assertNotNull(result);
         assertEquals(1L, result.getId());
+        
         verify(repositoryAssessmentTemplate).existsById(anyLong());
         verify(repositoryUser).existsById(anyLong());
         verify(repositoryUser, times(2)).findById(anyLong());
