@@ -129,6 +129,7 @@ public class AssessmentTemplateServiceTest {
 
     @Test //200
     void getFeedbackById_success(){
+        when(repositoryAssessmentTemplate.existsById(anyLong())).thenReturn(true);
         when(repositoryAssessmentTemplate.getFeedback(anyLong())).thenReturn(listaFeedbacks);
         List<FeedBack> result = assessmentTemplateService.getFeedbackById(1L);
 
@@ -136,11 +137,13 @@ public class AssessmentTemplateServiceTest {
         assertEquals(1, result.size());
         assertEquals(listaFeedbacks, result);
 
+        verify(repositoryAssessmentTemplate).existsById(anyLong());
         verify(repositoryAssessmentTemplate).getFeedback(anyLong());
     }
 
     @Test //204
     void getFeedbackById_isEmpty(){
+        when(repositoryAssessmentTemplate.existsById(anyLong())).thenReturn(true);
         when(repositoryAssessmentTemplate.getFeedback(anyLong())).thenReturn(new ArrayList<>());
         List<FeedBack> result = assessmentTemplateService.getFeedbackById(1L);
 
@@ -148,6 +151,7 @@ public class AssessmentTemplateServiceTest {
         assertEquals(0, result.size());
         assertNotEquals(listaFeedbacks, result);
 
+        verify(repositoryAssessmentTemplate).existsById(anyLong());
         verify(repositoryAssessmentTemplate).getFeedback(anyLong());
     }
 

@@ -70,10 +70,11 @@ public class StatisticServiceTest {
     @Test //200
     void getStatistic_success() {
         when(repositoryCourse.findAll()).thenReturn(courseList);
-        when(repositoryInscription.findInscriptionsByCourseId(anyLong()))
-                .thenReturn(List.of(new Inscription(), new Inscription(), new Inscription())); 
-        when(repositoryInscription.findInscriptionsByCourseId(anyLong()))
-                .thenReturn(List.of(new Inscription()));
+        when(repositoryInscription.findInscriptionsByCourseId(1L))
+        .thenReturn(List.of(new Inscription(), new Inscription(), new Inscription()));
+
+        when(repositoryInscription.findInscriptionsByCourseId(2L))
+        .thenReturn(List.of(new Inscription()));
 
         Optional<Statistic> result = statisticService.getStatistic();
 

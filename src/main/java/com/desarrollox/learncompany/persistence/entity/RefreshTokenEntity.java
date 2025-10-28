@@ -29,7 +29,7 @@ public class RefreshTokenEntity {
     private LocalDateTime expiryDate;
     
     @Column(name = "revoked", nullable = false)
-    private boolean revoked = false;
+    private boolean revoked;
     
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
