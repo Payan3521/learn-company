@@ -2,6 +2,9 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.5'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco'
+	id 'org.sonarqube' version '4.4.1.3373'
+	id 'io.qameta.allure' version '2.12.0'
 }
 
 group = 'com.desarrollox'
@@ -19,47 +22,105 @@ repositories {
 }
 
 dependencies {
+	// --- SPRING BOOT CORE ---
 	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
-	//Dependencia para leer variables de entorno(dotenv)
-	implementation 'io.github.cdimascio:java-dotenv:5.2.2'
-
-	//Dependencia para documentación de swagger
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.12'
-
-	// Dependencia de driver de MariaDB
+	// --- DATABASE ---
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
-	// Dependencia de starter data jpa
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation 'com.h2database:h2'
 
-	// Dependencia de validation hibernate
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	// --- DOCUMENTACIÓN / SWAGGER ---
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.12'
 
-	// Dependencia de starter web
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// --- UTILIDADES ---
+	implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
-	// Dependencias de Lombok
+	// --- LOMBOK ---
 	compileOnly 'org.projectlombok:lombok:1.18.24'
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
-	// Dependencia de devtools
+	// --- DESARROLLO ---
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	// Dependencias de MapStruct
-	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+	// --- TESTING ---
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' // incluye JUnit 5
+	testImplementation 'org.mockito:mockito-core:5.12.0'
+	testImplementation 'org.mockito:mockito-junit-jupiter:5.12.0'
 
-	// Para integrar MapStruct con Lombok y no choquen
-	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+	// 🔹 JUnit (para asegurar compatibilidad con Allure)
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
 
-	// Dependencia de starter security
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-
+	// --- ALLURE ---
+	testImplementation platform('io.qameta.allure:allure-bom:2.25.0')
+	testImplementation 'io.qameta.allure:allure-junit5'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+        xml.destination file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.8
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "learncompany-backend"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.login", "sqa_3141ac11b37b732f84d92be98593aea07d086b11"
+        property "sonar.sources", "src/main/java"
+        property "sonar.tests", "src/test/java"
+        property "sonar.java.binaries", "build/classes/java/main"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+        property "sonar.gradle.skipCompile", "true"
+    }
+}
+
+tasks.named("sonarqube") {
+    dependsOn tasks.named("jacocoTestReport")
+}
+
+
+// ✅ Configuración moderna de Allure
+allure {
+    version = "2.35.1"
+    adapter {
+        autoconfigure.set(true)
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.25.0")
+            }
+        }
+    }
 }

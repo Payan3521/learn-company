@@ -39,7 +39,7 @@ import com.desarrollox.learncompany.domain.model.User.Role;
 import com.desarrollox.learncompany.domain.service.impl.UserService;
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTest {
+class UserServiceTest {
     
     @Mock
     private IRepositoryUser repositoryUser;

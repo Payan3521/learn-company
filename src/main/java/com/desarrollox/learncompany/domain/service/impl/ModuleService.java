@@ -126,6 +126,10 @@ public class ModuleService implements IModuleService {
     public List<Module> getModulesByCourseId(Long courseId) {
         loggingService.logInfo("Obteniendo Modules para courseId: {}", courseId);
         try {
+            if (!repositoryCourse.existsById(courseId)) {
+                loggingService.logError("Curso con ID {} no encontrado", courseId);
+                throw new CourseNotFoundException(courseId);
+            }
             List<Module> modules = repositoryModule.findModulesByCourseId(courseId);
             if (modules.isEmpty()) {
                 loggingService.logWarning("No se encontraron Modules para courseId: {}", courseId);

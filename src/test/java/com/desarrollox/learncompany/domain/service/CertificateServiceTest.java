@@ -36,7 +36,7 @@ import com.desarrollox.learncompany.domain.model.User.Role;
 import com.desarrollox.learncompany.domain.service.impl.CertificateService;
 
 @ExtendWith(MockitoExtension.class)
-public class CertificateServiceTest {
+class CertificateServiceTest {
     
     @Mock
     private IRepositoryCertificate repositoryCertificate;
