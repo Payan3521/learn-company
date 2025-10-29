@@ -37,7 +37,7 @@ import com.desarrollox.learncompany.domain.model.User.Role;
 import com.desarrollox.learncompany.domain.service.impl.EmployeeBadgeService;
 
 @ExtendWith(MockitoExtension.class)
-public class EmployeeBadgeServiceTest {
+class EmployeeBadgeServiceTest {
     
     @Mock
     private IRepositoryBadge repositoryBadge;

@@ -30,7 +30,7 @@ import com.desarrollox.learncompany.domain.model.Module;
 import com.desarrollox.learncompany.domain.service.impl.ModuleService;
 
 @ExtendWith(MockitoExtension.class)
-public class ModuleServiceTest {
+class ModuleServiceTest {
     
     @Mock
     private IRepositoryModule repositoryModule;

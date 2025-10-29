@@ -14,7 +14,7 @@ import com.desarrollox.learncompany.domain.model.Season;
 import com.desarrollox.learncompany.domain.service.impl.SeasonService;
 
 @ExtendWith(MockitoExtension.class)
-public class SeasonServiceTest {
+class SeasonServiceTest {
     @Mock
     private IRepositorySeason repositorySeason;
 

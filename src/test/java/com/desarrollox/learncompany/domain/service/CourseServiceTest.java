@@ -17,11 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import io.qameta.allure.*;
+import io.qameta.allure.junit5.AllureJunit5;
+import static io.qameta.allure.Allure.step;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.annotation.Description;
 import com.desarrollox.learncompany.core.logging.LoggingService;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryCourse;
 import com.desarrollox.learncompany.domain.accessDb.IRepositoryDepartment;
@@ -41,7 +46,11 @@ import com.desarrollox.learncompany.domain.model.User.Role;
 import com.desarrollox.learncompany.domain.service.impl.CourseService;
 
 @ExtendWith(MockitoExtension.class)
-public class CourseServiceTest {
+@ExtendWith(AllureJunit5.class)
+@Epic("Gestión de Cursos") // ✅ Categoría principal
+@Feature("CRUD de Cursos") // ✅ Funcionalidad
+@DisplayName("Tests del Servicio de Cursos")
+class CourseServiceTest {
     
     @Mock
     private IRepositoryCourse repositoryCourse;
@@ -68,6 +77,7 @@ public class CourseServiceTest {
     private List<Course> courseList;
 
     @BeforeEach
+    @Step("Inicialización de datos de prueba")
     void setUp(){
         department = new Department();
         department.setId(1L);
@@ -94,27 +104,43 @@ public class CourseServiceTest {
     }
 
     @Test //200
+    @Story("Crear curso exitosamente") // ✅ Historia de usuario
+    @Severity(SeverityLevel.CRITICAL) // ✅ Severidad
+    @Description("Verifica que un curso se cree correctamente con todos los datos válidos")
+    @DisplayName("Crear curso - Caso exitoso")
     void createCourse_success(){
-        when(repositoryDepartment.existsById(anyLong())).thenReturn(true);
-        when(repositorySeason.existsById(anyLong())).thenReturn(true);
-        when(repositoryUser.existsById(anyLong())).thenReturn(true);
-        when(repositoryUser.findById(anyLong())).thenReturn(Optional.of(instructor));
-        when(repositorySeason.findById(anyLong())).thenReturn(Optional.of(season));
-        when(repositoryDepartment.findById(anyLong())).thenReturn(Optional.of(department));
-        when(repositoryCourse.save(any(Course.class))).thenReturn(course);
 
-        Course result = courseService.createCourse(course);
+        step("Configurar mocks para caso exitoso", () -> {
+            when(repositoryDepartment.existsById(anyLong())).thenReturn(true);
+            when(repositorySeason.existsById(anyLong())).thenReturn(true);
+            when(repositoryUser.existsById(anyLong())).thenReturn(true);
+            when(repositoryUser.findById(anyLong())).thenReturn(Optional.of(instructor));
+            when(repositorySeason.findById(anyLong())).thenReturn(Optional.of(season));
+            when(repositoryDepartment.findById(anyLong())).thenReturn(Optional.of(department));
+            when(repositoryCourse.save(any(Course.class))).thenReturn(course);
+        });
 
-        assertNotNull(result);
-        assertEquals(1L, result.getId());
+        Course result = step("Ejecutar creación de curso", () -> 
+            courseService.createCourse(course)
+        );
 
-        verify(repositoryDepartment).existsById(anyLong());
-        verify(repositorySeason).existsById(anyLong());
-        verify(repositoryUser).existsById(anyLong());
-        verify(repositoryUser, times(2)).findById(anyLong());
-        verify(repositorySeason, times(2)).findById(anyLong());
-        verify(repositoryDepartment).findById(anyLong());
-        verify(repositoryCourse).save(any(Course.class));
+        step("Verificar resultado", () -> {
+            assertNotNull(result);
+            assertEquals(1L, result.getId());
+            
+            Allure.addAttachment("Curso Creado", "application/json", 
+                String.format("{ \"id\": %d, \"title\": \"%s\" }", result.getId(), result.getTitle()));
+        });
+
+        step("Verificar interacciones con mocks", () -> {
+            verify(repositoryDepartment).existsById(anyLong());
+            verify(repositorySeason).existsById(anyLong());
+            verify(repositoryUser).existsById(anyLong());
+            verify(repositoryUser, times(2)).findById(anyLong());
+            verify(repositorySeason, times(2)).findById(anyLong());
+            verify(repositoryDepartment).findById(anyLong());
+            verify(repositoryCourse).save(any(Course.class));
+        });
     }
 
     @Test //404

@@ -33,7 +33,7 @@ import com.desarrollox.learncompany.domain.model.User.Role;
 import com.desarrollox.learncompany.domain.service.impl.NotificationService;
 
 @ExtendWith(MockitoExtension.class)
-public class NotificationServiceTest {
+class NotificationServiceTest {
     
     @Mock
     private IRepositoryNotification repositoryNotification;

@@ -28,7 +28,7 @@ import com.desarrollox.learncompany.domain.model.Statistic;
 import com.desarrollox.learncompany.domain.service.impl.StatisticService;
 
 @ExtendWith(MockitoExtension.class)
-public class StatisticServiceTest {
+class StatisticServiceTest {
     
     @Mock
     private IRepositoryCourse repositoryCourse;
