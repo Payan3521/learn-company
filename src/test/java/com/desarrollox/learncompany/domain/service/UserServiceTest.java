@@ -11,7 +11,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -104,7 +103,7 @@ class UserServiceTest {
         instructorSaved.setEmail("emailInstructor@gmail.com");
         instructorSaved.setDepartment(department);
         instructorSaved.setPassword("hashedPassword");
-        instructorSaved.setStatus(true);
+        instructorSaved.setStatus(false);
         instructorSaved.setBiography("Nuevo Bio");
         instructorSaved.setSpecialty("Python");
 
